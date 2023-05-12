@@ -1,3 +1,28 @@
+/*************** LOAD ***************/
+.a_load {
+    background-color: #ffffffd1;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    display: none;
+}
+.a_load img {
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 9999; width: 35px;
+}
+
 /*************** TEXT ***************/
 .text_recortar {
     white-space: nowrap;

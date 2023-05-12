@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Laboratorio extends Model
+class Recurso extends Model
 {
     use HasFactory;
 
@@ -16,5 +16,10 @@ class Laboratorio extends Model
     public function pais()
     {
         return $this->hasOne(Pais::class, 'id', 'pais_id')->select('id', 'nombre', 'bandera');
+    }
+    
+    public function centro()
+    {
+        return $this->hasOne(Centro::class, 'id', 'centro_id');
     }
 }

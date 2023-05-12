@@ -48,17 +48,10 @@ new Vue({
             this.Buscar(page);
         },
         Load(id, show, text) {
-            // if (show == 'on') {
-            //     $("#"+id).busyLoad("show", { 
-            //         spinner: "accordion",
-            //         text: text,
-            //         textPosition: "bottom",
-            //         background: this.color
-            //     });
-            // } else {
-            //     $("#"+id).busyLoad("hide");
-            //     $('.busy-load-container').hide();
-            // }
+            if (show == 'on') {
+                return $(".a_load").show();
+            }
+            return $(".a_load").hide();
         },
         Alert(action, title, message) {
             // switch (action) {
@@ -154,8 +147,6 @@ new Vue({
             }
         },
         Buscar(page) {
-            this.Load('my_table', 'on', 'Cargando Datos ...'); 
-
             urlBuscar = 'clientes/buscar?page=' + page;
             axios.post(urlBuscar, {
                 search: this.search.datos

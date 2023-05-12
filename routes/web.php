@@ -30,6 +30,32 @@ Route::middleware('auth')->group(function () {
         Route::post('/delete', [App\Http\Controllers\Interno\PaisController::class, 'delete']);
     });
 
+    Route::prefix('laboratorios')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\LaboratorioController::class, 'index'])->name('laboratorios');
+        Route::post('/datos', [App\Http\Controllers\Interno\LaboratorioController::class, 'datos']);
+        Route::post('/buscar', [App\Http\Controllers\Interno\LaboratorioController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\LaboratorioController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\LaboratorioController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\LaboratorioController::class, 'delete']);
+    });
+
+    Route::prefix('centros')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\CentroController::class, 'index'])->name('centros');
+        Route::post('/buscar', [App\Http\Controllers\Interno\CentroController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\CentroController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\CentroController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\CentroController::class, 'delete']);
+    });
+    
+    Route::prefix('recursos')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\RecursoController::class, 'index'])->name('recursos');
+        Route::post('/datos', [App\Http\Controllers\Interno\RecursoController::class, 'datos']);
+        Route::post('/buscar', [App\Http\Controllers\Interno\RecursoController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\RecursoController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\RecursoController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\RecursoController::class, 'delete']);
+    });
+
     Route::prefix('menus')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\UserController::class, 'index'])->name('menus');
         Route::post('/buscar', [App\Http\Controllers\Interno\UserController::class, 'buscar']);

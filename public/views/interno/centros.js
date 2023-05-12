@@ -1,19 +1,57 @@
 new Vue({
-    el: '#form_config',
+    el: '#form_centros',
     data: {
         config: [],
-        buttonKey: 1,
         color: 'rgba(0, 0, 0, 0.71)',
-        imagen: null,
-        imagen_dark: null,
-        form: [],
-        errors: []
+        search: {
+            'datos': null
+        },
+        page: 1,
+
+        listRequest: [],
+        pagination: {
+            'total': 0,
+            'current_page': 0,
+            'per_page': 0,
+            'last_page': 0,
+            'from': 0,
+            'to': 0,
+        },
+        to_pagination: 0,
+
+        modal: {
+            'size': null,
+            'method': null,
+            'loading': null,
+            'title': null,
+        },
+        id: null,
+        seleccion: [],
+        errors: [],
+
+        paises: [],
+        centro: {
+            'pais': null,
+            'pais_text': '--- Seleccione una opción ---',
+            'codigo': null,
+            'nombre': null,
+            'email': null,
+            'direccion': null,
+            'codigo_telefono': '+51',
+            'telefono': null
+        },
+        imagen_bandera: null
     },
     created() {
         this.Buscar();
         $(".my_vue").show();
     },
     methods: {
+        changePage(page) {
+            this.page = page;
+            this.pagination.current_page = page;
+            this.Buscar(page);
+        },
         Load(id, show, text) {
             if (show == 'on') {
                 return $(".a_load").show();
@@ -114,17 +152,13 @@ new Vue({
             }
         },
         Buscar(page) {
-            urlBuscar = 'config/buscar?page=' + page;
+            urlBuscar = 'centros/buscar?page=' + page;
             axios.post(urlBuscar, {
-
+                search: this.search.datos
             }).then(response => {
-                this.form = response.data.config;
-                if (this.form.logo) {
-                    this.imagen = "storage/" + this.form.logo;
-                }
-                if (this.form.logo_dark) {
-                    this.imagen_dark = "storage/" + this.form.logo_dark;
-                }
+                this.listRequest = response.data.centros.data;
+                this.to_pagination = response.data.centros.to;
+                this.pagination = response.data.pagination;
             }).catch(error => {
                 console.log(error)
 
@@ -134,34 +168,73 @@ new Vue({
                 this.Alert2(action, title, message);
             });
         },
-        Update(form) {
+        Modal(size, metodo, id, seleccion) {
+            $("#formularioModal").modal('show');
+            this.modal.size = size;
+            this.modal.method = metodo;
+            this.id = id;
+            this.color = 'rgba(236, 120, 0, 0.98)'
+
+            switch (metodo) {                
+                case 'create':
+                    this.modal.title = 'NUEVO CENTRO';
+                    break;
+
+                case 'edit':
+                    this.modal.title = 'EDITAR CENTRO';
+                    this.centro.nombre = seleccion.nombre;
+                    break;
+
+                case 'delete':
+                    this.modal.title = 'ELIMINAR CENTRO';
+                    this.centro.nombre = seleccion.nombre;
+                    break;
+                    
+                default:
+                    this.centro.nombre = seleccion.nombre;
+                    break;
+            }
+        },
+        CloseModal() {
+            $("#formularioModal").modal('hide');
+            this.color = 'rgba(0, 0, 0, 0.71)';
+            this.modal = {
+                'size': null,
+                'method': null,
+                'loading': null,
+                'title': null,
+            };
+            this.id = null;
+            this.seleccion = [];
             this.errors = [];
 
-            formdata = new FormData();
-            formdata.append('nombre', this.form.nombre);
-            formdata.append('descripcion', this.form.descripcion);
-            formdata.append('direccion', this.form.direccion);
-            formdata.append('telefono_1', this.form.telefono_1);
-            formdata.append('telefono_2', this.form.telefono_2);
-            formdata.append('whatsapp', this.form.whatsapp);
-            formdata.append('email', this.form.email);
-            formdata.append('facebook', this.form.facebook);
-            formdata.append('twitter', this.form.twitter);
-            formdata.append('instagram', this.form.instagram);
-            formdata.append('youtube', this.form.youtube);
-            formdata.append('dominio', this.form.dominio);
-            formdata.append('logo', this.form.logo);
-            formdata.append('logo_dark', this.form.logo_dark);
+            this.centro = {
+                'nombre': null,
+            };
+        },
+        Store(form) {
+            this.Load(form, 'on', 'Guardando Registro ...');
+            this.errors = [];
 
-            axios.post('config/update', formdata).then(response=> {
+            axios.post('centros/store', {
+                nombre: this.centro.nombre
+            }).then(response=> {
+                this.Load(form, 'off', null);
+
                 let action = response.data.action;
                 let title = response.data.title;
                 let message = response.data.message;
                 this.Alert2(action, title, message)
-                this.buttonKey++;
+
+                if (action == 'success') {
+                    $('#formularioModal').modal('hide');
+                    this.CloseModal();
+                    this.Buscar(self.page);
+                }
             }).catch(error => {
                 console.log(error)
-                this.buttonKey++;
+                this.Load(form, 'off', null);
+
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
                 } else {
@@ -173,53 +246,70 @@ new Vue({
                 }
             });
         },
-        Imagen() {
+        Update(form) {
+            this.Load(form, 'on', 'Actualizando Registro ...');
             this.errors = [];
-            let file = event.target.files[0];
 
-            if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/webp') {
-                this.form.logo = file;
-                var reader = new FileReader();
-                 
-                let self = this;
-                reader.onload = (function(theFile) {
-                    return function(e) {
-                        self.imagen = e.target.result;
-                    };
-                })(file);
-         
-                reader.readAsDataURL(file);
-            } else {
-                $('#logo').val('');
-                this.form.logo = null;
-                this.imagen = null
+            axios.post('centros/update', {
+                id: this.id,
+                nombre: this.centro.nombre
+            }).then(response=> {
+                this.Load(form, 'off', null);
 
-                this.errors['logo'] = ['El archivo seleccionado no es imagen.'];
-            }
+                let action = response.data.action;
+                let title = response.data.title;
+                let message = response.data.message;
+                this.Alert2(action, title, message);
+
+                if (action == 'success') {
+                    $('#formularioModal').modal('hide');
+                    this.CloseModal();
+                    this.Buscar(self.page);
+                }
+            }).catch(error => {
+                console.log(error)
+                this.Load(form, 'off', null);
+
+                if (error.response.status == 422) {
+                    this.errors = error.response.data.errors;
+                } else {
+                    let action = 'error';
+                    let title = 'Ops error !!';
+                    let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+
+                    this.Alert2(action, title, message);
+                }
+            });
         },
-        ImagenDark() {
+        Delete(form) {
+            this.Load(form, 'on', 'Eliminando Registro ...');
+
             this.errors = [];
-            let file = event.target.files[0];
+            axios.post('centros/delete', {
+                id: this.id,
+            }).then(response=> {
+                this.Load(form, 'off', null);
 
-            if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/webp') {
-                this.form.logo_dark = file;
-                var reader2 = new FileReader();
-                 
-                let self = this;
-                reader2.onload = (function(theFile) {
-                    return function(e) {
-                        self.imagen_dark = e.target.result;
-                    };
-                })(file);
-         
-                reader2.readAsDataURL(file);
-            } else {
-                $('#logo_dark').val('');
-                this.form.logo_dark = null;
-                this.imagen = null
+                let action = response.data.action;
+                let title = response.data.title;
+                let message = response.data.message;
+                this.Alert2(action, title, message);
 
-                this.errors['logo_dark'] = ['El archivo seleccionado no es imagen.'];
-            }
+                if (action == 'success') {
+                    $('#formularioModal').modal('hide');
+                    this.CloseModal();
+                    this.Buscar(self.page);
+                }
+            }).catch(error => {
+                console.log(error)
+                this.Load(form, 'off', null);
+
+                let action = 'error';
+                let title = 'Ops error !!';
+                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+
+                this.Alert2(action, title, message);
+            });
         },
         Fecha(date) {
             if (date) {

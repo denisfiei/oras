@@ -50,6 +50,12 @@ new Vue({
             this.pagination.current_page = page;
             this.Buscar(page);
         },
+        Load(id, show, text) {
+            if (show == 'on') {
+                return $(".a_load").show();
+            }
+            return $(".a_load").hide();
+        },
         Alert2(action, titulo, texto) {
             switch (action) {
                 case 'success':

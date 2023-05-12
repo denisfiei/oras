@@ -1,5 +1,5 @@
 new Vue({
-    el: '#form_paises',
+    el: '#form_recursos',
     data: {
         config: [],
         color: 'rgba(0, 0, 0, 0.71)',
@@ -29,16 +29,26 @@ new Vue({
         seleccion: [],
         errors: [],
 
-        pais: {
-            'nombre': null,
-            'codigo': null,
-            'codigo_telefono': null,
-            'bandera': null
+        paises: [],
+        centros: [],
+        recurso: {
+            'pais': null,
+            'pais_text': '--- Seleccione una opción ---',
+            'centro': null,
+            'centro_text': '--- Seleccione una opción ---',
+            'titulo': null,
+            'descripcion': null,
+            'fecha': null,
+            'ruta': null,
+            'imagen': null,
+            'enlace': null,
+            'orden': 1,
+            'nivel': 1
         },
-        imagen_bandera: null
+        imagen_recurso: null
     },
     created() {
-        this.Buscar();
+        this.Datos();
         $(".my_vue").show();
     },
     methods: {
@@ -146,13 +156,29 @@ new Vue({
                 break;
             }
         },
+        Datos() {
+            axios.post('recursos/datos').then(response => {
+                this.paises = response.data.paises;
+                this.centros = response.data.centros;
+
+                this.listRequest = response.data.recursos.data;
+                this.to_pagination = response.data.recursos.to;
+                this.pagination = response.data.pagination;
+            }).catch(error => {
+                console.log(error);
+                let action = 'error';
+                let title = 'Error !!';
+                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+                this.Alert2(action, title, message);
+            });
+        },
         Buscar(page) {
-            urlBuscar = 'paises/buscar?page=' + page;
+            urlBuscar = 'recursos/buscar?page=' + page;
             axios.post(urlBuscar, {
                 search: this.search.datos
             }).then(response => {
-                this.listRequest = response.data.paises.data;
-                this.to_pagination = response.data.paises.to;
+                this.listRequest = response.data.recursos.data;
+                this.to_pagination = response.data.recursos.to;
                 this.pagination = response.data.pagination;
             }).catch(error => {
                 console.log(error)
@@ -172,23 +198,31 @@ new Vue({
 
             switch (metodo) {                
                 case 'create':
-                    this.modal.title = 'NUEVO PAIS';
+                    this.modal.title = 'NUEVO RECURSO';
                     break;
 
                 case 'edit':
-                    this.modal.title = 'EDITAR PAIS';
-                    this.pais.nombre = seleccion.nombre;
-                    this.pais.codigo = seleccion.codigo;
-                    this.pais.codigo_telefono = seleccion.codigo_tel;
+                    this.modal.title = 'EDITAR RECURSO';
+                    this.recurso.pais = seleccion.pais_id;
+                    this.recurso.pais_text = seleccion.pais.nombre;
+                    this.recurso.centro = seleccion.centro_id;
+                    this.recurso.centro_text = seleccion.centro.nombre;
+                    this.recurso.titulo = seleccion.titulo;
+                    this.recurso.descripcion = seleccion.descripcion;
+                    this.recurso.fecha = seleccion.fecha;
+                    this.recurso.enlace = seleccion.enlace;
+                    this.recurso.orden = seleccion.orden;
+                    this.recurso.nivel = seleccion.nivel;
+                    this.imagen_recurso = 'storage/'+seleccion.ruta+'/'+seleccion.imagen;
                     break;
 
                 case 'delete':
-                    this.modal.title = 'ELIMINAR PAIS';
-                    this.pais.nombre = seleccion.nombre;
+                    this.modal.title = 'ELIMINAR RECURSO';
+                    this.recurso.nombre = seleccion.nombre;
                     break;
                     
                 default:
-                    this.pais.nombre = seleccion.nombre;
+                    this.recurso.nombre = seleccion.nombre;
                     break;
             }
         },
@@ -205,26 +239,39 @@ new Vue({
             this.seleccion = [];
             this.errors = [];
 
-            this.pais = {
-                'nombre': null,
-                'codigo': null,
-                'codigo_telefono': null,
-                'bandera': null
+            this.recurso = {
+                'pais': null,
+                'pais_text': '--- Seleccione una opción ---',
+                'centro': null,
+                'centro_text': '--- Seleccione una opción ---',
+                'titulo': null,
+                'descripcion': null,
+                'fecha': null,
+                'ruta': null,
+                'imagen': null,
+                'enlace': null,
+                'orden': 1,
+                'nivel': 1
             };
-            this.imagen_bandera = null;
-            $("#bandera").val('');
+            this.imagen_recurso = null;
+            $("#imagen").val('');
         },
         Store(form) {
             this.Load(form, 'on', 'Guardando Registro ...');
             this.errors = [];
 
             formdata = new FormData();
-            formdata.append('nombre', this.pais.nombre);
-            formdata.append('codigo', this.pais.codigo);
-            formdata.append('codigo_telefono', this.pais.codigo_telefono);
-            formdata.append('bandera', this.pais.bandera);
+            formdata.append('pais', this.recurso.pais);
+            formdata.append('centro', this.recurso.centro);
+            formdata.append('titulo', this.recurso.titulo);
+            formdata.append('descripcion', this.recurso.descripcion);
+            formdata.append('fecha', this.recurso.fecha);
+            formdata.append('orden', this.recurso.orden);
+            formdata.append('nivel', this.recurso.nivel);
+            formdata.append('imagen', this.recurso.imagen);
+            formdata.append('enlace', this.recurso.enlace);
 
-            axios.post('paises/store', formdata).then(response=> {
+            axios.post('recursos/store', formdata).then(response=> {
                 this.Load(form, 'off', null);
 
                 let action = response.data.action;
@@ -258,12 +305,17 @@ new Vue({
 
             formdata = new FormData();
             formdata.append('id', this.id);
-            formdata.append('nombre', this.pais.nombre);
-            formdata.append('codigo', this.pais.codigo);
-            formdata.append('codigo_telefono', this.pais.codigo_telefono);
-            formdata.append('bandera', this.pais.bandera);
+            formdata.append('pais', this.recurso.pais);
+            formdata.append('centro', this.recurso.centro);
+            formdata.append('titulo', this.recurso.titulo);
+            formdata.append('descripcion', this.recurso.descripcion);
+            formdata.append('fecha', this.recurso.fecha);
+            formdata.append('orden', this.recurso.orden);
+            formdata.append('nivel', this.recurso.nivel);
+            formdata.append('imagen', this.recurso.imagen);
+            formdata.append('enlace', this.recurso.enlace);
 
-            axios.post('paises/update', formdata).then(response=> {
+            axios.post('recursos/update', formdata).then(response=> {
                 this.Load(form, 'off', null);
 
                 let action = response.data.action;
@@ -295,7 +347,7 @@ new Vue({
             this.Load(form, 'on', 'Eliminando Registro ...');
 
             this.errors = [];
-            axios.post('paises/delete', {
+            axios.post('recursos/delete', {
                 id: this.id,
             }).then(response=> {
                 this.Load(form, 'off', null);
@@ -321,34 +373,42 @@ new Vue({
                 this.Alert2(action, title, message);
             });
         },
-        Bandera() {
+        SelectPais(data) {
+            this.recurso.pais = data.id;
+            this.recurso.pais_text = data.nombre;
+        },
+        SelectCentro(data) {
+            this.recurso.centro = data.id;
+            this.recurso.centro_text = data.nombre;
+        },
+        Imagen() {
             this.errors = [];
             let file = event.target.files[0];
 
             if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/webp') {
-                this.pais.bandera= file;
+                this.recurso.imagen= file;
                 var reader2 = new FileReader();
                  
                 let self = this;
                 reader2.onload = (function(theFile) {
                     return function(e) {
-                        self.imagen_bandera = e.target.result;
+                        self.imagen_recurso = e.target.result;
                     };
                 })(file);
          
                 reader2.readAsDataURL(file);
             } else {
-                $('#bandera').val('');
-                this.pais.bandera= null;
-                this.imagen_bandera = null
+                $('#imagen').val('');
+                this.recurso.imagen= null;
+                this.imagen_recurso = null;
 
-                this.errors['bandera'] = ['El archivo seleccionado no es imagen.'];
+                this.errors['imagen'] = ['El archivo seleccionado no es imagen.'];
             }
         },
         Fecha(date) {
             if (date) {
                 let fecha = date.split('-');
-                return fecha[2]+'-'+fecha[1]+'-'+fecha[0];
+                return fecha[2]+'/'+fecha[1]+'/'+fecha[0];
             }
             return '';
         },

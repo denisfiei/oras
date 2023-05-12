@@ -2,24 +2,24 @@
 
 @section('content')
     
-<div class="content-body" id="form_paises">
+<div class="content-body" id="form_centros">
     <div class="container pd-x-0">
         <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
             <div>
-                <h4 class="mg-b-0 tx-spacing--1"><i class="fas fa-globe-americas"></i> PAISES</h4>
+                <h4 class="mg-b-0 tx-spacing--1"><i class="fas fa-university"></i> CENTROS DE INFORMACIÓN</h4>
             </div>
             <div class="d-none d-md-block">
-                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Pais</button>
+                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Centro</button>
             </div>
         </div>
     </div>
 
-    @include('sistema.interno.paises.modal')
+    @include('sistema.interno.centros.modal')
 
     <div class="col-lg-12 col-xl-12 mg-t-10">
         <div class="card mg-b-10">
             <div class="card-header d-flex align-items-center justify-content-between pd-r-12">
-                <h6 class="mg-b-0">LISTA DE PAISES</h6>
+                <h6 class="mg-b-0">LISTA DE CENTROS DE INFORMACIÓN</h6>
                 <div class="d-flex tx-16">
                     <a href="#" class="link-03 lh-0" data-bs-toggle="tooltip" title="Recargar Lista" onclick="window.location.reload();"><ion-icon name="reload-sharp"></ion-icon></a>
                     {{-- <a href="" class="link-03 lh-0 mg-l-2"><ion-icon name="ellipsis-vertical"></ion-icon></a> --}}
@@ -43,23 +43,17 @@
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center">#</th>
-                                <th class="text-center">Código</th>
                                 <th class="text-right">Nombre</th>
-                                <th class="text-center">Bandera</th>
-                                <th class="text-center">Cod. Teléfono</th>
                                 <th class="text-center"><ion-icon name="ellipsis-vertical"></ion-icon></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-if="listRequest.length === 0">
-                                <td class="text-center no_data" colspan="5"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
+                                <td class="text-center no_data" colspan="3"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
                             </tr>
                             <tr class="my_vue" v-for="(data, index) in listRequest" style="display:none;">
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
-                                <td class="text-center">@{{data.codigo}}</td>
                                 <td class="text-right">@{{data.nombre}}</td>
-                                <td class="text-center"><img :src="'storage/paises/'+data.bandera" v-if="data.bandera" class="codigo_tel"> </td>
-                                <td class="text-center">@{{data.codigo_tel}}</td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a>
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Eliminar" @click="Modal('modal-md', 'delete', data.id, data)"><i class="text-danger far fa-trash-alt"></i></a>
@@ -98,5 +92,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/paises.js?v=1.0.0')}}"></script>
+    <script src="{{asset('views/interno/centros.js?v=1.0.0')}}"></script>
 @endsection

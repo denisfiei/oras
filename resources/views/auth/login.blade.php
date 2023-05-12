@@ -16,7 +16,7 @@
             @csrf
             <div class="wd-100p">
                 <h3 class="tx-color-01 mg-b-5">Iniciar Sesión</h3>
-                <p class="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
+                <p class="tx-color-03 tx-16 mg-b-20">Bienvenidos a la plataforma de Vigilancia Genómica.</p>
 
                 <div class="form-group">
                     <label>Email</label>

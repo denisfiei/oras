@@ -51,9 +51,9 @@
             
             <li class="nav-label mg-t-25">MENU DE ADMINISTRATIVO</li>
             <li class="nav-item {{(request()->is('paises')) ? 'active' : ''}}"><a href="{{ route('paises') }}" class="nav-link"><i class="fas fa-globe-americas"></i> <span>Paises</span></a></li>
-            <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i class="fas fa-flask"></i> <span>Laboratorios</span></a></li>
-            <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i class="fas fa-university"></i> <span>Centros de Información</span></a></li>
-            <li class="nav-item"><a href="dashboard-three.html" class="nav-link"><i class="far fa-file-alt"></i> <span>Recursos</span></a></li>
+            <li class="nav-item {{(request()->is('laboratorios')) ? 'active' : ''}}"><a href="{{ route('laboratorios') }}" class="nav-link"><i class="fas fa-flask"></i> <span>Laboratorios</span></a></li>
+            <li class="nav-item {{(request()->is('centros')) ? 'active' : ''}}"><a href="{{ route('centros') }}" class="nav-link"><i class="fas fa-university"></i> <span>Centros de Información</span></a></li>
+            <li class="nav-item {{(request()->is('recursos')) ? 'active' : ''}}"><a href="{{ route('recursos') }}" class="nav-link"><i class="far fa-file-alt"></i> <span>Recursos</span></a></li>
             
             <li class="nav-label mg-t-25">MENU OPERATIVO</li>
             <li class="nav-item"><a href="dashboard-two.html" class="nav-link"><i class="fas fa-file-upload"></i> <span>Carga de Datos</span></a></li>

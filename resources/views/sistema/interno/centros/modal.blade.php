@@ -18,34 +18,15 @@
 
                     <div data-label="DATOS GENERALES" class="df-example demo-forms">
                         <div class="row">
-                            <div class="form-group col-md-12 mb-3">
-                                <label class="form-label mb-0" for="codigo">CÓDIGO </label>
-                                <input type="text" id="codigo" v-model="pais.codigo" class="form-control" :class="[errors.codigo ? 'border-error' : '']">
-                                <div class="input-error" v-if="errors.codigo">@{{ errors.codigo[0] }}</div>
-                            </div>
-                            <div class="form-group col-md-12 mb-3">
-                                <label class="form-label mb-0" for="nombre">NOMBRE <span class="obligatorio">(*)</span></label>
-                                <input type="text" id="nombre" v-model="pais.nombre" class="form-control" :class="[errors.nombre ? 'border-error' : '']">
-                                <div class="input-error" v-if="errors.nombre">@{{ errors.nombre[0] }}</div>
-                            </div>
-                            <div class="form-group col-md-12 mb-3">
-                                <label class="form-label mb-0" for="codigo_telefono">CÓDIGO DE TELÉFONO</label>
-                                <input type="text" id="codigo_telefono" v-model="pais.codigo_telefono" class="form-control" :class="[errors.codigo_telefono ? 'border-error' : '']" placeholder="+51">
-                                <div class="input-error" v-if="errors.codigo_telefono">@{{ errors.codigo_telefono[0] }}</div>
-                            </div>
-
                             <div class="form-group col-md-12 mb-0">
-                                <label class="form-label mb-0" for="bandera">IMAGEN DE BANDERA </label>
-                                <input type="file" id="bandera" class="form-control" :class="[errors.bandera ? 'border-error' : '']" accept="image/*" @change="Bandera">
-                                <div class="input-error" v-if="errors.bandera">@{{ errors.bandera[0] }}</div>
-                            </div>
-                            <div class="col-md-12 mt-3 mb-0">
-                                <img class="img-fluid" :src="imagen_bandera" alt="Logo Sistema Oscuro" v-if="imagen_bandera"/>
+                                <label class="form-label mb-0" for="nombre">NOMBRE <span class="obligatorio">(*)</span></label>
+                                <input type="text" id="nombre" v-model="centro.nombre" class="form-control" :class="[errors.nombre ? 'border-error' : '']">
+                                <div class="input-error" v-if="errors.nombre">@{{ errors.nombre[0] }}</div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="d-grid mt-3">
+                    <div class="d-grid mt-4">
                         <button class="btn btn-primary" @click="Store('create')" v-if="modal.method == 'create'"><i class="fas fa-save"></i>&nbsp; Guardar registro</button>
                         <button class="btn btn-secondary" @click="Update('create')" v-else><i class="fas fa-save"></i>&nbsp; Actualizar registro</button>
                     </div>
@@ -64,8 +45,8 @@
                 <div>
                     <h4 class="text-center mb-4">@{{modal.title}}</h4>
                     <p class="text-center mb-4">
-                        ¿ Realmente desea eliminar el pais: <br>
-                        <strong> @{{pais.nombre}}</strong> ?
+                        ¿ Realmente desea eliminar el laboratorio: <br>
+                        <strong> @{{centro.nombre}}</strong> ?
                     </p>
 
                     <div class="text-center mt-2 pt-50">

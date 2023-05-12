@@ -62,6 +62,12 @@
             </div>
         @endif
         
+        {{-- LOAD SUBMIT --}}
+        <div class="a_load">
+            <img src="{{ asset('ajax-loader-1.gif') }}" alt="Loading ...">
+        </div>
+        {{-- LOAD SUBMIT --}}
+
         @yield('content')
     </div>
   

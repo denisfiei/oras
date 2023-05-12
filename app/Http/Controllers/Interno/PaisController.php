@@ -176,7 +176,7 @@ class PaisController extends Controller
             return [
                 'action'    =>  'success',
                 'title'     =>  'Bien!!',
-                'message'   =>  'El Pais se dio de BAJA con éxito.',
+                'message'   =>  'El Pais se eliminó con éxito.',
             ];
 
 
@@ -186,7 +186,7 @@ class PaisController extends Controller
             return [
                 'action'    =>  'error',
                 'title'     =>  'Incorrecto!!',
-                'message'   =>  'Ocurrio un error al Eliminar el Pais, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
+                'message'   =>  'Ocurrio un error al eliminar el Pais, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
                 'error'     =>  'Error: '.$e->getMessage()
             ];
         }

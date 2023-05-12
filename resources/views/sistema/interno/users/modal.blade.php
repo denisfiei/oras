@@ -28,7 +28,7 @@
                                 <div class="input-group">
                                     <div class="dropdown_select_content">
                                         <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false">@{{user.codigo}}</button>
-                                        <div class="dropdown-menu w-100">
+                                        <div class="dropdown-menu">
                                             <li v-for="pais in paises">
                                                 <a class="dropdown-item" href="#" @click="user.codigo = pais.codigo_tel" :class="[user.codigo == pais.codigo_tel ? 'active' : '']" style="white-space: nowrap;"><span class="text_codigo_tel">@{{pais.codigo_tel}}</span> <img :src="'storage/paises/'+pais.bandera" class="codigo_tel"> @{{pais.nombre}}</a>
                                             </li>
