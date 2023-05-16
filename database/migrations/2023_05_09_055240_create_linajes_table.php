@@ -15,7 +15,7 @@ class CreateLinajesTable extends Migration
     {
         Schema::create('linajes', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo', 10)->nullable();
+            $table->string('codigo', 20)->nullable();
             $table->string('nombre', 50);
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->timestamps();

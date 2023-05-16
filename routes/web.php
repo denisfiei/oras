@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,11 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\InicioController::class, 'index']);
 
-Auth::routes();
+Auth::routes(['register' => false]);
 
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -54,6 +53,33 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [App\Http\Controllers\Interno\RecursoController::class, 'store']);
         Route::post('/update', [App\Http\Controllers\Interno\RecursoController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\RecursoController::class, 'delete']);
+    });
+
+    Route::prefix('virus')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\VirusController::class, 'index'])->name('virus');
+        Route::post('/buscar', [App\Http\Controllers\Interno\VirusController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\VirusController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\VirusController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\VirusController::class, 'delete']);
+    });
+
+    Route::prefix('linajes')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\LinajeController::class, 'index'])->name('linajes');
+        Route::post('/buscar', [App\Http\Controllers\Interno\LinajeController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\LinajeController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\LinajeController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\LinajeController::class, 'delete']);
+    });
+    
+    Route::prefix('cargas')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\CargaController::class, 'index'])->name('cargas');
+        Route::post('/datos', [App\Http\Controllers\Interno\CargaController::class, 'datos']);
+        Route::post('/buscar', [App\Http\Controllers\Interno\CargaController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\CargaController::class, 'store']);
+        Route::post('/delete', [App\Http\Controllers\Interno\CargaController::class, 'delete']);
+        
+        Route::post('/rows', [App\Http\Controllers\Interno\CargaController::class, 'rows']);
+        Route::post('/import', [App\Http\Controllers\Interno\CargaController::class, 'import']);
     });
 
     Route::prefix('menus')->group(function () {

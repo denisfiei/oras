@@ -58,7 +58,9 @@
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
                                 <td class="text-right">@{{data.titulo}}</td>
                                 <td class="text-center">@{{Fecha(data.fecha)}}</td>
-                                <td class="text-center"><a href="#">Ir Enlace</a></td>
+                                <td class="text-center">
+                                    <a :href="data.enlace" class="button_link" target="_blank" v-if="data.enlace">Ir Enlace</a>
+                                </td>
                                 <td class="text-right"><img :src="'storage/paises/'+data.pais.bandera" v-if="data.pais.bandera" class="codigo_tel"> @{{data.pais.nombre}}</td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-xl', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a>

@@ -15,7 +15,7 @@ class CreateVirusTable extends Migration
     {
         Schema::create('virus', function (Blueprint $table) {
             $table->id();
-            $table->string('codigo', 10)->nullable();
+            $table->string('codigo', 20)->nullable();
             $table->string('nombre', 100);
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->timestamps();

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.vertical')
 
 @section('content')
     
@@ -57,7 +57,9 @@
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
                                 <td class="">@{{data.titulo}}</td>
                                 <td class="">@{{data.descripcion}}</td>
-                                <td class="text-center">@{{data.link}}</td>
+                                <td class="text-center">
+                                    <a :href="data.link" class="button_link" target="_blank">@{{data.boton}}</a>
+                                </td>
                                 <td class="text-center">
                                     <span class="text-success" v-if="data.mostrar == 'S'"><i class="fas fa-check"></i> </span>
                                     <span class="text-danger" v-else><i class="fas fa-times"></i> </span>

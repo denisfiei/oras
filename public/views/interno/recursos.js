@@ -218,11 +218,11 @@ new Vue({
 
                 case 'delete':
                     this.modal.title = 'ELIMINAR RECURSO';
-                    this.recurso.nombre = seleccion.nombre;
+                    this.recurso.titulo = seleccion.titulo;
                     break;
                     
                 default:
-                    this.recurso.nombre = seleccion.nombre;
+                    this.recurso.titulo = seleccion.titulo;
                     break;
             }
         },
@@ -282,7 +282,7 @@ new Vue({
                 if (action == 'success') {
                     $('#formularioModal').modal('hide');
                     this.CloseModal();
-                    this.Buscar(self.page);
+                    this.Buscar(this.page);
                 }
             }).catch(error => {
                 console.log(error)
@@ -326,7 +326,7 @@ new Vue({
                 if (action == 'success') {
                     $('#formularioModal').modal('hide');
                     this.CloseModal();
-                    this.Buscar(self.page);
+                    this.Buscar(this.page);
                 }
             }).catch(error => {
                 console.log(error)
@@ -360,7 +360,7 @@ new Vue({
                 if (action == 'success') {
                     $('#formularioModal').modal('hide');
                     this.CloseModal();
-                    this.Buscar(self.page);
+                    this.Buscar(this.page);
                 }
             }).catch(error => {
                 console.log(error)

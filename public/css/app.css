@@ -22,6 +22,11 @@
     text-align: center;
     z-index: 9999; width: 35px;
 }
+.a_load h5 {
+    position: relative;
+    top: 50%;
+    left: 45%;
+}
 
 /*************** TEXT ***************/
 .text_recortar {
@@ -31,6 +36,9 @@
 }
 .text-justify {
     text-align: justify !important;
+}
+.text_mayus {
+    text-transform: uppercase;
 }
 
 /*************** NAV ***************/
@@ -148,4 +156,39 @@
     border-right: 0.3em solid transparent;
     border-bottom: 0;
     border-left: 0.3em solid transparent;
+}
+
+/****************** FONT SIZE ************/
+.fs_30 {
+    font-size: 30px !important;
+}
+
+/****************** BUTTON ************/
+.button_link:hover {
+    text-decoration: underline !important;
+}
+.btn_auth .btn_auth_name {
+    position: absolute;
+    font-size: 15px;
+    height: 30px;
+    width: 0;
+    background-color: #1a3560;
+    color: #fff;
+    top: 11px;
+    padding: 5px 0px 5px 16px;
+    border-radius: 20px;
+    right: -105%;
+    transition: right 0.2s;
+}
+.btn_auth_name i {
+    float: right;
+    font-size: 30px;
+    line-height: 20px;
+    padding-left: 10px;
+}
+.btn_auth:hover .btn_auth_name {
+    right: 21px;
+    width: auto;
+    display: block;
+    color: #fff;
 }

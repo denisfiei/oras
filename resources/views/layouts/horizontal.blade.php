@@ -1,3 +1,7 @@
+@php
+    $config_cache = Cache::get('config_cache');
+@endphp
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
@@ -9,11 +13,11 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     
     <!-- Meta -->
-    <meta name="description" content="Vigilancia Genómica">
-    <meta name="author" content="ORAS">
+    <meta name="description" content="Plataforma de Vigilancia Genómica">
+    <meta name="author" content="Oras">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('theme/assets/img/favicon.png') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <title>{{ config('app.name', 'ORAS-APP') }}</title>
 
@@ -34,7 +38,11 @@
     <header class="navbar navbar-header navbar-header-fixed">
         <a href="#" id="mainMenuOpen" class="burger-menu"><i data-feather="menu"></i></a>
         <div class="navbar-brand">
-            <a href="{{ asset('theme/index.html') }}" class="df-logo">dash<span>forge</span></a>
+            @if ($config_cache->logo_dark)
+                <a href="{{url("/")}}" class="df-logo"><img src="{{ 'storage/'.$config_cache->logo }}" alt="Logo" style="width: 170px; max-height: 45px;"></a>
+            @else
+                <a href="{{url("/")}}" class="df-logo">ORAS-<span>APP</span></a>
+            @endif
         </div>
         <div id="navbarMenu" class="navbar-menu-wrapper">
             <div class="navbar-menu-header">
@@ -98,15 +106,27 @@
             </ul>
         </div>
         <div class="navbar-right">
-            <a href="http://dribbble.com/themepixels" class="btn btn-social"><i class="fab fa-dribbble"></i></a>
-            <a href="https://github.com/themepixels" class="btn btn-social"><i class="fab fa-github"></i></a>
-            <a href="https://twitter.com/themepixels" class="btn btn-social"><i class="fab fa-twitter"></i></a>
-            <a href="https://themeforest.net/item/dashforge-responsive-admin-dashboard-template/23725961" class="btn btn-buy"><i data-feather="shopping-bag"></i> <span>Buy Now</span></a>
+            @if (Auth::check())
+                <a href="{{route('home')}}" class="btn btn-social fs_30 btn_auth">
+                    <i class="fas fa-user-circle"></i>
+                    <div class="btn_auth_name">
+                        <i class="fas fa-user-circle"></i>
+                        {{Auth::user()->nombres}}
+                    </div>
+                </a>
+            @endif
         </div>
     </header>
 
     <div class="content content-fixed content-auth">
         <div class="container">
+            {{-- LOAD SUBMIT --}}
+            <div class="a_load">
+                <img src="{{ asset('ajax-loader-1.gif') }}" alt="Loading ...">
+                <h5>PROCESANDO, ESPERE ...</h5>
+            </div>
+            {{-- LOAD SUBMIT --}}
+
             @yield('content')
         </div>
     </div>

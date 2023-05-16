@@ -5,8 +5,8 @@
 <aside class="aside aside-fixed">
     <div class="aside-header">
         <a href="{{ url('/') }}" class="aside-logo">
-            @if ($config_cache->logo_dark)
-                <img src="{{ 'storage/'.$config_cache->logo_dark }}" alt="Logo Sistema" style="width: 170px; max-height: 45px;">
+            @if ($config_cache->logo)
+                <img src="{{ 'storage/'.$config_cache->logo }}" alt="Logo Sistema" style="width: 170px; max-height: 45px;">
             @else
                 ORAS-<span>APP</span>
             @endif
@@ -19,7 +19,7 @@
     <div class="aside-body">
         <div class="aside-loggedin">
             <div class="d-flex align-items-center justify-content-start">
-                <a href="" class="avatar"><img src="https://placehold.co/387" class="rounded-circle" alt=""></a>
+                <a href="#" class="avatar"><img src="{{asset('auth.svg')}}" class="rounded-circle" alt="User"></a>
                 <div class="aside-alert-link">
                     {{-- <a href="" class="new" data-bs-toggle="tooltip" title="You have 2 unread messages"><i data-feather="message-square"></i></a>
                     <a href="" class="new" data-bs-toggle="tooltip" title="You have 4 new notifications"><i data-feather="bell"></i></a> --}}
@@ -56,7 +56,9 @@
             <li class="nav-item {{(request()->is('recursos')) ? 'active' : ''}}"><a href="{{ route('recursos') }}" class="nav-link"><i class="far fa-file-alt"></i> <span>Recursos</span></a></li>
             
             <li class="nav-label mg-t-25">MENU OPERATIVO</li>
-            <li class="nav-item"><a href="dashboard-two.html" class="nav-link"><i class="fas fa-file-upload"></i> <span>Carga de Datos</span></a></li>
+            <li class="nav-item {{(request()->is('virus')) ? 'active' : ''}}"><a href="{{ route('virus') }}" class="nav-link"><i class="fas fa-virus"></i> <span>Virus</span></a></li>
+            <li class="nav-item {{(request()->is('linajes')) ? 'active' : ''}}"><a href="{{ route('linajes') }}" class="nav-link"><i class="fas fa-bezier-curve"></i> <span>Linajes</span></a></li>
+            <li class="nav-item {{(request()->is('cargas')) ? 'active' : ''}}"><a href="{{ route('cargas') }}" class="nav-link"><i class="fas fa-file-upload"></i> <span>Carga de Datos</span></a></li>
 
             <li class="nav-label mg-t-25">MENU DE SISTEMA</li>
             <li class="nav-item {{(request()->is('menus')) ? 'active' : ''}}"><a href="{{ route('menus') }}" class="nav-link"><i class="fas fa-th-list"></i> <span>Menus</span></a></li>

@@ -31,7 +31,7 @@
                                     </div>
                                     <div class="form-group form-group-sm col-md-12 mb-3">
                                         <label class="form-label mb-0" for="boton">NOMBRE DEL BOTÓN &nbsp;<i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Si no desea el botón dejar en blanco"></i></label>
-                                        <input type="text" id="boton" v-model="aviso.boton" class="form-control" :class="[errors.boton ? 'border-error' : '']" maxlength="9">
+                                        <input type="text" id="boton" v-model="aviso.boton" class="form-control" :class="[errors.boton ? 'border-error' : '']" maxlength="20">
                                         <div class="input-error" v-if="errors.boton">@{{ errors.boton[0] }}</div>
                                     </div>
                                     <div class="form-group form-group-sm col-md-12 mb-3" v-if="aviso.boton">
@@ -56,7 +56,7 @@
                                 <div class="row row-sm">
                                     <div class="form-group form-group-sm col-md-12 mb-3">
                                         <label class="form-label mb-0" for="imagen">IMAGEN &nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Dimención de la imagen 300x400"></i> <span class="obligatorio"> &nbsp;(*)</span></label>
-                                        <input type="file" id="imagen" @change="Imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']">
+                                        <input type="file" id="imagen" @change="Imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']" accept="image/*">
                                         <div class="input-error" v-if="errors.imagen">@{{ errors.imagen[0] }}</div>
                                     </div>
                                     <div class="col-12">
@@ -104,7 +104,7 @@
                                     </div>
                                     <div class="form-group form-group-sm col-md-12 mb-3">
                                         <label class="form-label mb-0" for="boton">NOMBRE DEL BOTÓN &nbsp;<i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Si no desea el botón dejar en blanco"></i></label>
-                                        <input type="text" id="boton" v-model="aviso.boton" class="form-control" :class="[errors.boton ? 'border-error' : '']" maxlength="9">
+                                        <input type="text" id="boton" v-model="aviso.boton" class="form-control" :class="[errors.boton ? 'border-error' : '']" maxlength="20">
                                         <div class="input-error" v-if="errors.boton">@{{ errors.boton[0] }}</div>
                                     </div>
                                     <div class="form-group form-group-sm col-md-12 mb-3" v-if="aviso.boton">
@@ -129,7 +129,7 @@
                                 <div class="row row-sm">
                                     <div class="form-group form-group-sm col-md-12 mb-3">
                                         <label class="form-label mb-0" for="imagen">IMAGEN &nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Dimención de la imagen 300x400"></i> <span class="obligatorio"> &nbsp;(*)</span></label>
-                                        <input type="file" id="imagen" @change="Imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']">
+                                        <input type="file" id="imagen" @change="Imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']" accept="image/*">
                                         <div class="input-error" v-if="errors.imagen">@{{ errors.imagen[0] }}</div>
                                     </div>
                                     <div class="col-12">

@@ -30,6 +30,8 @@ class ConfigController extends Controller
 
     public function update(Request $request)
     {
+        $request->replace($this->null_string($request->all()));
+        
         $this->validate($request, [
             'nombre' => 'required|max:100',
             'descripcion' => 'required|max:255',
@@ -132,5 +134,16 @@ class ConfigController extends Controller
         $this->store_cache($config);
 
         return;
+    }
+
+    public function null_string($data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_string($value) && $value === 'null') {
+                $data[$key] = null;
+            }
+        }
+
+        return $data;
     }
 }

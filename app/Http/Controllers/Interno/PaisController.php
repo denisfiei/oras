@@ -47,8 +47,10 @@ class PaisController extends Controller
 
     public function store(Request $request)
     {
+        $request->replace($this->null_string($request->all()));
+
         $this->validate($request, [
-            //'codigo' => 'required|max:10',
+            'codigo' => 'max:10',
             'codigo_telefono' => 'required|min:2|max:5',
             'nombre' => 'required|min:4|max:255'
         ]);
@@ -103,8 +105,10 @@ class PaisController extends Controller
 
     public function update(Request $request)
     {
+        $request->replace($this->null_string($request->all()));
+
         $this->validate($request, [
-            //'codigo' => 'required|max:10',
+            'codigo' => 'max:10',
             'codigo_telefono' => 'required|min:2|max:5',
             'nombre' => 'required|min:4|max:255'
         ]);
@@ -190,5 +194,16 @@ class PaisController extends Controller
                 'error'     =>  'Error: '.$e->getMessage()
             ];
         }
+    }
+
+    public function null_string($data)
+    {
+        foreach ($data as $key => $value) {
+            if (is_string($value) && $value === 'null') {
+                $data[$key] = null;
+            }
+        }
+
+        return $data;
     }
 }

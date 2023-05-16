@@ -54,7 +54,7 @@ class RecursoController extends Controller
             });
         }
 
-        $recursos = $recursos->with(['pais', 'centro'])->orderBy('titulo', 'DESC')->paginate(10);
+        $recursos = $recursos->with(['pais', 'centro'])->orderBy('titulo', 'ASC')->paginate(10);
 
         return [
             'pagination' => [

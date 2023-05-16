@@ -18,7 +18,7 @@
 
                     <div class="row">
                         <div class="col-lg-6 col-md-12">
-                            <div data-label="DATOS GENERALES" class="df-example demo-forms  mt-4">
+                            <div data-label="DATOS GENERALES" class="df-example demo-forms mb-3">
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-3">
                                         <label class="form-label mb-0" for="pais">PAIS <span class="obligatorio">(*)</span></label>
@@ -63,7 +63,7 @@
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
-                            <div data-label="OTROS DATOS" class="df-example demo-forms mt-4">
+                            <div data-label="OTROS DATOS" class="df-example demo-forms mb-3">
                                 <div class="row">
                                     <div class="form-group col-lg-6 col-md-12 mb-3">
                                         <label class="form-label mb-0" for="orden">ORDEN </label>
@@ -76,21 +76,21 @@
                                         <div class="input-error" v-if="errors.nivel">@{{ errors.nivel[0] }}</div>
                                     </div>
                                     <div class="form-group col-md-12 mb-0">
-                                        <label class="form-label mb-0" for="enlace">ENLACE / LINK <span class="obligatorio">(*)</span></label>
+                                        <label class="form-label mb-0" for="enlace">ENLACE / LINK&nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Escriba el enlace al cual se redireccionará al hacer click."></i></label>
                                         <input type="text" id="enlace" v-model="recurso.enlace" class="form-control" :class="[errors.enlace ? 'border-error' : '']">
                                         <div class="input-error" v-if="errors.enlace">@{{ errors.enlace[0] }}</div>
                                     </div>
                                 </div>
                             </div>
 
-                            <div data-label="ARCHIVO" class="df-example demo-forms mt-4">
+                            <div data-label="ARCHIVO" class="df-example demo-forms mb-3">
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-0">
-                                        <label class="form-label mb-0" for="imagen">IMAGEN <span class="obligatorio">(*)</span></label>
+                                        <label class="form-label mb-0" for="imagen">IMAGEN&nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Dimención de la imagen 300x400 píxeles"></i> <span class="obligatorio">(*)</span></label>
                                         <input type="file" id="imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']" accept="image/*" @change="Imagen">
                                         <div class="input-error" v-if="errors.imagen">@{{ errors.imagen[0] }}</div>
                                     </div>
-                                    <div class="col-md-12 mt-3 mb-0">
+                                    <div class="col-md-12 mt-3 mb-0 text-center">
                                         <img class="img-fluid" :src="imagen_recurso" alt="Imagen" v-if="imagen_recurso"/>
                                     </div>
                                 </div>
@@ -117,8 +117,8 @@
                 <div>
                     <h4 class="text-center mb-4">@{{modal.title}}</h4>
                     <p class="text-center mb-4">
-                        ¿ Realmente desea eliminar el laboratorio: <br>
-                        <strong> @{{recurso.nombre}}</strong> ?
+                        ¿ Realmente desea eliminar el recurso: <br>
+                        <strong> @{{recurso.titulo}}</strong> ?
                     </p>
 
                     <div class="text-center mt-2 pt-50">

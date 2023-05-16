@@ -45,7 +45,7 @@
                 <div>
                     <h4 class="text-center mb-4">@{{modal.title}}</h4>
                     <p class="text-center mb-4">
-                        ¿ Realmente desea eliminar el laboratorio: <br>
+                        ¿ Realmente desea eliminar el Centro de Información: <br>
                         <strong> @{{centro.nombre}}</strong> ?
                     </p>
 

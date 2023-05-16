@@ -9,16 +9,16 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 5 Dashboard Template">
-    <meta name="author" content="ThemePixels">
+    <meta name="description" content="Plataforma de Vigilancia Genómica">
+    <meta name="author" content="Oras">
 
     <!-- Favicon -->
-    {{-- <link rel="shortcut icon" type="image/x-icon" href="{{ asset('theme/assets/img/favicon.png') }}"> --}}
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <title>{{ config('app.name', 'ORAS-APP') }}</title>
 
     <!-- vendor css -->
-    <link href="{{ asset('theme/lib/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('theme/lib/fontawesome-pro-master/css/all.min.css') }}" rel="stylesheet">
     {{-- <link href="{{ asset('theme/lib/ionicons/css/ionicons.min.css') }}" rel="stylesheet"> --}}
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/lib/remixicon/fonts/remixicon.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/lib/jqvmap/jqvmap.min.css') }}">
@@ -65,6 +65,7 @@
         {{-- LOAD SUBMIT --}}
         <div class="a_load">
             <img src="{{ asset('ajax-loader-1.gif') }}" alt="Loading ...">
+            <h5>PROCESANDO, ESPERE ...</h5>
         </div>
         {{-- LOAD SUBMIT --}}
 

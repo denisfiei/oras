@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.vertical')
 
 @section('content')
     
@@ -28,7 +28,7 @@
                         (*)<small style="vertical-align: top;"> Obligatorio</small>
                     </div>
                     <div class="col-lg-8 col-md-12">
-                        <div data-label="DATOS GENERALES" class="df-example demo-forms">
+                        <div data-label="DATOS GENERALES" class="df-example demo-forms mb-3">
                             <div class="row row-sm">
                                 <div class="form-group col-lg-4 col-md-12 mb-3">
                                     <label class="form-label mb-0" for="nombre">NOMBRE DEL SISTEMA <span class="obligatorio">(*)</span></label>
@@ -63,7 +63,7 @@
                                     </div>
                                     <div class="input-error" v-if="errors.whatsapp">@{{ errors.whatsapp[0] }}</div>
                                 </div>
-                                <div class="form-group col-lg-5 col-md-6 col-sm-12 mb-3">
+                                <div class="form-group col-lg-5 col-md-6 col-sm-12 mb-0">
                                     <label class="form-label mb-0" for="email">EMAIL <span class="obligatorio">(*)</span></label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="far fa-envelope"></i></span>
@@ -71,11 +71,11 @@
                                     </div>
                                     <div class="input-error" v-if="errors.email">@{{ errors.email[0] }}</div>
                                 </div>
-                                <div class="form-group col-md-7 mb-3">
-                                    <label class="form-label mb-0" for="dominio">DOMINIO API<span class="obligatorio">(*)</span></label>
-                                    <input type="text" id="dominio" v-model="form.dominio" class="form-control" :class="[errors.dominio ? 'border-error' : '']">
-                                    <div class="input-error" v-if="errors.dominio">@{{ errors.dominio[0] }}</div>
-                                </div>
+                            </div>
+                        </div>
+
+                        <div data-label="REDES SOCIALES" class="df-example demo-forms mb-3">
+                            <div class="row row-sm">
                                 <div class="form-group col-lg-12 col-md-12 col-sm-12 mb-3">
                                     <label class="form-label mb-0" for="facebook">FACEBOOK </label>
                                     <div class="input-group">
@@ -92,7 +92,7 @@
                                     </div>
                                     <div class="input-error" v-if="errors.twitter">@{{ errors.twitter[0] }}</div>
                                 </div>
-                                <div class="form-group col-lg-12 col-md-12 col-sm-12 mb-3">
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 mb-0">
                                     <label class="form-label mb-0" for="instagram">INSTAGRAM </label>
                                     <div class="input-group">
                                         <span class="input-group-text"><i class="fab fa-instagram"></i></span>
@@ -107,7 +107,7 @@
                         <div data-label="LOGO DEL SISTEMA" class="df-example demo-forms mb-4">
                             <div class="row row-sm mb-4">
                                 <div class="form-group col-md-12 mb-3">
-                                    <label class="form-label mb-0" for="logo">LOGO LIGHT <span class="obligatorio">(* resolución 180x45)</span></label>
+                                    <label class="form-label mb-0" for="logo">LOGO <span class="obligatorio">(* resolución 180x45)</span></label>
                                     <input type="file" id="logo" class="form-control" :class="[errors.logo ? 'border-error' : '']" accept="image/*" @change="Imagen">
                                     <div class="input-error" v-if="errors.logo">@{{ errors.logo[0] }}</div>
                                 </div>
@@ -116,7 +116,7 @@
                                 </div>
                             </div>
                             
-                            <div class="row row-sm">
+                            {{-- <div class="row row-sm">
                                 <div class="form-group col-md-12 mb-3">
                                     <label class="form-label mb-0" for="logo_dark">LOGO DARK <span class="obligatorio">(* resolución 180x45)</span></label>
                                     <input type="file" id="logo_dark" class="form-control" :class="[errors.logo_dark ? 'border-error' : '']" accept="image/*" @change="ImagenDark">
@@ -125,36 +125,8 @@
                                 <div class="col-md-12">
                                     <img class="img-fluid" :src="imagen_dark" alt="Logo Sistema Oscuro" v-if="imagen_dark"/>
                                 </div>
-                            </div>
+                            </div> --}}
                         </div>
-
-                        {{-- <div data-label="ACCESOS API" class="df-example demo-forms">
-                            <div class="row row-sm">
-                                <div class="form-group col-md-12 mb-3">
-                                    <label class="form-label mb-0" for="dominio">DOMINIO <span class="obligatorio">(*)</span></label>
-                                    <input type="text" id="dominio" v-model="form.dominio" class="form-control" :class="[errors.dominio ? 'border-error' : '']">
-                                    <div class="input-error" v-if="errors.dominio">@{{ errors.dominio[0] }}</div>
-                                </div>
-                                <div class="form-group col-md-12 mb-3">
-                                    <label class="form-label mb-0" for="nombre_bd">NOMBRE BD <small>(base de datos)</small> <span class="obligatorio">(*)</span></label>
-                                    <input type="text" id="nombre_bd" v-model="form.nombre_bd" class="form-control" :class="[errors.nombre_bd ? 'border-error' : '']">
-                                    <div class="input-error" v-if="errors.nombre_bd">@{{ errors.nombre_bd[0] }}</div>
-                                </div>
-                                <div class="form-group col-md-12 mb-3">
-                                    <label class="form-label mb-0" for="usuario_bd">USUARIO BD <small>(base de datos)</small> <span class="obligatorio">(*)</span></label>
-                                    <input type="text" id="usuario_bd" v-model="form.usuario_bd" class="form-control" :class="[errors.usuario_bd ? 'border-error' : '']">
-                                    <div class="input-error" v-if="errors.usuario_bd">@{{ errors.usuario_bd[0] }}</div>
-                                </div>
-                                <div class="form-group col-md-12 mb-3">
-                                    <label class="form-label mb-0" for="clave_bd">CLAVE BD <small>(base de datos)</small> <span class="obligatorio">(*)</span></label>
-                                    <div class="input-group form-password-toggle">
-                                        <input type="password" id="clave_bd" v-model="form.clave_bd" class="form-control" :class="[errors.clave_bd ? 'border-error' : '']">
-                                        <span class="input-group-text show_password cursor-pointer"><i class="far fa-eye"></i></span>
-                                    </div>
-                                    <div class="input-error" v-if="errors.clave_bd">@{{ errors.clave_bd[0] }}</div>
-                                </div>
-                            </div>
-                        </div> --}}
                     </div>
 
                     <div class="text-center mt-3">

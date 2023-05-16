@@ -17,7 +17,7 @@ class CreateAvisosTable extends Migration
             $table->id();
             $table->string('titulo', 100);
             $table->string('descripcion')->nullable();
-            $table->string('boton', 100)->nullable();
+            $table->string('boton', 20)->nullable();
             $table->string('link')->nullable();
             $table->string('imagen')->nullable();
             $table->char('mostrar', 1)->default('S');

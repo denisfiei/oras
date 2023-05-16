@@ -29,18 +29,9 @@ new Vue({
         seleccion: [],
         errors: [],
 
-        paises: [],
         centro: {
-            'pais': null,
-            'pais_text': '--- Seleccione una opción ---',
-            'codigo': null,
             'nombre': null,
-            'email': null,
-            'direccion': null,
-            'codigo_telefono': '+51',
-            'telefono': null
-        },
-        imagen_bandera: null
+        }
     },
     created() {
         this.Buscar();
@@ -229,7 +220,7 @@ new Vue({
                 if (action == 'success') {
                     $('#formularioModal').modal('hide');
                     this.CloseModal();
-                    this.Buscar(self.page);
+                    this.Buscar(this.page);
                 }
             }).catch(error => {
                 console.log(error)
@@ -264,7 +255,7 @@ new Vue({
                 if (action == 'success') {
                     $('#formularioModal').modal('hide');
                     this.CloseModal();
-                    this.Buscar(self.page);
+                    this.Buscar(this.page);
                 }
             }).catch(error => {
                 console.log(error)
@@ -298,7 +289,7 @@ new Vue({
                 if (action == 'success') {
                     $('#formularioModal').modal('hide');
                     this.CloseModal();
-                    this.Buscar(self.page);
+                    this.Buscar(this.page);
                 }
             }).catch(error => {
                 console.log(error)
