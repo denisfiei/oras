@@ -46,6 +46,7 @@ class CreateCargaDetallesTable extends Migration
             $table->char('comorbilidad', 2)->default('NO');
             $table->text('comorbilidad_lista')->nullable();
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });
     }

@@ -384,9 +384,9 @@ new Vue({
                 
                 if (action == 'success') {
                     this.finished = true;
-                    /*this.importar.rows = response.data.import.total;
+                    this.importar.rows = response.data.import.total;
                     this.importar.rows_error = response.data.import.total_error;
-                    this.importar.errors = response.data.import.duplicados;*/
+                    this.importar.errors = response.data.import.duplicados;
                     this.Buscar(this.page);
                 } else {
                     this.Alert2(action, title, message);

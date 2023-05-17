@@ -25,6 +25,13 @@
                                         <div class="input-error" v-if="errors.titulo">@{{ errors.titulo[0] }}</div>
                                     </div>
                                     <div class="form-group form-group-sm col-md-12 mb-3">
+                                        <label class="form-label mb-0" for="solo_imagen">MOSTRAR <span class="obligatorio">(*)</span></label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" v-model="aviso.solo_imagen" id="flexSwitchCheckDefault" true-value="S" false-value="N">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Al activar solo se mostrará la imagen.</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-md-12 mb-3" v-show="aviso.solo_imagen == 'N'">
                                         <label class="form-label mb-0" for="descripcion">DESCRIPCIÓN <span class="obligatorio">(*)</span></label>
                                         <textarea id="descripcion" v-model="aviso.descripcion" class="form-control" :class="[errors.descripcion ? 'border-error' : '']"></textarea>
                                         <div class="input-error" v-if="errors.descripcion">@{{ errors.descripcion[0] }}</div>
@@ -39,7 +46,7 @@
                                         <input type="text" id="link" v-model="aviso.link" class="form-control" :class="[errors.link ? 'border-error' : '']">
                                         <div class="input-error" v-if="errors.link">@{{ errors.link[0] }}</div>
                                     </div>
-                                    <div class="form-group form-group-sm col-md-12 mb-3">
+                                    <div class="form-group form-group-sm col-md-12 mb-0">
                                         <label class="form-label mb-0" for="mostrar">MOSTRAR <span class="obligatorio">(*)</span></label>
                                         <select id="mostrar" v-model="aviso.mostrar" class="form-select" :class="[errors.mostrar ? 'border-error' : '']">
                                             <option value="S">SI</option>
@@ -98,6 +105,13 @@
                                         <div class="input-error" v-if="errors.titulo">@{{ errors.titulo[0] }}</div>
                                     </div>
                                     <div class="form-group form-group-sm col-md-12 mb-3">
+                                        <label class="form-label mb-0" for="solo_imagen">MOSTRAR <span class="obligatorio">(*)</span></label>
+                                        <div class="form-check form-switch">
+                                            <input class="form-check-input" type="checkbox" role="switch" v-model="aviso.solo_imagen" id="flexSwitchCheckDefault" true-value="S" false-value="N">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Al activar solo se mostrará la imagen.</label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group form-group-sm col-md-12 mb-3" v-show="aviso.solo_imagen == 'N'">
                                         <label class="form-label mb-0" for="descripcion">DESCRIPCIÓN <span class="obligatorio">(*)</span></label>
                                         <textarea id="descripcion" v-model="aviso.descripcion" class="form-control" :class="[errors.descripcion ? 'border-error' : '']"></textarea>
                                         <div class="input-error" v-if="errors.descripcion">@{{ errors.descripcion[0] }}</div>
@@ -112,7 +126,7 @@
                                         <input type="text" id="link" v-model="aviso.link" class="form-control" :class="[errors.link ? 'border-error' : '']">
                                         <div class="input-error" v-if="errors.link">@{{ errors.link[0] }}</div>
                                     </div>
-                                    <div class="form-group form-group-sm col-md-12 mb-3">
+                                    <div class="form-group form-group-sm col-md-12 mb-0">
                                         <label class="form-label mb-0" for="mostrar">MOSTRAR <span class="obligatorio">(*)</span></label>
                                         <select id="mostrar" v-model="aviso.mostrar" class="form-select" :class="[errors.mostrar ? 'border-error' : '']">
                                             <option value="S">SI</option>

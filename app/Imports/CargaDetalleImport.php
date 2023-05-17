@@ -2,7 +2,7 @@
 
 namespace App\Imports;
 
-use App\Models\CargaGisaid;
+use App\Models\CargaDetalle;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Row;
@@ -12,7 +12,7 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\Importable;
 use Carbon\Carbon;
 
-class CargaGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
+class CargaDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
 {
     use Importable;
 
@@ -44,7 +44,7 @@ class CargaGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
             $collection_date = $this->transformDateTime($row[2]);
         }
 
-        $gisaid = new CargaGisaid();
+        $gisaid = new CargaDetalle();
         $gisaid->carga_id = $this->carga;
         $gisaid->virus_name = $row[0];
         $gisaid->accession_id = $row[1];

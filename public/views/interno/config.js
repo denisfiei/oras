@@ -5,7 +5,7 @@ new Vue({
         buttonKey: 1,
         color: 'rgba(0, 0, 0, 0.71)',
         imagen: null,
-        imagen_dark: null,
+        imagen_login: null,
         form: [],
         errors: []
     },
@@ -122,8 +122,8 @@ new Vue({
                 if (this.form.logo) {
                     this.imagen = "storage/" + this.form.logo;
                 }
-                if (this.form.logo_dark) {
-                    this.imagen_dark = "storage/" + this.form.logo_dark;
+                if (this.form.logo_login) {
+                    this.imagen_login = "storage/" + this.form.logo_login;
                 }
             }).catch(error => {
                 console.log(error)
@@ -151,9 +151,11 @@ new Vue({
             formdata.append('youtube', this.form.youtube);
             formdata.append('dominio', this.form.dominio);
             formdata.append('logo', this.form.logo);
-            formdata.append('logo_dark', this.form.logo_dark);
+            formdata.append('logo_login', this.form.logo_login);
 
             axios.post('config/update', formdata).then(response=> {
+                $("#logo").val('');
+                $("#logo_login").val('');
                 let action = response.data.action;
                 let title = response.data.title;
                 let message = response.data.message;
@@ -202,23 +204,23 @@ new Vue({
             let file = event.target.files[0];
 
             if (file.type === 'image/png' || file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/webp') {
-                this.form.logo_dark = file;
+                this.form.logo_login = file;
                 var reader2 = new FileReader();
                  
                 let self = this;
                 reader2.onload = (function(theFile) {
                     return function(e) {
-                        self.imagen_dark = e.target.result;
+                        self.imagen_login = e.target.result;
                     };
                 })(file);
          
                 reader2.readAsDataURL(file);
             } else {
-                $('#logo_dark').val('');
-                this.form.logo_dark = null;
+                $('#logo_login').val('');
+                this.form.logo_login = null;
                 this.imagen = null
 
-                this.errors['logo_dark'] = ['El archivo seleccionado no es imagen.'];
+                this.errors['logo_login'] = ['El archivo seleccionado no es imagen.'];
             }
         },
         Fecha(date) {

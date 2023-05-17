@@ -29,7 +29,7 @@ class CreateConfigsTable extends Migration
             $table->string('instagram')->nullable();
             $table->string('youtube')->nullable();
             $table->string('logo')->nullable();
-            $table->string('logo_dark')->nullable();
+            $table->string('logo_login')->nullable();
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });

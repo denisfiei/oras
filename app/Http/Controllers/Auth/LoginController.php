@@ -50,6 +50,12 @@ class LoginController extends Controller
         }
     }
 
+    public function showLoginForm()
+    {
+        $config_cache = Cache::get('config_cache');
+        return view('auth.login', compact('config_cache'));
+    }
+
     public function login(Request $request)
     {
         $this->validateLogin($request);

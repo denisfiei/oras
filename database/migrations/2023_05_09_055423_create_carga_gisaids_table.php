@@ -16,7 +16,7 @@ class CreateCargaGisaidsTable extends Migration
         Schema::create('carga_gisaids', function (Blueprint $table) {
             $table->id();
             $table->foreignId('carga_id')->references('id')->on('cargas')->onDelete('restrict');
-            $table->foreignId('linaje_id')->references('id')->on('linajes')->onDelete('restrict');
+            //$table->foreignId('linaje_id')->references('id')->on('linajes')->onDelete('restrict');
             $table->string('virus_name', 100);
             $table->string('accession_id', 100);
             $table->date('collection_date');
@@ -25,7 +25,7 @@ class CreateCargaGisaidsTable extends Migration
             $table->string('additional_location_information');
             $table->string('sampling_strategy');
             $table->string('gender', 20);
-            $table->string('patient_age', 3);
+            $table->string('patient_age', 20);
             $table->string('patient_status');
             $table->string('last_vaccinated');
             $table->string('passage', 20);
@@ -35,6 +35,7 @@ class CreateCargaGisaidsTable extends Migration
             $table->string('clade', 20);
             $table->text('aa_substitutions')->nullable();
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });
     }

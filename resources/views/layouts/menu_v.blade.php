@@ -6,7 +6,7 @@
     <div class="aside-header">
         <a href="{{ url('/') }}" class="aside-logo">
             @if ($config_cache->logo)
-                <img src="{{ 'storage/'.$config_cache->logo }}" alt="Logo Sistema" style="width: 170px; max-height: 45px;">
+                <img src="{{ 'storage/'.$config_cache->logo }}" alt="Logo Sistema" style="max-width: 170px; max-height: 45px;">
             @else
                 ORAS-<span>APP</span>
             @endif

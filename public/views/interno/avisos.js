@@ -36,6 +36,7 @@ new Vue({
             'link': null,
             'imagen': null,
             'mostrar': 'S',
+            'solo_imagen': 'N',
         },
         img: null
     },
@@ -118,6 +119,7 @@ new Vue({
                         this.aviso.link = seleccion.link;
                     }
                     this.aviso.mostrar = seleccion.mostrar;
+                    this.aviso.solo_imagen = seleccion.solo_imagen;
                     this.img = 'storage/'+seleccion.imagen;
                     break;
 
@@ -152,6 +154,7 @@ new Vue({
                 'link': null,
                 'imagen': null,
                 'mostrar': 'S',
+                'solo_imagen': 'N',
             };
             this.img = null;
         },
@@ -165,6 +168,7 @@ new Vue({
             formdata.append('link', this.aviso.link);
             formdata.append('imagen', this.aviso.imagen);
             formdata.append('mostrar', this.aviso.mostrar);
+            formdata.append('solo_imagen', this.aviso.solo_imagen);
 
             axios.post('avisos/store', formdata).then(response=> {
                 console.log(response.data)
@@ -206,6 +210,7 @@ new Vue({
             formdata.append('link', this.aviso.link);
             formdata.append('imagen', this.aviso.imagen);
             formdata.append('mostrar', this.aviso.mostrar);
+            formdata.append('solo_imagen', this.aviso.solo_imagen);
 
             axios.post('avisos/update', formdata).then(response=> {
                 this.buttonKey++;

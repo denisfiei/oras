@@ -20,6 +20,7 @@ class CreateAvisosTable extends Migration
             $table->string('boton', 20)->nullable();
             $table->string('link')->nullable();
             $table->string('imagen')->nullable();
+            $table->char('solo_imagen', 1)->default('N');
             $table->char('mostrar', 1)->default('S');
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();

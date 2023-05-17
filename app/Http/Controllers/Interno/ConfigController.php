@@ -62,17 +62,17 @@ class ConfigController extends Controller
                 $config->logo = $fileContent;
             }
 
-            if ($request->hasFile('logo_dark')) {
-                $anterior2 = $config->logo_dark;
+            if ($request->hasFile('logo_login')) {
+                $anterior2 = $config->logo_login;
 
-                $file2 = $request->file('logo_dark');
+                $file2 = $request->file('logo_login');
                 $fileName2 = $file2->getClientOriginalName();
                 $extension2 = $file2->getClientOriginalExtension();
-                $fileContent2 = 'logo_dark_'.time().'.'.$extension2;
+                $fileContent2 = 'logo_login_'.time().'.'.$extension2;
                 Storage::putFileAs('public/', $file2, $fileContent2);
                 Storage::delete('public/'.$anterior2);
 
-                $config->logo_dark = $fileContent2;
+                $config->logo_login = $fileContent2;
             }
 
             $config->nombre = $request->nombre;

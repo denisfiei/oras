@@ -5,10 +5,14 @@
 <div class="media align-items-stretch justify-content-center ht-100p pos-relative">
     <div class="media-body align-items-center d-none d-lg-flex">
         <div class="mx-wd-600">
-            <img src="https://placehold.co/1260x900" class="img-fluid" alt="">
+            @if ($config_cache->logo_login)
+                <img src="{{ 'storage/'.$config_cache->logo_login }}" class="img-fluid" alt="Imagen_login">
+            @else
+                <img src="https://placehold.co/1260x900" class="img-fluid" alt="Imagen_login">
+            @endif
         </div>
         <div class="pos-absolute b-0 l-0 tx-12 tx-center">
-            Plataforma de Vigilancia Genómica, creado por <a href="https://www.freepik.com/pikisuperstar" target="_blank">ORAS (oras.com)</a>
+            Plataforma de Vigilancia Genómica, creado por <a href="#" target="_blank">ORAS (oras.com)</a>
         </div>
     </div>
     <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">

@@ -77,6 +77,7 @@ class AvisoController extends Controller
                 $aviso->imagen = $fileContent;
             }
             $aviso->mostrar = $request->mostrar;
+            $aviso->solo_imagen = $request->solo_imagen;
             $aviso->user_id = Auth::user()->id;
             $aviso->save();
 
@@ -141,6 +142,7 @@ class AvisoController extends Controller
                 $aviso->imagen = $fileContent;
             }
             $aviso->mostrar = $request->mostrar;
+            $aviso->solo_imagen = $request->solo_imagen;
             $aviso->user_id = Auth::user()->id;
             $aviso->save();
 

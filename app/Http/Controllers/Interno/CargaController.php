@@ -222,17 +222,26 @@ class CargaController extends Controller
             $carga->user_id = Auth::user()->id;
             $carga->save();
 
-            DB::commit();
+            if ($request->tipo == 1 || $request->tipo == '1') {
 
-            /*$import = new CargaGisaidImport();
-            Excel::import($import, request()->file('file'));
-            $data = $import->getData();*/
+                $import = new CargaGisaidImport($carga->id);
+                Excel::import($import, request()->file('file'));
+                $data = $import->getData();
+
+            } else if ($request->tipo == 2 || $request->tipo == '2') {
+
+                $import = new CargaGisaidImport($carga->id);
+                Excel::import($import, request()->file('file'));
+                $data = $import->getData();
+            }
+
+            DB::commit();
     
             return [
                 'action'    =>  'success',
                 'title'     =>  'Bien!!',
                 'message'   =>  'Se importaron los Datos con éxito.',
-                //'import'    =>  $data
+                'import'    =>  $data
             ];
         } catch (\Exception $e) {
             DB::rollBack();

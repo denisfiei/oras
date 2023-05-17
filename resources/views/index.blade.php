@@ -10,26 +10,40 @@
                         <span aria-hidden="true">&times;</span>
                     </a>
                     <div class="row">
-                        <div class="col-sm-5">
-                            <div class="aviso_img">
-                                <img class="img-fluid" src="{{asset('storage/'.$aviso->imagen)}}" alt="Imagen">
-                            </div>
-                        </div>
-                        <div class="col-sm-7">
-                            <div class="popup_content">
-                                <div class="popup-text">
-                                    <div class="heading_s1">
-                                        <h4>{{$aviso->titulo}}</h4>
-                                    </div>
-                                    <p>{{$aviso->descripcion}}</p>
+                        @if ($aviso->solo_imagen == 'N')
+                            <div class="col-sm-5">
+                                <div class="aviso_img">
+                                    <img class="img-fluid" src="{{asset('storage/'.$aviso->imagen)}}" alt="Imagen">
                                 </div>
+                            </div>
+                            <div class="col-sm-7">
+                                <div class="popup_content">
+                                    <div class="popup-text">
+                                        <div class="heading_s1">
+                                            <h4>{{$aviso->titulo}}</h4>
+                                        </div>
+                                        <p>{{$aviso->descripcion}}</p>
+                                    </div>
+                                    @if ($aviso->boton)
+                                        <div class="mt-3">
+                                            <a href="{{$aviso->link}}" class="btn btn-outline-primary btn-block text-uppercase rounded-0">{{$aviso->boton}}</a>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                        @else
+                            <div class="col-sm-12 text-center">
+                                <div class="aviso_img">
+                                    <img class="img-fluid" src="{{asset('storage/'.$aviso->imagen)}}" alt="Imagen">
+                                </div>
+
                                 @if ($aviso->boton)
                                     <div class="mt-3">
                                         <a href="{{$aviso->link}}" class="btn btn-outline-primary btn-block text-uppercase rounded-0">{{$aviso->boton}}</a>
                                     </div>
                                 @endif
                             </div>
-                        </div>
+                        @endif
                     </div>
                 </div>
             </div>

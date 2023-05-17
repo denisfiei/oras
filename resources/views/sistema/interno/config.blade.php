@@ -116,16 +116,16 @@
                                 </div>
                             </div>
                             
-                            {{-- <div class="row row-sm">
+                            <div class="row row-sm">
                                 <div class="form-group col-md-12 mb-3">
-                                    <label class="form-label mb-0" for="logo_dark">LOGO DARK <span class="obligatorio">(* resolución 180x45)</span></label>
-                                    <input type="file" id="logo_dark" class="form-control" :class="[errors.logo_dark ? 'border-error' : '']" accept="image/*" @change="ImagenDark">
-                                    <div class="input-error" v-if="errors.logo_dark">@{{ errors.logo_dark[0] }}</div>
+                                    <label class="form-label mb-0" for="logo_login">IMAGEN LOGIN <span class="obligatorio">(* resolución 600x430)</span></label>
+                                    <input type="file" id="logo_login" class="form-control" :class="[errors.logo_login ? 'border-error' : '']" accept="image/*" @change="ImagenDark">
+                                    <div class="input-error" v-if="errors.logo_login">@{{ errors.logo_login[0] }}</div>
                                 </div>
                                 <div class="col-md-12">
-                                    <img class="img-fluid" :src="imagen_dark" alt="Logo Sistema Oscuro" v-if="imagen_dark"/>
+                                    <img class="img-fluid" :src="imagen_login" alt="Logo Sistema Oscuro" v-if="imagen_login"/>
                                 </div>
-                            </div> --}}
+                            </div>
                         </div>
                     </div>
 
