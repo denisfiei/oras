@@ -1,0 +1,194 @@
+/*************** LOAD ***************/
+.a_load {
+    background-color: #ffffffd1;
+    bottom: 0;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    display: none;
+}
+.a_load img {
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    text-align: center;
+    z-index: 9999; width: 35px;
+}
+.a_load h5 {
+    position: relative;
+    top: 50%;
+    left: 45%;
+}
+
+/*************** TEXT ***************/
+.text_recortar {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.text-justify {
+    text-align: justify !important;
+}
+.text_mayus {
+    text-transform: uppercase;
+}
+
+/*************** NAV ***************/
+.nav-link .fa, .nav-link .fas, .nav-link .fab, .nav-link .far {
+    width: 18px;
+    height: 18px;
+    stroke-width: 2.3px;
+    margin-right: 15px;
+    /*color: rgba(27, 46, 75, 0.65);
+    fill: rgba(27, 46, 75, 0.06);*/
+}
+.nav-link  .fa::before, .nav-link .fas::before, .nav-link .fab::before, .nav-link .far::before {
+    font-size: 18px;
+}
+
+.btn_opt svg {
+    width: 15px !important;
+    height: 15px !important;
+}
+.btn_opt {
+    padding: 6px;
+}
+.btn_opt:hover {
+    background-color: #adadad !important;
+    border-radius: 24px;
+    padding: 6px;
+}
+.page-link {
+    min-width: 30px;
+    padding: 5px 10px;
+}
+.page-link-icon {
+    padding: 0px 5px;
+}
+.form-group-sm .form-control, .form-group-sm .form-select {
+    /*padding: 0.4rem 0.5rem;*/
+    line-height: 1.2;
+}
+.row label, .form_row_sm label {
+    font-size: 11px;
+}
+.cursor_pointer {
+    cursor: pointer;
+}
+
+/*************** VALIDATION ERROR ***************/
+.input-error {
+    color: red;
+    font-size: 12px;
+}
+.border-error {
+    border-color: red !important;
+}
+.obligatorio {
+	color: red !important;
+	line-height: 0;
+}
+
+/*************** CARD ***************/
+.content-body {
+    background-color: whitesmoke;
+}
+.card {
+    -webkit-box-shadow: 4px 6px 12px 0px rgba(219,219,219,1);
+    -moz-box-shadow: 4px 6px 12px 0px rgba(219,219,219,1);
+    box-shadow: 4px 6px 12px 0px rgb(219,219,219,1);
+}
+
+/*************** TABLE ***************/
+.no_data {
+    font-size: 25px;
+    color: #959595;
+    padding: 23px !important;
+}
+.table th, .table td {
+    vertical-align: middle !important;
+}
+.codigo_tel {
+    width: 20px;
+}
+.text_codigo_tel {
+    width: 35px;
+    display: inline-block;
+}
+
+/*************** DROPDOWN ***************/
+.dropdown-menu {
+    box-shadow: 2px 3px 5px #e0e0e0 !important;
+    border: 1px solid #dadada !important;
+}
+.dropdown_select_content {
+    position: relative;
+}
+.dropdown_select_content .dropdown-item {
+    white-space: break-spaces;
+}
+.form_select {
+    text-align: left;
+    margin-right: 15px;
+    color: #606874;
+    border: 1px solid #c0ccda;
+    background-color: #fff;
+    border-radius: 0.25rem;
+    padding: 0.46875rem 0.625rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    width: 100%;
+}
+.form_select::before {
+    position: absolute;
+    margin-top: 8px;
+    right: 8px;
+    content: "";
+    border-top: 0.3em solid;
+    border-right: 0.3em solid transparent;
+    border-bottom: 0;
+    border-left: 0.3em solid transparent;
+}
+
+/****************** FONT SIZE ************/
+.fs_30 {
+    font-size: 30px !important;
+}
+
+/****************** BUTTON ************/
+.button_link:hover {
+    text-decoration: underline !important;
+}
+.btn_auth .btn_auth_name {
+    position: absolute;
+    font-size: 15px;
+    height: 30px;
+    width: 0;
+    background-color: #1a3560;
+    color: #fff;
+    top: 11px;
+    padding: 5px 0px 5px 16px;
+    border-radius: 20px;
+    right: -105%;
+    transition: right 0.2s;
+}
+.btn_auth_name i {
+    float: right;
+    font-size: 30px;
+    line-height: 20px;
+    padding-left: 10px;
+}
+.btn_auth:hover .btn_auth_name {
+    right: 21px;
+    width: auto;
+    display: block;
+    color: #fff;
+}
