@@ -81,6 +81,8 @@
                     {{Auth::user()->nombres}}
                 </div>
             </a>
+        @else
+            <a href="{{route('login')}}" class="btn btn-sm btn-primary">Ingresar <i class="fas fa-sign-in"></i></a>
         @endif
     </div>
 </header>

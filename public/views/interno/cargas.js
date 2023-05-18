@@ -30,13 +30,16 @@ new Vue({
         errors: [],
 
         virus: [],
+        muestreos: [],
         carga: {
+            'nombre': null,
+            'fecha': null,
             'virus': null,
             'virus_text': '--- Seleccione una Opción ---',
             'tipo': null,
             'tipo_text': '--- Seleccione una Opción ---',
-            'codigo': null,
-            'nombre': null,
+            'muestreo': null,
+            'muestreo_text': '--- Seleccione una Opción ---',
             'file': null
         },
 
@@ -162,6 +165,7 @@ new Vue({
         Datos() {
             axios.post('cargas/datos').then(response => {
                 this.virus = response.data.virus;
+                this.muestreos = response.data.muestreos;
 
                 this.listRequest = response.data.cargas.data;
                 this.to_pagination = response.data.cargas.to;
@@ -211,11 +215,13 @@ new Vue({
 
                 case 'delete':
                     this.modal.title = 'ELIMINAR CARGA';
-                    this.carga.nombre = seleccion.nombre;
+                    this.carga.nombre = seleccion.archivo;
+                    this.carga.fecha = seleccion.created_at;
                     break;
                     
                 default:
-                    this.carga.nombre = seleccion.nombre;
+                    this.carga.nombre = seleccion.archivo;
+                    this.carga.fecha = seleccion.created_at;
                     break;
             }
         },
@@ -233,12 +239,14 @@ new Vue({
             this.errors = [];
 
             this.carga = {
+                'nombre': null,
+                'fecha': null,
                 'virus': null,
                 'virus_text': '--- Seleccione una Opción ---',
                 'tipo': null,
                 'tipo_text': '--- Seleccione una Opción ---',
-                'codigo': null,
-                'nombre': null,
+                'muestreo': null,
+                'muestreo_text': '--- Seleccione una Opción ---',
                 'file': null
             };
 
@@ -290,6 +298,10 @@ new Vue({
         SelectTipo(id, text) {
             this.carga.tipo = id;
             this.carga.tipo_text = text;
+        },
+        SelectMuestreo(data) {
+            this.carga.muestreo = data.id;
+            this.carga.muestreo_text = data.nombre;
         },
         Tipo(data) {
             if (data == 1) {
@@ -372,6 +384,7 @@ new Vue({
             var formData  = new FormData();
             formData.append('virus', this.carga.virus);
             formData.append('tipo', this.carga.tipo);
+            formData.append('muestreo', this.carga.muestreo);
             formData.append('file', this.carga.file);
             formData.append('cantidad', this.total_rows);
 
@@ -388,6 +401,8 @@ new Vue({
                     this.importar.rows_error = response.data.import.total_error;
                     this.importar.errors = response.data.import.duplicados;
                     this.Buscar(this.page);
+
+                    this.Alert2(action, title, message);
                 } else {
                     this.Alert2(action, title, message);
                     this.visible = true;

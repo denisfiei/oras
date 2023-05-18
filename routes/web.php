@@ -45,6 +45,14 @@ Route::middleware('auth')->group(function () {
         Route::post('/update', [App\Http\Controllers\Interno\CentroController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\CentroController::class, 'delete']);
     });
+
+    Route::prefix('muestreos')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\MuestreoController::class, 'index'])->name('muestreos');
+        Route::post('/buscar', [App\Http\Controllers\Interno\MuestreoController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\MuestreoController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\MuestreoController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\MuestreoController::class, 'delete']);
+    });
     
     Route::prefix('recursos')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\RecursoController::class, 'index'])->name('recursos');

@@ -3,7 +3,6 @@
 namespace App\Imports;
 
 use App\Models\CargaGisaid;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\OnEachRow;
@@ -63,6 +62,7 @@ class CargaGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
         $gisaid->lineage = $row[14];
         $gisaid->clade = $row[15];
         $gisaid->aa_substitutions = $row[16];
+        $gisaid->user_id = Auth::user()->id;
         $gisaid->save();
 
         $this->total += 1;

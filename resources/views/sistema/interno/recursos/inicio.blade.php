@@ -9,7 +9,7 @@
                 <h4 class="mg-b-0 tx-spacing--1"><i class="far fa-file-alt"></i> RECURSOS</h4>
             </div>
             <div class="d-none d-md-block">
-                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-xl', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Laboratorio</button>
+                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-xl', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Recurso</button>
             </div>
         </div>
     </div>

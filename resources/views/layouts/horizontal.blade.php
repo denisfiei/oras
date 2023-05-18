@@ -22,7 +22,8 @@
     <title>{{ config('app.name', 'ORAS-APP') }}</title>
 
     <!-- vendor css -->
-    <link href="{{ asset('theme/lib/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('theme/lib/@fortawesome/fontawesome-free/css/all.min.css') }}" rel="stylesheet"> --}}
+    <link href="{{ asset('theme/lib/fontawesome-pro-master/css/all.min.css') }}" rel="stylesheet">
     <link href="{{ asset('theme/lib/remixicon/fonts/remixicon.css') }}" rel="stylesheet">
 
     <!-- DashForge CSS -->

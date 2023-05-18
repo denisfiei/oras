@@ -20,18 +20,13 @@
                         <div class="row">
                             <div class="form-group col-md-12 mb-3">
                                 <label class="form-label mb-0" for="codigo">CÓDIGO <span class="obligatorio">(*)</span></label>
-                                <input type="text" id="codigo" v-model="linaje.codigo" class="form-control" :class="[errors.codigo ? 'border-error' : '']">
+                                <input type="text" id="codigo" v-model="muestreo.codigo" class="form-control" :class="[errors.codigo ? 'border-error' : '']">
                                 <div class="input-error" v-if="errors.codigo">@{{ errors.codigo[0] }}</div>
                             </div>
-                            <div class="form-group col-md-12 mb-3">
-                                <label class="form-label mb-0" for="nombre">NOMBRE</label>
-                                <input type="text" id="nombre" v-model="linaje.nombre" class="form-control" :class="[errors.nombre ? 'border-error' : '']">
-                                <div class="input-error" v-if="errors.nombre">@{{ errors.nombre[0] }}</div>
-                            </div>
                             <div class="form-group col-md-12 mb-0">
-                                <label class="form-label mb-0" for="clade">CLADE <span class="obligatorio">(*)</span></label>
-                                <input type="text" id="clade" v-model="linaje.clade" class="form-control" :class="[errors.clade ? 'border-error' : '']">
-                                <div class="input-error" v-if="errors.clade">@{{ errors.clade[0] }}</div>
+                                <label class="form-label mb-0" for="nombre">NOMBRE <span class="obligatorio">(*)</span></label>
+                                <input type="text" id="nombre" v-model="muestreo.nombre" class="form-control" :class="[errors.nombre ? 'border-error' : '']">
+                                <div class="input-error" v-if="errors.nombre">@{{ errors.nombre[0] }}</div>
                             </div>
                         </div>
                     </div>
@@ -55,8 +50,8 @@
                 <div>
                     <h4 class="text-center mb-4">@{{modal.title}}</h4>
                     <p class="text-center mb-4">
-                        ¿ Realmente desea eliminar el linaje: <br>
-                        <strong> @{{linaje.nombre}}</strong> ?
+                        ¿ Realmente desea eliminar el Centro de Información: <br>
+                        <strong> @{{muestreo.nombre}}</strong> ?
                     </p>
 
                     <div class="text-center mt-2 pt-50">

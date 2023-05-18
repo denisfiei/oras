@@ -9,11 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Carga;
 use App\Models\Virus;
+use App\Models\TipoMuestreo;
+use App\Models\CargaGisaid;
+use App\Models\CargaDetalle;
 
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Imports\RowsImport;
 use App\Imports\CargaGisaidImport;
+use App\Imports\CargaDetalleImport;
 
 class CargaController extends Controller
 {
@@ -25,6 +29,7 @@ class CargaController extends Controller
     public function datos(Request $request)
     {
         $virus = Virus::where('activo', 'S')->get();
+        $muestreos = TipoMuestreo::where('activo', 'S')->get();
         $cargas = Carga::where('activo', 'S')->with('virus')->orderBy('id', 'DESC')->paginate(10);
 
         return [
@@ -38,7 +43,8 @@ class CargaController extends Controller
                 'index' => ($cargas->currentPage()-1)*$cargas->perPage(),
             ],
             'cargas' => $cargas,
-            'virus' => $virus
+            'virus' => $virus,
+            'muestreos' => $muestreos
         ];
     }
     
@@ -152,6 +158,14 @@ class CargaController extends Controller
             $carga->activo = 'N';
             $carga->save();
 
+            if ($carga->tipo == 1) {
+                CargaGisaid::where('carga_id', $request->id)->delete();
+            }
+            
+            if ($carga->tipo == 2) {
+                CargaDetalle::where('carga_id', $request->id)->delete();
+            }
+
             DB::commit();
 
             return [
@@ -195,22 +209,31 @@ class CargaController extends Controller
     {
         $request->replace($this->null_string($request->all()));
 
-        $this->validate($request, [
-            'virus' => 'required|exists:virus,id',
-            'tipo' => 'required|digits_between:1,2',
-            'file' => ['required', 'mimes:xlsx'],
-            'cantidad' => 'required|min:1',
-        ]);
+        $tipo = 'detalle';
+        if ($request->tipo == 1 || $request->tipo == '1') {
+            $tipo = 'gisaid';
+
+            $this->validate($request, [
+                'virus' => 'required|exists:virus,id',
+                'tipo' => 'required|digits_between:1,2',
+                'file' => ['required', 'mimes:xlsx'],
+                'cantidad' => 'required|min:1',
+            ]);
+        } else {
+            $this->validate($request, [
+                'virus' => 'required|exists:virus,id',
+                'muestreo' => 'required|exists:tipo_muestreos,id',
+                'tipo' => 'required|digits_between:1,2',
+                'file' => ['required', 'mimes:xlsx'],
+                'cantidad' => 'required|min:1',
+            ]);
+        }
 
         try {
             DB::beginTransaction();
             
             $file = $request->file('file');
             $extension = $file->getClientOriginalExtension();
-            $tipo = 'detalle';
-            if ($request->tipo == 1 || $request->tipo == '1') {
-                $tipo = 'gisaid';
-            }
             $fileContent = 'cargas/'.$tipo.'/arch_'.time().'.'.$extension;
             Storage::putFileAs('public/', $file, $fileContent);
 
@@ -228,9 +251,9 @@ class CargaController extends Controller
                 Excel::import($import, request()->file('file'));
                 $data = $import->getData();
 
-            } else if ($request->tipo == 2 || $request->tipo == '2') {
+            } else {
 
-                $import = new CargaGisaidImport($carga->id);
+                $import = new CargaDetalleImport($carga->id, $request->muestreo);
                 Excel::import($import, request()->file('file'));
                 $data = $import->getData();
             }

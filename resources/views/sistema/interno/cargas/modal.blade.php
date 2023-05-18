@@ -41,6 +41,18 @@
                                 </div>
                                 <div class="input-error" v-if="errors.tipo">@{{ errors.tipo[0] }}</div>
                             </div>
+                            <div class="form-group col-md-12 mb-3" v-show="carga.tipo == 2">
+                                <label class="form-label mb-0" for="muestreo">TIPO DE MUESTREO <span class="obligatorio">(*)</span></label>
+                                <div class="dropdown_select_content"> 
+                                    <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.muestreo ? 'border-error' : '']">@{{carga.muestreo_text}}</button>
+                                    <div class="dropdown-menu w-100">
+                                        <li v-for="m in muestreos">
+                                            <a class="dropdown-item" href="#" :class="[carga.muestreo == m.id ? 'active' : '']" @click="SelectMuestreo(m)">@{{m.nombre}}</a>
+                                        </li>
+                                    </div>
+                                </div>
+                                <div class="input-error" v-if="errors.muestreo">@{{ errors.muestreo[0] }}</div>
+                            </div>
                             <div class="form-group col-md-12 mb-2">
                                 <label class="form-label mb-0" for="file">SUBIR ARCHIVO <span class="obligatorio">(*)</span></label>
                                 <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
@@ -101,8 +113,9 @@
                 <div>
                     <h4 class="text-center mb-4">@{{modal.title}}</h4>
                     <p class="text-center mb-4">
-                        ¿ Realmente desea eliminar el carga: <br>
-                        <strong> @{{carga.nombre}}</strong> ?
+                        ¿ Realmente desea eliminar la carga de datos del archivo: <br>
+                        <strong> @{{carga.nombre}}</strong> <br>
+                        creada el <strong>@{{FechaHora(carga.fecha)}}</strong> ?
                     </p>
 
                     <div class="text-center mt-2 pt-50">

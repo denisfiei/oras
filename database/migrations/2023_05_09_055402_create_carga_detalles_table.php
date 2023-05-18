@@ -21,7 +21,7 @@ class CreateCargaDetallesTable extends Migration
             $table->string('codigo', 50);
             $table->string('codigo_pais', 10);
             $table->string('kit_ct', 50)->nullable();
-            $table->string('gen', 5)->nullable();
+            $table->string('gen', 50)->nullable();
             $table->string('ct', 5)->nullable();
             $table->string('ct2', 5)->nullable();
             $table->date('fecha_muestra');
@@ -39,8 +39,8 @@ class CreateCargaDetallesTable extends Migration
             $table->string('placa')->nullable();
             $table->string('corrida', 5)->nullable();
             $table->date('fecha_sistema');
-            $table->string('cobertura', 10)->nullable();
-            $table->double('cobertura_porcentaje', 7, 2)->nullable();
+            $table->string('cobertura', 20)->nullable();
+            $table->string('cobertura_porcentaje', 20)->nullable();
             $table->char('asintomatico', 2)->default('NO');
             $table->text('sintomas')->nullable();
             $table->char('comorbilidad', 2)->default('NO');

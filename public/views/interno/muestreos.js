@@ -1,5 +1,5 @@
 new Vue({
-    el: '#form_linajes',
+    el: '#form_muestreos',
     data: {
         config: [],
         color: 'rgba(0, 0, 0, 0.71)',
@@ -29,10 +29,9 @@ new Vue({
         seleccion: [],
         errors: [],
 
-        linaje: {
+        muestreo: {
             'codigo': null,
             'nombre': null,
-            'clade': null
         }
     },
     created() {
@@ -145,12 +144,12 @@ new Vue({
             }
         },
         Buscar(page) {
-            urlBuscar = 'linajes/buscar?page=' + page;
+            urlBuscar = 'muestreos/buscar?page=' + page;
             axios.post(urlBuscar, {
                 search: this.search.datos
             }).then(response => {
-                this.listRequest = response.data.linajes.data;
-                this.to_pagination = response.data.linajes.to;
+                this.listRequest = response.data.muestreos.data;
+                this.to_pagination = response.data.muestreos.to;
                 this.pagination = response.data.pagination;
             }).catch(error => {
                 console.log(error)
@@ -170,23 +169,22 @@ new Vue({
 
             switch (metodo) {                
                 case 'create':
-                    this.modal.title = 'NUEVO LINAJE';
+                    this.modal.title = 'NUEVO TIPO DE MUESTREO';
                     break;
 
                 case 'edit':
-                    this.modal.title = 'EDITAR LINAJE';
-                    this.linaje.nombre = seleccion.nombre;
-                    this.linaje.codigo = seleccion.codigo;
-                    this.linaje.clade = seleccion.clade;
+                    this.modal.title = 'EDITAR TIPO DE MUESTREO';
+                    this.muestreo.codigo = seleccion.codigo;
+                    this.muestreo.nombre = seleccion.nombre;
                     break;
 
                 case 'delete':
-                    this.modal.title = 'ELIMINAR LINAJE';
-                    this.linaje.nombre = seleccion.nombre;
+                    this.modal.title = 'ELIMINAR TIPO DE MUESTREO';
+                    this.muestreo.nombre = seleccion.nombre;
                     break;
                     
                 default:
-                    this.linaje.nombre = seleccion.nombre;
+                    this.muestreo.nombre = seleccion.nombre;
                     break;
             }
         },
@@ -203,20 +201,18 @@ new Vue({
             this.seleccion = [];
             this.errors = [];
 
-            this.linaje = {
+            this.muestreo = {
                 'codigo': null,
-                'nombre': null,
-                'clade': null
+                'nombre': null
             };
         },
         Store(form) {
             this.Load(form, 'on', 'Guardando Registro ...');
             this.errors = [];
 
-            axios.post('linajes/store', {
-                codigo: this.linaje.codigo,
-                nombre: this.linaje.nombre,
-                clade: this.linaje.clade
+            axios.post('muestreos/store', {
+                codigo: this.muestreo.codigo,
+                nombre: this.muestreo.nombre
             }).then(response=> {
                 this.Load(form, 'off', null);
 
@@ -249,11 +245,10 @@ new Vue({
             this.Load(form, 'on', 'Actualizando Registro ...');
             this.errors = [];
 
-            axios.post('linajes/update', {
+            axios.post('muestreos/update', {
                 id: this.id,
-                codigo: this.linaje.codigo,
-                nombre: this.linaje.nombre,
-                clade: this.linaje.clade
+                codigo: this.muestreo.codigo,
+                nombre: this.muestreo.nombre
             }).then(response=> {
                 this.Load(form, 'off', null);
 
@@ -286,7 +281,7 @@ new Vue({
             this.Load(form, 'on', 'Eliminando Registro ...');
 
             this.errors = [];
-            axios.post('linajes/delete', {
+            axios.post('muestreos/delete', {
                 id: this.id,
             }).then(response=> {
                 this.Load(form, 'off', null);

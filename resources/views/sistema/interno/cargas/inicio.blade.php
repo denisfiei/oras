@@ -43,6 +43,7 @@
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center">#</th>
+                                <th class="text-right">Fecha</th>
                                 <th class="text-right">Virus</th>
                                 <th class="text-center">Archivo</th>
                                 <th class="text-center">Cantidad</th>
@@ -52,16 +53,24 @@
                         </thead>
                         <tbody>
                             <tr v-if="listRequest.length === 0">
-                                <td class="text-center no_data" colspan="6"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
+                                <td class="text-center no_data" colspan="7"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
                             </tr>
                             <tr class="my_vue" v-for="(data, index) in listRequest" style="display:none;">
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
+                                <td class="text-right"><i class="far fa-calendar-alt"></i> @{{FechaHora(data.created_at)}}</td>
                                 <td class="text-right">@{{data.virus.nombre}}</td>
                                 <td class="text-center">@{{data.archivo}}</td>
                                 <td class="text-center">@{{data.cantidad}}</td>
-                                <td class="text-center">@{{Tipo(data.tipo)}}</td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a>
+                                    <template v-if="data.tipo == 1">
+                                        <span class="badge text-bg-warning">@{{Tipo(data.tipo)}}</span>
+                                    </template>
+                                    <template v-else>
+                                        <span class="badge text-bg-success">@{{Tipo(data.tipo)}}</span>
+                                    </template>
+                                </td>
+                                <td class="text-center">
+                                    {{-- <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a> --}}
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Eliminar" @click="Modal('modal-md', 'delete', data.id, data)"><i class="text-danger far fa-trash-alt"></i></a>
                                 </td>
                             </tr>

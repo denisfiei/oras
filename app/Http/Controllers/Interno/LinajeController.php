@@ -47,7 +47,8 @@ class LinajeController extends Controller
     {
         $this->validate($request, [
             'codigo' => 'required|max:20',
-            'nombre' => 'required|max:50',
+            'nombre' => 'max:50',
+            'clade' => 'max:50',
         ]);
 
         try {
@@ -56,6 +57,7 @@ class LinajeController extends Controller
             $linaje = new Linaje();
             $linaje->codigo = Str::upper($request->codigo);
             $linaje->nombre = Str::upper($request->nombre);
+            $linaje->clade = $request->clade;
             $linaje->save();
 
             DB::commit();
@@ -82,7 +84,8 @@ class LinajeController extends Controller
     {
         $this->validate($request, [
             'codigo' => 'required|max:20',
-            'nombre' => 'required|max:50',
+            'nombre' => 'max:50',
+            'clade' => 'max:50'
         ]);
 
         try {
@@ -92,6 +95,7 @@ class LinajeController extends Controller
             $linaje = Linaje::findOrFail($request->id);
             $linaje->codigo = Str::upper($request->codigo);
             $linaje->nombre = Str::upper($request->nombre);
+            $linaje->clade = $request->clade;
             $linaje->save();
 
             DB::commit();

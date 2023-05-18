@@ -10,7 +10,7 @@ class Carga extends Model
     use HasFactory;
 
     protected $hidden = [
-        'user_id', 'activo', 'created_at', 'updated_at',
+        'user_id', 'activo', 'updated_at',
     ];
 
     public function virus()
