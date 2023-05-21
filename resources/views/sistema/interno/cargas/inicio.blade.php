@@ -9,7 +9,7 @@
                 <h4 class="mg-b-0 tx-spacing--1"><i class="fas fa-file-upload"></i> CARGA DE DATOS</h4>
             </div>
             <div class="d-none d-md-block">
-                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Carga</button>
+                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Carga Gisaid</button>
             </div>
         </div>
     </div>
@@ -42,33 +42,39 @@
                     <table class="table table-bordered table-hover mg-b-0">
                         <thead class="thead-light">
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-right">Fecha</th>
-                                <th class="text-right">Virus</th>
-                                <th class="text-center">Archivo</th>
-                                <th class="text-center">Cantidad</th>
-                                <th class="text-center">Tipo</th>
-                                <th class="text-center"><ion-icon name="ellipsis-vertical"></ion-icon></th>
+                                <th class="text-center" rowspan="2" width="5%">#</th>
+                                <th class="text-start" rowspan="2" width="13%">País</th>
+                                <th class="text-center" rowspan="2" width="13%">Fecha</th>
+                                <th class="text-center" rowspan="2" width="13%">Virus</th>
+                                <th class="text-center p_0" colspan="2" width="25%">Gisaid</th>
+                                <th class="text-center p_0" colspan="2" width="25%">Detalle</th>
+                                <th class="text-center" rowspan="2" width="6%"><ion-icon name="ellipsis-vertical"></ion-icon></th>
+                            </tr>
+                            <tr>
+                                <th class="text-center p_0" width="15%">Archivo</th>
+                                <th class="text-center p_0" width="10%">Cantidad</th>
+                                <th class="text-center p_0" width="15%">Archivo</th>
+                                <th class="text-center p_0" width="10%">Cantidad</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-if="listRequest.length === 0">
-                                <td class="text-center no_data" colspan="7"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
+                                <td class="text-center no_data" colspan="8"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
                             </tr>
                             <tr class="my_vue" v-for="(data, index) in listRequest" style="display:none;">
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
-                                <td class="text-right"><i class="far fa-calendar-alt"></i> @{{FechaHora(data.created_at)}}</td>
+                                <td class="text-right"><img :src="'storage/paises/'+data.pais.bandera" v-if="data.pais.bandera" class="codigo_tel"> @{{data.pais.nombre}}</td>
+                                <td class="text-center"><i class="far fa-calendar-alt"></i> @{{FechaHora(data.created_at)}}</td>
                                 <td class="text-right">@{{data.virus.nombre}}</td>
-                                <td class="text-center">@{{data.archivo}}</td>
-                                <td class="text-center">@{{data.cantidad}}</td>
                                 <td class="text-center">
-                                    <template v-if="data.tipo == 1">
-                                        <span class="badge text-bg-warning">@{{Tipo(data.tipo)}}</span>
-                                    </template>
-                                    <template v-else>
-                                        <span class="badge text-bg-success">@{{Tipo(data.tipo)}}</span>
-                                    </template>
+                                    <a href="javascript:void(0)" class="btn_link"  @click="Modal('modal-fullscreen', 'rows_gisaid', data.id, data)">@{{data.archivo_gisaid}}</a>
                                 </td>
+                                <td class="text-center">@{{data.cantidad_gisaid}}</td>
+                                <td class="text-center">
+                                    <a href="javascript:void(0)" class="btn_link"  @click="Modal('modal-fullscreen', 'rows_detalle', data.id, data)" v-if="data.archivo_detalle">@{{data.archivo_detalle}}</a>
+                                    <a href="javascript:void(0)" class="btn_opt text-primary" data-bs-toggle="tooltip" title="Subir Detalle"  @click="Modal('modal-md', 'carga', data.id, data)" v-else><i class="fas fa-file-upload"></i></a>
+                                </td>
+                                <td class="text-center">@{{data.cantidad_detalle}}</td>
                                 <td class="text-center">
                                     {{-- <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a> --}}
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Eliminar" @click="Modal('modal-md', 'delete', data.id, data)"><i class="text-danger far fa-trash-alt"></i></a>

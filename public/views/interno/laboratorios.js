@@ -4,7 +4,9 @@ new Vue({
         config: [],
         color: 'rgba(0, 0, 0, 0.71)',
         search: {
-            'datos': null
+            'datos': null,
+            'pais': null,
+            'pais_text': '--- Todos los Países ---'
         },
         page: 1,
 
@@ -135,7 +137,7 @@ new Vue({
                         customClass: {
                             confirmButton: 'btn btn-success'
                         },
-                        timer: 3000
+                        timer: 2000
                     });
                 break;
                 case 'error': 
@@ -169,7 +171,8 @@ new Vue({
         Buscar(page) {
             urlBuscar = 'laboratorios/buscar?page=' + page;
             axios.post(urlBuscar, {
-                search: this.search.datos
+                search: this.search.datos,
+                pais: this.search.pais
             }).then(response => {
                 this.listRequest = response.data.laboratorios.data;
                 this.to_pagination = response.data.laboratorios.to;
@@ -355,6 +358,17 @@ new Vue({
         SelectPais(data) {
             this.lab.pais = data.id;
             this.lab.pais_text = data.nombre;
+        },
+        SelectSearchPais(data) {
+            if (data == null) {
+                this.search.pais = null;
+                this.search.pais_text = '--- Todos los Países ---';
+                this.Buscar(this.page);
+                return;
+            }
+            this.search.pais = data.id;
+            this.search.pais_text = data.nombre;
+            this.Buscar(this.page);
         },
         Fecha(date) {
             if (date) {

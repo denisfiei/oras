@@ -41,6 +41,11 @@
     text-transform: uppercase;
 }
 
+/*************** PADDING ***************/
+.p_0 {
+    padding: 0px !important;
+}
+
 /*************** NAV ***************/
 .nav-link .fa, .nav-link .fas, .nav-link .fab, .nav-link .far {
     width: 18px;
@@ -123,6 +128,19 @@
     width: 35px;
     display: inline-block;
 }
+.table_overflow tbody {
+    display:block;
+    height:50px;
+    overflow:auto;
+}
+.table_overflow thead, .table_overflow tbody tr {
+    display:table;
+    width:100%;
+    table-layout:fixed;
+}
+.table_overflow thead {
+    width: calc( 100% - 1em )
+}
 
 /*************** DROPDOWN ***************/
 .dropdown-menu {
@@ -191,4 +209,29 @@
     width: auto;
     display: block;
     color: #fff;
+}
+
+/*************** OVERFLOW ***********/
+.overflow {
+    overflow-y: scroll;
+}
+.overflow::-webkit-scrollbar {
+    -webkit-appearance: none;
+}
+.overflow::-webkit-scrollbar:vertical {
+    width:13px;
+}
+.overflow::-webkit-scrollbar-button:increment,.overflow::-webkit-scrollbar-button {
+    display: none;
+} 
+.overflow::-webkit-scrollbar-thumb {
+    background-color: #cacad0;
+    border-radius: 20px;
+    border: 2px solid #f1f2f3;
+}
+.overflow::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+.overflow::-webkit-scrollbar-thumb:hover {
+    background-color: #b8b8b9;
 }

@@ -40,8 +40,11 @@ new Vue({
             'tipo_text': '--- Seleccione una Opción ---',
             'muestreo': null,
             'muestreo_text': '--- Seleccione una Opción ---',
+            'archivo': null,
             'file': null
         },
+        gisaids: [],
+        detalles: [],
 
         // UPLOAD
         visible: true,
@@ -146,7 +149,7 @@ new Vue({
                         customClass: {
                             confirmButton: 'btn btn-success'
                         },
-                        timer: 3000
+                        timer: 2000
                     });
                 break;
                 case 'error': 
@@ -204,7 +207,12 @@ new Vue({
 
             switch (metodo) {                
                 case 'create':
-                    this.modal.title = 'NUEVA CARGA';
+                    this.modal.title = 'NUEVA CARGA GISAID';
+                    break;
+                    
+                case 'carga':
+                    this.modal.title = 'NUEVA CARGA DETALLE';
+                    this.carga.archivo = seleccion.archivo_gisaid;
                     break;
 
                 case 'edit':
@@ -217,6 +225,18 @@ new Vue({
                     this.modal.title = 'ELIMINAR CARGA';
                     this.carga.nombre = seleccion.archivo;
                     this.carga.fecha = seleccion.created_at;
+                    break;
+                
+                case 'rows_gisaid':
+                    this.modal.title = 'LISTA GISAID';
+                    this.carga.archivo = seleccion.archivo_gisaid;
+                    this.BuscarGisaid(metodo);
+                    break;
+
+                case 'rows_detalle':
+                    this.modal.title = 'LISTA DETALLE';
+                    this.carga.archivo = seleccion.archivo_detalle;
+                    this.BuscarDetalle(metodo);
                     break;
                     
                 default:
@@ -247,8 +267,11 @@ new Vue({
                 'tipo_text': '--- Seleccione una Opción ---',
                 'muestreo': null,
                 'muestreo_text': '--- Seleccione una Opción ---',
+                'archivo': null,
                 'file': null
             };
+            this.gisaids = [];
+            this.detalles = [];
 
             // -------- UPLOAD
             this.visible = true;
@@ -291,6 +314,41 @@ new Vue({
                 this.Alert2(action, title, message);
             });
         },
+        BuscarGisaid(form) {
+            this.Load(form, 'on', 'Cargando datos ...');
+
+            axios.post('cargas/datos_gisaid', {
+                id: this.id
+            }).then(response => {
+                this.Load(form, 'off', null);
+                this.gisaids = response.data;
+            }).catch(error => {
+                console.log(error)
+                this.Load(form, 'off', null);
+                let action = 'error';
+                let title = 'Error !!';
+                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+                this.Alert2(action, title, message);
+            });
+        },
+        BuscarDetalle(form) {
+            this.Load(form, 'on', 'Cargando datos ...');
+
+            axios.post('cargas/datos_detalle', {
+                id: this.id
+            }).then(response => {
+                this.Load(form, 'off', null);
+                this.detalles = response.data;
+            }).catch(error => {
+                console.log(error)
+                this.Load(form, 'off', null);
+                let action = 'error';
+                let title = 'Error !!';
+                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+                this.Alert2(action, title, message);
+            });
+        },
+
         SelectVirus(data) {
             this.carga.virus = data.id;
             this.carga.virus_text = data.nombre;
@@ -376,19 +434,17 @@ new Vue({
                 }
             });
         },
-        Importar(form) {
+        Gisaid(form) {
             this.errors = [];
             this.Load(form, 'on', 'Importando datos espere ...');
             this.visible = false;
 
             var formData  = new FormData();
             formData.append('virus', this.carga.virus);
-            formData.append('tipo', this.carga.tipo);
-            formData.append('muestreo', this.carga.muestreo);
             formData.append('file', this.carga.file);
             formData.append('cantidad', this.total_rows);
 
-            axios.post('cargas/import', formData).then(response=>{
+            axios.post('cargas/gisaid', formData).then(response=>{
                 console.log(response.data)
                 this.Load(form, 'off', null);
                 var action = response.data.action;
@@ -399,7 +455,57 @@ new Vue({
                     this.finished = true;
                     this.importar.rows = response.data.import.total;
                     this.importar.rows_error = response.data.import.total_error;
-                    this.importar.errors = response.data.import.duplicados;
+                    this.importar.errors = response.data.import.errors;
+                    this.Buscar(this.page);
+
+                    this.Alert2(action, title, message);
+                } else {
+                    this.Alert2(action, title, message);
+                    this.visible = true;
+                    this.carga.file = null;
+                    $('#file').val('');
+                }
+            }).catch(error => {
+                console.log(error);
+
+                $('#file').val('');
+                this.visible = true;
+                this.Load(form, 'off', null);
+
+                if (error.response.status == 422) {
+                    this.errors = error.response.data.errors;
+                } else {
+                    var action = 'error';
+                    var title = 'Ops error !!';
+                    var message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+
+                    this.Alert2(action, title, message);
+                }
+            });
+        },
+        Detalle(form) {
+            this.errors = [];
+            this.Load(form, 'on', 'Importando datos espere ...');
+            this.visible = false;
+
+            var formData  = new FormData();
+            formData.append('id', this.id);
+            formData.append('muestreo', this.carga.muestreo);
+            formData.append('file', this.carga.file);
+            formData.append('cantidad', this.total_rows);
+
+            axios.post('cargas/detalle', formData).then(response=>{
+                console.log(response.data)
+                this.Load(form, 'off', null);
+                var action = response.data.action;
+                var title = response.data.title;
+                var message = response.data.message;
+                
+                if (action == 'success') {
+                    this.finished = true;
+                    this.importar.rows = response.data.import.total;
+                    this.importar.rows_error = response.data.import.total_error;
+                    this.importar.errors = response.data.import.errors;
                     this.Buscar(this.page);
 
                     this.Alert2(action, title, message);

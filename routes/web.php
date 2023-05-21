@@ -74,20 +74,23 @@ Route::middleware('auth')->group(function () {
     Route::prefix('linajes')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\LinajeController::class, 'index'])->name('linajes');
         Route::post('/buscar', [App\Http\Controllers\Interno\LinajeController::class, 'buscar']);
-        Route::post('/store', [App\Http\Controllers\Interno\LinajeController::class, 'store']);
-        Route::post('/update', [App\Http\Controllers\Interno\LinajeController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\LinajeController::class, 'delete']);
+        Route::post('/carga', [App\Http\Controllers\Interno\LinajeController::class, 'carga']);
+        Route::post('/rows', [App\Http\Controllers\Interno\LinajeController::class, 'rows']);
+        Route::post('/import', [App\Http\Controllers\Interno\LinajeController::class, 'import']);
     });
     
     Route::prefix('cargas')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\CargaController::class, 'index'])->name('cargas');
         Route::post('/datos', [App\Http\Controllers\Interno\CargaController::class, 'datos']);
         Route::post('/buscar', [App\Http\Controllers\Interno\CargaController::class, 'buscar']);
-        Route::post('/store', [App\Http\Controllers\Interno\CargaController::class, 'store']);
         Route::post('/delete', [App\Http\Controllers\Interno\CargaController::class, 'delete']);
+        Route::post('/datos_gisaid', [App\Http\Controllers\Interno\CargaController::class, 'datos_gisaid']);
+        Route::post('/datos_detalle', [App\Http\Controllers\Interno\CargaController::class, 'datos_detalle']);
         
         Route::post('/rows', [App\Http\Controllers\Interno\CargaController::class, 'rows']);
-        Route::post('/import', [App\Http\Controllers\Interno\CargaController::class, 'import']);
+        Route::post('/gisaid', [App\Http\Controllers\Interno\CargaController::class, 'gisaid']);
+        Route::post('/detalle', [App\Http\Controllers\Interno\CargaController::class, 'detalle']);
     });
 
     Route::prefix('menus')->group(function () {

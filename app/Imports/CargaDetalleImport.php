@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\CargaDetalle;
+use App\Models\CargaGisaid;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\OnEachRow;
@@ -15,7 +16,7 @@ class CargaDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
 {
     use Importable;
 
-    public $duplicados = [], $total = 0, $total_error = 0, $carga = 0, $muestreo = 0, $fecha = '';
+    public $errors = [], $total = 0, $total_error = 0, $carga = [], $muestreo = 0, $fecha = '';
 
     public function __construct($carga, $muestreo)
     {
@@ -38,49 +39,71 @@ class CargaDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
         $rowIndex = $row->getIndex();
         $row      = array_map('trim', $row->toArray());
         
-        $fecha_muestra = null;
-        $fecha_sistema = null;
-        if ($row[6]) {
-            $fecha_muestra = $this->transformDateTime($row[6], 'Y-m-d');
-        }
-        if ($row[20]) {
-            $fecha_sistema = $this->transformDateTime($row[20], 'Y-m-d H:i:s');
-        }
+        try {
+            $gisaid = CargaGisaid::where('virus_name', $row[0])->where('activo', 'S')->first();
+            if ($gisaid) {
+                $fecha_muestra = null;
+                $fecha_sistema = null;
+                if ($row[6]) {
+                    $fecha_muestra = $this->transformDateTime($row[6], 'Y-m-d');
+                }
+                if ($row[20]) {
+                    $fecha_sistema = $this->transformDateTime($row[20], 'Y-m-d H:i:s');
+                }
+    
+                $detalle = new CargaDetalle();
+                $detalle->carga_id = $this->carga->id;
+                $detalle->virus_id = $this->carga->virus_id;
+                $detalle->tipo_muestreo_id = $this->muestreo;
+                $detalle->pais_id = $this->carga->pais_id;
+                $detalle->codigo = $row[0];
+                $detalle->codigo_pais = $row[1];
+                $detalle->kit_ct = $row[2];
+                $detalle->gen = $row[3];
+                $detalle->ct = $row[4];
+                $detalle->ct2 = $row[5];
+                $detalle->fecha_muestra = $fecha_muestra;
+                $detalle->edad = $row[7];
+                $detalle->sexo = $row[8];
+                $detalle->vacunado = $row[9];
+                $detalle->dosis_1 = $row[10];
+                $detalle->dosis_2 = $row[11];
+                $detalle->dosis_3 = $row[12];
+                $detalle->dosis_4 = $row[13];
+                $detalle->dosis_5 = $row[14];
+                $detalle->hospitalizacion = $row[15];
+                $detalle->fallecido = $row[16];
+                $detalle->numero_placa = $row[17];
+                $detalle->placa = $row[18];
+                $detalle->corrida = $row[19];
+                $detalle->fecha_sistema = $fecha_sistema;
+                $detalle->cobertura = $row[21];
+                $detalle->cobertura_porcentaje = $row[22];
+                $detalle->asintomatico = $row[23];
+                $detalle->sintomas = $row[24];
+                $detalle->comorbilidad = $row[25];
+                $detalle->comorbilidad_lista = $row[26];
+                $detalle->user_id = Auth::user()->id;
+                $detalle->save();
+    
+                $this->total += 1;
+            } else {
+                $this->total_error += 1;
+    
+                $this->errors[] = [
+                    'fila' => $rowIndex,
+                    'error' => 'No se encontro el Virus_name en el archivo GISAID'
+                ];
+            }
 
-        $gisaid = new CargaDetalle();
-        $gisaid->carga_id = $this->carga;
-        $gisaid->tipo_muestreo_id = 1;
-        $gisaid->codigo = $row[0];
-        $gisaid->codigo_pais = $row[1];
-        $gisaid->kit_ct = $row[2];
-        $gisaid->gen = $row[3];
-        $gisaid->ct = $row[4];
-        $gisaid->ct2 = $row[5];
-        $gisaid->fecha_muestra = $fecha_muestra;
-        $gisaid->edad = $row[7];
-        $gisaid->sexo = $row[8];
-        $gisaid->vacunado = $row[9];
-        $gisaid->dosis_1 = $row[10];
-        $gisaid->dosis_2 = $row[11];
-        $gisaid->dosis_3 = $row[12];
-        $gisaid->dosis_4 = $row[13];
-        $gisaid->dosis_5 = $row[14];
-        $gisaid->hospitalizacion = $row[15];
-        $gisaid->fallecido = $row[16];
-        $gisaid->numero_placa = $row[17];
-        $gisaid->placa = $row[18];
-        $gisaid->corrida = $row[19];
-        $gisaid->fecha_sistema = $fecha_sistema;
-        $gisaid->cobertura = $row[21];
-        $gisaid->cobertura_porcentaje = $row[22];
-        $gisaid->asintomatico = $row[23];
-        $gisaid->sintomas = $row[24];
-        $gisaid->comorbilidad = $row[25];
-        $gisaid->comorbilidad_lista = $row[26];
-        $gisaid->user_id = Auth::user()->id;
-        $gisaid->save();
+        } catch (\Exception $e) {
+            $this->total_error += 1;
 
-        $this->total += 1;
+            $this->errors[] = [
+                'fila' => $rowIndex,
+                'error' => $e->getMessage()
+            ];
+        }
     }
 
     public function getData()
@@ -88,7 +111,7 @@ class CargaDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
         return [
             'total' => $this->total,
             'total_error' => $this->total_error,
-            'duplicados' => $this->duplicados,
+            'errors' => $this->errors,
         ];
     }
 

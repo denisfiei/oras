@@ -27,9 +27,7 @@
             </div>
             <div class="card-body pd-y-30">
                 <div class="row mb-3">
-                    <div class="col-lg-8 col-md-12">
-
-                    </div>
+                    <div class="col-lg-8 col-md-12"></div>
 
                     <div class="col-lg-4 col-md-12">
                         <div class="search-form">

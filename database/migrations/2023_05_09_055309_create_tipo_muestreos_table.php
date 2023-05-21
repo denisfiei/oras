@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\DB;
 
 class CreateTipoMuestreosTable extends Migration
 {
@@ -20,6 +21,13 @@ class CreateTipoMuestreosTable extends Migration
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->timestamps();
         });
+
+        DB::table('tipo_muestreos')->insert([
+            [
+                'codigo'=>'0001',
+                'nombre'=>'VIGILANCIA'
+            ]
+        ]);
     }
 
     /**

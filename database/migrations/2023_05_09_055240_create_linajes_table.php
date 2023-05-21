@@ -15,6 +15,7 @@ class CreateLinajesTable extends Migration
     {
         Schema::create('linajes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('carga_linaje_id')->references('id')->on('carga_linajes')->onDelete('restrict');
             $table->string('codigo', 20)->nullable();
             $table->string('nombre', 50)->default("");
             $table->string('clade', 50)->nullable();

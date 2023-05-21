@@ -3,9 +3,8 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\Support\Facades\DB;
 
-class CreateCentrosTable extends Migration
+class CreateCargaLinajesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,16 +13,15 @@ class CreateCentrosTable extends Migration
      */
     public function up()
     {
-        Schema::create('centros', function (Blueprint $table) {
+        Schema::create('carga_linajes', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
+            $table->string('archivo', 100)->nullable();
+            $table->string('file', 50)->nullable();
+            $table->double('cantidad', 15, 0);
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('restrict');
             $table->timestamps();
         });
-
-        DB::table('virus')->insert([
-            ['nombre'=>'CENTRO DE INFORMACIÓN DEMO']
-        ]);
     }
 
     /**
@@ -33,6 +31,6 @@ class CreateCentrosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('centros');
+        Schema::dropIfExists('carga_linajes');
     }
 }

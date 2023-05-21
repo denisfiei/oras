@@ -6,10 +6,10 @@
     <div class="container pd-x-0">
         <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
             <div>
-                <h4 class="mg-b-0 tx-spacing--1"><i class="fas fa-bezier-curve"></i> LINAJES</h4>
+                <h4 class="mg-b-0 tx-spacing--1"><i class="fas fa-bezier-curve"></i>LINAJES</h4>
             </div>
             <div class="d-none d-md-block">
-                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Linaje</button>
+                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Carga</button>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
     <div class="col-lg-12 col-xl-12 mg-t-10">
         <div class="card mg-b-10">
             <div class="card-header d-flex align-items-center justify-content-between pd-r-12">
-                <h6 class="mg-b-0">LISTA DE LINAJES</h6>
+                <h6 class="mg-b-0">LISTA DE CARGA DE LINAJES</h6>
                 <div class="d-flex tx-16">
                     <a href="#" class="link-03 lh-0" data-bs-toggle="tooltip" title="Recargar Lista" onclick="window.location.reload();"><ion-icon name="reload-sharp"></ion-icon></a>
                     {{-- <a href="" class="link-03 lh-0 mg-l-2"><ion-icon name="ellipsis-vertical"></ion-icon></a> --}}
@@ -42,24 +42,31 @@
                     <table class="table table-bordered table-hover mg-b-0">
                         <thead class="thead-light">
                             <tr>
-                                <th class="text-center">#</th>
-                                <th class="text-center">Código</th>
-                                <th class="text-right">Nombre</th>
-                                <th class="text-right">Clade</th>
-                                <th class="text-center"><ion-icon name="ellipsis-vertical"></ion-icon></th>
+                                <th class="text-center" width="5%">#</th>
+                                <th class="text-center" width="15%">Fecha</th>
+                                <th class="text-right" width="25%">Archivo</th>
+                                <th class="text-center" width="15%">Cantidad</th>
+                                <th class="text-center" width="20%">Detalle</th>
+                                <th class="text-center" width="10%">Estado</th>
+                                <th class="text-center" width="10%"><ion-icon name="ellipsis-vertical"></ion-icon></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-if="listRequest.length === 0">
-                                <td class="text-center no_data" colspan="5"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
+                                <td class="text-center no_data" colspan="6"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
                             </tr>
                             <tr class="my_vue" v-for="(data, index) in listRequest" style="display:none;">
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
-                                <td class="text-center">@{{data.codigo}}</td>
-                                <td class="text-right">@{{data.nombre}}</td>
-                                <td class="text-right">@{{data.clade}}</td>
+                                <td class="text-center">@{{FechaHora(data.created_at)}}</td>
+                                <td class="text-right"><i class="far fa-file-times"></i> @{{data.archivo}}</td>
+                                <td class="text-center">@{{data.cantidad}}</td>
+                                <td class="text-center"><a href="javascript:void(0)" class="button_link" @click="Modal('modal-lg', 'detalles', data.id, data)">Ver registros</a></td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a>
+                                    <i class="fas fa-check text-success" v-if="data.activo == 'S'"></i>
+                                    <i class="fas fa-times text-danger" v-else></i>
+                                </td>
+                                <td class="text-center">
+                                    {{-- <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a> --}}
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Eliminar" @click="Modal('modal-md', 'delete', data.id, data)"><i class="text-danger far fa-trash-alt"></i></a>
                                 </td>
                             </tr>

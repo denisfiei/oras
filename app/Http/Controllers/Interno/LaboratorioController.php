@@ -49,6 +49,10 @@ class LaboratorioController extends Controller
             });
         }
 
+        if ($request->pais) {
+            $laboratorios->where('pais_id', $request->pais);
+        }
+
         $laboratorios = $laboratorios->with('pais')->orderBy('id', 'DESC')->paginate(10);
 
         return [

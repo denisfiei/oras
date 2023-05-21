@@ -104,15 +104,15 @@
                         </div>
                     </div>
                     <div class="col-lg-4 col-md-12">
-                        <div data-label="LOGO DEL SISTEMA" class="df-example demo-forms mb-4">
+                        <div data-label="IMAGENES DEL SISTEMA" class="df-example demo-forms mb-4">
                             <div class="row row-sm mb-4">
                                 <div class="form-group col-md-12 mb-3">
                                     <label class="form-label mb-0" for="logo">LOGO <span class="obligatorio">(* resolución 180x45)</span></label>
                                     <input type="file" id="logo" class="form-control" :class="[errors.logo ? 'border-error' : '']" accept="image/*" @change="Imagen">
                                     <div class="input-error" v-if="errors.logo">@{{ errors.logo[0] }}</div>
                                 </div>
-                                <div class="col-md-12">
-                                    <img class="img-fluid" :src="imagen" alt="Logo Sistema Claro" v-if="imagen" style="background-color: #dbdbdb;"/>
+                                <div class="col-md-12 text-center">
+                                    <img class="img-fluid" :src="imagen" alt="Logo Sistema Claro" v-if="imagen" style="max-width: 170px; background-color: #dbdbdb;"/>
                                 </div>
                             </div>
                             

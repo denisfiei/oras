@@ -17,4 +17,9 @@ class Carga extends Model
     {
         return $this->hasOne(Virus::class, 'id', 'virus_id')->select('id', 'nombre');
     }
+    
+    public function pais()
+    {
+        return $this->hasOne(Pais::class, 'id', 'pais_id')->select('id', 'nombre', 'bandera');
+    }
 }

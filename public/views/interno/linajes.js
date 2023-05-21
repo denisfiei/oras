@@ -29,11 +29,21 @@ new Vue({
         seleccion: [],
         errors: [],
 
-        linaje: {
-            'codigo': null,
-            'nombre': null,
-            'clade': null
-        }
+        linajes: [],
+        carga: {
+            'archivo': null,
+            'file': null
+        },
+
+        // UPLOAD
+        visible: true,
+        importar: {
+            'rows': 0,
+            'rows_error': 0,
+            'errors': [],
+        },
+        finished: false,
+        total_rows: 0,
     },
     created() {
         this.Buscar();
@@ -128,7 +138,7 @@ new Vue({
                         customClass: {
                             confirmButton: 'btn btn-success'
                         },
-                        timer: 3000
+                        timer: 2000
                     });
                 break;
                 case 'error': 
@@ -149,8 +159,8 @@ new Vue({
             axios.post(urlBuscar, {
                 search: this.search.datos
             }).then(response => {
-                this.listRequest = response.data.linajes.data;
-                this.to_pagination = response.data.linajes.to;
+                this.listRequest = response.data.cargas.data;
+                this.to_pagination = response.data.cargas.to;
                 this.pagination = response.data.pagination;
             }).catch(error => {
                 console.log(error)
@@ -170,23 +180,18 @@ new Vue({
 
             switch (metodo) {                
                 case 'create':
-                    this.modal.title = 'NUEVO LINAJE';
-                    break;
-
-                case 'edit':
-                    this.modal.title = 'EDITAR LINAJE';
-                    this.linaje.nombre = seleccion.nombre;
-                    this.linaje.codigo = seleccion.codigo;
-                    this.linaje.clade = seleccion.clade;
+                    this.modal.title = 'CARGA DE LINAJES';
                     break;
 
                 case 'delete':
-                    this.modal.title = 'ELIMINAR LINAJE';
-                    this.linaje.nombre = seleccion.nombre;
+                    this.modal.title = 'ELIMINAR CARGA DE LINAJES';
+                    this.carga.archivo = seleccion.archivo;
                     break;
                     
                 default:
-                    this.linaje.nombre = seleccion.nombre;
+                    this.modal.title = 'LISTA DE LINAJES';
+                    this.carga.archivo = seleccion.archivo;
+                    this.Carga(metodo);
                     break;
             }
         },
@@ -203,84 +208,12 @@ new Vue({
             this.seleccion = [];
             this.errors = [];
 
+            this.linajes = [];
             this.linaje = {
                 'codigo': null,
                 'nombre': null,
                 'clade': null
             };
-        },
-        Store(form) {
-            this.Load(form, 'on', 'Guardando Registro ...');
-            this.errors = [];
-
-            axios.post('linajes/store', {
-                codigo: this.linaje.codigo,
-                nombre: this.linaje.nombre,
-                clade: this.linaje.clade
-            }).then(response=> {
-                this.Load(form, 'off', null);
-
-                let action = response.data.action;
-                let title = response.data.title;
-                let message = response.data.message;
-                this.Alert2(action, title, message)
-
-                if (action == 'success') {
-                    $('#formularioModal').modal('hide');
-                    this.CloseModal();
-                    this.Buscar(this.page);
-                }
-            }).catch(error => {
-                console.log(error)
-                this.Load(form, 'off', null);
-
-                if (error.response.status == 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    let action = 'error';
-                    let title = 'Ops error !!';
-                    let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
-
-                    this.Alert2(action, title, message);
-                }
-            });
-        },
-        Update(form) {
-            this.Load(form, 'on', 'Actualizando Registro ...');
-            this.errors = [];
-
-            axios.post('linajes/update', {
-                id: this.id,
-                codigo: this.linaje.codigo,
-                nombre: this.linaje.nombre,
-                clade: this.linaje.clade
-            }).then(response=> {
-                this.Load(form, 'off', null);
-
-                let action = response.data.action;
-                let title = response.data.title;
-                let message = response.data.message;
-                this.Alert2(action, title, message);
-
-                if (action == 'success') {
-                    $('#formularioModal').modal('hide');
-                    this.CloseModal();
-                    this.Buscar(this.page);
-                }
-            }).catch(error => {
-                console.log(error)
-                this.Load(form, 'off', null);
-
-                if (error.response.status == 422) {
-                    this.errors = error.response.data.errors;
-                } else {
-                    let action = 'error';
-                    let title = 'Ops error !!';
-                    let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
-
-                    this.Alert2(action, title, message);
-                }
-            });
         },
         Delete(form) {
             this.Load(form, 'on', 'Eliminando Registro ...');
@@ -312,6 +245,24 @@ new Vue({
                 this.Alert2(action, title, message);
             });
         },
+        Carga(form) {
+            this.Load(form, 'on', 'Cargando datos ...');
+
+            axios.post('linajes/carga', {
+                id: this.id
+            }).then(response => {
+                this.Load(form, 'off', null);
+                this.linajes = response.data;
+            }).catch(error => {
+                console.log(error)
+                this.Load(form, 'off', null);
+                let action = 'error';
+                let title = 'Error !!';
+                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+                this.Alert2(action, title, message);
+            });
+        },
+
         Fecha(date) {
             if (date) {
                 let fecha = date.split('-');
@@ -341,6 +292,90 @@ new Vue({
                 return new Array(width + (/\./.test(number) ? 2 : 1)).join('0') + number;
             }
             return number + "";
+        },
+
+        //----------------- UPLOAD
+        File(form) {
+            this.Load(form, 'on', 'Cargando archivo ...');
+            var file = event.target.files[0];
+
+            var formData  = new FormData();
+            formData.append('file', file);
+            axios.post('cargas/rows', formData).then(response=>{
+                this.Load(form, 'off', null);
+
+                var action = response.data.action;
+                var title = response.data.title;
+                var message = response.data.message;
+                
+                if (action == 'success') {
+                    this.total_rows = response.data.rows.total;
+                    this.carga.file = file;
+                } else {
+                    this.Alert2(action, title, message);
+                }
+            }).catch(error => {
+                console.log(error);
+                $('#file').val('');
+                this.Load(form, 'off', null);
+
+                if (error.response.status == 422) {
+                    this.errors = error.response.data.errors;
+                } else {
+                    var action = 'error';
+                    var title = 'Ops error !!';
+                    var message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+
+                    this.Alert2(action, title, message);
+                }
+            });
+        },
+        Importar(form) {
+            this.errors = [];
+            this.Load(form, 'on', 'Importando datos espere ...');
+            this.visible = false;
+
+            var formData  = new FormData();
+            formData.append('file', this.carga.file);
+            formData.append('cantidad', this.total_rows);
+
+            axios.post('linajes/import', formData).then(response=>{
+                this.Load(form, 'off', null);
+                var action = response.data.action;
+                var title = response.data.title;
+                var message = response.data.message;
+                
+                if (action == 'success') {
+                    this.finished = true;
+                    this.importar.rows = response.data.import.total;
+                    this.importar.rows_error = response.data.import.total_error;
+                    this.importar.errors = response.data.import.errors;
+                    this.Buscar(this.page);
+
+                    this.Alert2(action, title, message);
+                } else {
+                    this.Alert2(action, title, message);
+                    this.visible = true;
+                    this.carga.file = null;
+                    $('#file').val('');
+                }
+            }).catch(error => {
+                console.log(error);
+
+                $('#file').val('');
+                this.visible = true;
+                this.Load(form, 'off', null);
+
+                if (error.response.status == 422) {
+                    this.errors = error.response.data.errors;
+                } else {
+                    var action = 'error';
+                    var title = 'Ops error !!';
+                    var message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+
+                    this.Alert2(action, title, message);
+                }
+            });
         },
     }
 });

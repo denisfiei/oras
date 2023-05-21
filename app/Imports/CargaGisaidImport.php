@@ -15,12 +15,11 @@ class CargaGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
 {
     use Importable;
 
-    public $duplicados = [], $total = 0, $total_error = 0, $carga = 0, $fecha = '';
+    public $errors = [], $total = 0, $total_error = 0, $carga = [];
 
     public function __construct($carga)
     {
         $this->carga = $carga;
-        //$this->fecha = date('Y-m-d H:i:s');
     }
 
     public function startRow(): int
@@ -38,34 +37,46 @@ class CargaGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
         $rowIndex = $row->getIndex();
         $row      = array_map('trim', $row->toArray());
         
-        $collection_date = null;
-        if ($row[2]) {
-            $collection_date = $this->transformDateTime($row[2]);
+        try {
+            $collection_date = null;
+            if ($row[2]) {
+                $collection_date = $this->transformDateTime($row[2]);
+            }
+
+            $gisaid = new CargaGisaid();
+            $gisaid->carga_id = $this->carga->id;
+            $gisaid->virus_id = $this->carga->virus_id;
+            $gisaid->pais_id = $this->carga->pais_id;
+            $gisaid->virus_name = $row[0];
+            $gisaid->accession_id = $row[1];
+            $gisaid->collection_date = $collection_date;
+            $gisaid->location = $row[3];
+            $gisaid->host = $row[4];
+            $gisaid->additional_location_information = $row[5];
+            $gisaid->sampling_strategy = $row[6];
+            $gisaid->gender = $row[7];
+            $gisaid->patient_age = $row[8];
+            $gisaid->patient_status = $row[9];
+            $gisaid->last_vaccinated = $row[10];
+            $gisaid->passage = $row[11];
+            $gisaid->specimen = $row[12];
+            $gisaid->additional_host_information = $row[13];
+            $gisaid->lineage = $row[14];
+            $gisaid->clade = $row[15];
+            $gisaid->aa_substitutions = $row[16];
+            $gisaid->user_id = Auth::user()->id;
+            $gisaid->save();
+    
+            $this->total += 1;
+            
+        } catch (\Exception $e) {
+            $this->total_error += 1;
+
+            $this->errors[] = [
+                'fila' => $rowIndex,
+                'error' => $e->getMessage()
+            ];
         }
-
-        $gisaid = new CargaGisaid();
-        $gisaid->carga_id = $this->carga;
-        $gisaid->virus_name = $row[0];
-        $gisaid->accession_id = $row[1];
-        $gisaid->collection_date = $collection_date;
-        $gisaid->location = $row[3];
-        $gisaid->host = $row[4];
-        $gisaid->additional_location_information = $row[5];
-        $gisaid->sampling_strategy = $row[6];
-        $gisaid->gender = $row[7];
-        $gisaid->patient_age = $row[8];
-        $gisaid->patient_status = $row[9];
-        $gisaid->last_vaccinated = $row[10];
-        $gisaid->passage = $row[11];
-        $gisaid->specimen = $row[12];
-        $gisaid->additional_host_information = $row[13];
-        $gisaid->lineage = $row[14];
-        $gisaid->clade = $row[15];
-        $gisaid->aa_substitutions = $row[16];
-        $gisaid->user_id = Auth::user()->id;
-        $gisaid->save();
-
-        $this->total += 1;
     }
 
     public function getData()
@@ -73,7 +84,7 @@ class CargaGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
         return [
             'total' => $this->total,
             'total_error' => $this->total_error,
-            'duplicados' => $this->duplicados,
+            'errors' => $this->errors,
         ];
     }
 

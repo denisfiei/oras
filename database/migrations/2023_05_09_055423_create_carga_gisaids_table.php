@@ -16,7 +16,9 @@ class CreateCargaGisaidsTable extends Migration
         Schema::create('carga_gisaids', function (Blueprint $table) {
             $table->id();
             $table->foreignId('carga_id')->references('id')->on('cargas')->onDelete('restrict');
+            $table->foreignId('virus_id')->references('id')->on('virus')->onDelete('restrict');
             //$table->foreignId('linaje_id')->references('id')->on('linajes')->onDelete('restrict');
+            $table->foreignId('pais_id')->references('id')->on('paises')->onDelete('restrict');
             $table->string('virus_name', 100);
             $table->string('accession_id', 100);
             $table->date('collection_date');

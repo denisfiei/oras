@@ -16,8 +16,10 @@ class CreateCargaDetallesTable extends Migration
         Schema::create('carga_detalles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('carga_id')->references('id')->on('cargas')->onDelete('restrict');
+            $table->foreignId('virus_id')->references('id')->on('virus')->onDelete('restrict');
             $table->foreignId('tipo_muestreo_id')->references('id')->on('tipo_muestreos')->onDelete('restrict');
-            $table->foreignId('linaje_id')->references('id')->on('linajes')->onDelete('restrict');
+            //$table->foreignId('linaje_id')->references('id')->on('linajes')->onDelete('restrict');
+            $table->foreignId('pais_id')->references('id')->on('paises')->onDelete('restrict');
             $table->string('codigo', 50);
             $table->string('codigo_pais', 10);
             $table->string('kit_ct', 50)->nullable();

@@ -91,7 +91,7 @@
                                         <div class="input-error" v-if="errors.imagen">@{{ errors.imagen[0] }}</div>
                                     </div>
                                     <div class="col-md-12 mt-3 mb-0 text-center">
-                                        <img class="img-fluid" :src="imagen_recurso" alt="Imagen" v-if="imagen_recurso"/>
+                                        <img class="img-fluid" :src="imagen_recurso" alt="Imagen" v-if="imagen_recurso" style="max-width: 250px;"/>
                                     </div>
                                 </div>
                             </div>

@@ -30,7 +30,7 @@ class CargaController extends Controller
     {
         $virus = Virus::where('activo', 'S')->get();
         $muestreos = TipoMuestreo::where('activo', 'S')->get();
-        $cargas = Carga::where('activo', 'S')->with('virus')->orderBy('id', 'DESC')->paginate(10);
+        $cargas = Carga::where('activo', 'S')->with(['pais', 'virus'])->orderBy('id', 'DESC')->paginate(10);
 
         return [
             'pagination' => [
@@ -56,11 +56,12 @@ class CargaController extends Controller
             $search = $request->search;
             
             $cargas->where(function ($query) use ($search){
-                $query->where('virus', 'LIKE', "%{$search}%");
+                $query->where('archivo_gisaid', 'LIKE', "%{$search}%")
+                ->where('archivo_detalle', 'LIKE', "%{$search}%");
             });
         }
 
-        $cargas = $cargas->with('virus')->orderBy('id', 'DESC')->paginate(10);
+        $cargas = $cargas->with(['pais', 'virus'])->orderBy('id', 'DESC')->paginate(10);
 
         return [
             'pagination' => [
@@ -74,78 +75,6 @@ class CargaController extends Controller
             ],
             'cargas' => $cargas,
         ];
-    }
-
-    public function store(Request $request)
-    {
-        $this->validate($request, [
-            'codigo' => 'required|max:20',
-            'nombre' => 'required|max:50',
-        ]);
-
-        try {
-            DB::beginTransaction();
-            
-            $carga = new Carga();
-            $carga->codigo = Str::upper($request->codigo);
-            $carga->nombre = Str::upper($request->nombre);
-            $carga->save();
-
-            DB::commit();
-
-            return [
-                'action'    =>  'success',
-                'title'     =>  'Bien!!',
-                'message'   =>  'El Carga se registró con éxito.',
-            ];
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            return [
-                'action'    =>  'error',
-                'title'     =>  'Incorrecto!!',
-                'message'   =>  'Ocurrio un error al crear el Carga, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
-                'error'     =>  'Error: '.$e->getMessage()
-            ];
-        }
-    }
-
-    public function update(Request $request)
-    {
-        $this->validate($request, [
-            'codigo' => 'required|max:20',
-            'nombre' => 'required|max:50',
-        ]);
-
-        try {
-
-            DB::beginTransaction();
-
-            $carga = Carga::findOrFail($request->id);
-            $carga->codigo = Str::upper($request->codigo);
-            $carga->nombre = Str::upper($request->nombre);
-            $carga->save();
-
-            DB::commit();
-
-            return [
-                'action'    =>  'success',
-                'title'     =>  'Bien!!',
-                'message'   =>  'El Carga se actualizó con éxito.',
-            ];
-
-
-        } catch (\Exception $e) {
-            DB::rollBack();
-
-            return [
-                'action'    =>  'error',
-                'title'     =>  'Incorrecto!!',
-                'message'   =>  'Ocurrio un error al actualizar el Carga, intente nuevamente o contacte al Administrador del Sistema. Código de error '.$e->getMessage(),
-                'error'     =>  'Error: '.$e->getMessage()
-            ];
-        }
     }
 
     public function delete(Request $request)
@@ -187,6 +116,22 @@ class CargaController extends Controller
         }
     }
 
+    public function datos_gisaid(Request $request)
+    {
+        $gisaids = CargaGisaid::where('carga_id', $request->id)
+        ->get();
+
+        return $gisaids;
+    }
+    
+    public function datos_detalle(Request $request)
+    {
+        $detalles = CargaDetalle::where('carga_id', $request->id)
+        ->get();
+
+        return $detalles;
+    }
+
     public function rows(Request $request)
     {
         $request->replace($this->null_string($request->all()));
@@ -205,58 +150,51 @@ class CargaController extends Controller
         ];
     }
     
-    public function import(Request $request)
+    public function gisaid(Request $request)
     {
         $request->replace($this->null_string($request->all()));
 
-        $tipo = 'detalle';
-        if ($request->tipo == 1 || $request->tipo == '1') {
-            $tipo = 'gisaid';
-
-            $this->validate($request, [
-                'virus' => 'required|exists:virus,id',
-                'tipo' => 'required|digits_between:1,2',
-                'file' => ['required', 'mimes:xlsx'],
-                'cantidad' => 'required|min:1',
-            ]);
-        } else {
-            $this->validate($request, [
-                'virus' => 'required|exists:virus,id',
-                'muestreo' => 'required|exists:tipo_muestreos,id',
-                'tipo' => 'required|digits_between:1,2',
-                'file' => ['required', 'mimes:xlsx'],
-                'cantidad' => 'required|min:1',
-            ]);
-        }
+        $this->validate($request, [
+            'virus' => 'required|exists:virus,id',
+            'file' => ['required', 'mimes:xlsx'],
+            'cantidad' => 'required|min:1',
+        ]);
 
         try {
             DB::beginTransaction();
             
             $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
             $extension = $file->getClientOriginalExtension();
-            $fileContent = 'cargas/'.$tipo.'/arch_'.time().'.'.$extension;
+            $fileContent = 'cargas/gisaid/arch_'.time().'.'.$extension;
             Storage::putFileAs('public/', $file, $fileContent);
 
             $carga = new Carga();
             $carga->virus_id = $request->virus;
-            $carga->archivo = $fileContent;
-            $carga->cantidad = $request->cantidad;
-            $carga->tipo = $request->tipo;
+            $carga->pais_id = Auth::user()->pais_id;
+            $carga->archivo_gisaid = $fileName;
+            $carga->file_gisaid = $fileContent;
+            $carga->cantidad_gisaid = $request->cantidad;
             $carga->user_id = Auth::user()->id;
             $carga->save();
 
-            if ($request->tipo == 1 || $request->tipo == '1') {
+            $import = new CargaGisaidImport($carga);
+            Excel::import($import, request()->file('file'));
+            $data = $import->getData();
 
-                $import = new CargaGisaidImport($carga->id);
-                Excel::import($import, request()->file('file'));
-                $data = $import->getData();
+            if (count($data['errors']) > 0) {
+                $errors = [];
+                foreach ($data['errors'] as $key => $value) {
+                    $errors[] = '#'.($key+1).', Fila: '.$value['fila'].', Error: '.$value['error'];
+                }
+                $contenido = implode("\n", $errors);
+                $log_file = "cargas/gisaid/logs/log_".time().".log";
+                Storage::put('public/'.$log_file, $contenido);
 
-            } else {
-
-                $import = new CargaDetalleImport($carga->id, $request->muestreo);
-                Excel::import($import, request()->file('file'));
-                $data = $import->getData();
+                $carga->log_gisaid = $log_file;
             }
+            $carga->cantidad_detalle = $data['total'];
+            $carga->save();
 
             DB::commit();
     
@@ -268,6 +206,75 @@ class CargaController extends Controller
             ];
         } catch (\Exception $e) {
             DB::rollBack();
+
+            Storage::delete('public/'.$fileContent);
+
+            return [
+                'action'    =>  'error',
+                'title'     =>  'Incorrecto!!',
+                'message'   =>  'Ocurrio un error al importar los Datos, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
+                'import'    =>  $data,
+                'error'     =>  'Error: '.$e->getMessage()
+            ];
+        }
+    }
+    
+    public function detalle(Request $request)
+    {
+        $request->replace($this->null_string($request->all()));
+
+        $this->validate($request, [
+            'muestreo' => 'required|exists:tipo_muestreos,id',
+            'file' => ['required', 'mimes:xlsx'],
+            'cantidad' => 'required|min:1',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            
+            $file = $request->file('file');
+            $fileName = $file->getClientOriginalName();
+            $extension = $file->getClientOriginalExtension();
+            $fileContent = 'cargas/detalle/arch_'.time().'.'.$extension;
+            Storage::putFileAs('public/', $file, $fileContent);
+
+            $carga = Carga::findOrFail($request->id);
+            $carga->archivo_detalle = $fileName;
+            $carga->file_detalle = $fileContent;
+            $carga->cantidad_detalle = $request->cantidad;
+            $carga->user_id = Auth::user()->id;
+            $carga->save();
+
+            $import = new CargaDetalleImport($carga, $request->muestreo);
+            Excel::import($import, request()->file('file'));
+            $data = $import->getData();
+
+            if (count($data['errors']) > 0) {
+                $errors = [];
+                foreach ($data['errors'] as $key => $value) {
+                    $errors[] = '#'.($key+1).', Fila: '.$value['fila'].', Error: '.$value['error'];
+                }
+                $contenido = implode("\n", $errors);
+                $log_file = "cargas/detalle/logs/log_".time().".log";
+                Storage::put('public/'.$log_file, $contenido);
+
+                $carga->log_detalle = $log_file;
+            }
+            $carga->cantidad_detalle = $data['total'];
+            $carga->save();
+
+            DB::commit();
+    
+            return [
+                'action'    =>  'success',
+                'title'     =>  'Bien!!',
+                'message'   =>  'Se importaron los Datos con éxito.',
+                'import'    =>  $data
+            ];
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            Storage::delete('public/'.$fileContent);
 
             return [
                 'action'    =>  'error',
