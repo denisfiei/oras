@@ -1,5 +1,21 @@
 @extends('layouts.vertical')
 
+@section('css')
+    <link rel="stylesheet" href="{{asset('css/dataTables.bootstrap5.min.css')}}">
+    <style>
+        #table_linajes_info {
+            display: none;
+        }
+        .dataTables_wrapper .dataTables_paginate .paginate_button {
+            background-color: #ffffff !important;
+            padding: 0 !important;
+        }
+        .sorting_asc {
+            background-color: #ffffff40 !important;
+        }
+    </style>
+@endsection
+
 @section('content')
     
 <div class="content-body" id="form_linajes">
@@ -103,5 +119,7 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/linajes.js?v=1.0.1')}}"></script>
+    <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
+    <script src="{{asset('js/dataTables.bootstrap5.min.js')}}"></script>
+    <script src="{{asset('views/interno/linajes.js?v=1.0.2')}}"></script>
 @endsection

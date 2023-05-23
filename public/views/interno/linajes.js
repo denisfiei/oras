@@ -246,13 +246,19 @@ new Vue({
             });
         },
         Carga(form) {
+            if ( $.fn.DataTable.isDataTable('#table_linajes') ) {
+                $('#table_linajes').DataTable().clear().destroy();
+            }
             this.Load(form, 'on', 'Cargando datos ...');
 
             axios.post('linajes/carga', {
                 id: this.id
             }).then(response => {
-                this.Load(form, 'off', null);
                 this.linajes = response.data;
+                setTimeout(() => {
+                    $('#table_linajes').DataTable(); 
+                    this.Load(form, 'off', null);
+                }, 300);
             }).catch(error => {
                 console.log(error)
                 this.Load(form, 'off', null);
@@ -379,3 +385,37 @@ new Vue({
         },
     }
 });
+
+//var searchBox_3 = document.getElementById("search_linaje");
+
+/*searchBox_3.addEventListener("keyup",function(){
+    var keyword = this.value;
+    if (keyword.length >= 3) {
+        $(".a_load").show();
+
+        keyword = keyword.toUpperCase();
+        var table_3 = document.getElementById("table_linajes");
+        var all_tr = table_3.getElementsByTagName("tr");
+        for(var i=0; i<all_tr.length; i++){
+            var code_column = all_tr[i].getElementsByTagName("td")[1];
+            var name_column = all_tr[i].getElementsByTagName("td")[2];
+            var clade_column = all_tr[i].getElementsByTagName("td")[3];
+            if(code_column && name_column && clade_column){
+                var code_value = code_column.textContent || code_column.innerText;
+                var name_value = name_column.textContent || name_column.innerText;
+                var clade_value = clade_column.textContent || clade_column.innerText;
+                code_value = code_value.toUpperCase();
+                name_value = name_value.toUpperCase();
+                clade_value = clade_value.toUpperCase();
+                if((name_value.indexOf(keyword) > -1) || (code_value.indexOf(keyword) > -1)  || (clade_value.indexOf(keyword) > -1)){
+                    all_tr[i].style.display = ""; // show
+                }else{
+                    all_tr[i].style.display = "none"; // hide
+                }
+            }
+            if(i === (all_tr.length-1)) {
+                $(".a_load").hide();
+            }
+        }
+    }
+});*/

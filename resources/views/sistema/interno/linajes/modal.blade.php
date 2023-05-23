@@ -103,8 +103,12 @@
                         <i class="far fa-file-times"></i> @{{carga.archivo}}
                     </div>
                     <div data-label="LISTA" class="df-example demo-forms">
-                        <div class="table-responsive" style="max-height: calc(100vh - 285px);">
-                            <table class="table table-hover table-sm table_overflow">
+                        {{-- <div class="search-form mb-3">
+                            <input type="text" class="form-control" id="search_linaje" placeholder="Buscar">
+                            <button class="btn" type="button" @click="Buscar"><i data-feather="search"></i></button>
+                        </div> --}}
+                        <div class="table-responsive">
+                            <table class="table table-hover table-sm table_overflow mb-0" id="table_linajes">
                                 <thead class="thead-primary">
                                     <tr>
                                         <th class="text-center">#</th>
@@ -114,7 +118,7 @@
                                         <th class="text-center">Estado</th>
                                     </tr>
                                 </thead>
-                                <tbody style="height: calc(100vh - 335px);">
+                                <tbody style="height: calc(100vh - 422px);">
                                     <tr v-for="(lin, index) in linajes">
                                         <td class="text-center">@{{(index+1)}}</td>
                                         <td>@{{lin.codigo}}</td>

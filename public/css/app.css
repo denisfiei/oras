@@ -40,6 +40,9 @@
 .text_mayus {
     text-transform: uppercase;
 }
+.text_bold {
+    font-weight: bold;
+}
 
 /*************** PADDING ***************/
 .p_0 {

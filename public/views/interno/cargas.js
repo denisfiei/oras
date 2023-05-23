@@ -168,7 +168,6 @@ new Vue({
         Datos() {
             axios.post('cargas/datos').then(response => {
                 this.virus = response.data.virus;
-                this.muestreos = response.data.muestreos;
 
                 this.listRequest = response.data.cargas.data;
                 this.to_pagination = response.data.cargas.to;
@@ -314,6 +313,9 @@ new Vue({
                 this.Alert2(action, title, message);
             });
         },
+        DeleteDetalle(form) {
+
+        },
         BuscarGisaid(form) {
             this.Load(form, 'on', 'Cargando datos ...');
 
@@ -360,6 +362,12 @@ new Vue({
         SelectMuestreo(data) {
             this.carga.muestreo = data.id;
             this.carga.muestreo_text = data.nombre;
+        },
+        ConfirmModal() {
+            $("#confirmModal").modal('show');
+        },
+        CloseModalConfirm() {
+            $("#confirmModal").modal('hide');
         },
         Tipo(data) {
             if (data == 1) {
@@ -490,7 +498,7 @@ new Vue({
 
             var formData  = new FormData();
             formData.append('id', this.id);
-            formData.append('muestreo', this.carga.muestreo);
+            // formData.append('muestreo', this.carga.muestreo);
             formData.append('file', this.carga.file);
             formData.append('cantidad', this.total_rows);
 

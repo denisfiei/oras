@@ -27,9 +27,7 @@
             </div>
             <div class="card-body pd-y-30">
                 <div class="row mb-3">
-                    <div class="col-lg-8 col-md-12">
-
-                    </div>
+                    <div class="col-lg-8 col-md-12"></div>
 
                     <div class="col-lg-4 col-md-12">
                         <div class="search-form">
@@ -46,35 +44,46 @@
                                 <th class="text-start" rowspan="2" width="13%">País</th>
                                 <th class="text-center" rowspan="2" width="13%">Fecha</th>
                                 <th class="text-center" rowspan="2" width="13%">Virus</th>
-                                <th class="text-center p_0" colspan="2" width="25%">Gisaid</th>
-                                <th class="text-center p_0" colspan="2" width="25%">Detalle</th>
+                                <th class="text-center p_0" colspan="3" width="25%">Gisaid</th>
+                                <th class="text-center p_0" colspan="3" width="25%">Detalle</th>
                                 <th class="text-center" rowspan="2" width="6%"><ion-icon name="ellipsis-vertical"></ion-icon></th>
                             </tr>
                             <tr>
-                                <th class="text-center p_0" width="15%">Archivo</th>
-                                <th class="text-center p_0" width="10%">Cantidad</th>
-                                <th class="text-center p_0" width="15%">Archivo</th>
-                                <th class="text-center p_0" width="10%">Cantidad</th>
+                                <th class="text-center p_0" width="12%">Archivo</th>
+                                <th class="text-center p_0" width="8%">Cantidad</th>
+                                <th class="text-center p_0" width="5%">Obs.</th>
+                                <th class="text-center p_0" width="12%">Archivo</th>
+                                <th class="text-center p_0" width="8%">Cantidad</th>
+                                <th class="text-center p_0" width="5%">Obs.</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-if="listRequest.length === 0">
-                                <td class="text-center no_data" colspan="8"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
+                                <td class="text-center no_data" colspan="11"><i class="fas fa-exclamation-circle"></i> Sin datos encontrados </td>
                             </tr>
                             <tr class="my_vue" v-for="(data, index) in listRequest" style="display:none;">
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
                                 <td class="text-right"><img :src="'storage/paises/'+data.pais.bandera" v-if="data.pais.bandera" class="codigo_tel"> @{{data.pais.nombre}}</td>
                                 <td class="text-center"><i class="far fa-calendar-alt"></i> @{{FechaHora(data.created_at)}}</td>
-                                <td class="text-right">@{{data.virus.nombre}}</td>
+                                <td class="text-center">@{{data.virus.nombre}}</td>
+
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="btn_link"  @click="Modal('modal-fullscreen', 'rows_gisaid', data.id, data)">@{{data.archivo_gisaid}}</a>
+                                    <a href="javascript:void(0)" class="text-success button_link text_bold"  @click="Modal('modal-fullscreen', 'rows_gisaid', data.id, data)">@{{data.archivo_gisaid}}</a>
                                 </td>
-                                <td class="text-center">@{{data.cantidad_gisaid}}</td>
+                                <td class="text-center text-success text_bold">@{{data.cantidad_gisaid}}</td>
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="btn_link"  @click="Modal('modal-fullscreen', 'rows_detalle', data.id, data)" v-if="data.archivo_detalle">@{{data.archivo_detalle}}</a>
-                                    <a href="javascript:void(0)" class="btn_opt text-primary" data-bs-toggle="tooltip" title="Subir Detalle"  @click="Modal('modal-md', 'carga', data.id, data)" v-else><i class="fas fa-file-upload"></i></a>
+                                    <a :href="'storage/'+data.log_gisaid" target="_blank" title="Ver Archivo Log"><span class="badge text-bg-danger" v-if="data.error_gisaid > 0"><i class="fas fa-exclamation-triangle"></i> @{{data.error_gisaid}}</span></a>
                                 </td>
-                                <td class="text-center">@{{data.cantidad_detalle}}</td>
+
+                                <td class="text-center">
+                                    <a href="javascript:void(0)" class="button_link text-info text_bold"  @click="Modal('modal-fullscreen', 'rows_detalle', data.id, data)" v-if="data.archivo_detalle">@{{data.archivo_detalle}}</a>
+                                    <a href="javascript:void(0)" class="btn_opt text-info" data-bs-toggle="tooltip" title="Subir Detalle"  @click="Modal('modal-md', 'carga', data.id, data)" v-else><i class="fas fa-file-upload"></i></a>
+                                </td>
+                                <td class="text-center text-info text_bold">@{{data.cantidad_detalle}}</td>
+                                <td class="text-center">
+                                    <a :href="'storage/'+data.log_detalle" target="_blank" title="Ver Archivo Log"><span class="badge text-bg-danger" v-if="data.error_detalle > 0"><i class="fas fa-exclamation-triangle"></i> @{{data.error_detalle}}</span></a>
+                                </td>
+
                                 <td class="text-center">
                                     {{-- <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a> --}}
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Eliminar" @click="Modal('modal-md', 'delete', data.id, data)"><i class="text-danger far fa-trash-alt"></i></a>
@@ -113,5 +122,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/cargas.js?v=1.0.0')}}"></script>
+    <script src="{{asset('views/interno/cargas.js?v=1.0.1')}}"></script>
 @endsection
