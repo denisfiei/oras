@@ -22,7 +22,7 @@ class CreateRecursosTable extends Migration
             $table->date('fecha')->nullable();
             $table->string('ruta')->nullable();
             $table->string('imagen', 50)->nullable();
-            $table->string('enlace')->nullable();
+            $table->string('enlace')->nullable(); 
             $table->tinyInteger('orden')->default(0);
             $table->tinyInteger('nivel')->default(0);
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
