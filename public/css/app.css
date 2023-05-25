@@ -30,10 +30,7 @@
 
 /*************** BANNER ***************/
 .banner_top {
-    position: absolute;
-    left: 0;
-    margin-top: -31px;
-    width: 100%;
+    position: relative;
 }
 .last_banner {
     padding-top: 270px;
@@ -44,8 +41,8 @@
     top: 0;
 }
 .buttons_right div {
-    height: 50px;
-    margin-top: 15px;
+    height: 44px;
+    margin-top: 16px;
     background-color: #04040457;
     text-align: right;
     padding-left: 16px;
@@ -55,7 +52,7 @@
 }
 .buttons_right img {
     width: 30px;
-    margin: 10px;
+    margin: 6px;
 }
 .buttons_right a {
     position: relative;
@@ -77,7 +74,7 @@
     width: 100%;
 }
 .buttons_right a.rounded {
-    border-radius: 5px;
+    border-radius: 3px;
     font-weight: bold;
   }
 .buttons_right a.rounded .right_content {
@@ -87,8 +84,8 @@
     align-items: center;
 }
 .buttons_right a.rounded::before {
-    border-radius: 5px;
-    height: 50px;
+    border-radius: 3px;
+    height: 44px;
     width: 0;
     background: #00b1cb;
 }
@@ -99,8 +96,8 @@
 }
 .buttons_right a.active {
     background: #00b1cb;
-    border-radius: 5px;
-    height: 50px;
+    border-radius: 3px;
+    height: 44px;
 }
 @media(max-width: 1000px) {
     .df-logo img {

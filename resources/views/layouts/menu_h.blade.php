@@ -2,7 +2,7 @@
     $config_cache = Cache::get('config_cache');
 @endphp
 
-<header class="navbar navbar-header navbar-header-fixed">
+<nav class="navbar navbar-header navbar-header-fixed">
     <a href="#" id="mainMenuOpen" class="burger-menu"><i data-feather="menu"></i></a>
     <div class="navbar-brand">
         @if ($config_cache->logo)
@@ -44,4 +44,4 @@
             <img src="{{asset('images/logos/logo_BID.png')}}" alt="BID" class="bid">
         </div>
     </div>
-</header>
+</nav>

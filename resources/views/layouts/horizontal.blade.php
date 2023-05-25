@@ -40,6 +40,13 @@
             font-family: 'Archivo', sans-serif;
             font-family: 'Merriweather Sans', sans-serif;
         }*/
+        .page-header {
+            position: relative;
+            background: #fff;
+            padding: 4.29em 0 0 0;
+            overflow: hidden;
+            z-index: 1;
+        }
         .logo_title {
             font-size: 13px;
             line-height: 14px;
@@ -86,19 +93,29 @@
 
 <body>
     @include('layouts.menu_h')
-
-    <div class="content content-fixed {{(request()->is('login')) ? 'content-auth' : ''}}" >        
-        <div class="container">
-            {{-- LOAD SUBMIT --}}
-            <div class="a_load">
-                <img src="{{ asset('ajax-loader-1.gif') }}" alt="Loading ...">
-                <h5>PROCESANDO, ESPERE ...</h5>
+    
+    <header class="page-header">
+        <div class="banner_top">
+            <img src="{{asset('images/banner_1.webp')}}" alt="banner" style="width: 100%; max-height: 260px;">
+            <div class="buttons_right">
+                <div><a href="#" class="{{(request()->is('/')) ? 'active' : ''}} rounded"><span class="right_content"><span class="text">VIGILANCIA GENÓMICA</span> <img src="{{asset('images/botones/vigilancia.png')}}" alt="btn1"></span></a></div>
+                <div><a href="#" class="{{(request()->is('red')) ? 'active' : ''}} rounded"><span class="right_content"><span class="text">RED REGIONAL DE VIGILACIA GENÓMICA</span> <img src="{{asset('images/botones/red.png')}}" alt="btn1"></span></a></div>
+                <div><a href="#" class="{{(request()->is('secuenciacion')) ? 'active' : ''}} rounded"><span class="right_content"><span class="text">SECUENCIACIÓN GENÓMICA</span> <img src="{{asset('images/botones/genoma.png')}}" alt="btn1"></span></a></div>
+                <div><a href="#" class="{{(request()->is('distribucion')) ? 'active' : ''}} rounded"><span class="right_content"><span class="text">DISTRIBUCIÓN DE CASOS POR LAS VOC DELTA - OMICRON</span> <img src="{{asset('images/botones/distribucion.png')}}" alt="btn1"></span></a></div>
             </div>
-            {{-- LOAD SUBMIT --}}
-
-            @yield('content')
         </div>
-    </div>
+    </header>
+
+    <main class="content content-fixed {{(request()->is('login')) ? 'content-auth' : 'm-0'}}" >        
+        {{-- LOAD SUBMIT --}}
+        <div class="a_load">
+            <img src="{{ asset('ajax-loader-1.gif') }}" alt="Loading ...">
+            <h5>PROCESANDO, ESPERE ...</h5>
+        </div>
+        {{-- LOAD SUBMIT --}}
+
+        @yield('content')
+    </main>
 
     <footer class="footer">
         <div>
