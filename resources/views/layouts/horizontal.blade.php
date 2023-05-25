@@ -32,13 +32,62 @@
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert2.min.css?v=1.0') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {{-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300&family=Merriweather+Sans:wght@300&display=swap" rel="stylesheet"> --}}
+    <style>
+        /*body {
+            font-family: 'Archivo', sans-serif;
+            font-family: 'Merriweather Sans', sans-serif;
+        }*/
+        .logo_title {
+            font-size: 13px;
+            line-height: 14px;
+            margin-left: 10px;
+            font-weight: bold;
+        }
+        .image_content_lateral {
+            display: flex;
+            height: 370px;
+            background: rgb(0,0,0);
+            background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,50,96,1) 60%, rgba(0,50,96,1) 100%);
+        }
+        .content_lateral_text {
+            display: inline-block;
+            align-self: flex-end;
+            padding: 10px 20px;
+            color: #fff;
+            text-align: justify;
+            font-size: 12px;
+        }
+        .title_gradient {
+            color: #fff;
+            padding: 10px 20px;
+            background: rgb(0,50,96);
+            background: linear-gradient(90deg, rgba(0,50,96,0.9669117647058824) 0%, rgba(0,50,96,1) 50%, rgba(0,50,96,0.09576330532212884) 100%);
+        }
+        .cd_btn {
+            display: inline-grid;
+            background: #003260;
+            color: #fff;
+            border: 1px solid #003260;
+            padding: 5px 10px;
+            border-radius: 50%;
+        }
+        .cd_btn img {
+            width: 50px;
+            height: 50px;
+            padding: 10px;
+        }
+    </style>
+
     @yield('css')
 </head>
 
 <body>
     @include('layouts.menu_h')
 
-    <div class="content content-fixed content-auth">
+    <div class="content content-fixed {{(request()->is('login')) ? 'content-auth' : ''}}" >        
         <div class="container">
             {{-- LOAD SUBMIT --}}
             <div class="a_load">
@@ -85,6 +134,9 @@
     <script>
         $(function(){
             'use script'
+
+            const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]')
+            const tooltipList = [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl))
 
             window.darkMode = function(){
                 $('.btn-white').addClass('btn-dark').removeClass('btn-white');
