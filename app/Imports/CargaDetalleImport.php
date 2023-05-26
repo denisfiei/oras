@@ -4,6 +4,7 @@ namespace App\Imports;
 
 use App\Models\CargaDetalle;
 use App\Models\CargaGisaid;
+use App\Models\TipoMuestreo;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\OnEachRow;
@@ -16,12 +17,11 @@ class CargaDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
 {
     use Importable;
 
-    public $errors = [], $total = 0, $total_error = 0, $carga = [], $muestreo = 0, $fecha = '';
+    public $errors = [], $total = 0, $total_error = 0, $carga = [], $fecha = '';
 
-    public function __construct($carga, $muestreo)
+    public function __construct($carga)
     {
         $this->carga = $carga;
-        $this->muestreo = $muestreo;
     }
 
     public function startRow(): int
@@ -40,21 +40,34 @@ class CargaDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
         $row      = array_map('trim', $row->toArray());
         
         try {
+            $success = true;
+            $columna = [];
+
             $gisaid = CargaGisaid::where('virus_name', $row[0])->where('activo', 'S')->first();
-            if ($gisaid) {
+            if (!$gisaid) {
+                $success = false;
+                $columna[] = 'virus_name (No existe en el archivo GISAID)';
+            }
+            
+            $muestreo = TipoMuestreo::where('nombre', $row[15])->where('activo', 'S')->first();
+            if (!$muestreo) {
+                $success = false;
+                $columna[] = 'tipo_muestreo (No existe en los registros)';
+            }
+
+            if ($success) {
                 $fecha_muestra = null;
                 $fecha_sistema = null;
                 if ($row[6]) {
                     $fecha_muestra = $this->transformDateTime($row[6], 'Y-m-d');
                 }
-                if ($row[20]) {
-                    $fecha_sistema = $this->transformDateTime($row[20], 'Y-m-d H:i:s');
+                if ($row[21]) {
+                    $fecha_sistema = $this->transformDateTime($row[21], 'Y-m-d H:i:s');
                 }
     
                 $detalle = new CargaDetalle();
                 $detalle->carga_id = $this->carga->id;
                 $detalle->virus_id = $this->carga->virus_id;
-                $detalle->tipo_muestreo_id = $this->muestreo;
                 $detalle->pais_id = $this->carga->pais_id;
                 $detalle->codigo = $row[0];
                 $detalle->codigo_pais = $row[1];
@@ -71,18 +84,19 @@ class CargaDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
                 $detalle->dosis_3 = $row[12];
                 $detalle->dosis_4 = $row[13];
                 $detalle->dosis_5 = $row[14];
-                $detalle->hospitalizacion = $row[15];
-                $detalle->fallecido = $row[16];
-                $detalle->numero_placa = $row[17];
-                $detalle->placa = $row[18];
-                $detalle->corrida = $row[19];
+                $detalle->tipo_muestreo = $row[15];
+                $detalle->hospitalizacion = $row[16];
+                $detalle->fallecido = $row[17];
+                $detalle->numero_placa = $row[18];
+                $detalle->placa = $row[19];
+                $detalle->corrida = $row[20];
                 $detalle->fecha_sistema = $fecha_sistema;
-                $detalle->cobertura = $row[21];
-                $detalle->cobertura_porcentaje = $row[22];
-                $detalle->asintomatico = $row[23];
-                $detalle->sintomas = $row[24];
-                $detalle->comorbilidad = $row[25];
-                $detalle->comorbilidad_lista = $row[26];
+                $detalle->cobertura = $row[22];
+                $detalle->cobertura_porcentaje = $row[23];
+                $detalle->asintomatico = $row[24];
+                $detalle->sintomas = $row[25];
+                $detalle->comorbilidad = $row[26];
+                $detalle->comorbilidad_lista = $row[27];
                 $detalle->user_id = Auth::user()->id;
                 $detalle->save();
     
@@ -92,7 +106,7 @@ class CargaDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
     
                 $this->errors[] = [
                     'fila' => $rowIndex,
-                    'error' => 'No se encontro el Virus_name en el archivo GISAID'
+                    'error' => $columna
                 ];
             }
 

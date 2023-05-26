@@ -99,7 +99,7 @@
                     </div>
                     <div data-label="DATOS GENERALES" class="df-example demo-forms" v-if="visible">
                         <div class="row">
-                            <div class="form-group col-md-12 mb-3">
+                            {{-- <div class="form-group col-md-12 mb-3">
                                 <label class="form-label mb-0" for="muestreo">TIPO DE MUESTREO <span class="obligatorio">(*)</span></label>
                                 <div class="dropdown_select_content"> 
                                     <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.muestreo ? 'border-error' : '']">@{{carga.muestreo_text}}</button>
@@ -110,7 +110,7 @@
                                     </div>
                                 </div>
                                 <div class="input-error" v-if="errors.muestreo">@{{ errors.muestreo[0] }}</div>
-                            </div>
+                            </div> --}}
                             <div class="form-group col-md-12 mb-2">
                                 <label class="form-label mb-0" for="file">SUBIR ARCHIVO <span class="obligatorio">(*)</span></label>
                                 <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
@@ -193,8 +193,8 @@
 
                 <div>
                     <h4 class="text-center mb-4">@{{modal.title}}</h4>
-                    <div class="mb-4 text-primary">
-                        <i class="far fa-file-times"></i> @{{carga.archivo}}
+                    <div class="mb-4">
+                        <div>ARCHIVO: <i class="far fa-file-times"></i> @{{carga.archivo}}</div>
                     </div>
                     <div data-label="LISTA" class="df-example demo-forms">
                         <div class="table-responsive" style="max-height: calc(100vh - 230px);">
@@ -254,11 +254,12 @@
 
                 <div>
                     <h4 class="text-center mb-4">@{{modal.title}}</h4>
-                    <div class="mb-4 text-primary">
-                        <i class="far fa-file-times"></i> @{{carga.archivo}}
+                    <div class="mb-4">
+                        <button class="float-end btn btn-sm btn-danger" @click="ConfirmModal"><i class="fas fa-trash-alt"></i> Borrar Detalle</button>
+                        <div>ARCHIVO: <i class="far fa-file-times"></i> @{{carga.archivo}}</div>
                     </div>
                     <div data-label="LISTA" class="df-example demo-forms">
-                        <div class="table-responsive" style="max-height: calc(100vh - 285px);">
+                        <div class="table-responsive" style="max-height: calc(100vh - 230px);">
                             <table class="table table-hover table-sm">
                                 <thead class="thead-primary">
                                     <tr>
@@ -334,3 +335,29 @@
     </div>
 </div>
 <!-- MODAL -->
+
+<!-- MODAL CONFIRM-->
+<div class="modal fade" id="confirmModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true"  style="background-color: #000000eb;">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-body pd-20 pd-sm-40">
+                <a href="#" role="button" class="close pos-absolute t-15 r-15" @click="CloseModalConfirm">
+                    <span aria-hidden="true">&times;</span>
+                </a>
+
+                <div>
+                    <h4 class="text-center mb-4">BORRAR LOS REGISTRO DETALLE</h4>
+                    <p class="text-center mb-4">
+                        Se eliminaran todos los registros de este archivo <br>
+                        <strong class="text-primary"> @{{carga.archivo}}</strong> <br>
+                        ¿ Deseas continuar ?
+                    </p>
+
+                    <div class="text-center mt-2 pt-50">
+                        <button class="btn btn-danger" @click="DeleteDetalle('delete_detalle')" style="width: 300px;"><i class="far fa-trash-alt"></i> Eliminar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

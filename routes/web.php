@@ -134,3 +134,7 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::prefix('secuenciacion')->group(function () {
+    Route::get('/', [App\Http\Controllers\SecuenciaController::class, 'index'])->name('secuenciacion');
+    Route::post('/buscar', [App\Http\Controllers\SecuenciaController::class, 'buscar']);
+});

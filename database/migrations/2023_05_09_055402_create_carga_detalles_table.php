@@ -17,7 +17,6 @@ class CreateCargaDetallesTable extends Migration
             $table->id();
             $table->foreignId('carga_id')->references('id')->on('cargas')->onDelete('restrict');
             $table->foreignId('virus_id')->references('id')->on('virus')->onDelete('restrict');
-            $table->foreignId('tipo_muestreo_id')->references('id')->on('tipo_muestreos')->onDelete('restrict');
             //$table->foreignId('linaje_id')->references('id')->on('linajes')->onDelete('restrict');
             $table->foreignId('pais_id')->references('id')->on('paises')->onDelete('restrict');
             $table->string('codigo', 50);
@@ -35,6 +34,7 @@ class CreateCargaDetallesTable extends Migration
             $table->char('dosis_3', 2)->default('NO');
             $table->char('dosis_4', 2)->default('NO');
             $table->char('dosis_5', 2)->default('NO');
+            $table->string('tipo_muestreo', 100);
             $table->string('hospitalizacion', 5)->nullable();
             $table->char('fallecido', 2)->default('NO');
             $table->string('numero_placa', 20)->nullable();

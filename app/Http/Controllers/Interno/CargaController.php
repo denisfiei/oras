@@ -29,7 +29,6 @@ class CargaController extends Controller
     public function datos(Request $request)
     {
         $virus = Virus::where('activo', 'S')->get();
-        $muestreos = TipoMuestreo::where('activo', 'S')->get();
         $cargas = Carga::where('activo', 'S')->with(['pais', 'virus'])->orderBy('id', 'DESC')->paginate(10);
 
         return [
@@ -43,8 +42,7 @@ class CargaController extends Controller
                 'index' => ($cargas->currentPage()-1)*$cargas->perPage(),
             ],
             'cargas' => $cargas,
-            'virus' => $virus,
-            'muestreos' => $muestreos
+            'virus' => $virus
         ];
     }
     
@@ -192,8 +190,9 @@ class CargaController extends Controller
                 Storage::put('public/'.$log_file, $contenido);
 
                 $carga->log_gisaid = $log_file;
+                $carga->error_gisaid = $data['total_error'];
             }
-            $carga->cantidad_detalle = $data['total'];
+            $carga->cantidad_gisaid = $data['total'];
             $carga->save();
 
             DB::commit();
@@ -224,7 +223,7 @@ class CargaController extends Controller
         $request->replace($this->null_string($request->all()));
 
         $this->validate($request, [
-            'muestreo' => 'required|exists:tipo_muestreos,id',
+            //'muestreo' => 'required|exists:tipo_muestreos,id',
             'file' => ['required', 'mimes:xlsx'],
             'cantidad' => 'required|min:1',
         ]);
@@ -245,20 +244,21 @@ class CargaController extends Controller
             $carga->user_id = Auth::user()->id;
             $carga->save();
 
-            $import = new CargaDetalleImport($carga, $request->muestreo);
+            $import = new CargaDetalleImport($carga);
             Excel::import($import, request()->file('file'));
             $data = $import->getData();
 
             if (count($data['errors']) > 0) {
                 $errors = [];
                 foreach ($data['errors'] as $key => $value) {
-                    $errors[] = '#'.($key+1).', Fila: '.$value['fila'].', Error: '.$value['error'];
+                    $errors[] = '#'.($key+1).', Fila: '.$value['fila'].', '.implode(",", $value['error']);
                 }
                 $contenido = implode("\n", $errors);
                 $log_file = "cargas/detalle/logs/log_".time().".log";
                 Storage::put('public/'.$log_file, $contenido);
 
                 $carga->log_detalle = $log_file;
+                $carga->error_detalle = $data['total_error'];
             }
             $carga->cantidad_detalle = $data['total'];
             $carga->save();
