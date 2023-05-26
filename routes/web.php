@@ -138,3 +138,8 @@ Route::prefix('secuenciacion')->group(function () {
     Route::get('/', [App\Http\Controllers\SecuenciaController::class, 'index'])->name('secuenciacion');
     Route::post('/buscar', [App\Http\Controllers\SecuenciaController::class, 'buscar']);
 });
+
+Route::prefix('vigilancia')->group(function () {
+    Route::get('/', [App\Http\Controllers\VigilanciaController::class, 'index'])->name('vigilancia');
+    Route::post('/buscar', [App\Http\Controllers\VigilanciaController::class, 'buscar']);
+});

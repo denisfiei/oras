@@ -47,26 +47,27 @@
                         </div>
                         <div class="text_iframe">Resultado de Secuenciación</div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
-                        <div data-label="Example" class="df-example mt-5">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mt-4">
+                        <h5><span class="tema_interes">Temas de Interés</span></h5>
+                        <div data-label="Example" class="df-example">
                             <div id="carouselExample2" class="carousel slide" data-bs-ride="carousel">
                                 <div class="carousel-inner">
                                     <div class="carousel-item active">
                                         <img src="{{asset('images/lateral.jpg')}}" alt="img1" style="height: 200px; width: 100%;">
-                                        <h5>Programa Nacional de Laboratorios de Vigilancia Genómica</h5>
-                                        <p>Esta constituida por 22 Laboratorios, donde se incluye universidades, 
+                                        <h5 class="tittle_interes">Programa Nacional de Laboratorios de Vigilancia Genómica</h5>
+                                        <p class="text_interes">Esta constituida por 22 Laboratorios, donde se incluye universidades, 
                                             centros de investigación y laboratorios de Salud públicos y privados</p>
                                     </div>
                                     <div class="carousel-item">
                                         <img src="{{asset('images/lateral2.jpg')}}" alt="img2" style="height: 200px; width: 100%;">
-                                        <h5>Programa Nacional de Laboratorios de Vigilancia Genómica</h5>
-                                        <p>Esta constituida por 22 Laboratorios, donde se incluye universidades, 
+                                        <h5 class="tittle_interes">Programa Nacional de Laboratorios de Vigilancia Genómica</h5>
+                                        <p class="text_interes">Esta constituida por 22 Laboratorios, donde se incluye universidades, 
                                             centros de investigación y laboratorios de Salud públicos y privados</p>
                                     </div>
                                     <div class="carousel-item">
                                         <img src="{{asset('images/lateral3.jpg')}}" alt="img3" style="height: 200px; width: 100%;">
-                                        <h5>Programa Nacional de Laboratorios de Vigilancia Genómica</h5>
-                                        <p>Esta constituida por 22 Laboratorios, donde se incluye universidades, 
+                                        <h5 class="tittle_interes">Programa Nacional de Laboratorios de Vigilancia Genómica</h5>
+                                        <p class="text_interes">Esta constituida por 22 Laboratorios, donde se incluye universidades, 
                                             centros de investigación y laboratorios de Salud públicos y privados</p>
                                     </div>
                                 </div>

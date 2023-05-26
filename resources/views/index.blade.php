@@ -113,12 +113,17 @@
                     </div>
                 </div>
                 <div class="col-lg-5 col-sm-12 ps-5 mt-4">
-                    <img src="{{asset('images/botones/mapa2.png')}}" alt="mapa" width="503" height="400" usemap="#workmap" class="maparea">
+                    <img src="{{asset('images/botones/mapa2.png')}}" alt="mapa" width="503" height="400" usemap="#workmap" class="maparea" id="america">
                     <map name="workmap">
-                        <area target="_blank" alt="Perú" title="Perú" href="" coords="11,238,9,228,5,219,10,211,17,209,15,216,21,219,27,220,35,223,42,215,47,203,54,198,63,192,72,186,76,178,81,165,87,166,94,172,103,177,110,186,126,187,137,186,137,191,135,199,132,204,125,206,107,219,99,227,98,244,95,256,102,269,106,279,116,279,122,282,135,287,143,294,160,302,159,314,157,326,156,339,155,347,155,355,155,361,153,371,149,379,135,371,115,358,99,353,82,338,75,321,62,300,56,286,43,270,40,258,28,251,19,239" shape="poly">
-                        <area target="_blank" alt="Ecuador" title="Ecuador" href="" coords="27,209,22,201,27,193,20,183,14,189,13,177,20,170,21,156,27,150,34,146,39,150,50,152,59,158,66,158,71,160,71,167,70,174,61,180,54,185,49,188,40,196,38,204,32,211" shape="poly">
-                        <area target="_blank" alt="Colombia" title="Colombia" href="" coords="40,139,47,129,54,123,56,109,53,94,53,79,55,67,65,61,70,49,79,39,89,27,99,23,110,16,105,39,106,52,115,68,124,68,137,75,147,76,152,78,163,79,170,81,169,95,169,106,169,116,169,123,160,124,149,126,143,133,139,144,141,158,147,166,148,178,138,178,126,178,116,177,108,165,91,159,76,148,69,142,58,144" shape="poly">
-                        <area target="_blank" alt="Bolivia" title="Bolivia" href="" coords="166,372,166,358,165,331,169,315,169,300,167,290,182,285,188,280,198,277,203,281,202,293,207,302,219,309,235,315,246,317,257,322,263,336,263,346,268,355,279,355,286,356,288,366,291,374,293,384,284,387,264,388,249,392,241,408,235,420,220,420,211,420,200,420,185,431,174,409" shape="poly">
+                        <area target="_blank" alt="Perú" title="Perú" href="" class="home" onmouseover="mouseover('{{asset('images/botones/mapa_peru.png')}}')" onmouseleave="mouseleave({{asset('images/botones/mapa2.png')}})"
+                        coords="19,184,19,193,27,199,34,201,39,185,50,174,61,162,68,150,72,140,84,145,92,154,100,162,111,162,118,165,122,174,117,179,107,186,97,197,90,209,91,225,102,237,107,245,123,243,120,260,130,265,136,272,143,275,150,280,148,288,145,300,146,308,143,316,138,319,126,317,115,319,101,315,89,307,79,294,69,283,62,271,53,261,46,245,34,232,25,216,16,211,11,197,13,192,22,187,29,196,120" shape="poly">
+                        <area target="_blank" alt="Ecuador" title="Ecuador" href="" onmouseover="mouseover('{{asset('images/botones/mapa_ecuador.png')}}')" onmouseleave="mouseleave({{asset('images/botones/mapa2.png')}})"
+                        coords="29,188,38,191,42,178,51,168,67,163,77,145,70,131,56,131,44,125,32,121,22,131,19,143,15,151,15,167,24,163,24,172,23,179" shape="poly">
+                        <area target="_blank" alt="Colombia" title="Colombia" href="" onmouseover="mouseover('{{asset('images/botones/mapa_colombia.png')}}')" onmouseleave="mouseleave({{asset('images/botones/mapa2.png')}})"
+                        coords="38,116,57,129,69,129,82,136,97,148,109,149,112,159,125,157,139,156,147,164,149,143,142,124,144,106,168,106,175,95,170,67,150,56,116,47,106,26,110,0,82,5,63,29,50,48,53,72,53,94,50,107" shape="poly">
+                        <area target="_blank" alt="Bolivia" title="Bolivia" href="" onmouseover="mouseover('{{asset('images/botones/mapa_bolivia.png')}}')" onmouseleave="mouseleave({{asset('images/botones/mapa2.png')}})"
+                        coords="149,242,170,234,186,225,190,246,201,257,236,274,249,281,250,300,261,309,273,306,280,326,277,346,257,343,228,351,226,374,205,380,187,375,171,382,156,357,153,333,146,319,152,297,150,280,156,262" shape="poly">
+                    </map>
                     </map>
                 </div>
                 <div class="col-lg-3 col-sm-12 mt-4">
@@ -147,6 +152,7 @@
 @endsection
 
 @section('js')
+
     @if ($aviso)
         <script>
             $(window).on('load',function(){
@@ -154,7 +160,15 @@
                     $("#onload-popup").modal('show', {}, 500);
                 }, 1000);
             });
-            
         </script>
     @endif
+
+    <script>
+        function mouseover(image) {
+            document.getElementById("america").src = image;
+        }
+        function mouseleave(image) {
+            document.getElementById("imageid").src = image;
+        }
+    </script>
 @endsection

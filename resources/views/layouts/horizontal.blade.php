@@ -178,6 +178,26 @@
             margin-top: 5px;
             font-weight: bold;
         }
+        .tema_interes {
+            background: #003260;
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 6px;
+            outline: 3px solid #fff;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+        }
+        .tittle_interes {
+            margin-top: 10px;
+            color: #fff;
+            line-height: 18px;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+        }
+        .text_interes {
+            color: #fff;
+            text-align: justify;
+            line-height: 14px;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+        }
 
         @media(max-width: 1400px) and (min-width: 1250px) {
             .img_sec_pais {
