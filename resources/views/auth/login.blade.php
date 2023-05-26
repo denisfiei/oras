@@ -14,7 +14,7 @@
                     @endif
                 </div>
                 <div class="pos-absolute b-0 l-0 tx-12 tx-center">
-                    Plataforma de Vigilancia Genómica, creado por <a href="#" target="_blank">ORAS (oras.com)</a>
+                    Plataforma de Vigilancia Genómica, creado por <a href="https://www.orasconhu.org/" target="_blank">ORAS (https://www.orasconhu.org/)</a>
                 </div>
             </div>
             <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">
