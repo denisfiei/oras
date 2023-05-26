@@ -69,22 +69,185 @@
         }
         .title_gradient {
             color: #fff;
-            padding: 10px 20px;
+            padding: 5px 20px;
             background: rgb(0,50,96);
             background: linear-gradient(90deg, rgba(0,50,96,0.9669117647058824) 0%, rgba(0,50,96,1) 50%, rgba(0,50,96,0.09576330532212884) 100%);
+        }
+        .img_sec_pais {
+            width: 290px;
+        }
+        .img_lab_pais {
+            width: 70px;
+            border-radius: 50%;
+        }
+        .title_pais {
+            font-weight: bold;
+            font-size: 45px;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+        }
+        .title_pais .bg {
+            padding: 0 20px;
+            background-color: #fff;
+            color: #003260;
+        }
+        .subtitle_pais {
+            color: #fff;
+            font-size: 30px;
+            line-height: 30px;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+            padding-bottom: 20px;
+            float: right;
+            padding-right: 35px;
+        }
+        .subtitle_pais .md {
+            font-weight: bold;
+            font-size: 35px
+        }
+        .subtitle_pais .lg {
+            font-weight: bold;
+            font-size: 45px
         }
         .cd_btn {
             display: inline-grid;
             background: #003260;
             color: #fff;
             border: 1px solid #003260;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 50%;
+            margin: 0 2px;
         }
         .cd_btn img {
             width: 50px;
             height: 50px;
-            padding: 10px;
+            padding: 8px;
+        }
+        .cd_btn:hover {
+            outline: 4px solid #00b1cb;
+        }
+        .btn_socials {
+            background: #003260;
+            border-radius: 50%;
+            margin: 0 2px;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            text-align: center;
+            display: flex;
+        }
+        .btn_socials i {
+            margin: auto;
+        }
+        .btn_socials:hover {
+            outline: 2px solid #00b1cb;
+            color: #00b1cb
+        }
+        .btn_sec_pais {
+            background: rgb(0,50,96);
+            background: linear-gradient(90deg, rgba(0,50,96,0) 0%, rgba(0,50,96,1) 15%, rgba(0,50,96,0) 100%);
+            padding: 10px 16px 10px 0px;
+            font-size: 18px;
+            color: #fff;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+            margin-right: 35px;
+        }
+        .btn_sec_pais:hover {
+            border: 2px solid #fff;
+            border-radius: 20px;
+            color: #fff;
+        }
+        .secuencia_iframe {
+            height: 245px;
+            padding: 8px;
+            background-color: #fff;
+        }
+        .content_iframe {
+            width: 100%;
+            position: relative;
+        }
+        .content_iframe iframe {
+            width: 100%;
+            min-height: 230px;
+            position: absolute;
+            display: block;
+        }
+        .text_iframe {
+            font-size: 18px;
+            color: #fff;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+            text-align: center;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+
+        @media(max-width: 1400px) and (min-width: 1250px) {
+            .img_sec_pais {
+                width: 250px;
+            }
+            .img_lab_pais {
+                width: 50px;
+                border-radius: 50%;
+            }
+            .title_pais {
+                font-weight: bold;
+                font-size: 40px;
+                text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+            }
+            .subtitle_pais {
+                color: #fff;
+                font-size: 25px;
+                line-height: 25px;
+                text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+                padding-bottom: 15px;
+                float: right;
+                padding-right: 30px;
+            }
+            .subtitle_pais .md {
+                font-weight: bold;
+                font-size: 30px
+            }
+            .subtitle_pais .lg {
+                font-weight: bold;
+                font-size: 40px
+            }
+            .btn_sec_pais {
+                font-size: 15px;
+                margin-right: 30px;
+            }
+        }
+        @media(max-width: 1249px) and (min-width: 1050px) {
+            .img_sec_pais {
+                width: 230px;
+            }
+            .img_lab_pais {
+                width: 35px;
+                border-radius: 50%;
+            }
+            .title_pais {
+                font-weight: bold;
+                font-size: 30px;
+                text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+            }
+            .subtitle_pais {
+                color: #fff;
+                font-size: 18px;
+                line-height: 18px;
+                text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+                padding-bottom: 15px;
+                float: right;
+                padding-right: 20px;
+            }
+            .subtitle_pais .md {
+                font-weight: bold;
+                font-size: 20px
+            }
+            .subtitle_pais .lg {
+                font-weight: bold;
+                font-size: 30px
+            }
+            .btn_sec_pais {
+                font-size: 13px;
+                margin-right: 20px;
+            }
         }
     </style>
 
@@ -93,31 +256,16 @@
 
 <body>
     @include('layouts.menu_h')
-    
-    <header class="page-header">
-        <div class="banner_top">
-            <img src="{{asset('images/banner_1.webp')}}" alt="banner" style="width: 100%; max-height: 260px;">
-            <div class="buttons_right">
-                <div><a href="#" class="{{(request()->is('/')) ? 'active' : ''}} rounded"><span class="right_content"><span class="text">VIGILANCIA GENÓMICA</span> <img src="{{asset('images/botones/vigilancia.png')}}" alt="btn1"></span></a></div>
-                <div><a href="#" class="{{(request()->is('red')) ? 'active' : ''}} rounded"><span class="right_content"><span class="text">RED REGIONAL DE VIGILACIA GENÓMICA</span> <img src="{{asset('images/botones/red.png')}}" alt="btn1"></span></a></div>
-                <div><a href="#" class="{{(request()->is('secuenciacion')) ? 'active' : ''}} rounded"><span class="right_content"><span class="text">SECUENCIACIÓN GENÓMICA</span> <img src="{{asset('images/botones/genoma.png')}}" alt="btn1"></span></a></div>
-                <div><a href="#" class="{{(request()->is('distribucion')) ? 'active' : ''}} rounded"><span class="right_content"><span class="text">DISTRIBUCIÓN DE CASOS POR LAS VOC DELTA - OMICRON</span> <img src="{{asset('images/botones/distribucion.png')}}" alt="btn1"></span></a></div>
-            </div>
-        </div>
-    </header>
+    {{-- LOAD SUBMIT --}}
+    <div class="a_load">
+        <img src="{{ asset('ajax-loader-1.gif') }}" alt="Loading ...">
+        <h5>PROCESANDO, ESPERE ...</h5>
+    </div>
+    {{-- LOAD SUBMIT --}}
 
-    <main class="content content-fixed {{(request()->is('login')) ? 'content-auth' : 'm-0'}}" >        
-        {{-- LOAD SUBMIT --}}
-        <div class="a_load">
-            <img src="{{ asset('ajax-loader-1.gif') }}" alt="Loading ...">
-            <h5>PROCESANDO, ESPERE ...</h5>
-        </div>
-        {{-- LOAD SUBMIT --}}
+    @yield('content')
 
-        @yield('content')
-    </main>
-
-    <footer class="footer">
+    {{-- <footer class="footer">
         <div>
             <span>&copy; 2023 DashForge v1.0.0. </span>
             <span>Created by <a href="http://themepixels.me">ThemePixels</a></span>
@@ -129,7 +277,7 @@
                 <a href="https://discordapp.com/invite/RYqkVuw" class="nav-link">Get Help</a>
             </nav>
         </div>
-    </footer>
+    </footer> --}}
 
     <script src="{{ asset('theme/lib/jquery/jquery.min.js') }}"></script>
     <script src="{{ asset('theme/lib/bootstrap/js/bootstrap.bundle.min.js') }}"></script>

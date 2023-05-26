@@ -32,13 +32,43 @@
 .banner_top {
     position: relative;
 }
+.banner_background {
+    background-repeat: no-repeat, repeat;
+    background-size: cover;
+    width: 100%;
+    height: calc(100vh * 0.4 - 30px);
+    color: #fff;
+}
+.banner_slide_content {
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -moz-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
+    z-index: 1;
+}
+h2 {
+    font-size: 45px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 25px;
+}
+h5 {
+    font-size: 19px;
+    font-weight: bold;
+    color: #fff;
+}
 .last_banner {
-    padding-top: 270px;
+    width: 100%;
+    height: calc(100vh * 0.6 - 30px);
 }
 .buttons_right {
     position: absolute;
     right: 0;
     top: 0;
+    z-index: 2;
 }
 .buttons_right div {
     height: 44px;

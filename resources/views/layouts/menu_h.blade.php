@@ -32,10 +32,14 @@
             <li class="nav-item"><a href="theme/components/" class="nav-link"><i data-feather="box"></i> Components</a></li>
             <li class="nav-item"><a href="theme/collections/" class="nav-link"><i data-feather="archive"></i> Collections</a></li> --}}
 
+            <a href="theme/collections/" class="btn_socials"><i class="fab fa-facebook-f"></i> </a>
+            <a href="theme/collections/" class="btn_socials"><i class="fab fa-twitter"></i> </a>
+            <a href="theme/collections/" class="btn_socials"><i class="fab fa-instagram"></i> </a>
+            <a href="theme/collections/" class="btn_socials"><i class="fab fa-youtube"></i> </a>
             @if (Auth::check())
-                <a href="{{route('home')}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hola {{Auth::user()->nombres}}, haga click para ir al Sistema"><img src="{{asset('images/auth.png')}}" alt="auth" class="img_icon"></a>
+                <a href="{{route('home')}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hola {{Auth::user()->nombres}}, haga click para ir al Sistema" class="btn_auth ms-1"><img src="{{asset('images/auth.png')}}" alt="auth" class="img_icon"></a>
             @else
-                <a href="{{route('login')}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Iniciar Sesión" class="{{(request()->is('login')) ? 'hide' : ''}}"><img src="{{asset('images/auth.png')}}" alt="auth" class="img_icon"></a>
+                <a href="{{route('login')}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Iniciar Sesión" class="{{(request()->is('login')) ? 'hide' : 'btn_auth ms-1'}}"><img src="{{asset('images/auth.png')}}" alt="auth" class="img_icon"></a>
             @endif
         </ul>
     </div>
