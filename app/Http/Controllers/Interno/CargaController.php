@@ -29,7 +29,7 @@ class CargaController extends Controller
     public function datos(Request $request)
     {
         $virus = Virus::where('activo', 'S')->get();
-        $cargas = Carga::where('activo', 'S')->with(['pais', 'virus'])->orderBy('id', 'DESC')->paginate(10);
+        $cargas = Carga::where('activo', '<>', 'N')->with(['pais', 'virus'])->orderBy('id', 'DESC')->paginate(10);
 
         return [
             'pagination' => [
@@ -48,7 +48,7 @@ class CargaController extends Controller
     
     public function buscar(Request $request)
     {
-        $cargas = Carga::where('activo', 'S');
+        $cargas = Carga::where('activo', '<>', 'N');
 
         if ($request->search) {
             $search = $request->search;
@@ -75,30 +75,23 @@ class CargaController extends Controller
         ];
     }
 
-    public function delete(Request $request)
+    public function publicado(Request $request)
     {
         try {
 
             DB::beginTransaction();
 
             $carga = Carga::findOrFail($request->id);
-            $carga->activo = 'N';
+            $carga->activo = $request->estado;
+            $carga->user_id = Auth::user()->id;
             $carga->save();
-
-            if ($carga->tipo == 1) {
-                CargaGisaid::where('carga_id', $request->id)->delete();
-            }
-            
-            if ($carga->tipo == 2) {
-                CargaDetalle::where('carga_id', $request->id)->delete();
-            }
 
             DB::commit();
 
             return [
                 'action'    =>  'success',
                 'title'     =>  'Bien!!',
-                'message'   =>  'El Carga se eliminó con éxito.',
+                'message'   =>  'El Carga se actualizó con éxito.',
             ];
 
 
@@ -108,7 +101,115 @@ class CargaController extends Controller
             return [
                 'action'    =>  'error',
                 'title'     =>  'Incorrecto!!',
-                'message'   =>  'Ocurrio un error al Eliminar el Carga, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
+                'message'   =>  'Ocurrio un error al actualizar la Carga, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
+                'error'     =>  'Error: '.$e->getMessage()
+            ];
+        }
+    }
+
+    public function delete(Request $request)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $carga = Carga::findOrFail($request->id);
+            $file_gisaid = $carga->file_gisaid;
+            $log_gisaid = $carga->log_gisaid;
+            $file_detalle = $carga->file_detalle;
+            $log_detalle = $carga->log_detalle;
+
+            $carga->archivo_gisaid = null;
+            $carga->file_gisaid = null;
+            $carga->cantidad_gisaid = 0;
+            $carga->log_gisaid = null;
+            $carga->error_gisaid = 0;
+            $carga->archivo_detalle = null;
+            $carga->file_detalle = null;
+            $carga->cantidad_detalle = 0;
+            $carga->log_detalle = null;
+            $carga->error_detalle = 0;
+            $carga->activo = 'N';
+            $carga->user_id = Auth::user()->id;
+            $carga->save();
+
+            CargaGisaid::where('carga_id', $request->id)->delete();
+            Storage::delete('public/'.$file_gisaid);
+            if ($log_gisaid) {
+                Storage::delete('public/'.$log_gisaid);
+            }
+
+            if ($file_detalle) {
+                CargaDetalle::where('carga_id', $request->id)->delete();
+                Storage::delete('public/'.$file_detalle);
+
+                if ($log_detalle) {
+                    Storage::delete('public/'.$log_detalle);
+                }
+            }
+
+            DB::commit();
+
+            return [
+                'action'    =>  'success',
+                'title'     =>  'Bien!!',
+                'message'   =>  'La Carga se eliminó con éxito.',
+            ];
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return [
+                'action'    =>  'error',
+                'title'     =>  'Incorrecto!!',
+                'message'   =>  'Ocurrio un error al Eliminar la Carga, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
+                'error'     =>  'Error: '.$e->getMessage()
+            ];
+        }
+    }
+    
+    public function delete_detalle(Request $request)
+    {
+        try {
+
+            DB::beginTransaction();
+
+            $carga = Carga::findOrFail($request->id);
+            $file_detalle = $carga->file_detalle;
+            $log_detalle = $carga->log_detalle;
+            
+            $carga->archivo_detalle = null;
+            $carga->file_detalle = null;
+            $carga->cantidad_detalle = 0;
+            $carga->log_detalle = null;
+            $carga->error_detalle = 0;
+            $carga->user_id = Auth::user()->id;
+            $carga->save();
+
+            CargaDetalle::where('carga_id', $request->id)->delete();
+
+            Storage::delete('public/'.$file_detalle);
+            if ($log_detalle) {
+                Storage::delete('public/'.$log_detalle);
+            }
+
+            DB::commit();
+
+            return [
+                'action'    =>  'success',
+                'title'     =>  'Bien!!',
+                'message'   =>  'El Detalle se eliminó con éxito.',
+            ];
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return [
+                'action'    =>  'error',
+                'title'     =>  'Incorrecto!!',
+                'message'   =>  'Ocurrio un error al Eliminar el Detalle, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
                 'error'     =>  'Error: '.$e->getMessage()
             ];
         }

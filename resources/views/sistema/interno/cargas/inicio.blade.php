@@ -37,16 +37,16 @@
                     </div>
                 </div>
                 <div class="table-responsive">
-                    <table class="table table-bordered table-hover mg-b-0">
+                    <table class="table table-bordered table-hover mg-b-0" id="my_tabla">
                         <thead class="thead-light">
                             <tr>
                                 <th class="text-center" rowspan="2" width="5%">#</th>
-                                <th class="text-start" rowspan="2" width="13%">País</th>
-                                <th class="text-center" rowspan="2" width="13%">Fecha</th>
+                                <th class="text-start" rowspan="2" width="15%">País / Fecha</th>
                                 <th class="text-center" rowspan="2" width="13%">Virus</th>
                                 <th class="text-center p_0" colspan="3" width="25%">Gisaid</th>
                                 <th class="text-center p_0" colspan="3" width="25%">Detalle</th>
-                                <th class="text-center" rowspan="2" width="6%"><ion-icon name="ellipsis-vertical"></ion-icon></th>
+                                <th class="text-center" rowspan="2" width="10%">Publicado</th>
+                                <th class="text-center" rowspan="2" width="7%"><ion-icon name="ellipsis-vertical"></ion-icon></th>
                             </tr>
                             <tr>
                                 <th class="text-center p_0" width="12%">Archivo</th>
@@ -63,12 +63,14 @@
                             </tr>
                             <tr class="my_vue" v-for="(data, index) in listRequest" style="display:none;">
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
-                                <td class="text-right"><img :src="'storage/paises/'+data.pais.bandera" v-if="data.pais.bandera" class="codigo_tel"> @{{data.pais.nombre}}</td>
-                                <td class="text-center"><i class="far fa-calendar-alt"></i> @{{FechaHora(data.created_at)}}</td>
+                                <td class="text-right">
+                                    <div><img :src="'storage/paises/'+data.pais.bandera" v-if="data.pais.bandera" class="codigo_tel"> @{{data.pais.nombre}}</div>
+                                    <div><small><i class="far fa-calendar-alt"></i> @{{FechaHora(data.created_at)}}</small></div>
+                                </td>
                                 <td class="text-center">@{{data.virus.nombre}}</td>
 
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="text-success button_link text_bold"  @click="Modal('modal-fullscreen', 'rows_gisaid', data.id, data)">@{{data.archivo_gisaid}}</a>
+                                    <a href="javascript:void(0)" class="text-success button_link text_bold" title="Ver Datos" @click="Modal('modal-fullscreen', 'rows_gisaid', data.id, data)">@{{data.archivo_gisaid}}</a>
                                 </td>
                                 <td class="text-center text-success text_bold">@{{data.cantidad_gisaid}}</td>
                                 <td class="text-center">
@@ -76,14 +78,19 @@
                                 </td>
 
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="button_link text-info text_bold"  @click="Modal('modal-fullscreen', 'rows_detalle', data.id, data)" v-if="data.archivo_detalle">@{{data.archivo_detalle}}</a>
+                                    <a href="javascript:void(0)" class="button_link text-info text_bold"  title="Ver Datos" @click="Modal('modal-fullscreen', 'rows_detalle', data.id, data)" v-if="data.archivo_detalle">@{{data.archivo_detalle}}</a>
                                     <a href="javascript:void(0)" class="btn_opt text-info" data-bs-toggle="tooltip" title="Subir Detalle"  @click="Modal('modal-md', 'carga', data.id, data)" v-else><i class="fas fa-file-upload"></i></a>
                                 </td>
                                 <td class="text-center text-info text_bold">@{{data.cantidad_detalle}}</td>
                                 <td class="text-center">
                                     <a :href="'storage/'+data.log_detalle" target="_blank" title="Ver Archivo Log"><span class="badge text-bg-danger" v-if="data.error_detalle > 0"><i class="fas fa-exclamation-triangle"></i> @{{data.error_detalle}}</span></a>
                                 </td>
-
+                                
+                                <td class="text-center">
+                                    <div class="form-switch">
+                                        <input class="form-check-input" type="checkbox" role="switch" id="publicado" v-model="data.activo" true-value="P" false-value="S" style="width: 36px; height: 18px;" @change="Publicado(data.id, data.activo)">
+                                    </div>
+                                </td>
                                 <td class="text-center">
                                     {{-- <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a> --}}
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Eliminar" @click="Modal('modal-md', 'delete', data.id, data)"><i class="text-danger far fa-trash-alt"></i></a>
@@ -122,5 +129,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/cargas.js?v=1.0.1')}}"></script>
+    <script src="{{asset('views/interno/cargas.js?v=1.0.2')}}"></script>
 @endsection

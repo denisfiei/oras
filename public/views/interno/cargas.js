@@ -214,16 +214,13 @@ new Vue({
                     this.carga.archivo = seleccion.archivo_gisaid;
                     break;
 
-                case 'edit':
-                    this.modal.title = 'EDITAR CARGA';
-                    this.carga.nombre = seleccion.nombre;
-                    this.carga.codigo = seleccion.codigo;
-                    break;
-
                 case 'delete':
                     this.modal.title = 'ELIMINAR CARGA';
-                    this.carga.nombre = seleccion.archivo;
-                    this.carga.fecha = seleccion.created_at;
+                    this.carga.archivo = seleccion.archivo_gisaid;
+                    if (seleccion.archivo_detalle) {
+                        this.carga.archivo = seleccion.archivo_gisaid+' y '+seleccion.archivo_detalle;
+                    }
+                    this.carga.fecha = this.FechaHora(seleccion.created_at);
                     break;
                 
                 case 'rows_gisaid':
@@ -239,8 +236,8 @@ new Vue({
                     break;
                     
                 default:
-                    this.carga.nombre = seleccion.archivo;
-                    this.carga.fecha = seleccion.created_at;
+                    this.carga.archivo = seleccion.archivo_gisaid;
+                    this.carga.fecha = this.FechaHora(seleccion.created_at);
                     break;
             }
         },
@@ -314,7 +311,65 @@ new Vue({
             });
         },
         DeleteDetalle(form) {
+            this.Load(form, 'on', 'Eliminando Registro ...');
 
+            this.errors = [];
+            axios.post('cargas/delete_detalle', {
+                id: this.id,
+            }).then(response=> {
+                this.Load(form, 'off', null);
+
+                let action = response.data.action;
+                let title = response.data.title;
+                let message = response.data.message;
+                this.Alert2(action, title, message);
+
+                if (action == 'success') {
+                    $('#formularioModal').modal('hide');
+                    this.CloseModalConfirm();
+                    this.CloseModal();
+                    this.Buscar(this.page);
+                }
+            }).catch(error => {
+                console.log(error)
+                this.Load(form, 'off', null);
+
+                let action = 'error';
+                let title = 'Ops error !!';
+                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+
+                this.Alert2(action, title, message);
+            });
+        },
+        Publicado(id, activo) {
+            this.Load('my_table', 'on', 'Eliminando Registro ...');
+            console.log(activo);
+
+            axios.post('cargas/publicado', {
+                id: id,
+                estado: activo
+            }).then(response=> {
+                this.Load('my_table', 'off', null);
+
+                let action = response.data.action;
+                let title = response.data.title;
+                let message = response.data.message;
+                this.Alert2(action, title, message);
+
+                if (action == 'success') {
+                    $('#formularioModal').modal('hide');
+                    this.Buscar(this.page);
+                }
+            }).catch(error => {
+                console.log(error)
+                this.Load('my_table', 'off', null);
+
+                let action = 'error';
+                let title = 'Ops error !!';
+                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+
+                this.Alert2(action, title, message);
+            });
         },
         BuscarGisaid(form) {
             this.Load(form, 'on', 'Cargando datos ...');

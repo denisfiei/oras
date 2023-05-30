@@ -1,7 +1,8 @@
 @extends('layouts.horizontal')
 
 @section('content')
-@include('layouts.header_v', ['title_include' => 'VIGILANCIA GENÓMICA', 'subtitle_include' => ''])
+
+@include('layouts.header_v', ['title_include' => 'VIGILANCIA GENÓMICA', 'subtitle_include' => '', 'image' => 'images/banner_2.webp'])
 
 <main class="m-0" >
     <div class="last_banner" style="background-image: url({{asset('images/colombia-fondo.jpg')}});background-repeat: no-repeat, repeat;

@@ -113,15 +113,15 @@
                     </div>
                 </div>
                 <div class="col-lg-5 col-sm-12 ps-5 mt-4">
-                    <img src="{{asset('images/botones/mapa2.png')}}" alt="mapa" width="503" height="400" usemap="#workmap" class="maparea" id="america">
+                    <img src="{{asset('images/botones/mapa3.png')}}" alt="mapa" width="503" height="400" usemap="#workmap" class="maparea" id="america">
                     <map name="workmap">
-                        <area target="_blank" alt="Perú" title="Perú" href="" class="home" onmouseover="mouseover('{{asset('images/botones/mapa_peru.png')}}')" onmouseleave="mouseleave({{asset('images/botones/mapa2.png')}})"
+                        <area target="_blank" alt="Perú" title="Perú" href="" class="home" onmouseover="mouseover('{{asset('images/botones/mapa_peru_2.png')}}')" onmouseleave="mouseleave('{{asset('images/botones/mapa3.png')}}')"
                         coords="19,184,19,193,27,199,34,201,39,185,50,174,61,162,68,150,72,140,84,145,92,154,100,162,111,162,118,165,122,174,117,179,107,186,97,197,90,209,91,225,102,237,107,245,123,243,120,260,130,265,136,272,143,275,150,280,148,288,145,300,146,308,143,316,138,319,126,317,115,319,101,315,89,307,79,294,69,283,62,271,53,261,46,245,34,232,25,216,16,211,11,197,13,192,22,187,29,196,120" shape="poly">
-                        <area target="_blank" alt="Ecuador" title="Ecuador" href="" onmouseover="mouseover('{{asset('images/botones/mapa_ecuador.png')}}')" onmouseleave="mouseleave({{asset('images/botones/mapa2.png')}})"
+                        <area target="_blank" alt="Ecuador" title="Ecuador" href="" onmouseover="mouseover('{{asset('images/botones/mapa_ecuador_2.png')}}')" onmouseleave="mouseleave('{{asset('images/botones/mapa3.png')}}')"
                         coords="29,188,38,191,42,178,51,168,67,163,77,145,70,131,56,131,44,125,32,121,22,131,19,143,15,151,15,167,24,163,24,172,23,179" shape="poly">
-                        <area target="_blank" alt="Colombia" title="Colombia" href="" onmouseover="mouseover('{{asset('images/botones/mapa_colombia.png')}}')" onmouseleave="mouseleave({{asset('images/botones/mapa2.png')}})"
+                        <area target="_blank" alt="Colombia" title="Colombia" href="" onmouseover="mouseover('{{asset('images/botones/mapa_colombia_2.png')}}')" onmouseleave="mouseleave('{{asset('images/botones/mapa3.png')}}')"
                         coords="38,116,57,129,69,129,82,136,97,148,109,149,112,159,125,157,139,156,147,164,149,143,142,124,144,106,168,106,175,95,170,67,150,56,116,47,106,26,110,0,82,5,63,29,50,48,53,72,53,94,50,107" shape="poly">
-                        <area target="_blank" alt="Bolivia" title="Bolivia" href="" onmouseover="mouseover('{{asset('images/botones/mapa_bolivia.png')}}')" onmouseleave="mouseleave({{asset('images/botones/mapa2.png')}})"
+                        <area target="_blank" alt="Bolivia" title="Bolivia" href="" onmouseover="mouseover('{{asset('images/botones/mapa_bolivia_2.png')}}')" onmouseleave="mouseleave('{{asset('images/botones/mapa3.png')}}')"
                         coords="149,242,170,234,186,225,190,246,201,257,236,274,249,281,250,300,261,309,273,306,280,326,277,346,257,343,228,351,226,374,205,380,187,375,171,382,156,357,153,333,146,319,152,297,150,280,156,262" shape="poly">
                     </map>
                     </map>
@@ -131,6 +131,12 @@
                         <h4 class="title_gradient">Centro de Información y Documentación Científica</h4>
                         <div class="mt-4 text-center">
                             <div class="d-grid gap-4 d-md-block mb-4">
+                                <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Título 1"><span class="cd_text">DT</span></a>
+                                <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Título 2"><span class="cd_text">PU</span></a>
+                                <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Título 3"><span class="cd_text">WF</span></a>
+                                <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Título 4"><span class="cd_text">SP</span></a>
+                            </div>
+                            {{-- <div class="d-grid gap-4 d-md-block mb-4">
                                 <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Título 1"><img src="{{asset('images/botones/cd_btn_1.png')}}" alt=""></a>
                                 <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Título 2"><img src="{{asset('images/botones/cd_btn_2.png')}}" alt=""></a>
                                 <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="top" title="Título 3"><img src="{{asset('images/botones/cd_btn_3.png')}}" alt=""></a>
@@ -141,7 +147,7 @@
                                 <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Título 6"><img src="{{asset('images/botones/cd_btn_6.png')}}" alt=""></a>
                                 <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Título 7"><img src="{{asset('images/botones/cd_btn_7.png')}}" alt=""></a>
                                 <a href="#" class="cd_btn" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Título 8"><img src="{{asset('images/botones/cd_btn_8.png')}}" alt=""></a>
-                            </div>
+                            </div> --}}
                         </div>
                     </div>
                 </div>
@@ -168,7 +174,7 @@
             document.getElementById("america").src = image;
         }
         function mouseleave(image) {
-            document.getElementById("imageid").src = image;
+            document.getElementById("america").src = image;
         }
     </script>
 @endsection

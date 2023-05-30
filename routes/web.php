@@ -84,7 +84,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\CargaController::class, 'index'])->name('cargas');
         Route::post('/datos', [App\Http\Controllers\Interno\CargaController::class, 'datos']);
         Route::post('/buscar', [App\Http\Controllers\Interno\CargaController::class, 'buscar']);
+        Route::post('/publicado', [App\Http\Controllers\Interno\CargaController::class, 'publicado']);
         Route::post('/delete', [App\Http\Controllers\Interno\CargaController::class, 'delete']);
+        Route::post('/delete_detalle', [App\Http\Controllers\Interno\CargaController::class, 'delete_detalle']);
         Route::post('/datos_gisaid', [App\Http\Controllers\Interno\CargaController::class, 'datos_gisaid']);
         Route::post('/datos_detalle', [App\Http\Controllers\Interno\CargaController::class, 'datos_detalle']);
         
@@ -134,12 +136,27 @@ Route::middleware('auth')->group(function () {
     });
 });
 
+Route::prefix('vigilancia')->group(function () {
+    Route::get('/', [App\Http\Controllers\VigilanciaController::class, 'index'])->name('vigilancia');
+    Route::post('/buscar', [App\Http\Controllers\VigilanciaController::class, 'buscar']);
+});
+
+Route::prefix('red')->group(function () {
+    Route::get('/', [App\Http\Controllers\SecuenciaController::class, 'index'])->name('red');
+    Route::post('/buscar', [App\Http\Controllers\SecuenciaController::class, 'buscar']);
+});
+
 Route::prefix('secuenciacion')->group(function () {
     Route::get('/', [App\Http\Controllers\SecuenciaController::class, 'index'])->name('secuenciacion');
     Route::post('/buscar', [App\Http\Controllers\SecuenciaController::class, 'buscar']);
 });
 
-Route::prefix('vigilancia')->group(function () {
-    Route::get('/', [App\Http\Controllers\VigilanciaController::class, 'index'])->name('vigilancia');
+Route::prefix('distribucion')->group(function () {
+    Route::get('/', [App\Http\Controllers\VigilanciaController::class, 'index'])->name('distribucion');
     Route::post('/buscar', [App\Http\Controllers\VigilanciaController::class, 'buscar']);
+});
+
+Route::prefix('centro_informacion')->group(function () {
+    Route::get('/', [App\Http\Controllers\CentroInformacionController::class, 'index'])->name('distribucion');
+    Route::post('/buscar', [App\Http\Controllers\CentroInformacionController::class, 'buscar']);
 });

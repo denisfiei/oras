@@ -173,7 +173,7 @@
                     <p class="text-center mb-4">
                         ¿ Realmente desea eliminar la carga de datos del archivo: <br>
                         <strong class="text-primary"> @{{carga.archivo}}</strong> <br>
-                        creada el <strong>@{{FechaHora(carga.fecha)}}</strong> ?
+                        creada el <strong>@{{carga.fecha}}</strong> ?
                     </p>
 
                     <div class="text-center mt-2 pt-50">
