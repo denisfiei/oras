@@ -47,6 +47,18 @@
             overflow: hidden;
             z-index: 1;
         }
+        .bg_1 {
+            background-color: #003260;
+            color: #fff;
+        }
+        .bg_2 {
+            background-color: #00b1cb;
+            color: #fff;
+        }
+        .bg_3 {
+            background-color: #929292;
+            color: #003260;
+        }
         .logo_title {
             font-size: 13px;
             line-height: 14px;
@@ -55,7 +67,7 @@
         }
         .image_content_lateral {
             display: flex;
-            height: 370px;
+            height: 390px;
             background: rgb(0,0,0);
             background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,50,96,1) 60%, rgba(0,50,96,1) 100%);
         }
@@ -66,12 +78,41 @@
             color: #fff;
             text-align: justify;
             font-size: 12px;
+            height: 200px;
+            overflow: auto;
+            margin-bottom: 10px;
         }
-        .title_gradient {
+        .total_casos {
+            background-color: #000000db;
+            position: absolute;
+            top: 30%;
+            right: 25%;
+            z-index: 3;
+            color: #fff;
+            text-align: center;
+            padding: 5px 10px;
+        }
+        .title_gradient_1 {
             color: #fff;
             padding: 5px 20px;
-            background: rgb(0,50,96);
-            background: linear-gradient(90deg, rgba(0,50,96,0.9669117647058824) 0%, rgba(0,50,96,1) 50%, rgba(0,50,96,0.09576330532212884) 100%);
+            text-transform: uppercase;
+            text-align: center;
+            background: #00b1cb;
+            text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+            font-weight: bold;
+            /*background: linear-gradient(90deg, rgba(0,50,96,0.9669117647058824) 0%, rgba(0,50,96,1) 50%, rgba(0,50,96,0.09576330532212884) 100%);*/
+        }
+        .title_gradient_2 {
+            color: #fff;
+            padding: 5px 20px;
+            text-align: center;
+            background: #003260;
+            /*background: linear-gradient(90deg, rgba(0,50,96,0.9669117647058824) 0%, rgba(0,50,96,1) 50%, rgba(0,50,96,0.09576330532212884) 100%);*/
+        }
+        .table_gradient {
+            border-collapse: separate;
+            font-size: 15px;
+            font-weight: 700;
         }
         .img_sec_pais {
             width: 290px;
@@ -107,23 +148,37 @@
             font-weight: bold;
             font-size: 45px
         }
+        .centro_informacion{
+            text-align: left;
+            list-style: none;
+        }
         .cd_btn {
-            display: inline-grid;
-            background: #003260;
-            color: #fff;
-            border: 1px solid #003260;
-            padding: 4px 8px;
-            border-radius: 50%;
             margin: 0 2px;
+            color: #003260;
+            padding: 4px 8px;
+            font-size: 23px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.39);
+        }
+        .cd_btn .cd_btn_img, .cd_btn .cd_btn_text {
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .cd_btn .cd_btn_img {
+            background: #003260;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            text-align: center;
         }
         .cd_btn img {
-            width: 50px;
-            height: 50px;
-            padding: 8px;
+            max-width: 28px;
+            max-height: 28px;
+            vertical-align: text-top;
         }
-        .cd_btn:hover {
-            outline: 4px solid #00b1cb;
-            color: #fff;
+        .cd_btn .cd_btn_text:hover {
+            color: #00b1cb;
+            text-decoration: underline;
         }
         .cd_text {
             font-size: 35px;
