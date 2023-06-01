@@ -22,7 +22,10 @@ class CreateCentrosTable extends Migration
         });
 
         DB::table('virus')->insert([
-            ['nombre'=>'CENTRO DE INFORMACIÓN DEMO']
+            ['nombre'=>'DOCUMENTOS TÉCNICOS'],
+            ['nombre'=>'PUBLICACIONES'],
+            ['nombre'=>'PIPELINE O WORKFLOW'],
+            ['nombre'=>'SALA DE PRENSA']
         ]);
     }
 

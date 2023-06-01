@@ -1,7 +1,84 @@
 @extends('layouts.horizontal')
 
 @section('content')
-@include('layouts.header_v', ['title_include' => 'VIGILACIA GENÓMICA', 'subtitle_include' => 'EN LOS PAISE DE BOLIVIA, COLOMBIA, ECUADOR Y PERÚ'])
+<header class="page-header">
+    <div class="banner_top">
+        @include('layouts.menu_h')
+
+        <div data-label="Example" class="df-example">
+            <div id="carouselExample3" class="carousel slide banner_background" data-bs-ride="carousel">
+                @if (count($banners) > 0)
+                    <ol class="carousel-indicators">
+                        @foreach ($banners as $index => $item)
+                            <li data-bs-target="#carouselExample3" data-bs-slide-to="{{$index}}" class="{{ ($index==0) ? 'active' : '' }}"></li>
+                        @endforeach
+                    </ol>
+
+                    <div class="carousel-inner">
+                        @foreach ($banners as $index => $img)
+                        <div class="carousel-item {{($index == 0) ? 'active' : ''}}">
+                            <div class="banner_background" style="background-image: url({{asset('storage/recursos/'.$img->imagen)}});">
+                                <div class="container">
+                                    <div style="padding-top: 35px;">
+                                        <h2 class="banner_title">{{$img->titulo}}</h2>
+                                        <h5 class="banner_subtitle">{{$img->descripcion}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>    
+                @else
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#carouselExample3" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#carouselExample3" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#carouselExample3" data-bs-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <div class="banner_background" style="background-image: url({{asset('images/banner_2.webp')}});">
+                                <div class="container">
+                                    <div style="padding-top: 35px;">
+                                        <h2 class="banner_title">Título 1</h2>
+                                        <h5 class="banner_subtitle">Subtitulo 123</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="banner_background" style="background-image: url({{asset('images/banner_2.webp')}});">
+                                <div class="container">
+                                    <div style="padding-top: 35px;">
+                                        <h2 class="banner_title">Título 2</h2>
+                                        <h5 class="banner_subtitle">Subtitulo 123</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item">
+                            <div class="banner_background" style="background-image: url({{asset('images/banner_2.webp')}});">
+                                <div class="container">
+                                    <div style="padding-top: 35px;">
+                                        <h2 class="banner_title">Título 3</h2>
+                                        <h5 class="banner_subtitle">Subtitulo 123</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endif
+                <a class="carousel-control-prev" href="#carouselExample3" role="button" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"><i data-feather="chevron-left"></i></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#carouselExample3" role="button" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"><i data-feather="chevron-right"></i></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</header>
 
 <main class="m-0">
     <div class="last_banner">
@@ -58,20 +135,30 @@
         <div class="w-100">
             <div class="row ms-5 me-5">
                 <div class="col-xl-3 col-lg-5 col-md-12 col-sm-12 mt-4">
-                    <div style="background-image: url({{asset('images/lateral.jpg')}}); background-repeat: no-repeat, repeat; background-size: 100%;">
-                        <div class="image_content_lateral">
-                            <div class="content_lateral_text">
-                                <p>El proyecto “Fortalecimiento de la toma de decisiones en el control de la pandemia Covid-19 mediante la vigilancia 
-                                    genómica en los países de Bolivia, Colombia, Ecuador y Perú”, del Organismo Andino de Salud - Convenio Hipólito 
-                                    Unanue (ORAS-CONHU) con el financiamiento del Banco Interamericano de Desarrollo (BID), tiene por finalidad la 
-                                    implementación de un observatorio regional que permitirá generar información y nuevas evidencias en base a la 
-                                    vigilancia genómica, donde la identificación y detección de variantes de los patógenos, permitirá la toma decisiones 
-                                    oportunas en salud pública, a través de la coordinación de capacidades de los institutos de salud de los cuatro países 
-                                    participantes.</p>
-                                <p>La información obtenida en la vigilancia genómica será de acceso y uso público.</p>
+                    @if ($present)
+                        <div style="background-image: url({{asset('storage/recursos/'.$present->imagen)}}); background-repeat: no-repeat, repeat; background-size: 100%;">
+                            <div class="image_content_lateral">
+                                <div class="content_lateral_text">
+                                    <p style="white-space: pre-line;">{{$present->descripcion}}</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @else
+                        <div style="background-image: url({{asset('images/lateral.jpg')}}); background-repeat: no-repeat, repeat; background-size: 100%;">
+                            <div class="image_content_lateral">
+                                <div class="content_lateral_text">
+                                    <p>El proyecto “Fortalecimiento de la toma de decisiones en el control de la pandemia Covid-19 mediante la vigilancia 
+                                        genómica en los países de Bolivia, Colombia, Ecuador y Perú”, del Organismo Andino de Salud - Convenio Hipólito 
+                                        Unanue (ORAS-CONHU) con el financiamiento del Banco Interamericano de Desarrollo (BID), tiene por finalidad la 
+                                        implementación de un observatorio regional que permitirá generar información y nuevas evidencias en base a la 
+                                        vigilancia genómica, donde la identificación y detección de variantes de los patógenos, permitirá la toma decisiones 
+                                        oportunas en salud pública, a través de la coordinación de capacidades de los institutos de salud de los cuatro países 
+                                        participantes.</p>
+                                    <p>La información obtenida en la vigilancia genómica será de acceso y uso público.</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
                 <div class="col-xl-5 col-lg-7 col-md-12 col-sm-12 ps-5 mt-4">
                     <div style="position: relative;">

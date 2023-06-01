@@ -27,8 +27,17 @@
             </div>
             <div class="card-body pd-y-30">
                 <div class="row mb-3">
-                    <div class="col-lg-8 col-md-12">
-
+                    <div class="col-lg-5 col-md-12"></div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="dropdown_select_content"> 
+                            <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false">@{{search.nivel_text}}</button>
+                            <div class="dropdown-menu w-100">
+                                <li><a class="dropdown-item" href="#" :class="[search.nivel == null ? 'active' : '']" @click="SelectSearchNivel()">--- Todos los niveles ---</a></li>
+                                <li v-for="niv in niveles">
+                                    <a class="dropdown-item" href="#" :class="[search.nivel == niv.id ? 'active' : '']" @click="SelectSearchNivel(niv)">@{{niv.text}}</a>
+                                </li>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="col-lg-4 col-md-12">
@@ -61,7 +70,11 @@
                                 <td class="text-center">
                                     <a :href="data.enlace" class="button_link" target="_blank" v-if="data.enlace">Ir Enlace</a>
                                 </td>
-                                <td class="text-right"><img :src="'storage/paises/'+data.pais.bandera" v-if="data.pais.bandera" class="codigo_tel"> @{{data.pais.nombre}}</td>
+                                <td class="text-right">
+                                    <template v-if="data.pais">
+                                        <img :src="'storage/paises/'+data.pais.bandera" class="codigo_tel"> @{{data.pais.nombre}}
+                                    </template>
+                                </td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-xl', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a>
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Eliminar" @click="Modal('modal-md', 'delete', data.id, data)"><i class="text-danger far fa-trash-alt"></i></a>
@@ -100,5 +113,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/recursos.js?v=1.0.0')}}"></script>
+    <script src="{{asset('views/interno/recursos.js?v=1.0.1')}}"></script>
 @endsection

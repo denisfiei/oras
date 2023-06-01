@@ -4,7 +4,9 @@ new Vue({
         config: [],
         color: 'rgba(0, 0, 0, 0.71)',
         search: {
-            'datos': null
+            'datos': null,
+            'nivel': null,
+            'nivel_text': '--- Todos los niveles ---',
         },
         page: 1,
 
@@ -43,9 +45,19 @@ new Vue({
             'imagen': null,
             'enlace': null,
             'orden': 1,
-            'nivel': 1
+            'nivel': 0,
+            'nivel_text': 'BANNER INICIO',
         },
-        imagen_recurso: null
+        imagen_recurso: null,
+        niveles: [
+            {'id': '1', 'text': 'INICIO: BANNER INICIO'}, 
+            {'id': '2', 'text': 'INICIO: PRESENTACIÓN'}, 
+            {'id': '3', 'text': 'VIGILANCIA: VIDEO'}, 
+            {'id': '4', 'text': 'VIGILANCIA: TEMA DE INTERÉS'}, 
+            {'id': '10', 'text': 'SECUENCIACIÓN: VIDEO'}, 
+            {'id': '11', 'text': 'SECUENCIACIÓN: TEMAS DE INTERES'}, 
+            {'id': '20', 'text': 'RECURSO: CENTRO DE INFORMACIÓN'},
+        ],
     },
     created() {
         this.Datos();
@@ -175,7 +187,8 @@ new Vue({
         Buscar(page) {
             urlBuscar = 'recursos/buscar?page=' + page;
             axios.post(urlBuscar, {
-                search: this.search.datos
+                search: this.search.datos,
+                nivel: this.search.nivel
             }).then(response => {
                 this.listRequest = response.data.recursos.data;
                 this.to_pagination = response.data.recursos.to;
@@ -203,16 +216,21 @@ new Vue({
 
                 case 'edit':
                     this.modal.title = 'EDITAR RECURSO';
-                    this.recurso.pais = seleccion.pais_id;
-                    this.recurso.pais_text = seleccion.pais.nombre;
-                    this.recurso.centro = seleccion.centro_id;
-                    this.recurso.centro_text = seleccion.centro.nombre;
+                    if (seleccion.nivel >= 20) {
+                        this.recurso.pais = seleccion.pais_id;
+                        this.recurso.pais_text = seleccion.pais.nombre;
+                        this.recurso.centro = seleccion.centro_id;
+                        this.recurso.centro_text = seleccion.centro.nombre;
+                    }
                     this.recurso.titulo = seleccion.titulo;
-                    this.recurso.descripcion = seleccion.descripcion;
+                    if (seleccion.descripcion) {
+                        this.recurso.descripcion = seleccion.descripcion;
+                    }
                     this.recurso.fecha = seleccion.fecha;
                     this.recurso.enlace = seleccion.enlace;
                     this.recurso.orden = seleccion.orden;
                     this.recurso.nivel = seleccion.nivel;
+                    this.recurso.nivel_text = this.FindNivel(seleccion.nivel);
                     this.imagen_recurso = 'storage/'+seleccion.ruta+'/'+seleccion.imagen;
                     break;
 
@@ -251,7 +269,8 @@ new Vue({
                 'imagen': null,
                 'enlace': null,
                 'orden': 1,
-                'nivel': 1
+                'nivel': 0,
+                'nivel_text': 'BANNER INICIO'
             };
             this.imagen_recurso = null;
             $("#imagen").val('');
@@ -372,6 +391,24 @@ new Vue({
 
                 this.Alert2(action, title, message);
             });
+        },
+        SelectSearchNivel(data) {
+            this.search.nivel = null;
+            this.search.nivel_text = '--- Todos los niveles ---';
+            
+            if (data) {
+                this.search.nivel = data.id;
+                this.search.nivel_text = data.text;
+            }
+            this.Buscar(this.page);
+        },
+        SelectNivel(data) {
+            this.recurso.nivel = data.id;
+            this.recurso.nivel_text = data.text;
+        },
+        FindNivel(id) {
+            let idx = this.niveles.findIndex((nivel) => nivel.id == id);
+            return this.niveles[idx]['text'];
         },
         SelectPais(data) {
             this.recurso.pais = data.id;

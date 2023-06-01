@@ -53,6 +53,10 @@ class RecursoController extends Controller
                 $query->where('titulo', 'LIKE', "%{$search}%");
             });
         }
+        
+        if ($request->nivel) {
+            $recursos->where('nivel', $request->nivel);
+        }
 
         $recursos = $recursos->with(['pais', 'centro'])->orderBy('titulo', 'ASC')->paginate(10);
 
@@ -74,17 +78,37 @@ class RecursoController extends Controller
     {
         $request->replace($this->null_string($request->all()));
         
-        $this->validate($request, [
-            'pais' => 'required|exists:paises,id',
-            'centro' => 'required|exists:centros,id',
-            'titulo' => 'required|max:255',
-            'descripcion' => 'max:255',
-            'fecha' => 'required|date|max:255',
-            'orden' => 'numeric|min:1',
-            'nivel' => 'numeric|min:1',
-            'enlace' => 'max:255',
-            'imagen' => 'file|max:2048',
-        ]);
+        if ($request->nivel >= 20) {
+            $this->validate($request, [
+                'pais' => 'required|exists:paises,id',
+                'centro' => 'required|exists:centros,id',
+                'titulo' => 'required|max:255',
+                'fecha' => 'required|date|max:255',
+                'orden' => 'numeric|min:1',
+                'nivel' => 'numeric|min:1',
+                'enlace' => 'max:255',
+                'imagen' => 'file|max:2048',
+            ]);
+        } else if ($request->nivel < 20 && $request->nivel >= 10) {
+            $this->validate($request, [
+                'pais' => 'required|exists:paises,id',
+                'titulo' => 'required|max:255',
+                'fecha' => 'required|date|max:255',
+                'orden' => 'numeric|min:1',
+                'nivel' => 'numeric|min:1',
+                'enlace' => 'max:255',
+                'imagen' => 'file|max:2048',
+            ]);
+        } else {
+            $this->validate($request, [
+                'titulo' => 'required|max:255',
+                'fecha' => 'required|date|max:255',
+                'orden' => 'numeric|min:1',
+                'nivel' => 'numeric|min:1',
+                'enlace' => 'max:255',
+                'imagen' => 'file|max:2048',
+            ]);
+        }
 
         try {
             DB::beginTransaction();
@@ -133,16 +157,34 @@ class RecursoController extends Controller
     {
         $request->replace($this->null_string($request->all()));
 
-        $this->validate($request, [
-            'pais' => 'required|exists:paises,id',
-            'centro' => 'required|exists:centros,id',
-            'titulo' => 'required|max:255',
-            'descripcion' => 'max:255',
-            'fecha' => 'required|date|max:255',
-            'orden' => 'numeric|min:1',
-            'nivel' => 'numeric|min:1',
-            'enlace' => 'max:255'
-        ]);
+        if ($request->nivel >= 20) {
+            $this->validate($request, [
+                'pais' => 'required|exists:paises,id',
+                'centro' => 'required|exists:centros,id',
+                'titulo' => 'required|max:255',
+                'fecha' => 'required|date|max:255',
+                'orden' => 'numeric|min:1',
+                'nivel' => 'numeric|min:1',
+                'enlace' => 'max:255',
+            ]);
+        } else if ($request->nivel < 20 && $request->nivel >= 10) {
+            $this->validate($request, [
+                'pais' => 'required|exists:paises,id',
+                'titulo' => 'required|max:255',
+                'fecha' => 'required|date|max:255',
+                'orden' => 'numeric|min:1',
+                'nivel' => 'numeric|min:1',
+                'enlace' => 'max:255',
+            ]);
+        } else {
+            $this->validate($request, [
+                'titulo' => 'required|max:255',
+                'fecha' => 'required|date|max:255',
+                'orden' => 'numeric|min:1',
+                'nivel' => 'numeric|min:1',
+                'enlace' => 'max:255',
+            ]);
+        }
 
         try {
 

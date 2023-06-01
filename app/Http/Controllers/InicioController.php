@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Aviso;
 use App\Models\Config;
+use App\Models\Recurso;
 
 class InicioController extends Controller
 {
@@ -17,6 +18,9 @@ class InicioController extends Controller
         }
         $config = Cache::get('config_cache');
         $aviso = Aviso::where('mostrar', 'S')->first();
-        return view('index', compact('config', 'aviso'));
+        $banners = Recurso::where('activo', 'S')->where('nivel', '1')->orderBy('orden', 'ASC')->get();
+        $present = Recurso::where('activo', 'S')->where('nivel', '2')->orderBy('orden', 'DESC')->first();
+
+        return view('index', compact('config', 'aviso', 'banners', 'present'));
     }
 }

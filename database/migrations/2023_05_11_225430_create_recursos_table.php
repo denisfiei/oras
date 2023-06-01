@@ -15,10 +15,10 @@ class CreateRecursosTable extends Migration
     {
         Schema::create('recursos', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('pais_id')->references('id')->on('paises')->onDelete('restrict');
-            $table->foreignId('centro_id')->references('id')->on('centros')->onDelete('restrict');
+            $table->foreignId('pais_id')->nullable()->references('id')->on('paises')->onDelete('restrict');
+            $table->foreignId('centro_id')->nullable()->references('id')->on('centros')->onDelete('restrict');
             $table->string('titulo');
-            $table->string('descripcion')->nullable();
+            $table->text('descripcion')->nullable();
             $table->date('fecha')->nullable();
             $table->string('ruta')->nullable();
             $table->string('imagen', 50)->nullable();

@@ -20,7 +20,21 @@
                         <div class="col-lg-6 col-md-12">
                             <div data-label="DATOS GENERALES" class="df-example demo-forms mb-3">
                                 <div class="row">
-                                    <div class="form-group col-md-12 mb-3">
+                                    <div class="form-group col-lg-12 mb-3">
+                                        <label class="form-label mb-0" for="nivel">NIVEL <span class="obligatorio">(*)</span></label>
+                                        {{-- <input type="text" id="nivel" v-model="recurso.nivel" class="form-control text_numeric" :class="[errors.nivel ? 'border-error' : '']" maxlength="2"> --}}
+                                        <div class="dropdown_select_content"> 
+                                            <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.nivel ? 'border-error' : '']">@{{recurso.nivel_text}}</button>
+                                            <div class="dropdown-menu w-100">
+                                                <li v-for="niv in niveles">
+                                                    <a class="dropdown-item" href="#" :class="[recurso.nivel == niv.id ? 'active' : '']" @click="SelectNivel(niv)">@{{niv.text}}</a>
+                                                </li>
+                                            </div>
+                                        </div>
+                                        <div class="input-error" v-if="errors.nivel">@{{ errors.nivel[0] }}</div>
+                                    </div>
+
+                                    <div class="form-group col-md-12 mb-3"  v-if="recurso.nivel < 20 && recurso.nivel >= 10">
                                         <label class="form-label mb-0" for="pais">PAIS <span class="obligatorio">(*)</span></label>
                                         <div class="dropdown_select_content"> 
                                             <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.pais ? 'border-error' : '']">@{{recurso.pais_text}}</button>
@@ -32,7 +46,7 @@
                                         </div>
                                         <div class="input-error" v-if="errors.pais">@{{ errors.pais[0] }}</div>
                                     </div>
-                                    <div class="form-group col-md-12 mb-3">
+                                    <div class="form-group col-md-12 mb-3"  v-if="recurso.nivel >= 20">
                                         <label class="form-label mb-0" for="centro">CENTRO DE INFORMACIÓN <span class="obligatorio">(*)</span></label>
                                         <div class="dropdown_select_content"> 
                                             <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.centro ? 'border-error' : '']">@{{recurso.centro_text}}</button>
@@ -44,6 +58,7 @@
                                         </div>
                                         <div class="input-error" v-if="errors.centro">@{{ errors.centro[0] }}</div>
                                     </div>
+                                    
                                     <div class="form-group col-md-12 mb-3">
                                         <label class="form-label mb-0" for="titulo">TÍTULO <span class="obligatorio">(*)</span></label>
                                         <input type="text" id="titulo" v-model="recurso.titulo" class="form-control" :class="[errors.titulo ? 'border-error' : '']">
@@ -54,26 +69,21 @@
                                         <textarea id="descripcion" v-model="recurso.descripcion" class="form-control" :class="[errors.descripcion ? 'border-error' : '']"></textarea>
                                         <div class="input-error" v-if="errors.descripcion">@{{ errors.descripcion[0] }}</div>
                                     </div>
-                                    <div class="form-group col-md-12 mb-0">
-                                        <label class="form-label mb-0" for="fecha">FECHA DE PUBLICACIÓN <span class="obligatorio">(*)</span></label>
-                                        <input type="date" id="fecha" v-model="recurso.fecha" class="form-control" :class="[errors.fecha ? 'border-error' : '']" max="{{date('Y-m-d')}}">
-                                        <div class="input-error" v-if="errors.fecha">@{{ errors.fecha[0] }}</div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-12">
                             <div data-label="OTROS DATOS" class="df-example demo-forms mb-3">
                                 <div class="row">
-                                    <div class="form-group col-lg-6 col-md-12 mb-3">
+                                    <div class="form-group col-lg-4 col-md-4 col-sm-12 mb-3">
                                         <label class="form-label mb-0" for="orden">ORDEN </label>
                                         <input type="text" id="orden" v-model="recurso.orden" class="form-control text_numeric" :class="[errors.orden ? 'border-error' : '']" maxlength="2">
                                         <div class="input-error" v-if="errors.orden">@{{ errors.orden[0] }}</div>
                                     </div>
-                                    <div class="form-group col-lg-6 col-md-12 mb-3">
-                                        <label class="form-label mb-0" for="nivel">NIVEL </label>
-                                        <input type="text" id="nivel" v-model="recurso.nivel" class="form-control text_numeric" :class="[errors.nivel ? 'border-error' : '']" maxlength="2">
-                                        <div class="input-error" v-if="errors.nivel">@{{ errors.nivel[0] }}</div>
+                                    <div class="form-group col-lg-8 col-md-8 col-sm-12 mb-0">
+                                        <label class="form-label mb-0" for="fecha">FECHA DE PUBLICACIÓN <span class="obligatorio">(*)</span></label>
+                                        <input type="date" id="fecha" v-model="recurso.fecha" class="form-control" :class="[errors.fecha ? 'border-error' : '']" max="{{date('Y-m-d')}}">
+                                        <div class="input-error" v-if="errors.fecha">@{{ errors.fecha[0] }}</div>
                                     </div>
                                     <div class="form-group col-md-12 mb-0">
                                         <label class="form-label mb-0" for="enlace">ENLACE / LINK&nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Escriba el enlace al cual se redireccionará al hacer click."></i></label>
