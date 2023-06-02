@@ -210,12 +210,14 @@ h5 {
     right: 0;
 }
 .menu_nav .nav-link {
-    background-color: #00b1cb;
-    color: #fff;
+    /*background-color: #00b1cb;*/
+    background-color: #b7b7b7;
+    color: #003260;
     padding: 5px 10px;
     margin-right: 10px;
     font-size: 16px;
     font-weight: bold;
+    transition: transform .2s; 
 }
 .menu_nav .nav-link i {
     width: 25px;
@@ -226,14 +228,15 @@ h5 {
 }
 .menu_nav .nav-link:hover {
     outline: 3px solid #fff;
-    text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+    transform: scale(1.1);
+    /*text-shadow: 2px 2px 2px rgba(0,0,0,0.39);*/
 }
 .menu_nav .active {
     outline: 3px solid #fff;
-    text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+    /*text-shadow: 2px 2px 2px rgba(0,0,0,0.39);*/
 }
 .img_nav {
-    width: 28px;
+    width: 31px;
     margin-right: 5px;
 }
 
@@ -433,8 +436,39 @@ h5 {
         color: #fff;
     }
     .bg_3 {
-        background-color: #929292;
+        background-color: #b7b7b7;
         color: #003260;
+    }
+    .bg_4 {
+        background-color: #f0f0f0;
+        color: #003260;
+    }
+    .bg_5 {
+        background-color: #004FFE;
+        color: #fff;
+    }
+    .bg_6 {
+        background-color: #0B1A45;
+        color: #fff;
+    }
+    .text_1 {
+        color: #003260;
+    }
+    .text_2 {
+        color: #00b1cb;
+    }
+    .text_3 {
+        color: #b7b7b7;
+    }
+    .subraya {
+        height: 4px;
+        margin-left: 0%;
+        margin: 0;
+        margin-right: 80%;
+        background-color: #00b1cb;
+        opacity: 1;
+        padding: 0;
+
     }
     .logo_title {
         font-size: 13px;
@@ -447,6 +481,13 @@ h5 {
         height: 390px;
         background: rgb(0,0,0);
         background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,50,96,1) 60%, rgba(0,50,96,1) 100%);
+    }
+    .content_institutos {
+        display: inline-block;
+        background-color: #fff;
+        height: 70px;
+        padding: 10px 20px;
+        border-radius: 20px;
     }
     .content_lateral_text {
         display: inline-block;
@@ -545,13 +586,32 @@ h5 {
         font-weight: bold;
     }
 
+/********************** RED REGIONAL **********************/
+.img_contenedor {
+    background-color: #f7f7f7;
+    padding: 15px;
+    height: 280px;
+}
+.list_red {
+    position: relative;
+    display: flex;
+    align-items: baseline;
+    padding: 0;
+}
+.list_red i {
+    margin-right: 10px;
+}
+.red_title_pais {
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+
 /********************** SECUENCIACION **********************/
     .img_sec_pais {
-        width: 290px;
+        width: 270px;
     }
     .img_lab_pais {
-        width: 70px;
-        border-radius: 50%;
+        width: 60px;
     }
     .title_pais {
         font-weight: bold;
@@ -587,8 +647,10 @@ h5 {
     }
     .text_secuencia {
         color: #fff;
-        font-size: 17px;
+        font-size: 18px;
         text-align: justify;
+        font-weight: 500;
+        text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
     }
     .btn_secuencia {
         background-color: #003260;
@@ -618,6 +680,15 @@ h5 {
         border: 2px solid #fff;
         border-radius: 20px;
         color: #fff;
+    }
+    .btn_sec_img {
+        display: inline-block;
+        width: 75px;
+        height: 75px;
+        background-color: white;
+        border-radius: 50%;
+        padding-top: 19px;
+        text-align: center;
     }
     .secuencia_iframe {
         height: 280px;
@@ -677,7 +748,6 @@ h5 {
         }
         .img_lab_pais {
             width: 50px;
-            border-radius: 50%;
         }
         .title_pais {
             font-weight: bold;
@@ -712,7 +782,6 @@ h5 {
         }
         .img_lab_pais {
             width: 35px;
-            border-radius: 50%;
         }
         .title_pais {
             font-weight: bold;

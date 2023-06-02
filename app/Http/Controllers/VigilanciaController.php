@@ -3,11 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Recurso;
 
 class VigilanciaController extends Controller
 {
     public function index()
     {
-        return view('sistema.externo.vigilancia');
+        $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('orden', 'DESC')->first();
+        $intro = Recurso::where('activo', 'S')->where('nivel', '5')->orderBy('orden', 'DESC')->first();
+
+        return view('sistema.externo.vigilancia', compact('banner', 'intro'));
     }
 }

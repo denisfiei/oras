@@ -5,6 +5,8 @@ new Vue({
         color: 'rgba(0, 0, 0, 0.71)',
         search: {
             'datos': null,
+            'pais': null,
+            'pais_text': '--- Todos los paises ---',
             'nivel': null,
             'nivel_text': '--- Todos los niveles ---',
         },
@@ -52,10 +54,20 @@ new Vue({
         niveles: [
             {'id': '1', 'text': 'INICIO: BANNER INICIO'}, 
             {'id': '2', 'text': 'INICIO: PRESENTACIÓN'}, 
-            {'id': '3', 'text': 'VIGILANCIA: VIDEO'}, 
-            {'id': '4', 'text': 'VIGILANCIA: TEMA DE INTERÉS'}, 
-            {'id': '10', 'text': 'SECUENCIACIÓN: VIDEO'}, 
-            {'id': '11', 'text': 'SECUENCIACIÓN: TEMAS DE INTERES'}, 
+            {'id': '4', 'text': 'VIGILANCIA: BANNER'}, 
+            {'id': '5', 'text': 'VIGILANCIA: INTRODUCCIÓN'},
+            {'id': '6', 'text': 'RED: BANNER'}, 
+            {'id': '7', 'text': 'RED: INTRODUCCIÓN'},
+            {'id': '9', 'text': 'SECUENCIACIÓN: BANNER'}, 
+            {'id': '10', 'text': 'SECUENCIACIÓN: MAPA PAIS'}, 
+            {'id': '11', 'text': 'SECUENCIACIÓN: LOGO INSTITUTO'}, 
+            {'id': '12', 'text': 'SECUENCIACIÓN: VIDEO'}, 
+            {'id': '13', 'text': 'SECUENCIACIÓN: TEMAS DE INTERES'}, 
+            {'id': '8', 'text': 'DISTRIBUCIÓN: BANNER'}, 
+            {'id': '10', 'text': 'DISTRIBUCIÓN: MAPA PAIS'}, 
+            {'id': '11', 'text': 'DISTRIBUCIÓN: LOGO INSTITUTO'}, 
+            {'id': '12', 'text': 'DISTRIBUCIÓN: VIDEO'}, 
+            {'id': '13', 'text': 'DISTRIBUCIÓN: TEMAS DE INTERES'}, 
             {'id': '20', 'text': 'RECURSO: CENTRO DE INFORMACIÓN'},
         ],
     },
@@ -188,6 +200,7 @@ new Vue({
             urlBuscar = 'recursos/buscar?page=' + page;
             axios.post(urlBuscar, {
                 search: this.search.datos,
+                pais: this.search.pais,
                 nivel: this.search.nivel
             }).then(response => {
                 this.listRequest = response.data.recursos.data;
@@ -306,6 +319,8 @@ new Vue({
             }).catch(error => {
                 console.log(error)
                 this.Load(form, 'off', null);
+                this.imagen_recurso = null;
+                $("#imagen").val('');
 
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
@@ -350,6 +365,8 @@ new Vue({
             }).catch(error => {
                 console.log(error)
                 this.Load(form, 'off', null);
+                this.imagen_recurso = null;
+                $("#imagen").val('');
 
                 if (error.response.status == 422) {
                     this.errors = error.response.data.errors;
@@ -391,6 +408,16 @@ new Vue({
 
                 this.Alert2(action, title, message);
             });
+        },
+        SelectSearchPais(data) {
+            this.search.pais = null;
+            this.search.pais_text = '--- Todos los Países ---';
+
+            if (data) {
+                this.search.pais = data.id;
+                this.search.pais_text = data.nombre;
+            }
+            this.Buscar(this.page);
         },
         SelectSearchNivel(data) {
             this.search.nivel = null;

@@ -27,7 +27,18 @@
             </div>
             <div class="card-body pd-y-30">
                 <div class="row mb-3">
-                    <div class="col-lg-5 col-md-12"></div>
+                    <div class="col-lg-2 col-md-12"></div>
+                    <div class="col-lg-3 col-md-12">
+                        <div class="dropdown_select_content"> 
+                            <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false">@{{search.pais_text}}</button>
+                            <div class="dropdown-menu w-100">
+                                <a class="dropdown-item" href="#" :class="[search.pais == null ? 'active' : '']" @click="SelectSearchPais(null)"> --- Todos los Paises ---</a>
+                                <li v-for="pais in paises">
+                                    <a class="dropdown-item" href="#" :class="[search.pais == pais.id ? 'active' : '']" @click="SelectSearchPais(pais)"><img :src="'storage/paises/'+pais.bandera" class="codigo_tel"> @{{pais.nombre}}</a>
+                                </li>
+                            </div>
+                        </div>
+                    </div>
                     <div class="col-lg-3 col-md-12">
                         <div class="dropdown_select_content"> 
                             <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false">@{{search.nivel_text}}</button>
@@ -113,5 +124,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/recursos.js?v=1.0.1')}}"></script>
+    <script src="{{asset('views/interno/recursos.js?v=1.0.2')}}"></script>
 @endsection

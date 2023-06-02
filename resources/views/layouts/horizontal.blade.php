@@ -1,4 +1,5 @@
 @php
+    $path = Request::root();
     $config_cache = Cache::get('config_cache');
 @endphp
 
@@ -30,7 +31,7 @@
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.auth.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert2.min.css?v=1.0') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css?v=1.0.0') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     {{-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -44,7 +45,7 @@
         <a href="#" id="mainMenuOpen" class="burger-menu"><i data-feather="menu"></i></a>
         <div class="navbar-brand">
             @if ($config_cache->logo)
-                <a href="{{url("/")}}" class="df-logo"><img src="{{ 'storage/'.$config_cache->logo }}" alt="Logo" style="max-width: 170px; max-height: 45px;"></a>
+                <a href="{{url("/")}}" class="df-logo"><img src="{{ $path.'/storage/'.$config_cache->logo }}" alt="Logo" style="max-width: 70px; max-height: 45px;"></a>
             @else
                 <a href="{{url("/")}}" class="df-logo">ORAS-<span>APP</span></a>
             @endif
@@ -70,10 +71,10 @@
                 <li class="nav-item"><a href="theme/components/" class="nav-link"><i data-feather="box"></i> Components</a></li>
                 <li class="nav-item"><a href="theme/collections/" class="nav-link"><i data-feather="archive"></i> Collections</a></li> --}}
 
-                <a href="#" class="btn_socials"><i class="fab fa-facebook-f"></i> </a>
-                <a href="#" class="btn_socials"><i class="fab fa-twitter"></i> </a>
-                <a href="#" class="btn_socials"><i class="fab fa-instagram"></i> </a>
-                <a href="#" class="btn_socials"><i class="fab fa-youtube"></i> </a>
+                <a href="{{$config_cache->facebook}}" class="btn_socials"><i class="fab fa-facebook-f"></i> </a>
+                <a href="{{$config_cache->twitter}}" class="btn_socials"><i class="fab fa-twitter"></i> </a>
+                <a href="{{$config_cache->instagram}}" class="btn_socials"><i class="fab fa-instagram"></i> </a>
+                <a href="{{$config_cache->youtube}}" class="btn_socials"><i class="fab fa-youtube"></i> </a>
                 @if (Auth::check())
                     <a href="{{route('home')}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hola {{Auth::user()->nombres}}, haga click para ir al Sistema" class="btn_auth ms-1"><img src="{{asset('images/auth.png')}}" alt="auth" class="img_icon"></a>
                 @else
@@ -97,6 +98,66 @@
 
     @yield('content')
 
+    <div class="bg_1 mt-5">
+        <div class="container">
+            <div class="row pt-5 pb-5">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <h2 class="bg_5 px-5 py-5 m-0">Contacto</h2>
+                    <div class="bg_3 px-5 py-3">
+                        <ul class="p-0 m-0">
+                            <li class="list_red mb-1 tx-18">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>Av. Paseo la República N° 3832<br>Tercer Piso. Lima - Perú</span>
+                            </li>
+                            <li class="list_red tx-18">
+                                <i class="fas fa-phone-rotary"></i>
+                                <span>(511) 611-3700</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg_6 px-5 py-3">
+                        <h5 class="">Email</h5>
+                        <ul class="p-0 m-0">
+                            <li class="list_red">
+                                <i class="fas fa-envelope"></i>
+                                <span class="tx-18">contacto@conhu.org.pe</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-white px-5 py-3">
+                        <h5 class="text_1">Redes Sociales</h5>
+                        <div style="display: flex;">
+                            <a href="{{$config_cache->facebook}}" class="btn_socials"><i class="fab fa-facebook-f"></i> </a>
+                            <a href="{{$config_cache->twitter}}" class="btn_socials"><i class="fab fa-twitter"></i> </a>
+                            <a href="{{$config_cache->instagram}}" class="btn_socials"><i class="fab fa-instagram"></i> </a>
+                            <a href="{{$config_cache->youtube}}" class="btn_socials"><i class="fab fa-youtube"></i> </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <div class="mt-3 text-center">
+                        <div style="display: flex; justify-content: center;">
+                            @if ($config_cache->logo)
+                                <img src="{{ $path.'/storage/'.$config_cache->logo }}" alt="Logo" style="max-width: 100px;"></a>
+                            @endif
+                            <span class="text-white tx-bold ps-3 tx-18" style="padding-top: 22px;">ORGANISMO ANDINO DE SALUD<br>CONVENIO HIPÓLITO UNANUE</span>
+                        </div>
+                    </div>
+                    <div class="mt-5 text-center">
+                        <img src="{{asset('images/logos/logo_home_white.png')}}" alt="logo_white" style="max-width: 300px">
+                    </div>
+                    <div class="mt-5 text-center">
+                        <div class="content_institutos">
+                            <img src="{{asset('images/logos/logo_ins_bol.png')}}" alt="Ins_Bol" style="max-height: 50px;" class="pe-2">
+                            <img src="{{asset('images/logos/logo_ins_col.png')}}" alt="Ins_Col" style="max-height: 50px;" class="pe-2">
+                            <img src="{{asset('images/logos/logo_ins_ecu.png')}}" alt="Ins_Ecu" style="max-height: 50px;" class="pe-2">
+                            <img src="{{asset('images/logos/logo_ins_per.png')}}" alt="Ins_Per" style="max-height: 50px;" class="pe-2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     {{-- <footer class="footer">
         <div>
             <span>&copy; 2023 DashForge v1.0.0. </span>

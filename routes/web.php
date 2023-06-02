@@ -141,22 +141,19 @@ Route::prefix('vigilancia')->group(function () {
     Route::post('/buscar', [App\Http\Controllers\VigilanciaController::class, 'buscar']);
 });
 
-Route::prefix('red')->group(function () {
-    Route::get('/', [App\Http\Controllers\SecuenciaController::class, 'index'])->name('red');
-    Route::post('/buscar', [App\Http\Controllers\SecuenciaController::class, 'buscar']);
+Route::prefix('red_regional')->group(function () {
+    Route::get('/', [App\Http\Controllers\RedRegionalController::class, 'index'])->name('red_regional');
 });
 
 Route::prefix('secuenciacion')->group(function () {
     Route::get('/', [App\Http\Controllers\SecuenciaController::class, 'index'])->name('secuenciacion');
-    Route::post('/buscar', [App\Http\Controllers\SecuenciaController::class, 'buscar']);
+    Route::get('/{token}', [App\Http\Controllers\SecuenciaController::class, 'pais']);
 });
 
 Route::prefix('distribucion')->group(function () {
     Route::get('/', [App\Http\Controllers\VigilanciaController::class, 'index'])->name('distribucion');
-    Route::post('/buscar', [App\Http\Controllers\VigilanciaController::class, 'buscar']);
 });
 
 Route::prefix('centro_informacion')->group(function () {
-    Route::get('/', [App\Http\Controllers\CentroInformacionController::class, 'index'])->name('distribucion');
-    Route::post('/buscar', [App\Http\Controllers\CentroInformacionController::class, 'buscar']);
+    Route::get('/', [App\Http\Controllers\CentroInformacionController::class, 'index'])->name('centro_informacion');
 });

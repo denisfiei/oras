@@ -28,7 +28,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/assets/css/dashforge.dashboard.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('theme/assets/css/dashforge.demo.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert2.min.css?v=1.0')}}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css?v=1.0.0') }}">
 
     <style>
         .nav-aside .nav-link span {

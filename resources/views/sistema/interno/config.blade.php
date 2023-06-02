@@ -100,6 +100,14 @@
                                     </div>
                                     <div class="input-error" v-if="errors.instagram">@{{ errors.instagram[0] }}</div>
                                 </div>
+                                <div class="form-group col-lg-12 col-md-12 col-sm-12 mb-0">
+                                    <label class="form-label mb-0" for="youtube">YOUTUBE </label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fab fa-youtube"></i></span>
+                                        <input type="text" id="youtube" v-model="form.youtube" class="form-control" :class="[errors.youtube ? 'border-error' : '']">
+                                    </div>
+                                    <div class="input-error" v-if="errors.youtube">@{{ errors.youtube[0] }}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

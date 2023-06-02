@@ -1,44 +1,45 @@
+@php
+    $paises = App\Models\Pais::where('activo', 'S')->select('id', 'nombre', 'token')->get();
+@endphp
 <div class="menu_nav">
     <ul class="nav">
         <li class="nav-item">
-            <a class="nav-link {{(request()->is('/')) ? 'active' : ''}}" href="{{url('/')}}"><i class="fas fa-home-lg me-1"></i></a>
+            <a class="nav-link {{(request()->is('/')) ? 'active' : ''}}" href="{{url('/')}}"><i class="fas fa-home-lg me-1 text_1"></i></a>
         </li>
         <li class="nav-item">
             <a class="nav-link {{(request()->is('vigilancia')) ? 'active' : ''}}" href="{{route('vigilancia')}}">
-                <img class="img_nav" src="{{asset('images/botones/vigilancia.png')}}" alt="btn1">
+                <img class="img_nav" src="{{asset('images/botones/menu_vigilancia.png')}}" alt="btn1">
                 Vigilancia Genómica
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{(request()->is('red')) ? 'active' : ''}}" href="{{route('red')}}">
-                <img class="img_nav" src="{{asset('images/botones/red.png')}}" alt="btn1">
+            <a class="nav-link {{(request()->is('red_regional')) ? 'active' : ''}}" href="{{route('red_regional')}}">
+                <img class="img_nav" src="{{asset('images/botones/menu_red.png')}}" alt="btn1">
                 Red Regional
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{(request()->is('secuenciacion')) ? 'active' : ''}}" href="{{route('secuenciacion')}}" data-bs-toggle="dropdown">
-                <img class="img_nav" src="{{asset('images/botones/genoma.png')}}" alt="btn1">
+            <a class="nav-link {{(request()->is('secuenciacion/*')) ? 'active' : ''}}" href="{{route('secuenciacion')}}" data-bs-toggle="dropdown">
+                <img class="img_nav" src="{{asset('images/botones/menu_secuenciacion.png')}}" alt="btn1">
                 Secuenciación
             </a>
             <div class="dropdown-menu tx-13">
-                <a href="#" class="dropdown-item">TODOS</a>
-                <a href="#" class="dropdown-item">BOLIVIA</a>
-                <a href="#" class="dropdown-item">ECUADOR</a>
-                <a href="#" class="dropdown-item">COLOMBIA</a>
-                <a href="#" class="dropdown-item">PERÚ</a>
+                <a href="{{route('secuenciacion')}}" class="dropdown-item">Todos</a>
+                @foreach ($paises as $p)
+                    <a href="{{url('secuenciacion/'.$p->token)}}" class="dropdown-item">{{$p->nombre}}</a>
+                @endforeach
             </div>
         </li>
         <li class="nav-item">
-            <a class="nav-link {{(request()->is('distribucion')) ? 'active' : ''}}" href="{{route('distribucion')}}" data-bs-toggle="dropdown">
-                <img class="img_nav" src="{{asset('images/botones/distribucion.png')}}" alt="btn1">
+            <a class="nav-link {{(request()->is('distribucion/*')) ? 'active' : ''}}" href="{{route('distribucion')}}" data-bs-toggle="dropdown">
+                <img class="img_nav" src="{{asset('images/botones/menu_voc.png')}}" alt="btn1">
                 VOC. Delta Ómicron
             </a>
             <div class="dropdown-menu tx-13">
-                <a href="#" class="dropdown-item">TODOS</a>
-                <a href="#" class="dropdown-item">BOLIVIA</a>
-                <a href="#" class="dropdown-item">ECUADOR</a>
-                <a href="#" class="dropdown-item">COLOMBIA</a>
-                <a href="#" class="dropdown-item">PERÚ</a>
+                <a href="{{route('distribucion')}}" class="dropdown-item">Todos</a>
+                @foreach ($paises as $p)
+                    <a href="{{url('distribucion/'.$p->token)}}" class="dropdown-item">{{$p->nombre}}</a>
+                @endforeach
             </div>
         </li>
     </ul>

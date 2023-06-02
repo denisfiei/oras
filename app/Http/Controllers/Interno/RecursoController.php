@@ -54,6 +54,10 @@ class RecursoController extends Controller
             });
         }
         
+        if ($request->pais) {
+            $recursos->where('pais_id', $request->pais);
+        }
+
         if ($request->nivel) {
             $recursos->where('nivel', $request->nivel);
         }
@@ -243,6 +247,8 @@ class RecursoController extends Controller
             $lab = Recurso::findOrFail($request->id);
             $lab->activo = 'N';
             $lab->save();
+
+            Storage::delete('public/recursos/'.$lab->imagen);
 
             DB::commit();
 

@@ -81,6 +81,7 @@ class PaisController extends Controller
             $pais->codigo = Str::upper($request->codigo);
             $pais->codigo_tel = $request->codigo_telefono;
             $pais->nombre = $request->nombre;
+            $pais->token = Str::uuid();
             $pais->save();
 
             DB::commit();
