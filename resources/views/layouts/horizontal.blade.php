@@ -71,10 +71,10 @@
                 <li class="nav-item"><a href="theme/components/" class="nav-link"><i data-feather="box"></i> Components</a></li>
                 <li class="nav-item"><a href="theme/collections/" class="nav-link"><i data-feather="archive"></i> Collections</a></li> --}}
 
-                <a href="{{$config_cache->facebook}}" class="btn_socials"><i class="fab fa-facebook-f"></i> </a>
-                <a href="{{$config_cache->twitter}}" class="btn_socials"><i class="fab fa-twitter"></i> </a>
-                <a href="{{$config_cache->instagram}}" class="btn_socials"><i class="fab fa-instagram"></i> </a>
-                <a href="{{$config_cache->youtube}}" class="btn_socials"><i class="fab fa-youtube"></i> </a>
+                <a href="{{$config_cache->facebook}}" class="btn_socials" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                <a href="{{$config_cache->twitter}}" class="btn_socials" target="_blank"><i class="fab fa-twitter"></i> </a>
+                <a href="{{$config_cache->instagram}}" class="btn_socials" target="_blank"><i class="fab fa-instagram"></i> </a>
+                <a href="{{$config_cache->youtube}}" class="btn_socials" target="_blank"><i class="fab fa-youtube"></i> </a>
                 @if (Auth::check())
                     <a href="{{route('home')}}" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Hola {{Auth::user()->nombres}}, haga click para ir al Sistema" class="btn_auth ms-1"><img src="{{asset('images/auth.png')}}" alt="auth" class="img_icon"></a>
                 @else
@@ -127,10 +127,10 @@
                     <div class="bg-white px-5 py-3">
                         <h5 class="text_1">Redes Sociales</h5>
                         <div style="display: flex;">
-                            <a href="{{$config_cache->facebook}}" class="btn_socials"><i class="fab fa-facebook-f"></i> </a>
-                            <a href="{{$config_cache->twitter}}" class="btn_socials"><i class="fab fa-twitter"></i> </a>
-                            <a href="{{$config_cache->instagram}}" class="btn_socials"><i class="fab fa-instagram"></i> </a>
-                            <a href="{{$config_cache->youtube}}" class="btn_socials"><i class="fab fa-youtube"></i> </a>
+                            <a href="{{$config_cache->facebook}}" class="btn_socials" target="_blank"><i class="fab fa-facebook-f"></i> </a>
+                            <a href="{{$config_cache->twitter}}" class="btn_socials" target="_blank"><i class="fab fa-twitter"></i> </a>
+                            <a href="{{$config_cache->instagram}}" class="btn_socials" target="_blank"><i class="fab fa-instagram"></i> </a>
+                            <a href="{{$config_cache->youtube}}" class="btn_socials" target="_blank"><i class="fab fa-youtube"></i> </a>
                         </div>
                     </div>
                 </div>

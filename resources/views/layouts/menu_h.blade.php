@@ -33,7 +33,7 @@
         <li class="nav-item">
             <a class="nav-link {{(request()->is('distribucion/*')) ? 'active' : ''}}" href="{{route('distribucion')}}" data-bs-toggle="dropdown">
                 <img class="img_nav" src="{{asset('images/botones/menu_voc.png')}}" alt="btn1">
-                VOC. Delta Ómicron
+                Distribución
             </a>
             <div class="dropdown-menu tx-13">
                 <a href="{{route('distribucion')}}" class="dropdown-item">Todos</a>

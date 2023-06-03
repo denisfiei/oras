@@ -65,7 +65,7 @@
                                         <div class="input-error" v-if="errors.titulo">@{{ errors.titulo[0] }}</div>
                                     </div>
                                     <div class="form-group col-md-12 mb-3">
-                                        <label class="form-label mb-0" for="descripcion">DESCRIPCIÓN </label>
+                                        <label class="form-label mb-0" for="descripcion">DESCRIPCIÓN (Para videos <strong>"iframe"</strong> )</label>
                                         <textarea id="descripcion" v-model="recurso.descripcion" class="form-control" :class="[errors.descripcion ? 'border-error' : '']"></textarea>
                                         <div class="input-error" v-if="errors.descripcion">@{{ errors.descripcion[0] }}</div>
                                     </div>
