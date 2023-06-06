@@ -34,7 +34,7 @@
                                         <div class="input-error" v-if="errors.nivel">@{{ errors.nivel[0] }}</div>
                                     </div>
 
-                                    <div class="form-group col-md-12 mb-3"  v-if="recurso.nivel < 20 && recurso.nivel >= 10">
+                                    <div class="form-group col-md-12 mb-3"  v-if="recurso.nivel <= 20 && recurso.nivel >= 10">
                                         <label class="form-label mb-0" for="pais">PAIS <span class="obligatorio">(*)</span></label>
                                         <div class="dropdown_select_content"> 
                                             <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.pais ? 'border-error' : '']">@{{recurso.pais_text}}</button>
@@ -96,8 +96,8 @@
                             <div data-label="ARCHIVO" class="df-example demo-forms mb-3">
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-0">
-                                        <label class="form-label mb-0" for="imagen">IMAGEN&nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Dimención de la imagen 300x400 píxeles"></i> <span class="obligatorio">(*)</span></label>
-                                        <input type="file" id="imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']" accept="image/*" @change="Imagen">
+                                        <label class="form-label mb-0" for="imagen">IMAGEN / ARCHIVO&nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Dimención de la imagen 300x400 píxeles"></i> <span class="obligatorio">(*)</span></label>
+                                        <input type="file" id="imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']" accept="image/*, application/pdf" @change="Imagen">
                                         <div class="input-error" v-if="errors.imagen">@{{ errors.imagen[0] }}</div>
                                     </div>
                                     <div class="col-md-12 mt-3 mb-0 text-center">

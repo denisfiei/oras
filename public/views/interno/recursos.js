@@ -63,12 +63,12 @@ new Vue({
             {'id': '11', 'text': 'SECUENCIACIÓN: LOGO INSTITUTO'}, 
             {'id': '12', 'text': 'SECUENCIACIÓN: VIDEO'}, 
             {'id': '13', 'text': 'SECUENCIACIÓN: TEMAS DE INTERES'}, 
-            {'id': '8', 'text': 'DISTRIBUCIÓN: BANNER'}, 
-            {'id': '10', 'text': 'DISTRIBUCIÓN: MAPA PAIS'}, 
+            /*{'id': '10', 'text': 'DISTRIBUCIÓN: MAPA PAIS'}, 
             {'id': '11', 'text': 'DISTRIBUCIÓN: LOGO INSTITUTO'}, 
             {'id': '12', 'text': 'DISTRIBUCIÓN: VIDEO'}, 
-            {'id': '13', 'text': 'DISTRIBUCIÓN: TEMAS DE INTERES'}, 
-            {'id': '20', 'text': 'RECURSO: CENTRO DE INFORMACIÓN'},
+            {'id': '13', 'text': 'DISTRIBUCIÓN: TEMAS DE INTERES'},*/
+            {'id': '8', 'text': 'CENTRO INF: BANNER'}, 
+            {'id': '20', 'text': 'CENTRO INF: RECURSOS'},
         ],
     },
     created() {
@@ -245,6 +245,9 @@ new Vue({
                     this.recurso.nivel = seleccion.nivel;
                     this.recurso.nivel_text = this.FindNivel(seleccion.nivel);
                     this.imagen_recurso = 'storage/'+seleccion.ruta+'/'+seleccion.imagen;
+                    if (seleccion.nivel == 20) {
+                        this.imagen_recurso = 'pdf_logo.svg';
+                    }
                     break;
 
                 case 'delete':
@@ -461,6 +464,9 @@ new Vue({
                 })(file);
          
                 reader2.readAsDataURL(file);
+            } else if(file.type === 'application/pdf') {
+                this.recurso.imagen= file;
+                this.imagen_recurso = 'pdf_logo.svg';
             } else {
                 $('#imagen').val('');
                 this.recurso.imagen= null;

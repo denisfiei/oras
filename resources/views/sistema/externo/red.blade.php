@@ -11,7 +11,7 @@
 <main class="m-0" >
     <div class="last_banner" style="background-image: url({{asset('images/centro-fondo.jpg')}});background-repeat: no-repeat, repeat;
     background-size: cover;">
-        <div style="background-color: #32afc9d1; height: 100%;">
+        <div class="bg_color">
             <div class="container">
                 <div class="row">
                     @php

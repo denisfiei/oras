@@ -30,6 +30,7 @@
     <!-- DashForge CSS -->
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.filemgr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert2.min.css?v=1.0') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css?v=1.0.0') }}">
 
@@ -53,7 +54,7 @@
         </div>
         <div id="navbarMenu" class="navbar-menu-wrapper">
             <div class="navbar-menu-header">
-                <a href="theme/index.html" class="df-logo">dash<span>forge</span></a>
+                <a href="theme/index.html" class="df-logo">ORAS</span></a>
                 <a id="mainMenuClose" href=""><i data-feather="x"></i></a>
             </div>
             <ul class="nav navbar-menu">
@@ -178,7 +179,7 @@
     {{-- <script src="{{ asset('theme/lib/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script> --}}
 
     <script src="{{ asset('theme/assets/js/dashforge.js') }}"></script>
-
+    <script src="{{ asset('theme/assets/js/dashforge.filemgr.js') }}"></script>
     <script src="{{ asset('js/sweetalert2.all.min.js?v=1.0') }}"></script>
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/vue.min.js') }}"></script>

@@ -7,40 +7,46 @@
 <main class="m-0" >
     <div class="last_banner" style="background-image: url({{asset('images/colombia-fondo.jpg')}});background-repeat: no-repeat, repeat;
     background-size: cover;">
-        <div style="background-color: #32afc9d1; height: 100%;">
+        <div class="bg_color">
             <div class="ms-5 me-5">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-6 col-sm-12 pt-3 pb-3">
-                        <div class="secuencia">
-                            <img class="img_sec_pais" src="{{asset('images/colombia-mapa.png')}}" alt="colombia" 
-                            style="shape-outside: url({{asset('images/colombia-mapa.png')}}); shape-image-threshold: 0.5; shape-margin: 20px; float: left; shape-margin: 2em;">
-                            {{-- <h2 class="mb-3">Colombia</h2> --}}
-                            <p class="text-center title_pais pb-3"><span class="bg">Colombia</span></p>
-                            <p class="subtitle_pais">
-                                <span class="md">Genomas completos</span><br>
-                                <span class="sm">
-                                    secuenciados 
-                                    <sub class="lg">25830</sub>
-                                </span>
-                            </p>
-                            <p class="subtitle_pais">
-                                <span class="md">Linajes</span><br>
-                                <span class="sm">
-                                    identificados</span>
-                                    <span class="lg">310</span>
-                                </span>
-                            </p>
+                    <div class="col-xl-6 col-lg-6 col-md-12 py-3">
+                        <div class="row secuencia">
+                            <div class="col-lg-5 text-end">
+                                <img class="img_sec_pais" src="{{asset('images/colombia-mapa.png')}}" alt="colombia" 
+                                style="shape-outside: url({{asset('images/colombia-mapa.png')}}); shape-image-threshold: 0.5; shape-margin: 20px; float: left; shape-margin: 2em;">
+                            </div>
+                            <div class="col-lg-7">
+                                {{-- <h2 class="mb-3">Colombia</h2> --}}
+                                <p class="text-center title_pais pb-3"><span class="bg">Colombia</span></p>
+                                <p class="subtitle_pais">
+                                    <span class="md">Genomas completos</span><br>
+                                    <span class="sm">
+                                        secuenciados 
+                                        <sub class="lg">25830</sub>
+                                    </span>
+                                </p>
+                                <p class="subtitle_pais">
+                                    <span class="md">Linajes</span><br>
+                                    <span class="sm">
+                                        identificados</span>
+                                        <span class="lg">310</span>
+                                    </span>
+                                </p>
+                                <p class="text-center">
+                                    <a href="#" class="btn_sec_pais">
+                                        <span class="btn_sec_img">
+                                            <img class="img_lab_pais" src="{{asset('images/logos/logo_ins_col.png')}}" alt="logo_pais">
+                                        </span>
+                                        Consulte más estadísticas
+                                    </a>
+                                </p>
+                            </div>
 
-                            <p class="float-end">
-                                <a href="#" class="btn_sec_pais">
-                                    <img class="img_lab_pais" src="{{asset('images/laboratorios/lab_colombia.png')}}" alt="logo_pais">
-                                    Consulte más estadísticas
-                                </a>
-                            </p>
                         </div>
                     </div>
 
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 py-5">
                         <div class="secuencia_iframe mt-5">
                             <div class="content_iframe">
                                 @if ($video)
@@ -52,7 +58,7 @@
                         </div>
                         <div class="text_iframe">{{$video ? $video->titulo : 'Resultado de Secuenciación'}}</div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 mt-4">
+                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 py-3">
                         <h5><span class="tema_interes">Temas de Interés</span></h5>
                         <div data-label="Example" class="df-example">
                             <div id="carouselExample2" class="carousel slide" data-bs-ride="carousel">

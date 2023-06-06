@@ -138,7 +138,6 @@ Route::middleware('auth')->group(function () {
 
 Route::prefix('vigilancia')->group(function () {
     Route::get('/', [App\Http\Controllers\VigilanciaController::class, 'index'])->name('vigilancia');
-    Route::post('/buscar', [App\Http\Controllers\VigilanciaController::class, 'buscar']);
 });
 
 Route::prefix('red_regional')->group(function () {
@@ -155,5 +154,8 @@ Route::prefix('distribucion')->group(function () {
 });
 
 Route::prefix('centro_informacion')->group(function () {
-    Route::get('/', [App\Http\Controllers\CentroInformacionController::class, 'index'])->name('centro_informacion');
+    Route::get('/tipo/{tipo}', [App\Http\Controllers\CentroInformacionController::class, 'index'])->name('centro_informacion');
+    Route::get('/tipo/{tipo}/{anio}', [App\Http\Controllers\CentroInformacionController::class, 'anio']);
+
+    Route::get('/download/{id}', [App\Http\Controllers\CentroInformacionController::class, 'download']);
 });

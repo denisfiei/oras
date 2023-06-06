@@ -19,7 +19,7 @@
                         <div class="carousel-item {{($index == 0) ? 'active' : ''}}">
                             <div class="banner_background" style="background-image: url({{asset('storage/recursos/'.$img->imagen)}});">
                                 <div class="container">
-                                    <div style="padding-top: 35px;">
+                                    <div style="padding-top: 70px;">
                                         <h2 class="banner_title">{{$img->titulo}}</h2>
                                         <h5 class="banner_subtitle">{{$img->descripcion}}</h5>
                                     </div>
@@ -187,25 +187,25 @@
                             <div>
                                 <ul class="centro_informacion">
                                     <li class="mb-1">
-                                        <a href="" class="cd_btn">
+                                        <a href="{{url('centro_informacion/tipo/DT')}}" class="cd_btn">
                                             <div class="cd_btn_img"><img src="{{asset('images/botones/cd_btn_2.png')}}" alt=""></div>
                                             <div class="cd_btn_text">Documentos técnicos</div>
                                         </a>
                                     </li>
                                     <li class="mb-1">
-                                        <a href="" class="cd_btn">
+                                        <a href="{{url('centro_informacion/tipo/PU')}}" class="cd_btn">
                                             <div class="cd_btn_img"><img src="{{asset('images/botones/cd_btn_6.png')}}" alt=""></div>
                                             <div class="cd_btn_text">Publicaciones</div>
                                         </a>
                                     </li>
                                     <li class="mb-1">
-                                        <a href="" class="cd_btn">
+                                        <a href="{{url('centro_informacion/tipo/WF')}}" class="cd_btn">
                                             <div class="cd_btn_img pt-2"><img src="{{asset('images/botones/cd_btn_3.png')}}" alt=""></div>
                                             <div class="cd_btn_text">Pepiline - workflow</div>
                                         </a>
                                     </li>
                                     <li class="mb-1">
-                                        <a href="" class="cd_btn">
+                                        <a href="{{url('centro_informacion/tipo/SP')}}" class="cd_btn">
                                             <div class="cd_btn_img"><img src="{{asset('images/botones/cd_btn_4.png')}}" alt=""></div>
                                             <div class="cd_btn_text">Centro de prensa</div>
                                         </a>

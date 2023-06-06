@@ -91,7 +91,7 @@ class RecursoController extends Controller
                 'orden' => 'numeric|min:1',
                 'nivel' => 'numeric|min:1',
                 'enlace' => 'max:255',
-                'imagen' => 'file|max:2048',
+                'imagen' => 'file|max:5120',
             ]);
         } else if ($request->nivel < 20 && $request->nivel >= 10) {
             $this->validate($request, [
@@ -101,7 +101,7 @@ class RecursoController extends Controller
                 'orden' => 'numeric|min:1',
                 'nivel' => 'numeric|min:1',
                 'enlace' => 'max:255',
-                'imagen' => 'file|max:2048',
+                'imagen' => 'file|max:5120',
             ]);
         } else {
             $this->validate($request, [
@@ -110,7 +110,7 @@ class RecursoController extends Controller
                 'orden' => 'numeric|min:1',
                 'nivel' => 'numeric|min:1',
                 'enlace' => 'max:255',
-                'imagen' => 'file|max:2048',
+                'imagen' => 'file|max:5120',
             ]);
         }
 
@@ -132,7 +132,7 @@ class RecursoController extends Controller
                 $nombre = 'REC_'.time().'.'.$imagen->getClientOriginalExtension();
                 Storage::putFileAs('public/recursos/', $imagen, $nombre);
                 
-                $recurso->ruta = 'recursos';
+                $recurso->nombre_archivo = $imagen->getClientOriginalName();
                 $recurso->imagen = $nombre;
             }
             $recurso->save();
@@ -206,13 +206,13 @@ class RecursoController extends Controller
             
             if ($request->hasFile('imagen')) {
                 $anterior = $recurso->imagen;
-
+                
                 $imagen = $request->file('imagen');
                 $nombre = 'REC_'.time().'.'.$imagen->getClientOriginalExtension();
                 Storage::putFileAs('public/recursos/', $imagen, $nombre);
                 Storage::delete('public/recursos/'.$anterior);
                 
-                $recurso->ruta = 'recursos';
+                $recurso->nombre_archivo = $imagen->getClientOriginalName();
                 $recurso->imagen = $nombre;
             }
             $recurso->save();

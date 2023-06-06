@@ -63,6 +63,16 @@
     transform: translateY(-50%);
     z-index: 1;
 }
+.carousel-control-prev, .carousel-control-next {
+    width: 10%;
+}
+.banner_title {
+    font-size: 45px;
+    font-weight: bold;
+    color: #fff;
+    line-height: 37px;
+    max-width: 60%;
+}
 h2 {
     font-size: 45px;
     font-weight: bold;
@@ -76,7 +86,13 @@ h5 {
 }
 .last_banner {
     width: 100%;
-    height: calc(100vh * 0.6 - 30px);
+    height: auto;
+    min-height: calc(100vh * 0.6 - 30px);
+}
+.last_banner .bg_color {
+    background-color: #32afc9d1;
+    height: auto;
+    min-height: calc(100vh * 0.6 - 30px);
 }
 .buttons_right {
     position: absolute;
@@ -581,6 +597,10 @@ h5 {
         color: #00b1cb;
         text-decoration: underline;
     }
+    .cd_btn .cd_btn_text:hover {
+        color: #00b1cb;
+        text-decoration: underline;
+    }
     .cd_text {
         font-size: 35px;
         font-weight: bold;
@@ -611,7 +631,8 @@ h5 {
         width: 270px;
     }
     .img_lab_pais {
-        width: 60px;
+        width: 55px;
+        max-height: 45px;
     }
     .title_pais {
         font-weight: bold;
@@ -629,8 +650,8 @@ h5 {
         line-height: 30px;
         text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
         padding-bottom: 20px;
-        float: right;
-        padding-right: 35px;
+        /*float: right;
+        padding-right: 35px;*/
     }
     .subtitle_pais .md {
         font-weight: bold;
@@ -687,7 +708,7 @@ h5 {
         height: 75px;
         background-color: white;
         border-radius: 50%;
-        padding-top: 19px;
+        padding-top: 15px;
         text-align: center;
     }
     .secuencia_iframe {
@@ -746,15 +767,16 @@ h5 {
         .img_sec_pais {
             width: 250px;
         }
-        .img_lab_pais {
+        /*.img_lab_pais {
             width: 50px;
-        }
+            max-height: 40px;
+        }*/
         .title_pais {
             font-weight: bold;
             font-size: 40px;
             text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
         }
-        .subtitle_pais {
+        /*.subtitle_pais {
             color: #fff;
             font-size: 25px;
             line-height: 25px;
@@ -770,7 +792,7 @@ h5 {
         .subtitle_pais .lg {
             font-weight: bold;
             font-size: 40px
-        }
+        }*/
         .btn_sec_pais {
             font-size: 15px;
             margin-right: 30px;
@@ -780,15 +802,16 @@ h5 {
         .img_sec_pais {
             width: 230px;
         }
-        .img_lab_pais {
+        /*.img_lab_pais {
             width: 35px;
-        }
+            max-height: 20px;
+        }*/
         .title_pais {
             font-weight: bold;
             font-size: 30px;
             text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
         }
-        .subtitle_pais {
+        /*.subtitle_pais {
             color: #fff;
             font-size: 18px;
             line-height: 18px;
@@ -804,7 +827,7 @@ h5 {
         .subtitle_pais .lg {
             font-weight: bold;
             font-size: 30px
-        }
+        }*/
         .btn_sec_pais {
             font-size: 13px;
             margin-right: 20px;
