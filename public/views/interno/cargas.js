@@ -52,6 +52,7 @@ new Vue({
             'rows': 0,
             'rows_error': 0,
             'errors': [],
+            'log_file': null,
         },
         finished: false,
         total_rows: 0,
@@ -160,6 +161,17 @@ new Vue({
                         showConfirmButton: true,
                         customClass: {
                             confirmButton: 'btn btn-danger'
+                        }
+                    });
+                break;
+                default: 
+                    Swal.fire({
+                        title: titulo,
+                        text: texto,
+                        icon: 'warning',
+                        showConfirmButton: true,
+                        customClass: {
+                            confirmButton: 'btn btn-warning'
                         }
                     });
                 break;
@@ -275,6 +287,7 @@ new Vue({
                 'rows': 0,
                 'rows_error': 0,
                 'errors': [],
+                'log_file': null,
             };
             this.finished = false;
             this.total_rows = 0;            
@@ -463,6 +476,7 @@ new Vue({
 
         //----------------- UPLOAD
         File(form) {
+            this.errors = [];
             this.Load(form, 'on', 'Cargando archivo ...');
             var file = event.target.files[0];
 
@@ -514,11 +528,14 @@ new Vue({
                 var title = response.data.title;
                 var message = response.data.message;
                 
-                if (action == 'success') {
+                if (action == 'success' || action == 'warning') {
                     this.finished = true;
                     this.importar.rows = response.data.import.total;
                     this.importar.rows_error = response.data.import.total_error;
                     this.importar.errors = response.data.import.errors;
+                    if (response.data.log) {
+                        this.importar.log_file = 'storage/'+response.data.log;
+                    }
                     this.Buscar(this.page);
 
                     this.Alert2(action, title, message);

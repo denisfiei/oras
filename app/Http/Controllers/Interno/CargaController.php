@@ -16,8 +16,8 @@ use App\Models\CargaDetalle;
 use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Facades\Storage;
 use App\Imports\RowsImport;
-use App\Imports\CargaGisaidImport;
-use App\Imports\CargaDetalleImport;
+use App\Imports\CargaTsvGisaidImport;
+use App\Imports\CargaTsvDetalleImport;
 
 class CargaController extends Controller
 {
@@ -236,11 +236,11 @@ class CargaController extends Controller
         $request->replace($this->null_string($request->all()));
 
         request()->validate([
-            'file' => ['required', 'mimes:xlsx'],
+            'file' => ['required', 'mimes:tsv,txt'],
         ]);
 
         $import = new RowsImport();
-        Excel::import($import, request()->file('file'));
+        Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::TSV);
         $data = $import->getData();
 
         return [
@@ -255,7 +255,7 @@ class CargaController extends Controller
 
         $this->validate($request, [
             'virus' => 'required|exists:virus,id',
-            'file' => ['required', 'mimes:xlsx'],
+            'file' => ['required', 'mimes:tsv,txt'],
             'cantidad' => 'required|min:1',
         ]);
 
@@ -277,14 +277,20 @@ class CargaController extends Controller
             $carga->user_id = Auth::user()->id;
             $carga->save();
 
-            $import = new CargaGisaidImport($carga);
-            Excel::import($import, request()->file('file'));
+            $import = new CargaTsvGisaidImport($carga);
+            Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::TSV);
             $data = $import->getData();
 
             if (count($data['errors']) > 0) {
                 $errors = [];
+
+                $errors[] = 'ERROR CARGA GISAID: '.$fileName;
+                $errors[] = '--------------------------------------------------';
+                $errors[] = 'Total de errores: '.$data['total_error'];
+                $errors[] = '';
+
                 foreach ($data['errors'] as $key => $value) {
-                    $errors[] = '#'.($key+1).', Fila: '.$value['fila'].', Error: '.$value['error'];
+                    $errors[] = '#'.($key+1).','."\t".' Fila: '.$value['fila'].','."\t".implode(",\t", $value['error']);
                 }
                 $contenido = implode("\n", $errors);
                 $log_file = "cargas/gisaid/logs/log_".time().".log";
@@ -292,7 +298,25 @@ class CargaController extends Controller
 
                 $carga->log_gisaid = $log_file;
                 $carga->error_gisaid = $data['total_error'];
+                $carga->cantidad_gisaid = $data['total'];
+                $carga->activo = 'N';
+                $carga->save();
+
+                CargaGisaid::where('carga_id', $request->id)->delete();
+
+                DB::commit();
+
+                Storage::delete('public/'.$fileContent);
+
+                return [
+                    'action'    =>  'warning',
+                    'title'     =>  'Incorrecto!!',
+                    'message'   =>  'Ocurrio un error al importar los Datos, Verifique el archivo de Log para más detalles.',
+                    'import'    =>  $data,
+                    'log'       =>  $log_file
+                ];
             }
+
             $carga->cantidad_gisaid = $data['total'];
             $carga->save();
 
@@ -304,7 +328,7 @@ class CargaController extends Controller
                 'message'   =>  'Se importaron los Datos con éxito.',
                 'import'    =>  $data
             ];
-        } catch (\Exception $e) {
+        } catch (\Throwable $th) {
             DB::rollBack();
 
             Storage::delete('public/'.$fileContent);
@@ -312,9 +336,9 @@ class CargaController extends Controller
             return [
                 'action'    =>  'error',
                 'title'     =>  'Incorrecto!!',
-                'message'   =>  'Ocurrio un error al importar los Datos, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
+                'message'   =>  'Ocurrio un error al importar los Datos, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$th->getMessage(),
                 'import'    =>  $data,
-                'error'     =>  'Error: '.$e->getMessage()
+                'error'     =>  'Error: '.$th
             ];
         }
     }
@@ -325,7 +349,7 @@ class CargaController extends Controller
 
         $this->validate($request, [
             //'muestreo' => 'required|exists:tipo_muestreos,id',
-            'file' => ['required', 'mimes:xlsx'],
+            'file' => ['required', 'mimes:tsv,txt'],
             'cantidad' => 'required|min:1',
         ]);
 
@@ -345,14 +369,20 @@ class CargaController extends Controller
             $carga->user_id = Auth::user()->id;
             $carga->save();
 
-            $import = new CargaDetalleImport($carga);
-            Excel::import($import, request()->file('file'));
+            $import = new CargaTsvDetalleImport($carga);
+            Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::TSV);
             $data = $import->getData();
 
             if (count($data['errors']) > 0) {
                 $errors = [];
+
+                $errors[] = 'ERROR CARGA DETALLE: '.$fileName;
+                $errors[] = '--------------------------------------------------';
+                $errors[] = 'Total de errores: '.$data['total_error'];
+                $errors[] = '';
+
                 foreach ($data['errors'] as $key => $value) {
-                    $errors[] = '#'.($key+1).', Fila: '.$value['fila'].', '.implode(",", $value['error']);
+                    $errors[] = '#'.($key+1).','."\t".' Fila: '.$value['fila'].','."\t".implode(",\t", $value['error']);
                 }
                 $contenido = implode("\n", $errors);
                 $log_file = "cargas/detalle/logs/log_".time().".log";
@@ -360,9 +390,24 @@ class CargaController extends Controller
 
                 $carga->log_detalle = $log_file;
                 $carga->error_detalle = $data['total_error'];
+                $carga->cantidad_detalle = $data['total'];
+                $carga->activo = 'N';
+                $carga->save();
+
+                CargaDetalle::where('carga_id', $request->id)->delete();
+
+                DB::commit();
+
+                Storage::delete('public/'.$fileContent);
+
+                return [
+                    'action'    =>  'warning',
+                    'title'     =>  'Incorrecto!!',
+                    'message'   =>  'Ocurrio un error al importar los Datos, Verifique el archivo de Log para más detalles.',
+                    'import'    =>  $data,
+                    'log'       =>  $log_file
+                ];
             }
-            $carga->cantidad_detalle = $data['total'];
-            $carga->save();
 
             DB::commit();
     

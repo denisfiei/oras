@@ -33,7 +33,8 @@
                             <div class="form-group col-md-12 mb-2">
                                 <label class="form-label mb-0" for="file">SUBIR ARCHIVO <span class="obligatorio">(*)</span></label>
                                 <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
-                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                                accept=".tsv">
+                                {{-- accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"> --}}
                                 <div class="input-error" v-if="errors.file">@{{ errors.file[0] }}</div>
                             </div>
 
@@ -61,7 +62,10 @@
                             <div class="mt-4" v-if="importar.errors.length > 0" style="max-height: 500px; overflow-y: auto;">
                                 <table class="table table-sm table-error">
                                     <tr style="background-color: #dddddd;">
-                                        <th colspan="2"><i class="far fa-file-excel"></i> DATOS DUPLICADOS (@{{importar.rows_error}})</th>
+                                        <th colspan="2"><i class="far fa-file-excel"></i> ERRORES AL IMPORTAR (@{{importar.rows_error}})</th>
+                                    </tr>
+                                    <tr v-if="importar.log_file">
+                                        <th colspan="2" class="text-center"><a :href="importar.log_file" target="_blank"><i class="fas fa-eye"></i> Ver archivo log</a></th>
                                     </tr>
                                     <tr style="background-color: #dddddd;">
                                         <th>FILA</th>
@@ -213,9 +217,9 @@
                                         <th>Passage</th>
                                         <th>Specimen</th>
                                         <th>Additional host information</th>
-                                        <th>Linaje</th>
+                                        <th>Lineage</th>
                                         <th>Clade</th>
-                                        <th>Aa subsititutions</th>
+                                        <th>Aa substitutions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -232,9 +236,9 @@
                                         <td>@{{g.passage}}</td>
                                         <td>@{{g.specimen}}</td>
                                         <td>@{{g.additional_host_information}}</td>
-                                        <td>@{{g.linage}}</td>
+                                        <td>@{{g.linege}}</td>
                                         <td>@{{g.clade}}</td>
-                                        <td>@{{g.aa_subtitutions}}</td>
+                                        <td>@{{g.aa_substitutions}}</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -25,7 +25,15 @@ class CreateTipoMuestreosTable extends Migration
         DB::table('tipo_muestreos')->insert([
             [
                 'codigo'=>'0001',
-                'nombre'=>'VIGILANCIA'
+                'nombre'=>'VIGILANCIA ALEATORIA'
+            ],
+            [
+                'codigo'=>'0002',
+                'nombre'=>'FOCALIZADA'
+            ],
+            [
+                'codigo'=>'0003',
+                'nombre'=>'ESPECIAL'
             ]
         ]);
     }
