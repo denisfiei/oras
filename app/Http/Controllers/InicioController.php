@@ -18,8 +18,8 @@ class InicioController extends Controller
         }
         $config = Cache::get('config_cache');
         $aviso = Aviso::where('mostrar', 'S')->first();
-        $banners = Recurso::where('activo', 'S')->where('nivel', '1')->orderBy('orden', 'ASC')->get();
-        $present = Recurso::where('activo', 'S')->where('nivel', '2')->orderBy('orden', 'DESC')->first();
+        $banners = Recurso::where('activo', 'S')->where('nivel', '1')->orderBy('id', 'DESC')->orderBy('orden', 'ASC')->get();
+        $present = Recurso::where('activo', 'S')->where('nivel', '2')->orderBy('id', 'DESC')->orderBy('orden', 'DESC')->first();
 
         return view('index', compact('config', 'aviso', 'banners', 'present'));
     }

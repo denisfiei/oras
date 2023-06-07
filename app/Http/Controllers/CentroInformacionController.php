@@ -11,7 +11,7 @@ class CentroInformacionController extends Controller
 {
     public function index($tipo)
     {
-        $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('orden', 'DESC')->first();
+        $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('id', 'DESC')->orderBy('fecha', 'DESC')->first();
         
         switch ($tipo) {
             case 'DT':
@@ -38,7 +38,7 @@ class CentroInformacionController extends Controller
     public function anio($tipo, $anio)
     {
         if (is_numeric($anio)) {
-            $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('orden', 'DESC')->first();
+            $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('id', 'DESC')->orderBy('orden', 'DESC')->first();
 
             switch ($tipo) {
                 case 'DT':
@@ -71,9 +71,15 @@ class CentroInformacionController extends Controller
                 $anio_text = $anio;
             }
             
+            $an = date('Y');
+            $anios = [
+                ['id' => $an, 'nombre' => $an],
+                ['id' => $an-1, 'nombre' => $an-1],
+                ['id' => 1, 'nombre' => 'Anteriores a '.$an]
+            ];
             $recursos = $recursos->with('pais')->orderBy('fecha', 'DESC')->get();
     
-            return view('sistema.externo.recursos', compact('banner', 'tipo', 'centro', 'recursos', 'anio_text'));
+            return view('sistema.externo.recursos', compact('banner', 'tipo', 'centro', 'recursos', 'anio', 'anio_text', 'anios'));
         }
 
         return redirect()->back();

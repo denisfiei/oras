@@ -244,10 +244,10 @@ new Vue({
                     this.recurso.orden = seleccion.orden;
                     this.recurso.nivel = seleccion.nivel;
                     this.recurso.nivel_text = this.FindNivel(seleccion.nivel);
-                    this.imagen_recurso = 'storage/'+seleccion.ruta+'/'+seleccion.imagen;
-                    if (seleccion.nivel == 20) {
+                    this.imagen_recurso = 'storage/recursos/'+seleccion.imagen;
+                    /*if (seleccion.nivel == 20) {
                         this.imagen_recurso = 'pdf_logo.svg';
-                    }
+                    }*/
                     break;
 
                 case 'delete':
@@ -464,9 +464,9 @@ new Vue({
                 })(file);
          
                 reader2.readAsDataURL(file);
-            } else if(file.type === 'application/pdf') {
+            /*} else if(file.type === 'application/pdf') {
                 this.recurso.imagen= file;
-                this.imagen_recurso = 'pdf_logo.svg';
+                this.imagen_recurso = 'pdf_logo.svg';*/
             } else {
                 $('#imagen').val('');
                 this.recurso.imagen= null;

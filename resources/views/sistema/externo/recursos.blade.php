@@ -70,8 +70,17 @@
                         </div>
                     </div>
                     <div class="col-xl-8 col-lg-7 col-md-12 col-sm-8">
-                        <h2 class="title_secuencia mb-2 mt-5">{{$centro->nombre.': '.$anio_text}}</h2>
-                        <div class="row">
+                        <h2 class="title_secuencia mb-2 mt-5">
+                            <span>{{$centro->nombre.': '}}</span> 
+                            
+                            <button class="tx-20" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{$anio_text}}</button>
+                            <div class="dropdown-menu">
+                                @foreach ($anios as $an)
+                                    <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$an['id'])}}" class="dropdown-item {{$anio == $an['id'] ? 'active' : ''}}">{{$an['nombre']}}</a>
+                                @endforeach
+                            </div>
+                        </h2>
+                        {{-- <div class="row">
                             @foreach ($recursos as $key => $item)
                                 <div class="col-xl-3 col-lg-4 col-md-6 col-sm-12">
                                     <div class="">
@@ -88,13 +97,34 @@
                                             </div>
                                             <div class="card-body">
                                                 <h6><a href="javascript:void(0)" onclick="Download({{$item->id}})" class="link-02" data-bs-toggle="tooltip" data-bs-placement="top" title="Click para descargar">{{$item->nombre_archivo}}</a></h6>
-                                                {{-- <span>10.45kb</span> --}}
                                             </div>
                                             <div class="card-footer"><span class="text_1">Publicación: {{date('d/m/Y', strtotime($item->fecha))}}</span></div>
                                         </div>
                                     </div>
                                 </div>
                             @endforeach
+                        </div> --}}
+
+                        <div data-label="Example" class="df-example">
+                            <ul class="list-unstyled">
+                                @foreach ($recursos as $key => $item)
+                                    <div class="pos-absolute pais_top">
+                                        <img src="{{asset('storage/paises/'.$item->pais->bandera)}}" class="codigo_tel">
+                                    </div>
+                                    <li class="media d-block d-sm-flex mb-3">    
+                                        <img src="{{asset('storage/recursos/'.$item->imagen)}}" class="wd-100p wd-sm-200 rounded mg-sm-r-20 mg-b-20 mg-sm-b-0" alt="">
+                                        <div class="media-body">
+                                            <h5 class="mb-0 text_1">{{$item->titulo}}</h5>
+                                            <div class="tx-12 mb-2"><strong><i class="fas fa-calendar-alt"></i> Publicación:</strong> {{date('d/m/Y', strtotime($item->fecha))}}</div>
+                                            <div class="text-justify">{{$item->descripcion}}</div>
+
+                                            <div class="text-end">
+                                                <a href="{{$item->enlace}}" target="_blank" class="btn btn-sm btn-outline-dark"><i class="fas fa-download"></i> Descargar</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </div>
                     </div>
                 </div>
@@ -144,7 +174,7 @@
             </div>
         </div>
     </div>
-  </div>
+</div>
 @endsection
 
 @section('js')

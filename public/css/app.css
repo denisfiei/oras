@@ -661,7 +661,7 @@ h5 {
         font-weight: bold;
         font-size: 45px
     }
-    .title_secuencia {
+    .title_secuencia span {
         color: #fff;
         font-size: 30px;
         text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
@@ -847,4 +847,16 @@ h5 {
         color: #fff;
         text-decoration: underline;
         text-shadow: 2px 2px 2px rgba(0,0,0,0.39);
+    }
+    .media {
+        background-color: #ffffff99;
+        border-radius: 20px;
+        padding: 16px;
+    }
+    .pais_top img {
+        /* top: -4px; */
+        /* left: -5px; */
+        height: 25px;
+        width: 35px;
+        border-radius: 20%;
     }

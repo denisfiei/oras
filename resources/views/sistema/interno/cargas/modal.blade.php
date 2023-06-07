@@ -65,7 +65,7 @@
                                         <th colspan="2"><i class="far fa-file-excel"></i> ERRORES AL IMPORTAR (@{{importar.rows_error}})</th>
                                     </tr>
                                     <tr v-if="importar.log_file">
-                                        <th colspan="2" class="text-center"><a :href="importar.log_file" target="_blank"><i class="fas fa-eye"></i> Ver archivo log</a></th>
+                                        <th colspan="2" class="text-center"><a :href="importar.log_file" download id="log_file"><i class="fas fa-eye"></i> Ver archivo log</a></th>
                                     </tr>
                                     <tr style="background-color: #dddddd;">
                                         <th>FILA</th>

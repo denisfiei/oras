@@ -311,7 +311,7 @@ class CargaController extends Controller
                 return [
                     'action'    =>  'warning',
                     'title'     =>  'Incorrecto!!',
-                    'message'   =>  'Ocurrio un error al importar los Datos, Verifique el archivo de Log para más detalles.',
+                    'message'   =>  'El archivo importado contiene errores, Verifique el archivo de Log para más detalles.',
                     'import'    =>  $data,
                     'log'       =>  $log_file
                 ];
@@ -403,7 +403,7 @@ class CargaController extends Controller
                 return [
                     'action'    =>  'warning',
                     'title'     =>  'Incorrecto!!',
-                    'message'   =>  'Ocurrio un error al importar los Datos, Verifique el archivo de Log para más detalles.',
+                    'message'   =>  'El archivo importado contiene errores, Verifique el archivo de Log para más detalles.',
                     'import'    =>  $data,
                     'log'       =>  $log_file
                 ];

@@ -97,7 +97,7 @@
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-0">
                                         <label class="form-label mb-0" for="imagen">IMAGEN / ARCHIVO&nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Dimención de la imagen 300x400 píxeles"></i> <span class="obligatorio">(*)</span></label>
-                                        <input type="file" id="imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']" accept="image/*, application/pdf" @change="Imagen">
+                                        <input type="file" id="imagen" class="form-control" :class="[errors.imagen ? 'border-error' : '']" accept="image/*" @change="Imagen">
                                         <div class="input-error" v-if="errors.imagen">@{{ errors.imagen[0] }}</div>
                                     </div>
                                     <div class="col-md-12 mt-3 mb-0 text-center">

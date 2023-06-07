@@ -9,8 +9,8 @@ class VigilanciaController extends Controller
 {
     public function index()
     {
-        $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('orden', 'DESC')->first();
-        $intro = Recurso::where('activo', 'S')->where('nivel', '5')->orderBy('orden', 'DESC')->first();
+        $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('id', 'DESC')->orderBy('orden', 'DESC')->first();
+        $intro = Recurso::where('activo', 'S')->where('nivel', '5')->orderBy('id', 'DESC')->orderBy('orden', 'DESC')->first();
 
         return view('sistema.externo.vigilancia', compact('banner', 'intro'));
     }
