@@ -549,7 +549,7 @@ h5 {
         font-weight: 700;
     }
     .btn_socials {
-        background: #003260;
+        /*background: #003260;*/
         border-radius: 50%;
         margin: 0 2px;
         color: #fff;
@@ -558,12 +558,24 @@ h5 {
         text-align: center;
         display: flex;
     }
+    .facebook {
+        background: #3b5998;
+    }
+    .twitter {
+        background: #00aced;
+    }
+    .youtube {
+        background: #bb0000;
+    }
+    .instagram {
+        background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%);
+    }
     .btn_socials i {
         margin: auto;
     }
     .btn_socials:hover {
-        outline: 2px solid #00b1cb;
-        color: #00b1cb
+        outline: 2px solid #003260;
+        color: #fff;
     }
     .centro_informacion{
         text-align: left;

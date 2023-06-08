@@ -43,18 +43,16 @@
                                 <th class="text-center" rowspan="2" width="5%">#</th>
                                 <th class="text-start" rowspan="2" width="15%">País / Fecha</th>
                                 <th class="text-center" rowspan="2" width="13%">Virus</th>
-                                <th class="text-center p_0" colspan="3" width="25%">Gisaid</th>
-                                <th class="text-center p_0" colspan="3" width="25%">Detalle</th>
+                                <th class="text-center p_0" colspan="2" width="25%">Gisaid</th>
+                                <th class="text-center p_0" colspan="2" width="25%">Detalle</th>
                                 <th class="text-center" rowspan="2" width="10%">Publicado</th>
                                 <th class="text-center" rowspan="2" width="7%"><ion-icon name="ellipsis-vertical"></ion-icon></th>
                             </tr>
                             <tr>
-                                <th class="text-center p_0" width="12%">Archivo</th>
+                                <th class="text-center p_0" width="17%">Archivo</th>
                                 <th class="text-center p_0" width="8%">Cantidad</th>
-                                <th class="text-center p_0" width="5%">Obs.</th>
-                                <th class="text-center p_0" width="12%">Archivo</th>
+                                <th class="text-center p_0" width="17%">Archivo</th>
                                 <th class="text-center p_0" width="8%">Cantidad</th>
-                                <th class="text-center p_0" width="5%">Obs.</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -73,18 +71,18 @@
                                     <a href="javascript:void(0)" class="text-success button_link text_bold" title="Ver Datos" @click="Modal('modal-fullscreen', 'rows_gisaid', data.id, data)">@{{data.archivo_gisaid}}</a>
                                 </td>
                                 <td class="text-center text-success text_bold">@{{data.cantidad_gisaid}}</td>
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     <a :href="'storage/'+data.log_gisaid" target="_blank" title="Ver Archivo Log"><span class="badge text-bg-danger" v-if="data.error_gisaid > 0"><i class="fas fa-exclamation-triangle"></i> @{{data.error_gisaid}}</span></a>
-                                </td>
+                                </td> --}}
 
                                 <td class="text-center">
                                     <a href="javascript:void(0)" class="button_link text-info text_bold"  title="Ver Datos" @click="Modal('modal-fullscreen', 'rows_detalle', data.id, data)" v-if="data.archivo_detalle">@{{data.archivo_detalle}}</a>
                                     <a href="javascript:void(0)" class="btn_opt text-info" data-bs-toggle="tooltip" title="Subir Detalle"  @click="Modal('modal-md', 'carga', data.id, data)" v-else><i class="fas fa-file-upload"></i></a>
                                 </td>
                                 <td class="text-center text-info text_bold">@{{data.cantidad_detalle}}</td>
-                                <td class="text-center">
+                                {{-- <td class="text-center">
                                     <a :href="'storage/'+data.log_detalle" target="_blank" title="Ver Archivo Log"><span class="badge text-bg-danger" v-if="data.error_detalle > 0"><i class="fas fa-exclamation-triangle"></i> @{{data.error_detalle}}</span></a>
-                                </td>
+                                </td> --}}
                                 
                                 <td class="text-center">
                                     <div class="form-switch">

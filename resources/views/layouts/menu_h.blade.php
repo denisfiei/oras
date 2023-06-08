@@ -1,5 +1,5 @@
 @php
-    $paises = App\Models\Pais::where('activo', 'S')->select('id', 'nombre', 'token')->get();
+    $paises = App\Models\Pais::where('activo', 'S')->select('id', 'nombre', 'token')->orderBy('codigo', 'ASC')->get();
 @endphp
 <div class="menu_nav">
     <ul class="nav">
@@ -21,7 +21,7 @@
         <li class="nav-item">
             <a class="nav-link {{(request()->is('secuenciacion/*')) ? 'active' : ''}}" href="{{route('secuenciacion')}}" data-bs-toggle="dropdown">
                 <img class="img_nav" src="{{asset('images/botones/menu_secuenciacion.png')}}" alt="btn1">
-                Secuenciación
+                Secuenciación y Distribución
             </a>
             <div class="dropdown-menu tx-13">
                 <a href="{{route('secuenciacion')}}" class="dropdown-item">Todos</a>
@@ -30,7 +30,7 @@
                 @endforeach
             </div>
         </li>
-        <li class="nav-item">
+        {{-- <li class="nav-item">
             <a class="nav-link {{(request()->is('distribucion/*')) ? 'active' : ''}}" href="{{route('distribucion')}}" data-bs-toggle="dropdown">
                 <img class="img_nav" src="{{asset('images/botones/menu_voc.png')}}" alt="btn1">
                 Distribución
@@ -41,6 +41,6 @@
                     <a href="{{url('distribucion/'.$p->token)}}" class="dropdown-item">{{$p->nombre}}</a>
                 @endforeach
             </div>
-        </li>
+        </li> --}}
     </ul>
 </div>
