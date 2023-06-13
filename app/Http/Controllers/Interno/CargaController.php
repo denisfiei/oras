@@ -302,7 +302,7 @@ class CargaController extends Controller
                 $carga->activo = 'N';
                 $carga->save();
 
-                CargaGisaid::where('carga_id', $request->id)->delete();
+                CargaGisaid::where('carga_id', $carga->id)->delete();
 
                 DB::commit();
 
@@ -394,7 +394,7 @@ class CargaController extends Controller
                 $carga->activo = 'N';
                 $carga->save();
 
-                CargaDetalle::where('carga_id', $request->id)->delete();
+                CargaDetalle::where('carga_id', $carga->id)->delete();
 
                 DB::commit();
 

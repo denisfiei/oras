@@ -65,7 +65,7 @@
         {{-- LOAD SUBMIT --}}
         <div class="a_load">
             <img src="{{ asset('ajax-loader-1.gif') }}" alt="Loading ...">
-            <h5>PROCESANDO, ESPERE ...</h5>
+            <h5 style="color: #2e2e2e;">PROCESANDO, ESPERE ...</h5>
         </div>
         {{-- LOAD SUBMIT --}}
 

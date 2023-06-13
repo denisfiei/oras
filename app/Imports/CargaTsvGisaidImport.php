@@ -91,7 +91,7 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
                 }
             }
             
-            if (empty($row[8])) {
+            if ($row[8] != 0 && empty($row[8])) {
                 $success = false;
                 $columna[] = 'Patient_age (No puede estar vacio)';
             }
@@ -134,7 +134,7 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
                 $gisaid->additional_location_information = $row[5];
                 $gisaid->sampling_strategy = $row[6];
                 $gisaid->gender = $row[7];
-                $gisaid->patient_age = $row[8];
+                $gisaid->patient_age = (is_numeric($row[8]) ? $row[8] : 0);
                 $gisaid->patient_status = $row[9];
                 $gisaid->last_vaccinated = $row[10];
                 $gisaid->passage = $row[11];

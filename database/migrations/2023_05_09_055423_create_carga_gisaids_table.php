@@ -27,7 +27,7 @@ class CreateCargaGisaidsTable extends Migration
             $table->string('additional_location_information')->nullable();
             $table->string('sampling_strategy')->nullable();
             $table->string('gender', 20)->nullable();
-            $table->string('patient_age', 20)->nullable();
+            $table->double('patient_age', 5, 2)->default(0);
             $table->string('patient_status')->nullable();
             $table->string('last_vaccinated')->nullable();
             $table->string('passage', 20)->nullable();
