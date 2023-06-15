@@ -307,7 +307,7 @@ new Vue({
 
             var formData  = new FormData();
             formData.append('file', file);
-            axios.post('cargas/rows', formData).then(response=>{
+            axios.post('linajes/rows', formData).then(response=>{
                 this.Load(form, 'off', null);
 
                 var action = response.data.action;
