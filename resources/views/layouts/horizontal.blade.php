@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.auth.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.filemgr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert2.min.css?v=1.0') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css?v=1.0.0') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css?v=1.0.1') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     {{-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

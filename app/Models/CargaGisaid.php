@@ -34,4 +34,9 @@ class CargaGisaid extends Model
     protected $hidden = [
         'activo', 'created_at', 'updated_at',
     ];
+
+    public function carga()
+    {
+        return $this->belongsTo(Carga::class);
+    }
 }

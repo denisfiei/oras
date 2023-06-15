@@ -28,7 +28,7 @@ class MuestreoController extends Controller
             });
         }
 
-        $muestreos = $muestreos->orderBy('nombre', 'ASC')->paginate(10);
+        $muestreos = $muestreos->orderBy('id', 'ASC')->paginate(10);
 
         return [
             'pagination' => [

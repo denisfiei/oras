@@ -28,23 +28,29 @@
 
                             <div class="col-lg-7">
                                 <p class="title_pais pb-3"><span class="bg">{{$pais->nombre}}</span></p>
-                                <p class="subtitle_pais">
+                                <p class="subtitle_pais pb-0">
                                     <span class="md">Genomas completos</span><br>
                                     <span class="sm">
                                         secuenciados 
-                                        <sub class="lg">25830</sub>
+                                        <sub class="lg">{{$genomas}}</sub>
                                     </span>
                                 </p>
-                                <p class="subtitle_pais">
+                                <div class="pb-3">
+                                    <a href="https://app.powerbi.com/reportEmbed?reportId=dc6929df-bb74-4880-b591-268427197f0f&autoAuth=true&ctid=3a897b8b-2f6b-4b49-94a1-be7da333e39f" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
+                                </div>
+                                <p class="subtitle_pais pb-0">
                                     <span class="md">Linajes</span><br>
                                     <span class="sm">
                                         identificados</span>
-                                        <span class="lg">310</span>
+                                        <span class="lg">{{$linajes}}</span>
                                     </span>
                                 </p>
+                                <div class="pb-3">
+                                    <a href="#" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
+                                </div>
     
                                 <p class="text-center">
-                                    <a href="#" class="btn_sec_pais">
+                                    <a href="{{$instituto->enlace}}" target="_blank" class="btn_sec_pais">
                                         @php
                                             $img_inst = 'images/logos/logo_ins_col.png';
                                             if ($instituto) {

@@ -229,9 +229,11 @@ new Vue({
 
                 case 'edit':
                     this.modal.title = 'EDITAR RECURSO';
-                    if (seleccion.nivel >= 20) {
+                    if (seleccion.pais_id) {
                         this.recurso.pais = seleccion.pais_id;
                         this.recurso.pais_text = seleccion.pais.nombre;
+                    }
+                    if (seleccion.nivel >= 20) {
                         this.recurso.centro = seleccion.centro_id;
                         this.recurso.centro_text = seleccion.centro.nombre;
                     }

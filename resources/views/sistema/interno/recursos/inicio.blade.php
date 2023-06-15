@@ -124,5 +124,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/recursos.js?v=1.0.3')}}"></script>
+    <script src="{{asset('views/interno/recursos.js?v=1.0.4')}}"></script>
 @endsection
