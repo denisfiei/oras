@@ -121,5 +121,5 @@
 @section('js')
     <script src="{{asset('js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('js/dataTables.bootstrap5.min.js')}}"></script>
-    <script src="{{asset('views/interno/linajes.js?v=1.0.2')}}"></script>
+    <script src="{{asset('views/interno/linajes.js?v=1.0.3')}}"></script>
 @endsection
