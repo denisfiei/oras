@@ -66,28 +66,28 @@
                         <h2 class="title_secuencia mb-2 mt-5">{{$centro->nombre}}</h2>
                         <div class="row">
                             <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mt-4">
-                                <div class="">
+                                <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[0])}}" class="ci_anio">
                                     <img src="{{asset('images/placehold1.jpg')}}" class="card-img-top" alt="" style="height: 180px;">
                                     <div class="">
-                                        <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[0])}}" class="ci_anio">{{$anios[0]}}</a>
+                                        {{$anios[0]}}</a>
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mt-4">
-                                <div class="">
+                                <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[1])}}" class="ci_anio">
                                     <img src="{{asset('images/placehold2.jpg')}}" class="card-img-top" alt="" style="height: 180px;">
                                     <div class="">
-                                        <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[1])}}" class="ci_anio">{{$anios[1]}}</a>
+                                        {{$anios[1]}}
                                     </div>
-                                </div>
+                                </a>
                             </div>
                             <div class="col-xl-4 col-lg-6 col-md-12 col-sm-12 mt-4">
-                                <div class="">
+                                <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[2])}}" class="ci_anio">
                                     <img src="{{asset('images/placehold3.jpg')}}" class="card-img-top" alt="" style="height: 180px;">
                                     <div class="">
-                                        <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[2])}}" class="ci_anio">Anteriores</a>
+                                        Anteriores
                                     </div>
-                                </div>
+                                </a>
                             </div>
                         </div>
                     </div>

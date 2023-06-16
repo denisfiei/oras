@@ -1,5 +1,5 @@
 @php
-    $paises = App\Models\Pais::where('activo', 'S')->select('id', 'nombre', 'token')->orderBy('codigo', 'ASC')->get();
+    $paises = App\Models\Pais::where('id', '<>', 5)->where('activo', 'S')->select('id', 'nombre', 'token')->orderBy('codigo', 'ASC')->get();
 @endphp
 <div class="menu_nav">
     <ul class="nav">

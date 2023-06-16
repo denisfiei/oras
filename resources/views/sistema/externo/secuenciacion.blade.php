@@ -2,7 +2,11 @@
 
 @section('content')
 
-@include('layouts.header_v', ['title_include' => 'VIGILANCIA GENÓMICA', 'subtitle_include' => '', 'image' => 'images/banner_2.webp'])
+@include('layouts.header_v', [
+    'title_include' => $banner ? $banner->titulo : 'SECUENCIACIÓN GENÓMICA',
+    'subtitle_include' => $banner ? $banner->descripcion : '', 
+    'image' => $banner ? 'storage/recursos/'.$banner->imagen : 'images/banner_2.webp'
+])
 
 <main class="m-0" >
     <div class="last_banner" style="background-image: url({{asset('images/colombia-fondo.jpg')}});background-repeat: no-repeat, repeat;
@@ -12,42 +16,44 @@
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-12 py-3">
                         <div class="row secuencia">
+                            @php
+                                $img_mapa = 'images/colombia-mapa.png';
+                                if ($mapa) {
+                                    $img_mapa = 'storage/recursos/'.$mapa->imagen;
+                                }
+                            @endphp
                             <div class="col-lg-5 text-end">
-                                <img class="img_sec_pais" src="{{asset('images/colombia-mapa.png')}}" alt="colombia" 
-                                style="shape-outside: url({{asset('images/colombia-mapa.png')}}); shape-image-threshold: 0.5; shape-margin: 20px; float: left; shape-margin: 2em;">
+                                <img class="img_sec_pais" src="{{asset($img_mapa)}}" alt="Paises Andinos">
                             </div>
+
                             <div class="col-lg-7">
-                                {{-- <h2 class="mb-3">Colombia</h2> --}}
-                                <p class="text-center title_pais pb-3"><span class="bg">Colombia</span></p>
-                                <p class="subtitle_pais">
+                                <p class="title_pais pb-3"><span class="bg">Paises Andinos</span></p>
+                                <p class="subtitle_pais pb-0">
                                     <span class="md">Genomas completos</span><br>
                                     <span class="sm">
                                         secuenciados 
-                                        <sub class="lg">25830</sub>
+                                        <sub class="lg">{{$genomas}}</sub>
                                     </span>
                                 </p>
-                                <p class="subtitle_pais">
+                                <div class="pb-3">
+                                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZmI1MzdmNDUtMjkyMy00ZjU1LWEzNWEtNjUyODAyNzVlNWRkIiwidCI6IjNhODk3YjhiLTJmNmItNGI0OS05NGExLWJlN2RhMzMzZTM5ZiJ9" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
+                                </div>
+                                <p class="subtitle_pais pb-0">
                                     <span class="md">Linajes</span><br>
                                     <span class="sm">
                                         identificados</span>
-                                        <span class="lg">310</span>
+                                        <span class="lg">{{$linajes}}</span>
                                     </span>
                                 </p>
-                                <p class="text-center">
-                                    <a href="#" class="btn_sec_pais">
-                                        <span class="btn_sec_img">
-                                            <img class="img_lab_pais" src="{{asset('images/logos/logo_ins_col.png')}}" alt="logo_pais">
-                                        </span>
-                                        Consulte más estadísticas
-                                    </a>
-                                </p>
+                                <div class="pb-3">
+                                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZmI1MzdmNDUtMjkyMy00ZjU1LWEzNWEtNjUyODAyNzVlNWRkIiwidCI6IjNhODk3YjhiLTJmNmItNGI0OS05NGExLWJlN2RhMzMzZTM5ZiJ9&pageName=ReportSection0443596c064db8910077" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
+                                </div>
                             </div>
-
                         </div>
                     </div>
 
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 py-5">
-                        <div class="secuencia_iframe mt-5">
+                    <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-5">
+                        <div class="secuencia_iframe ">
                             <div class="content_iframe">
                                 @if ($video)
                                     {!! $video->descripcion !!}
@@ -58,7 +64,7 @@
                         </div>
                         <div class="text_iframe">{{$video ? $video->titulo : 'Resultado de Secuenciación'}}</div>
                     </div>
-                    <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12 py-3">
+                    <div class="col-xl-3 col-lg-6 col-md-12 col-sm-12 py-3">
                         <h5><span class="tema_interes">Temas de Interés</span></h5>
                         <div data-label="Example" class="df-example">
                             <div id="carouselExample2" class="carousel slide" data-bs-ride="carousel">

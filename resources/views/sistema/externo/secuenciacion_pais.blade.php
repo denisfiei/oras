@@ -50,13 +50,15 @@
                                 </div>
     
                                 <p class="text-center">
-                                    <a href="{{$instituto->enlace}}" target="_blank" class="btn_sec_pais">
                                         @php
                                             $img_inst = 'images/logos/logo_ins_col.png';
+                                            $enlace_inst = '#';
                                             if ($instituto) {
+                                                $enlace_inst = $instituto->enlace;
                                                 $img_inst = 'storage/recursos/'.$instituto->imagen;
                                             }
                                         @endphp
+                                    <a href="{{$enlace_inst}}" target="_blank" class="btn_sec_pais">
                                         <span class="btn_sec_img">
                                             <img class="img_lab_pais" src="{{asset($img_inst)}}" alt="logo_pais">
                                         </span>
