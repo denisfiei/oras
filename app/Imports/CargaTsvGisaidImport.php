@@ -161,7 +161,7 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
 
             $this->errors[] = [
                 'fila' => $rowIndex,
-                'error' => $e->getMessage()
+                'error' => [$e->getMessage()]
             ];
         }
     }
