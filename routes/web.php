@@ -96,20 +96,21 @@ Route::middleware('auth')->group(function () {
     });
 
     Route::prefix('menus')->group(function () {
-        Route::get('/', [App\Http\Controllers\Interno\UserController::class, 'index'])->name('menus');
-        Route::post('/buscar', [App\Http\Controllers\Interno\UserController::class, 'buscar']);
-        Route::post('/store', [App\Http\Controllers\Interno\UserController::class, 'store']);
-        Route::post('/update', [App\Http\Controllers\Interno\UserController::class, 'update']);
-        Route::post('/delete', [App\Http\Controllers\Interno\UserController::class, 'delete']);
-        Route::post('/alta', [App\Http\Controllers\Interno\UserController::class, 'alta']);
+        Route::get('/', [App\Http\Controllers\Interno\MenuController::class, 'index'])->name('menus');
+        Route::post('/buscar', [App\Http\Controllers\Interno\MenuController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\MenuController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\MenuController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\MenuController::class, 'delete']);
+        Route::post('/alta', [App\Http\Controllers\Interno\MenuController::class, 'alta']);
     });
     Route::prefix('roles')->group(function () {
-        Route::get('/', [App\Http\Controllers\Interno\UserController::class, 'index'])->name('roles');
-        Route::post('/buscar', [App\Http\Controllers\Interno\UserController::class, 'buscar']);
-        Route::post('/store', [App\Http\Controllers\Interno\UserController::class, 'store']);
-        Route::post('/update', [App\Http\Controllers\Interno\UserController::class, 'update']);
-        Route::post('/delete', [App\Http\Controllers\Interno\UserController::class, 'delete']);
-        Route::post('/alta', [App\Http\Controllers\Interno\UserController::class, 'alta']);
+        Route::get('/', [App\Http\Controllers\Interno\RolController::class, 'index'])->name('roles');
+        Route::post('/datos', [App\Http\Controllers\Interno\RolController::class, 'datos']);
+        Route::post('/buscar', [App\Http\Controllers\Interno\RolController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\RolController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\RolController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\RolController::class, 'delete']);
+        Route::post('/alta', [App\Http\Controllers\Interno\RolController::class, 'alta']);
     });
     Route::prefix('users')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\UserController::class, 'index'])->name('users');

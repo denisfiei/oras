@@ -50,7 +50,7 @@
                                 <li class="mb-1">
                                     <a href="{{url('centro_informacion/tipo/WF')}}" class="cd_btn {{(request()->is('centro_informacion/tipo/WF')) ? 'active' : ''}}">
                                         <div class="cd_btn_img pt-2"><img src="{{asset('images/botones/cd_btn_3.png')}}" alt=""></div>
-                                        <div class="cd_btn_text">Pepiline - workflow</div>
+                                        <div class="cd_btn_text">Pipeline - workflow</div>
                                     </a>
                                 </li>
                                 <li class="mb-1">

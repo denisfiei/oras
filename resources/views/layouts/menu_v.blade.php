@@ -57,7 +57,7 @@
             <li class="nav-item {{(request()->is('recursos')) ? 'active' : ''}}"><a href="{{ route('recursos') }}" class="nav-link"><i class="far fa-file-alt"></i> <span>Recursos</span></a></li>
             
             <li class="nav-label mg-t-25">MENU OPERATIVO</li>
-            {{-- <li class="nav-item {{(request()->is('virus')) ? 'active' : ''}}"><a href="{{ route('virus') }}" class="nav-link"><i class="fas fa-virus"></i> <span>Virus</span></a></li> --}}
+            <li class="nav-item {{(request()->is('virus')) ? 'active' : ''}}"><a href="{{ route('virus') }}" class="nav-link"><i class="fas fa-virus"></i> <span>Virus</span></a></li>
             <li class="nav-item {{(request()->is('linajes')) ? 'active' : ''}}"><a href="{{ route('linajes') }}" class="nav-link"><i class="fas fa-bezier-curve"></i> <span>Linajes</span></a></li>
             <li class="nav-item {{(request()->is('cargas')) ? 'active' : ''}}"><a href="{{ route('cargas') }}" class="nav-link"><i class="fas fa-file-upload"></i> <span>Carga de Datos</span></a></li>
 

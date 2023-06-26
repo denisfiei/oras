@@ -70,9 +70,26 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
             
             if (!empty($row[2])) {
                 $fecha = explode('-', $row[2]);
-                if(count($fecha) < 3 && !checkdate($fecha[1], $fecha[2], $fecha[0])){
+                if(count($fecha) < 3){
                     $success = false;
                     $columna[] = 'Collection_date (No contiene el formato correcto "YYYY-MM-DD")';
+                } else {
+                    if (intval($fecha[0]) < 2000) {
+                        $success = false;
+                        $columna[] = 'Collection_date ('.$fecha[0].' No contiene el formato para el año "YYYY")';
+                    }
+                    if (intval($fecha[1]) > 12 || intval($fecha[1]) < 1) {
+                        $success = false;
+                        $columna[] = 'Collection_date ('.$fecha[1].' No contiene el formato correcto para el mes "MM")';
+                    }
+                    if (intval($fecha[2]) > 31 || intval($fecha[2]) < 1) {
+                        $success = false;
+                        $columna[] = 'Collection_date ('.$fecha[2].' No contiene el formato correcto para día "DD")';
+                    }
+                    /*if (!checkdate($ef[1], $ef[2], $ef[0])) {
+                        $success = false;
+                        $columna[] = 'Collection_date (No contiene el formato correcto "YYYY-MM-DD")';
+                    }*/
                 }
             }   
             

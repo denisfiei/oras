@@ -85,7 +85,7 @@
         </div>
         <div class="navbar-right df-logo">
             <div class="df-logo">
-                <img src="{{asset('images/logos/logo_BID.png')}}" alt="BID" class="bid">
+                {{-- <img src="{{asset('images/logos/logo_BID.png')}}" alt="BID" class="bid"> --}}
             </div>
         </div>
     </nav>

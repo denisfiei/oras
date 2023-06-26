@@ -21,7 +21,7 @@ class CreateCentrosTable extends Migration
             $table->timestamps();
         });
 
-        DB::table('virus')->insert([
+        DB::table('centros')->insert([
             ['nombre'=>'DOCUMENTOS TÉCNICOS'],
             ['nombre'=>'PUBLICACIONES'],
             ['nombre'=>'PIPELINE O WORKFLOW'],

@@ -14,4 +14,14 @@ class Rol extends Model
     protected $hidden = [
         'activo', 'created_at', 'updated_at',
     ];
+
+    public function users()
+    {
+        return $this->hasMany(User::class);
+    }
+    
+    public function permisos()
+    {
+        return $this->hasMany(Permiso::class);
+    }
 }

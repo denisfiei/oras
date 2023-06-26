@@ -350,6 +350,18 @@ h5 {
 .fs_30 {
     font-size: 30px !important;
 }
+.fs_11 {
+    font-size: 11px !important;
+}
+.fs_12 {
+    font-size: 12px !important;
+}
+.fs_13 {
+    font-size: 13px !important;
+}
+.fs_14 {
+    font-size: 14px !important;
+}
 
 /****************** BUTTON ************/
 .button_link:hover {
