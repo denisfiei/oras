@@ -36,9 +36,9 @@
                         <div class="form-group">
                             <div class="d-flex justify-content-between mg-b-5">
                                 <label class="mg-b-0-f">Contraseña</label>
-                                @if (Route::has('password.request'))
+                                {{-- @if (Route::has('password.request'))
                                     <a href="{{ route('password.request') }}" class="tx-13">¿Olvido su Contraseña?</a>
-                                @endif
+                                @endif --}}
                             </div>
                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Escriba su contraseña">
                             @error('password')

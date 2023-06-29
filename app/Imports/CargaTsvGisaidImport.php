@@ -102,7 +102,8 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
             }
             
             if (!empty($row[7])) {
-                if($row[7] !== 'Male' && $row[7] !== 'Female' && $row[7] !== 'Unknown'){
+                $genders = ["MALE", "Male", "male", 'FEMALE', 'Female', 'female', 'UNKNOWN', 'Unknown', 'unknown'];
+                if( in_array($row[7], $genders) ){
                     $success = false;
                     $columna[] = 'Gender (No esta entre los valores aceptables: Male, Female, Unknown)';
                 }
