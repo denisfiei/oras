@@ -29,30 +29,33 @@
                             <div class="col-12">
                                 <div data-label="MENU ADMINISTRATIVO" class="df-example mb-4">
                                     <ul class="list-group">
-                                        <li class="list-group-item" v-for="item in administrativos">
+                                        <li class="list-group-item" v-for="(item,index) in administrativos">
                                             @{{item.nombre}}
                                             <div class="form-check form-switch float-end">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                                <input class="form-check-input" type="checkbox" v-model="item.permiso.activo" true-value="S" false-value="'N" v-if="item.permiso">
+                                                <input class="form-check-input" type="checkbox" @change="Active(item, index, 1)" v-else>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                                 <div data-label="MENU OPERATIVO" class="df-example mb-4">
                                     <ul class="list-group">
-                                        <li class="list-group-item" v-for="item in operativos">
+                                        <li class="list-group-item" v-for="(item,index) in operativos">
                                             @{{item.nombre}}
                                             <div class="form-check form-switch float-end">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                                <input class="form-check-input" type="checkbox" v-model="item.permiso.activo" true-value="S" false-value="'N" v-if="item.permiso">
+                                                <input class="form-check-input" type="checkbox" @change="Active(item, index, 2)" v-else>
                                             </div>
                                         </li>
                                     </ul>
                                 </div>
                                 <div data-label="MENU DE SISTEMA" class="df-example mb-0">
                                     <ul class="list-group">
-                                        <li class="list-group-item" v-for="item in sistemas">
+                                        <li class="list-group-item" v-for="(item,index) in sistemas">
                                             @{{item.nombre}}
                                             <div class="form-check form-switch float-end">
-                                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+                                                <input class="form-check-input" type="checkbox" v-model="item.permiso.activo" true-value="S" false-value="'N" v-if="item.permiso">
+                                                <input class="form-check-input" type="checkbox" @change="Active(item, index, 3)" v-else>
                                             </div>
                                         </li>
                                     </ul>

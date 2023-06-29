@@ -6,15 +6,24 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use App\Models\Menu;
+use App\Models\Permiso;
 use App\Models\Aviso;
 
 class AvisoController extends Controller
 {
     public function index()
     {
-        return view('sistema.interno.avisos.inicio');
+        $menu = Menu::where('route', Route::currentRouteName())->pluck('id')->first();
+
+        if (Permiso::where('rol_id', Auth::user()->rol_id)->where('menu_id', $menu)->first()) {
+            return view('sistema.interno.avisos.inicio');
+        }
+
+        return redirect('home');
     }
 
     public function buscar(Request $request)

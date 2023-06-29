@@ -8,7 +8,7 @@
             <div class="media-body align-items-center d-none d-lg-flex">
                 <div class="mx-wd-600">
                     @if ($config_cache->logo_login)
-                        <img src="{{ 'storage/'.$config_cache->logo_login }}" class="img-fluid" alt="Imagen_login">
+                        <img src="{{ 'storage/'.$config_cache->logo_login }}" class="img-fluid" alt="Imagen_login" style="max-height: 400px;">
                     @else
                         <img src="https://placehold.co/1260x900" class="img-fluid" alt="Imagen_login">
                     @endif

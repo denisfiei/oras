@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use App\Models\User;
+use App\Models\Menu;
 use App\Models\Config;
 
 
@@ -84,6 +85,31 @@ class LoginController extends Controller
             if( !Cache::has('config_cache') ) {
                 $config_cache = Config::first();
                 Cache::forever('config_cache', $config_cache);
+            }
+            // Guardar datos del menu en cache
+            $menu_cache = 'menu_rol_'.$user->rol_id;
+            if( !Cache::has($menu_cache) ) {
+                $menus = Menu::where('activo', 'S')
+                ->whereHas('permiso', function ($q) use ($user) {
+                    $q->where('rol_id', $user->rol_id);
+                })
+                ->with(['permiso' => function ($query) use ($user) {
+                    $query->where('rol_id', $user->rol_id)
+                    ->select('id', 'rol_id', 'menu_id', 'activo');
+                }])
+                ->orderBy('id', 'ASC')
+                ->orderBy('orden', 'ASC');
+        
+                $administrativos = clone $menus;
+                $operativos = clone $menus;
+                $sistemas = clone $menus;
+        
+                $data_cache = [
+                    'administrativos' => $administrativos->where('categoria', 'A')->get(),
+                    'operativos' => $operativos->where('categoria', 'O')->get(),
+                    'sistemas' => $sistemas->where('categoria', 'S')->get()
+                ];
+                Cache::forever($menu_cache, $data_cache);
             }
 
             Auth::logoutOtherDevices($request->password); //EVITAR 2 LOGIN

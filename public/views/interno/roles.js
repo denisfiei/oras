@@ -37,7 +37,7 @@ new Vue({
         sistemas: []
     },
     created() {
-        this.Datos();
+        this.Buscar();
         $(".my_vue").show();
     },
     methods: {
@@ -145,31 +145,11 @@ new Vue({
                 break;
             }
         },
-        Datos(page) {
-            urlBuscar = 'roles/datos';
-            axios.post(urlBuscar).then(response => {
-                this.listRequest = response.data.roles.data;
-                this.to_pagination = response.data.roles.to;
-                this.pagination = response.data.pagination;
-                this.administrativos = response.data.administrativos;
-                this.operativos = response.data.operativos;
-                this.sistemas = response.data.sistemas;
-                console.log(response.data)
-            }).catch(error => {
-                console.log(error)
-
-                let action = 'error';
-                let title = 'Error !!';
-                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
-                this.Alert2(action, title, message);
-            });
-        },
         Buscar(page) {
             urlBuscar = 'roles/buscar?page=' + page;
             axios.post(urlBuscar, {
                 search: this.search.datos
             }).then(response => {
-                console.log(response.data);
                 this.listRequest = response.data.roles.data;
                 this.to_pagination = response.data.roles.to;
                 this.pagination = response.data.pagination;
@@ -191,27 +171,23 @@ new Vue({
 
             switch (metodo) {                
                 case 'create':
-                    this.modal.title = 'NUEVO MENU';
+                    this.modal.title = 'NUEVO ROL';
+                    this.Permisos();
                     break;
 
                 case 'edit':
-                    this.modal.title = 'EDITAR MENU';
-                    this.menu.categoria = seleccion.categoria;
-                    this.menu.categoria_text = this.Categoria(seleccion.categoria);
-                    this.menu.nombre = seleccion.nombre;
-                    this.menu.icono = seleccion.icono;
-                    this.menu.route = seleccion.route;
-                    this.menu.url = seleccion.url;
-                    this.menu.orden = seleccion.orden;
+                    this.modal.title = 'EDITAR ROL';
+                    this.rol.nombre = seleccion.nombre;
+                    this.Permisos(id);
                     break;
 
                 case 'delete':
-                    this.modal.title = 'ELIMINAR MENU';
-                    this.menu.nombre = seleccion.nombre;
+                    this.modal.title = 'ELIMINAR ROL';
+                    this.rol.nombre = seleccion.nombre;
                     break;
                     
                 default:
-                    this.menu.nombre = seleccion.nombre;
+                    this.rol.nombre = seleccion.nombre;
                     break;
             }
         },
@@ -232,17 +208,29 @@ new Vue({
                 'nombre': null,
             };
         },
+        Permisos(id) {
+            urlBuscar = 'roles/permisos/' + id;
+            axios.get(urlBuscar).then(response => {
+                this.administrativos = response.data.administrativos;
+                this.operativos = response.data.operativos;
+                this.sistemas = response.data.sistemas;
+            }).catch(error => {
+                console.log(error)
+                let action = 'error';
+                let title = 'Error !!';
+                let message = 'No se pudo conectar con el servidor, por favor actualice la página.';
+                this.Alert2(action, title, message);
+            });
+        },
         Store(form) {
             this.Load(form, 'on', 'Guardando Registro ...');
             this.errors = [];
 
             axios.post('roles/store', {
-                categoria: this.menu.categoria,
-                nombre: this.menu.nombre,
-                icono: this.menu.icono,
-                route: this.menu.route,
-                url: this.menu.url,
-                orden: this.menu.orden
+                nombre: this.rol.nombre,
+                administrativos: this.administrativos,
+                operativos: this.operativos,
+                sistemas: this.sistemas
             }).then(response=> {
                 this.Load(form, 'off', null);
 
@@ -277,12 +265,10 @@ new Vue({
 
             axios.post('roles/update', {
                 id: this.id,
-                categoria: this.menu.categoria,
-                nombre: this.menu.nombre,
-                icono: this.menu.icono,
-                route: this.menu.route,
-                url: this.menu.url,
-                orden: this.menu.orden
+                nombre: this.rol.nombre,
+                administrativos: this.administrativos,
+                operativos: this.operativos,
+                sistemas: this.sistemas
             }).then(response=> {
                 this.Load(form, 'off', null);
 
@@ -341,20 +327,35 @@ new Vue({
                 this.Alert2(action, title, message);
             });
         },
-        SelectCategoria(categoria) {
-            this.menu.categoria = categoria.id;
-            this.menu.categoria_text = categoria.text;
-        },
-        Categoria(tipo) {
+        Active(data, index, tipo) {
             switch (tipo) {
-                case 'S':
-                    return 'Menu del Sistema';
+                case 1:
+                    this.administrativos[index].permiso = {
+                        'id': null,
+                        'rol_id': this.id,
+                        'menu_id': data.id,
+                        'activo': 'S'
+                    };
                     break;
-                case 'A':
-                    return 'Menu Administrativo';
+
+                case 2:
+                    this.operativos[index].permiso = {
+                        'id': null,
+                        'rol_id': this.id,
+                        'menu_id': data.id,
+                        'activo': 'S'
+                    };
+                    console.log(this.operativos);
                     break;
+            
                 default:
-                    return 'Menu Operativo';
+                    this.sistemas[index].permiso = {
+                        'id': null,
+                        'rol_id': this.id,
+                        'menu_id': data.id,
+                        'activo': 'S'
+                    };
+                    console.log(this.sistemas);
                     break;
             }
         },

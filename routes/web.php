@@ -101,7 +101,6 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [App\Http\Controllers\Interno\MenuController::class, 'store']);
         Route::post('/update', [App\Http\Controllers\Interno\MenuController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\MenuController::class, 'delete']);
-        Route::post('/alta', [App\Http\Controllers\Interno\MenuController::class, 'alta']);
     });
     Route::prefix('roles')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\RolController::class, 'index'])->name('roles');
@@ -110,7 +109,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [App\Http\Controllers\Interno\RolController::class, 'store']);
         Route::post('/update', [App\Http\Controllers\Interno\RolController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\RolController::class, 'delete']);
-        Route::post('/alta', [App\Http\Controllers\Interno\RolController::class, 'alta']);
+        Route::get('/permisos/{id}', [App\Http\Controllers\Interno\RolController::class, 'permisos']);
     });
     Route::prefix('users')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\UserController::class, 'index'])->name('users');
@@ -134,6 +133,12 @@ Route::middleware('auth')->group(function () {
         Route::post('/store', [App\Http\Controllers\Interno\AvisoController::class, 'store']);
         Route::post('/update', [App\Http\Controllers\Interno\AvisoController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\AvisoController::class, 'delete']);
+    });
+    
+    Route::prefix('logs')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\ConfigController::class, 'index'])->name('logs');
+        Route::post('/buscar', [App\Http\Controllers\Interno\ConfigController::class, 'buscar']);
+        Route::post('/update', [App\Http\Controllers\Interno\ConfigController::class, 'update']);
     });
 });
 

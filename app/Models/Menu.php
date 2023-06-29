@@ -15,8 +15,8 @@ class Menu extends Model
         'updated_at'
     ];
 
-    public function getPermisos()
+    public function permiso()
     {
-        return $this->hasMany(Permiso::class, 'menu_id', 'id')->where('activo', 'S');
+        return $this->hasOne(Permiso::class, 'menu_id', 'id');
     }
 }

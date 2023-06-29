@@ -5,18 +5,28 @@ namespace App\Http\Controllers\Interno;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Recurso;
 use App\Models\Pais;
 use App\Models\Centro;
+use App\Models\Menu;
+use App\Models\Permiso;
 
 class RecursoController extends Controller
 {
     public function index()
     {
+        $menu = Menu::where('route', Route::currentRouteName())->pluck('id')->first();
+
         //dd(is_string($pais) && $pais === 'null' ? null : $pais);
-        return view('sistema.interno.recursos.inicio');
+        if (Permiso::where('rol_id', Auth::user()->rol_id)->where('menu_id', $menu)->first()) {
+            return view('sistema.interno.recursos.inicio');
+        }
+
+        return redirect('home');
     }
 
     public function datos()

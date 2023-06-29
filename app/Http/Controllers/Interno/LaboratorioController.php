@@ -4,16 +4,26 @@ namespace App\Http\Controllers\Interno;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\Models\Laboratorio;
 use App\Models\Pais;
+use App\Models\Menu;
+use App\Models\Permiso;
 
 class LaboratorioController extends Controller
 {
     public function index()
     {
-        return view('sistema.interno.laboratorios.inicio');
+        $menu = Menu::where('route', Route::currentRouteName())->pluck('id')->first();
+
+        if (Permiso::where('rol_id', Auth::user()->rol_id)->where('menu_id', $menu)->first()) {
+            return view('sistema.interno.laboratorios.inicio');
+        }
+
+        return redirect('home');
     }
 
     public function datos()

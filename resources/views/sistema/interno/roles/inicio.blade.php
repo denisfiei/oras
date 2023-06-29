@@ -1,5 +1,15 @@
 @extends('layouts.vertical')
 
+@section('css')
+    <style>
+        .list-group-item {
+            padding: 2px 15px !important;
+            border-color: #a9a9a9 !important;
+            background-color: #eeeeee !important;
+        }
+    </style>
+@endsection
+
 @section('content')
     
 <div class="content-body" id="form_roles">
@@ -58,13 +68,13 @@
                                 <td class="text-right">@{{data.nombre}}</td>
                                 <td class="text-center">
                                     <div class="progress ht-5">
-                                        <div class="progress-bar wd-50p" role="progressbar" aria-valuenow="data.permisos_count" aria-valuemin="0" aria-valuemax="10"></div>
+                                        <div class="progress-bar" :style="'width: '+data.users_count+'0%'" role="progressbar" aria-valuenow="data.users_count" aria-valuemin="0" aria-valuemax="10"></div>
                                     </div>
                                     <span class="fs_11">@{{data.users_count}} usuarios</span>
                                 </td>
                                 <td class="text-center">
                                     <div class="progress ht-5">
-                                        <div class="progress-bar wd-50p" role="progressbar" aria-valuenow="data.permisos_count" aria-valuemin="0" aria-valuemax="15"></div>
+                                        <div class="progress-bar" :style="'width: '+data.permisos_count/0.15+'%'" role="progressbar" aria-valuenow="data.permisos_count" aria-valuemin="0" aria-valuemax="15"></div>
                                     </div>
                                     <span class="fs_11">@{{data.permisos_count}} permisos</span>
                                 </td>

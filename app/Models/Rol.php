@@ -24,4 +24,17 @@ class Rol extends Model
     {
         return $this->hasMany(Permiso::class);
     }
+
+    public function administrativos()
+    {
+        return $this->hasMany(ViewPermiso::class)->where('categoria', 'A');
+    }
+    public function operativos()
+    {
+        return $this->hasMany(ViewPermiso::class)->where('categoria', 'O');
+    }
+    public function sistemas()
+    {
+        return $this->hasMany(ViewPermiso::class)->where('categoria', 'S');
+    }
 }

@@ -1,5 +1,6 @@
 @php
     $config_cache = Cache::get('config_cache');
+    $menus = Cache::get('menu_rol_'.Auth::user()->rol_id);
 @endphp
 
 <aside class="aside aside-fixed">
@@ -49,24 +50,39 @@
         <ul class="nav nav-aside">
             <li class="nav-item {{(request()->is('home')) ? 'active' : ''}}"><a href="{{ url('/') }}" class="nav-link"><i class="fas fa-desktop"></i> <span>Inicio</span></a></li>
             
-            <li class="nav-label mg-t-25">MENU DE ADMINISTRATIVO</li>
-            <li class="nav-item {{(request()->is('paises')) ? 'active' : ''}}"><a href="{{ route('paises') }}" class="nav-link"><i class="fas fa-globe-americas"></i> <span>Paises</span></a></li>
-            <li class="nav-item {{(request()->is('laboratorios')) ? 'active' : ''}}"><a href="{{ route('laboratorios') }}" class="nav-link"><i class="fas fa-flask"></i> <span>Laboratorios</span></a></li>
+            @if ( count($menus['administrativos']) > 0 )
+                <li class="nav-label mg-t-25">MENU DE ADMINISTRATIVO</li>
+                @foreach ($menus['administrativos'] as $item)
+                    <li class="nav-item {{(request()->is($item->url)) ? 'active' : ''}}"><a href="{{ route($item->route) }}" class="nav-link"><i class="{{$item->icono}}"></i> <span>{{$item->nombre}}</span></a></li>
+                @endforeach
+            @endif
+            {{-- <li class="nav-item {{(request()->is('paises')) ? 'active' : ''}}"><a href="{{ route('paises') }}" class="nav-link"><i class="fas fa-globe-americas"></i> <span>Paises</span></a></li> --}}
+            {{-- <li class="nav-item {{(request()->is('laboratorios')) ? 'active' : ''}}"><a href="{{ route('laboratorios') }}" class="nav-link"><i class="fas fa-flask"></i> <span>Laboratorios</span></a></li>
             <li class="nav-item {{(request()->is('centros')) ? 'active' : ''}}"><a href="{{ route('centros') }}" class="nav-link"><i class="fas fa-university"></i> <span>Centros de Información</span></a></li>
             <li class="nav-item {{(request()->is('muestreos')) ? 'active' : ''}}"><a href="{{ route('muestreos') }}" class="nav-link"><i class="fas fa-layer-group"></i> <span>Tipos de Muestreo</span></a></li>
-            <li class="nav-item {{(request()->is('recursos')) ? 'active' : ''}}"><a href="{{ route('recursos') }}" class="nav-link"><i class="far fa-file-alt"></i> <span>Recursos</span></a></li>
+            <li class="nav-item {{(request()->is('recursos')) ? 'active' : ''}}"><a href="{{ route('recursos') }}" class="nav-link"><i class="far fa-file-alt"></i> <span>Recursos</span></a></li> --}}
             
-            <li class="nav-label mg-t-25">MENU OPERATIVO</li>
-            <li class="nav-item {{(request()->is('virus')) ? 'active' : ''}}"><a href="{{ route('virus') }}" class="nav-link"><i class="fas fa-virus"></i> <span>Virus</span></a></li>
+            @if ( count($menus['operativos']) > 0 )
+                <li class="nav-label mg-t-25">MENU OPERATIVO</li>
+                @foreach ($menus['operativos'] as $item)
+                    <li class="nav-item {{(request()->is($item->url)) ? 'active' : ''}}"><a href="{{ route($item->route) }}" class="nav-link"><i class="{{$item->icono}}"></i> <span>{{$item->nombre}}</span></a></li>
+                @endforeach
+            @endif
+            {{-- <li class="nav-item {{(request()->is('virus')) ? 'active' : ''}}"><a href="{{ route('virus') }}" class="nav-link"><i class="fas fa-virus"></i> <span>Virus</span></a></li>
             <li class="nav-item {{(request()->is('linajes')) ? 'active' : ''}}"><a href="{{ route('linajes') }}" class="nav-link"><i class="fas fa-bezier-curve"></i> <span>Linajes</span></a></li>
-            <li class="nav-item {{(request()->is('cargas')) ? 'active' : ''}}"><a href="{{ route('cargas') }}" class="nav-link"><i class="fas fa-file-upload"></i> <span>Carga de Datos</span></a></li>
+            <li class="nav-item {{(request()->is('cargas')) ? 'active' : ''}}"><a href="{{ route('cargas') }}" class="nav-link"><i class="fas fa-file-upload"></i> <span>Carga de Datos</span></a></li> --}}
 
-            <li class="nav-label mg-t-25">MENU DE SISTEMA</li>
-            <li class="nav-item {{(request()->is('menus')) ? 'active' : ''}}"><a href="{{ route('menus') }}" class="nav-link"><i class="fas fa-th-list"></i> <span>Menus</span></a></li>
+            @if ( count($menus['sistemas']) > 0 )
+                <li class="nav-label mg-t-25">MENU DE SISTEMA</li>
+                @foreach ($menus['sistemas'] as $item)
+                    <li class="nav-item {{(request()->is($item->url)) ? 'active' : ''}}"><a href="{{ route($item->route) }}" class="nav-link"><i class="{{$item->icono}}"></i> <span>{{$item->nombre}}</span></a></li>
+                @endforeach
+            @endif
+            {{-- <li class="nav-item {{(request()->is('menus')) ? 'active' : ''}}"><a href="{{ route('menus') }}" class="nav-link"><i class="fas fa-th-list"></i> <span>Menus</span></a></li>
             <li class="nav-item {{(request()->is('roles')) ? 'active' : ''}}"><a href="{{ route('roles') }}" class="nav-link"><i class="fas fa-tasks"></i> <span>Roles</span></a></li>
             <li class="nav-item {{(request()->is('users')) ? 'active' : ''}}"><a href="{{ route('users') }}" class="nav-link"><i class="fas fa-users"></i> <span>Usuarios</span></a></li>
             <li class="nav-item {{(request()->is('avisos')) ? 'active' : ''}}"><a href="{{ route('avisos') }}" class="nav-link"><i class="far fa-comment-alt"></i> <span>Avisos</span></a></li>
-            <li class="nav-item {{(request()->is('config')) ? 'active' : ''}}"><a href="{{ route('config') }}" class="nav-link"><i class="fas fa-cog"></i> <span>Datos de configuración</span></a></li>
+            <li class="nav-item {{(request()->is('config')) ? 'active' : ''}}"><a href="{{ route('config') }}" class="nav-link"><i class="fas fa-cog"></i> <span>Datos de configuración</span></a></li> --}}
             {{-- <li class="nav-item with-sub">
                 <a href="" class="nav-link"><i data-feather="user"></i> <span>Usuarios</span></a>
                 <ul>
