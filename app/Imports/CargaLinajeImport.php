@@ -40,6 +40,7 @@ class CargaLinajeImport implements OnEachRow, WithChunkReading, WithStartRow
         $gisaid->codigo = $row[0];
         $gisaid->nombre = $row[1];
         $gisaid->clade = $row[2];
+        $gisaid->grupo = $row[3];
         $gisaid->save();
 
         $this->total += 1;

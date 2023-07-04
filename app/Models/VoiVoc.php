@@ -15,8 +15,20 @@ class VoiVoc extends Model
         'created_at', 'updated_at',
     ];
 
-    public function voi_voc_casos()
+    public function voi_voc_peru()
     {
-        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo');
+        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo')->where('nivel1', 'Peru');
+    }
+    public function voi_voc_colombia()
+    {
+        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo')->where('nivel1', 'Colombia');
+    }
+    public function voi_voc_ecuador()
+    {
+        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo')->where('nivel1', 'Ecuador');
+    }
+    public function voi_voc_bolivia()
+    {
+        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo')->where('nivel1', 'Bolivia');
     }
 }

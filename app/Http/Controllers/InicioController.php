@@ -39,18 +39,18 @@ class InicioController extends Controller
         $ecuador = $ecuador->where('pais_id', 4)->count();
 
         $voi = VoiVoc::where('tipo', 'VOI')
-        ->withCount('voi_voc_casos')
+        ->withCount('voi_voc_peru')
+        ->withCount('voi_voc_colombia')
+        ->withCount('voi_voc_ecuador')
+        ->withCount('voi_voc_bolivia')
         ->get();
-        $voc = VoiVoc::where('tipo', 'VOC')
-        ->withCount('voi_voc_casos')
-        ->get();
-        //return $voi;
 
-        /*->withCount([
-            'voi_voc_casos as count' => function($q) {
-                $q->where('nivel1', 'Peru');
-            }
-        ])*/
+        $voc = VoiVoc::where('tipo', 'VOC')
+        ->withCount('voi_voc_peru')
+        ->withCount('voi_voc_colombia')
+        ->withCount('voi_voc_ecuador')
+        ->withCount('voi_voc_bolivia')
+        ->get();
         
         return view('index', compact('config', 'aviso', 'banners', 'present', 'casos', 'peru', 'colombia', 'bolivia', 'ecuador', 'voi', 'voc'));
     }

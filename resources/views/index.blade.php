@@ -238,11 +238,37 @@
                                 @endif
                                 @foreach ($voi as $item)
                                     <tr>
-                                        <td class="text-center bg_1" width="30%">{{$item->codigo}}</td>
-                                        <td class="text-center bg_3" width="70%">{{$item->voi_voc_casos_count}} casos</td>
+                                        <td class="text-center bg_1" width="30%" rowspan="4">{{$item->codigo}}</td>
+                                        <td class="bg_3" width="70%">
+                                            @if ($item->voi_voc_bolivia_count > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <div>BOLIVIA</div>
+                                                    <div>{{$item->voi_voc_bolivia_count}} casos</div>
+                                                </div>
+                                            @endif
+                                            @if ($item->voi_voc_colombia_count > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <div>COLOMBIA</div>
+                                                    <div>{{$item->voi_voc_colombia_count}} casos</div>
+                                                </div>
+                                            @endif
+                                            @if ($item->voi_voc_ecuador_count > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <div>ECUADOR</div>
+                                                    <div>{{$item->voi_voc_ecuador_count}} casos</div>
+                                                </div>
+                                            @endif
+                                            @if ($item->voi_voc_peru_count > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <div>PERÚ</div>
+                                                    <div>{{$item->voi_voc_peru_count}} casos</div>
+                                                </div>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
-
+                            </table>
+                            <table class="table_gradient w-100">
                                 @if (count($voc) > 0)
                                 <tr>
                                     <td colspan="2">VOC</td>
@@ -251,7 +277,32 @@
                                 @foreach ($voc as $item)
                                     <tr>
                                         <td class="text-center bg_1" width="30%">{{$item->codigo}}</td>
-                                        <td class="text-center bg_3" width="70%">{{$item->voi_voc_casos_count}} casos</td>
+                                        <td class="bg_3" width="70%">
+                                            @if ($item->voi_voc_bolivia_count > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <div>BOLIVIA</div>
+                                                    <div>{{$item->voi_voc_bolivia_count}} casos</div>
+                                                </div>
+                                            @endif
+                                            @if ($item->voi_voc_colombia_count > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <div>COLOMBIA</div>
+                                                    <div>{{$item->voi_voc_colombia_count}} casos</div>
+                                                </div>
+                                            @endif
+                                            @if ($item->voi_voc_ecuador_count > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <div>ECUADOR</div>
+                                                    <div>{{$item->voi_voc_ecuador_count}} casos</div>
+                                                </div>
+                                            @endif
+                                            @if ($item->voi_voc_peru_count > 0)
+                                                <div class="d-flex justify-content-between">
+                                                    <div>PERÚ</div>
+                                                    <div>{{$item->voi_voc_peru_count}} casos</div>
+                                                </div>
+                                            @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             </table>
