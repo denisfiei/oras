@@ -169,17 +169,17 @@ new Vue({
 
             switch (metodo) {                
                 case 'create':
-                    this.modal.title = 'NUEVO VARIANTES DE PREOCUPACIÓN';
+                    this.modal.title = 'NUEVO VOC / VOI';
                     break;
 
                 case 'edit':
-                    this.modal.title = 'EDITAR VARIANTES DE PREOCUPACIÓN';
+                    this.modal.title = 'EDITAR VOC / VOI';
                     this.variante.codigo = seleccion.codigo;
                     this.variante.tipo = seleccion.tipo;
                     break;
 
                 case 'delete':
-                    this.modal.title = 'ELIMINAR VARIANTES DE PREOCUPACIÓN';
+                    this.modal.title = 'ELIMINAR VOC / VOI';
                     this.variante.codigo = seleccion.codigo;
                     break;
                     

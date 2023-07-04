@@ -28,8 +28,8 @@
                                 <div class="dropdown_select_content"> 
                                     <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.tipo ? 'border-error' : '']">@{{variante.tipo}}</button>
                                     <div class="dropdown-menu w-100">
-                                        <li><a class="dropdown-item" href="#" :class="[variante.tipo == 'VOI' ? 'active' : '']" @click="carga.tipo = 'VOI'">VOI</a></li>
-                                        <li><a class="dropdown-item" href="#" :class="[variante.tipo == 'VOC' ? 'active' : '']" @click="carga.tipo = 'VOC'">VOC</a></li>
+                                        <li><a class="dropdown-item" href="#" :class="[variante.tipo == 'VOI' ? 'active' : '']" @click="variante.tipo = 'VOI'">VOI</a></li>
+                                        <li><a class="dropdown-item" href="#" :class="[variante.tipo == 'VOC' ? 'active' : '']" @click="variante.tipo = 'VOC'">VOC</a></li>
                                     </div>
                                 </div>
                                 <div class="input-error" v-if="errors.virus">@{{ errors.virus[0] }}</div>

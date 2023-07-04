@@ -6,10 +6,10 @@
     <div class="container pd-x-0">
         <div class="d-sm-flex align-items-center justify-content-between mg-b-20 mg-lg-b-25 mg-xl-b-30">
             <div>
-                <h4 class="mg-b-0 tx-spacing--1"><i class="far fa-head-side-mask"></i> VARIANTES DE PREOCUPACIÓN</h4>
+                <h4 class="mg-b-0 tx-spacing--1"><i class="far fa-head-side-mask"></i> VARIANTES DE PREOCUPACIÓN O DE INTERES</h4>
             </div>
             <div class="d-none d-md-block">
-                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo Tipo de Muestreo</button>
+                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo VOC / VOI</button>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
     <div class="col-lg-12 col-xl-12 mg-t-10">
         <div class="card mg-b-10">
             <div class="card-header d-flex align-items-center justify-content-between pd-r-12">
-                <h6 class="mg-b-0">LISTA DE VARIANTES DE PREOCUPACIÓN</h6>
+                <h6 class="mg-b-0">LISTA DE VARIANTES DE PREOCUPACIÓN O INTERES</h6>
                 <div class="d-flex tx-16">
                     <a href="#" class="link-03 lh-0" data-bs-toggle="tooltip" title="Recargar Lista" onclick="window.location.reload();"><ion-icon name="reload-sharp"></ion-icon></a>
                     {{-- <a href="" class="link-03 lh-0 mg-l-2"><ion-icon name="ellipsis-vertical"></ion-icon></a> --}}
@@ -94,5 +94,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/voivoc.js?v=1.0.0')}}"></script>
+    <script src="{{asset('views/interno/voivoc.js?v=1.0.1')}}"></script>
 @endsection
