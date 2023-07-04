@@ -8,6 +8,8 @@ use App\Models\Aviso;
 use App\Models\CargaGisaid;
 use App\Models\Config;
 use App\Models\Recurso;
+use App\Models\VoiVoc;
+use App\Models\ViewVoiVoc;
 
 class InicioController extends Controller
 {
@@ -35,7 +37,21 @@ class InicioController extends Controller
         $colombia = $colombia->where('pais_id', 2)->count();
         $bolivia = $bolivia->where('pais_id', 3)->count();
         $ecuador = $ecuador->where('pais_id', 4)->count();
+
+        $voi = VoiVoc::where('tipo', 'VOI')
+        ->withCount('voi_voc_casos')
+        ->get();
+        $voc = VoiVoc::where('tipo', 'VOC')
+        ->withCount('voi_voc_casos')
+        ->get();
+        //return $voi;
+
+        /*->withCount([
+            'voi_voc_casos as count' => function($q) {
+                $q->where('nivel1', 'Peru');
+            }
+        ])*/
         
-        return view('index', compact('config', 'aviso', 'banners', 'present', 'casos', 'peru', 'colombia', 'bolivia', 'ecuador'));
+        return view('index', compact('config', 'aviso', 'banners', 'present', 'casos', 'peru', 'colombia', 'bolivia', 'ecuador', 'voi', 'voc'));
     }
 }

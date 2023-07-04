@@ -231,14 +231,29 @@
                         <h5 class="title_gradient_2">Variantes del COVID-19 que circula en la Región Andina</h5>
                         <div class="px-4 pt-1 pb-3">
                             <table class="table_gradient w-100">
+                                @if (count($voi) > 0)
                                 <tr>
-                                    <td class="text-center bg_1" width="30%">XBB1.16</td>
-                                    <td class="bg_3" width="70%">Ecuador</td>
+                                    <td colspan="2">VOI</td>
                                 </tr>
+                                @endif
+                                @foreach ($voi as $item)
+                                    <tr>
+                                        <td class="text-center bg_1" width="30%">{{$item->codigo}}</td>
+                                        <td class="text-center bg_3" width="70%">{{$item->voi_voc_casos_count}} casos</td>
+                                    </tr>
+                                @endforeach
+
+                                @if (count($voc) > 0)
                                 <tr>
-                                    <td class="text-center bg_1" width="30%">XBB1.5</td>
-                                    <td class="bg_3" width="70%">Bolivia, Colombia y Perú</td>
+                                    <td colspan="2">VOC</td>
                                 </tr>
+                                @endif
+                                @foreach ($voc as $item)
+                                    <tr>
+                                        <td class="text-center bg_1" width="30%">{{$item->codigo}}</td>
+                                        <td class="text-center bg_3" width="70%">{{$item->voi_voc_casos_count}} casos</td>
+                                    </tr>
+                                @endforeach
                             </table>
                         </div>
                     </div>

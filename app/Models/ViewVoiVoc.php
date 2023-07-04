@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ViewGisaid extends Model
+class ViewVoiVoc extends Model
 {
     use HasFactory;
 
-    protected $table = 'view_gisaid';
+    protected $table = 'view_voi_voc';
 }

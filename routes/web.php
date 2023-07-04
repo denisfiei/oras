@@ -62,6 +62,15 @@ Route::middleware('auth')->group(function () {
         Route::post('/update', [App\Http\Controllers\Interno\RecursoController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\RecursoController::class, 'delete']);
     });
+    
+    Route::prefix('voi_voc')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\VoiVocController::class, 'index'])->name('voi_voc');
+        Route::post('/datos', [App\Http\Controllers\Interno\VoiVocController::class, 'datos']);
+        Route::post('/buscar', [App\Http\Controllers\Interno\VoiVocController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\VoiVocController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\VoiVocController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\VoiVocController::class, 'delete']);
+    });
 
     Route::prefix('virus')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\VirusController::class, 'index'])->name('virus');
