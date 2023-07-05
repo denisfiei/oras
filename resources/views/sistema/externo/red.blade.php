@@ -99,6 +99,11 @@
                                     <span>Números de contacto<br>
                                     (+57) 601 2207700</span>
                                 </li> 
+                                <li class="list_red mb-3">
+                                    <i class="far fa-envelope"></i>
+                                    <span>Correo de contacto<br>
+                                    genomica.ins21@gmail.com</span>
+                                </li> 
                             </ul>
                         </div>
                     </div>

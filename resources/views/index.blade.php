@@ -228,7 +228,7 @@
                         </div>
                     </div>
                     <div class="bg_2">
-                        <h5 class="title_gradient_2">Variantes del COVID-19 que circula en la Región Andina</h5>
+                        <h5 class="title_gradient_2">Variantes del SARS-CoV-2 bajo supervisión por la OMS (VUMs) en circulación en la Región Andina</h5>
                         <div class="px-4 pt-1 pb-3">
                             <table class="table_gradient w-100">
                                 @if (count($voi) > 0)
@@ -267,8 +267,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            </table>
-                            <table class="table_gradient w-100">
+
                                 @if (count($voc) > 0)
                                 <tr>
                                     <td colspan="2">VOC</td>
@@ -307,6 +306,7 @@
                                 @endforeach
                             </table>
                         </div>
+                        <a target="_blank" href="https://www.who.int/activities/tracking-SARS-CoV-2-variants" class="ps-4 button_link text-white"><i class="fas fa-link"></i> FUENTE </a>
                     </div>
                 </div>
             </div>

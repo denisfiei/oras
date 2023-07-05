@@ -50,7 +50,7 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
                 if ($text_ini[0] === "hCoV-19") {
                     if (CargaGisaid::where('virus_name', $row[0])->where('activo', 'S')->first()) {
                         $success = false;
-                        $columna[] = 'Virus_name (Registro ya fue cargado anteriormente)';
+                        $columna[] = 'Virus_name ("'.$row[0].'":Registro ya fue cargado anteriormente)';
                     }
                 } else {
                     $success = false;
@@ -64,7 +64,7 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
             } else {
                 if (CargaGisaid::where('accession_id', $row[1])->where('activo', 'S')->first()) {
                     $success = false;
-                    $columna[] = 'Accession_id (Registro ya fue cargado anteriormente)';
+                    $columna[] = 'Accession_id ("'.$row[1].'":Registro ya fue cargado anteriormente)';
                 }
             }   
             
@@ -72,7 +72,7 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
                 $fecha = explode('-', $row[2]);
                 if(count($fecha) < 3){
                     $success = false;
-                    $columna[] = 'Collection_date (No contiene el formato correcto "YYYY-MM-DD")';
+                    $columna[] = 'Collection_date ("'.$row[2].'": No contiene el formato correcto "YYYY-MM-DD")';
                 } else {
                     if (intval($fecha[0]) < 2000) {
                         $success = false;
@@ -97,21 +97,21 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
                 $location = explode('/', $row[3]);
                 if(count($location) == 1){
                     $success = false;
-                    $columna[] = 'Location (No contiene el formato correcto "Europe / Germany")';
+                    $columna[] = 'Location ("'.$row[3].'":No contiene el formato correcto "Europe / Germany")';
                 }
             }
             
             if (!empty($row[7])) {
                 $genders = ["MALE", "Male", "male", 'FEMALE', 'Female', 'female', 'UNKNOWN', 'Unknown', 'unknown'];
-                if( in_array($row[7], $genders) ){
+                if( !in_array($row[7], $genders) ){
                     $success = false;
-                    $columna[] = 'Gender (No esta entre los valores aceptables: Male, Female, Unknown)';
+                    $columna[] = 'Gender ("'.$row[7].'": No esta entre los valores aceptables: Male, Female, Unknown)';
                 }
             }
             
             if ($row[8] != 0 && empty($row[8])) {
                 $success = false;
-                $columna[] = 'Patient_age (No puede estar vacio)';
+                $columna[] = 'Patient_age ("'.$row[8].'":No puede estar vacio)';
             }
             
             if (empty($row[9])) {
