@@ -36,7 +36,12 @@ class CargaController extends Controller
     public function datos(Request $request)
     {
         $virus = Virus::where('activo', 'S')->get();
-        $cargas = Carga::where('activo', '<>', 'N')->with(['pais', 'virus'])->orderBy('id', 'DESC')->paginate(10);
+
+        $cargas = Carga::where('activo', '<>', 'N')->with(['pais', 'virus'])->orderBy('id', 'DESC');
+        if (Auth::user()->rol_id != 1) {
+            $cargas->where('pais_id', Auth::user()->pais_id);
+        }
+        $cargas = $cargas->paginate(10);
 
         return [
             'pagination' => [
@@ -56,6 +61,10 @@ class CargaController extends Controller
     public function buscar(Request $request)
     {
         $cargas = Carga::where('activo', '<>', 'N');
+
+        if (Auth::user()->rol_id != 1) {
+            $cargas->where('pais_id', Auth::user()->pais_id);
+        }
 
         if ($request->search) {
             $search = $request->search;

@@ -29,6 +29,9 @@ class PaisController extends Controller
     public function buscar(Request $request)
     {
         $paises = Pais::where('activo', 'S');
+        if (Auth::user()->rol_id != 1) {
+            $paises->where('id', Auth::user()->pais_id);
+        }
 
         if ($request->search) {
             $search = $request->search;

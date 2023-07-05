@@ -29,7 +29,11 @@ class LaboratorioController extends Controller
     public function datos()
     {
         $paises = Pais::where('activo', 'S')->get();
-        $laboratorios = Laboratorio::where('activo', 'S')->with('pais')->orderBy('id', 'DESC')->paginate(10);
+        $laboratorios = Laboratorio::where('activo', 'S')->with('pais')->orderBy('id', 'DESC');
+        if (Auth::user()->rol_id != 1) {
+            $laboratorios->where('pais_id', Auth::user()->pais_id);
+        }
+        $laboratorios = $laboratorios->paginate(10);
 
         return [
             'pagination' => [
@@ -49,6 +53,10 @@ class LaboratorioController extends Controller
     public function buscar(Request $request)
     {
         $laboratorios = Laboratorio::where('activo', 'S');
+
+        if (Auth::user()->rol_id != 1) {
+            $laboratorios->where('pais_id', Auth::user()->pais_id);
+        }
 
         if ($request->search) {
             $search = $request->search;

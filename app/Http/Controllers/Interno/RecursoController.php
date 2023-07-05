@@ -34,7 +34,12 @@ class RecursoController extends Controller
         $paises = Pais::where('activo', 'S')->get();
         $centros = Centro::where('activo', 'S')->get();
 
-        $recursos = Recurso::where('activo', 'S')->with(['pais', 'centro'])->orderBy('titulo', 'ASC')->paginate(10);
+        $recursos = Recurso::where('activo', 'S')->with(['pais', 'centro'])->orderBy('titulo', 'ASC');
+        
+        if (Auth::user()->rol_id != 1) {
+            $recursos->where('pais_id', Auth::user()->pais_id);
+        }
+        $recursos = $recursos->paginate(10);
 
         return [
             'pagination' => [
@@ -55,6 +60,10 @@ class RecursoController extends Controller
     public function buscar(Request $request)
     {
         $recursos = Recurso::where('activo', 'S');
+
+        if (Auth::user()->rol_id != 1) {
+            $recursos->where('pais_id', Auth::user()->pais_id);
+        }
 
         if ($request->search) {
             $search = $request->search;
