@@ -9,7 +9,6 @@ use App\Models\CargaGisaid;
 use App\Models\Config;
 use App\Models\Recurso;
 use App\Models\VoiVoc;
-use App\Models\ViewVoiVoc;
 
 class InicioController extends Controller
 {

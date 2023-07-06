@@ -23,11 +23,11 @@ class CreateViewGisaidsTable extends Migration
             cg.accession_id AS accession_id, 
             cg.collection_date AS collection_date, 
             YEARWEEK( cg.collection_date, 0 ) AS semana, 
-            ltrim(REPLACE (substr(substring_index( cg.location, '/', 1 ),(length(substring_index( cg.location, '/', 0 )) + 1 )), '/', '')) AS nivel0,
-            ltrim(REPLACE (substr(substring_index( cg.location, '/', 2 ),(length(substring_index( cg.location, '/', 1 )) + 1 )), '/', '')) AS nivel1,
-            ltrim(REPLACE (substr(substring_index( cg.location, '/', 3 ),(length(substring_index( cg.location, '/', 2 )) + 1 )), '/', '')) AS nivel2,
-            ltrim(REPLACE (substr(substring_index( cg.location, '/', 4 ),(length(substring_index( cg.location, '/', 3 )) + 1 )), '/', '')) AS nivel3,
-            ltrim(REPLACE (substr(substring_index( cg.location, '/', 5 ),(length(substring_index( cg.location, '/', 4 )) + 1 )), '/', '')) AS nivel4,
+            UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 1 ),(length(substring_index( cg.location, '/', 0 )) + 1 )), '/', ''))) AS nivel0,
+            UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 2 ),(length(substring_index( cg.location, '/', 1 )) + 1 )), '/', ''))) AS nivel1,
+            UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 3 ),(length(substring_index( cg.location, '/', 2 )) + 1 )), '/', ''))) AS nivel2,
+            UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 4 ),(length(substring_index( cg.location, '/', 3 )) + 1 )), '/', ''))) AS nivel3,
+            UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 5 ),(length(substring_index( cg.location, '/', 4 )) + 1 )), '/', ''))) AS nivel4,
             cg.host AS host, 
             cg.gender AS gender, 
             cg.patient_age AS patient_age, 
@@ -46,6 +46,10 @@ class CreateViewGisaidsTable extends Migration
             cargas AS c
             ON 
                 cg.carga_id = c.id
+            LEFT JOIN
+            mapas
+            ON 
+                cg.ubigeo = mapas.id
         WHERE
             cg.`host` = 'Human' AND
             cg.passage = 'Original'

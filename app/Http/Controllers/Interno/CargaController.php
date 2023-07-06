@@ -404,11 +404,13 @@ class CargaController extends Controller
                 $log_file = "cargas/detalle/logs/log_".time().".log";
                 Storage::put('public/'.$log_file, $contenido);
 
-                $carga->log_detalle = $log_file;
-                $carga->error_detalle = $data['total_error'];
-                $carga->cantidad_detalle = $data['total'];
-                $carga->activo = 'N';
+                $carga->archivo_detalle = null;
+                $carga->file_detalle = null;
+                $carga->cantidad_detalle = null;
                 $carga->save();
+                /*$carga->log_detalle = $log_file;
+                $carga->error_detalle = $data['total_error'];
+                $carga->cantidad_detalle = $data['total'];*/
 
                 CargaDetalle::where('carga_id', $carga->id)->delete();
 

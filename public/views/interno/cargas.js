@@ -477,10 +477,11 @@ new Vue({
         //----------------- UPLOAD
         File(form) {
             this.errors = [];
-            this.Load(form, 'on', 'Cargando archivo ...');
+            //this.Load(form, 'on', 'Cargando archivo ...');
             var file = event.target.files[0];
+            this.carga.file = file;
 
-            var formData  = new FormData();
+            /*var formData  = new FormData();
             formData.append('file', file);
             axios.post('cargas/rows', formData).then(response=>{
                 this.Load(form, 'off', null);
@@ -509,7 +510,7 @@ new Vue({
 
                     this.Alert2(action, title, message);
                 }
-            });
+            });*/
         },
         Gisaid(form) {
             this.errors = [];
@@ -575,17 +576,19 @@ new Vue({
             formData.append('cantidad', this.total_rows);
 
             axios.post('cargas/detalle', formData).then(response=>{
-                console.log(response.data)
                 this.Load(form, 'off', null);
                 var action = response.data.action;
                 var title = response.data.title;
                 var message = response.data.message;
                 
-                if (action == 'success') {
+                if (action == 'success' || action == 'warning') {
                     this.finished = true;
                     this.importar.rows = response.data.import.total;
                     this.importar.rows_error = response.data.import.total_error;
                     this.importar.errors = response.data.import.errors;
+                    if (response.data.log) {
+                        this.importar.log_file = 'storage/'+response.data.log;
+                    }
                     this.Buscar(this.page);
 
                     this.Alert2(action, title, message);

@@ -69,8 +69,10 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
             } 
             
             if (empty($row[4])) {
-                $success = false;
-                $columna[] = 'Ct (No puede estar vacio)';
+                if ($row[4] != 0) {
+                    $success = false;
+                    $columna[] = 'Ct (No puede estar vacio)';
+                }
             } else {
                 if (!is_numeric($row[4])) {
                     $success = false;
@@ -85,38 +87,38 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
                 }
             }
            
-            if (!empty($row[7])) {
+            if ($row[7]) {
                 if ($row[7] != 'SI' && $row[7] != 'NO') {
                     $success = false;
-                    $columna[] = '1Dosis (Debe ser "SI o NO")';
+                    $columna[] = '1Dosis (Debe ser "SI, NO o Vacio")';
                 }
             }
             
-            if (!empty($row[8])) {
+            if ($row[8]) {
                 if ($row[8] != 'SI' && $row[8] != 'NO') {
                     $success = false;
-                    $columna[] = '2Dosis (Debe ser "SI o NO")';
+                    $columna[] = '2Dosis (Debe ser "SI, NO o Vacio")';
                 }
             }
             
-            if (!empty($row[10])) {
+            if ($row[10]) {
                 if ($row[10] != 'SI' && $row[10] != 'NO') {
                     $success = false;
-                    $columna[] = '3Dosis (Debe ser "SI o NO")';
+                    $columna[] = '3Dosis (Debe ser "SI, NO o Vacio")';
                 }
             }
             
-            if (!empty($row[12])) {
+            if ($row[12]) {
                 if ($row[12] != 'SI' && $row[12] != 'NO') {
                     $success = false;
-                    $columna[] = '4Dosis (Debe ser "SI o NO")';
+                    $columna[] = '4Dosis (Debe ser "SI, NO o Vacio")';
                 }
             }
             
             $tipo_muestreo = null;
             if (!$tipo_muestreo = TipoMuestreo::where('nombre', $row[13])->where('activo', 'S')->pluck('id')->first()) {
                 $success = false;
-                $columna[] = 'Tipo_muestreo (No existe en los registros)';
+                $columna[] = 'Tipo_muestreo ("'.$row[13].'": No existe en los registros)';
             }
             /*if (!empty($row[13])) {
                 if ($row[13] != 'VIGILANCIA ALEATORIA' && $row[13] != 'FOCALIZADA' && $row[13] != 'ESPECIAL') {
@@ -125,11 +127,12 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
                 }
             }*/
 
-            if (!empty($row[16])) {
+            if ($row[16]) {
                 $fecha = explode('-', $row[16]);
-                if(count($fecha) < 3 && !checkdate($fecha[1], $fecha[2], $fecha[0])){
+                // if(count($fecha) < 3 && !checkdate($fecha[1], $fecha[2], $fecha[0])){
+                if(count($fecha) < 3){
                     $success = false;
-                    $columna[] = 'Collection_date (No contiene el formato correcto "YYYY-MM-DD")';
+                    $columna[] = 'Corrida ("'.$row[16].'": No contiene el formato correcto "YYYY-MM-DD")';
                 }
             } 
 
@@ -159,21 +162,21 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
                 }
             }
 
-            if (!empty($row[21])) {
+            if ($row[21]) {
                 if ($row[21] != 'SI' && $row[21] != 'NO') {
                     $success = false;
-                    $columna[] = 'Asintomático (Debe ser "SI o NO")';
+                    $columna[] = 'Asintomático (Debe ser "SI, NO o Vacio")';
                 }
             }
             
-            if (!empty($row[23])) {
+            if ($row[23]) {
                 if ($row[23] != 'SI' && $row[23] != 'NO') {
                     $success = false;
-                    $columna[] = 'Comorbilidad (Debe ser "SI o NO")';
+                    $columna[] = 'Comorbilidad (Debe ser "SI, NO o Vacio")';
                 } elseif($row[23] == 'SI') {
                     if (empty($row[24])) {
                         $success = false;
-                        $columna[] = 'Listar_comorbilidad (No puede estar vacio)';
+                        $columna[] = 'Listar_comorbilidad (Si Comorbilidad es SI, este campo no puede estar vacio)';
                     } 
                 }
             }

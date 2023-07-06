@@ -12,8 +12,11 @@
                 <div>
                     <h4 class="text-center mb-1">@{{modal.title}}</h4>
                     {{-- <p class="tx-color-03">It's free to signup and only takes a minute.</p> --}}
-                    <div class="obligatorio text-end mb-4 mt-3" style="max-height: 15px;">
+                    <div class="obligatorio text-end mb-2 mt-3" style="max-height: 15px;">
                         (*)<small style="vertical-align: top;"> Obligatorio</small>
+                    </div>
+                    <div class="mb-4">
+                        <a href="{{asset('files/carga_gisaid_plantilla.tsv')}}" download><i class="far fa-file-times"></i> Descargar plantilla archivo GISAID</a>
                     </div>
 
                     <div data-label="DATOS GENERALES" class="df-example demo-forms" v-if="visible">
@@ -39,8 +42,11 @@
                             </div>
 
                             <template v-if="carga.file">
-                                <div class="col-12 mb-4 text-center">
-                                    <span class="badge text-bg-warning">Se encontraron <strong>@{{total_rows}}</strong> filas por importar !!</span>
+                                <div class="col-12 mt-2 mb-2 text-center">
+                                    <div class="alert alert-warning mb-0" role="alert">
+                                        A continuación se importaran los datos del archivo, para continuar haga clic en el boton <strong>"Importar"</strong> !!
+                                    </div>
+                                    {{-- <span class="badge text-bg-warning">Se encontraron <strong>@{{total_rows}}</strong> filas por importar !!</span> --}}
                                 </div>
                                 <div class="mt-2 mb-2 text-center col-12">
                                     <button class="btn btn-success w-100" @click="Gisaid('import')" style="width: 300px;"><i class="fa-light fa-upload"></i> Importar Datos</button>
@@ -52,12 +58,12 @@
                     <div data-label="RESUMEN DE LA IMPORTACIÓN" class="df-example demo-forms" v-else>
                         <div class="project_progress pt-4">
                             <div class="progress ht-20">
-                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated wd-45p" role="progressbar" aria-valuenow="100%" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                                <div class="progress-bar bg-success wd-45p" role="progressbar" aria-valuenow="100%" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                                     <span style="position: absolute; left: 50%;">100%</span>
                                 </div>
                             </div>
                             <p class="mt-2">
-                                <i class="fas fa-check-circle text-success"></i> @{{importar.rows+'/'+total_rows}} Filas importadas.
+                                <i class="fas fa-check-circle text-success"></i> @{{importar.rows}} Filas importadas.
                             </p>
                             <div class="mt-4" v-if="importar.errors.length > 0" style="max-height: 500px; overflow-y: auto;">
                                 <table class="table table-sm table-error">
@@ -94,12 +100,15 @@
                 <div>
                     <h4 class="text-center mb-1">@{{modal.title}}</h4>
                     {{-- <p class="tx-color-03">It's free to signup and only takes a minute.</p> --}}
-                    <div class="obligatorio text-end mb-4 mt-3" style="max-height: 15px;">
+                    <div class="obligatorio text-end mb-2 mt-3" style="max-height: 15px;">
                         (*)<small style="vertical-align: top;"> Obligatorio</small>
+                    </div>
+                    <div class="mb-4">
+                        <a href="{{asset('files/carga_detalle_plantilla.tsv')}}" download><i class="far fa-file-times"></i> Descargar plantilla archivo GISAID_DETALLE</a>
                     </div>
 
                     <div class="mb-4">
-                        <strong>REFERENCIA GISAID:</strong> <span class="text-primary"><i class="far fa-file-times"></i> @{{carga.archivo}}</span>
+                        <strong>REFERENCIA GISAID:</strong> <span><i class="far fa-file-times"></i> @{{carga.archivo}}</span>
                     </div>
                     <div data-label="DATOS GENERALES" class="df-example demo-forms" v-if="visible">
                         <div class="row">
@@ -118,13 +127,17 @@
                             <div class="form-group col-md-12 mb-2">
                                 <label class="form-label mb-0" for="file">SUBIR ARCHIVO <span class="obligatorio">(*)</span></label>
                                 <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
-                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel">
+                                accept=".tsv">
+                                {{-- accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"> --}}
                                 <div class="input-error" v-if="errors.file">@{{ errors.file[0] }}</div>
                             </div>
 
                             <template v-if="carga.file">
                                 <div class="col-12 mb-4 text-center">
-                                    <span class="badge text-bg-warning">Se encontraron <strong>@{{total_rows}}</strong> filas por importar !!</span>
+                                    <div class="alert alert-warning mb-0" role="alert">
+                                        A continuación se importaran los datos del archivo, para continuar haga clic en el boton <strong>"Importar"</strong> !!
+                                    </div>
+                                    {{-- <span class="badge text-bg-warning">Se encontraron <strong>@{{total_rows}}</strong> filas por importar !!</span> --}}
                                 </div>
                                 <div class="mt-2 mb-2 text-center col-12">
                                     <button class="btn btn-success w-100" @click="Detalle('carga')" style="width: 300px;"><i class="fa-light fa-upload"></i> Importar Datos</button>
@@ -136,17 +149,20 @@
                     <div data-label="RESUMEN DE LA IMPORTACIÓN" class="df-example demo-forms" v-else>
                         <div class="project_progress pt-4">
                             <div class="progress ht-20">
-                                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated wd-45p" role="progressbar" aria-valuenow="100%" aria-valuemin="0" aria-valuemax="100" style="width:100%">
+                                <div class="progress-bar bg-success wd-45p" role="progressbar" aria-valuenow="100%" aria-valuemin="0" aria-valuemax="100" style="width:100%">
                                     <span style="position: absolute; left: 50%;">100%</span>
                                 </div>
                             </div>
                             <p class="mt-2">
-                                <i class="fas fa-check-circle text-success"></i> @{{importar.rows+'/'+total_rows}} Filas importadas.
+                                <i class="fas fa-check-circle text-success"></i> @{{importar.rows}} Filas importadas.
                             </p>
                             <div class="mt-4" v-if="importar.errors.length > 0" style="max-height: 500px; overflow-y: auto;">
                                 <table class="table table-sm table-error">
                                     <tr style="background-color: #dddddd;">
                                         <th colspan="2"><i class="far fa-file-excel"></i> ERROR DE DATOS (@{{importar.rows_error}})</th>
+                                    </tr>
+                                    <tr v-if="importar.log_file">
+                                        <th colspan="2" class="text-center"><a :href="importar.log_file" download id="log_file"><i class="fas fa-eye"></i> Ver archivo log</a></th>
                                     </tr>
                                     <tr style="background-color: #dddddd;">
                                         <th>FILA</th>

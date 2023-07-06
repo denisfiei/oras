@@ -20,7 +20,7 @@ class CreateCargaDetallesTable extends Migration
             //$table->foreignId('linaje_id')->references('id')->on('linajes')->onDelete('restrict');
             $table->foreignId('pais_id')->references('id')->on('paises')->onDelete('restrict');
             $table->string('virus_name', 100)->nullable();
-            $table->string('id_paid', 100)->nullable();
+            $table->string('id_pais', 100)->nullable();
             $table->string('kit_ct', 100)->nullable();
             $table->string('gen', 100)->nullable();
             $table->string('ct', 50)->nullable();
@@ -39,7 +39,7 @@ class CreateCargaDetallesTable extends Migration
             $table->string('corrida', 50)->nullable();
             $table->string('verificado', 50)->nullable();
             $table->date('fecha_sistema')->nullable();
-            $table->string('coberage', 50)->nullable();
+            $table->string('coverage', 50)->nullable();
             $table->string('n_percentage', 20)->nullable();
             $table->char('asintomatico', 2)->default('NO');
             $table->text('sintomas')->nullable();

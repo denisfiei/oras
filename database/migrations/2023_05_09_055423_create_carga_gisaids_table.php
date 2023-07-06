@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use PhpOffice\PhpSpreadsheet\Worksheet\AutoFilter\Column;
 
 class CreateCargaGisaidsTable extends Migration
 {
@@ -22,6 +23,7 @@ class CreateCargaGisaidsTable extends Migration
             $table->string('virus_name', 100);
             $table->string('accession_id', 100);
             $table->date('collection_date')->nullable();
+            $table->char('ubigeo', 6)->nullable();
             $table->string('location')->nullable();
             $table->string('host', 20)->nullable();
             $table->string('additional_location_information')->nullable();
