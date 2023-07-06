@@ -3,6 +3,7 @@
 namespace App\Imports;
 
 use App\Models\CargaGisaid;
+use App\Models\Mapa;
 use App\Models\TipoMuestreo;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Row;
@@ -10,6 +11,7 @@ use Maatwebsite\Excel\Concerns\OnEachRow;
 use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\Importable;
+use Illuminate\Support\Str;
 use Carbon\Carbon;
 
 class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
@@ -95,10 +97,36 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
             
             if (!empty($row[3])) {
                 $location = explode('/', $row[3]);
-                if(count($location) == 1){
+
+                if(count($location) <= 1){
                     $success = false;
                     $columna[] = 'Location ("'.$row[3].'":No contiene el formato correcto "Europe / Germany")';
+                } else {
+                    switch (count($location)) {
+                        case 2:
+                            $ubigeo = Mapa::where('nivel1', 'like', '%'.Str::upper(trim($location[1])).'%')
+                            ->pluck('id')
+                            ->first();
+                            break;
+                        case 3:
+                            $ubigeo = Mapa::where('nivel1', 'like', '%'.Str::upper(trim($location[1])).'%')
+                            ->where('nivel2', 'like', '%'.Str::upper(trim($location[2])).'%')
+                            ->pluck('id')
+                            ->first();
+                            break;
+                        
+                        default:
+                            $ubigeo = Mapa::where('nivel1', 'like', '%'.Str::upper(trim($location[1])).'%')
+                            ->where('nivel2', 'like', '%'.Str::upper(trim($location[2])).'%')
+                            ->where('nivel3', 'like', '%'.Str::upper(trim($location[3])).'%')
+                            ->pluck('id')
+                            ->first();
+                            break;
+                    }
                 }
+            } else {
+                $success = false;
+                $columna[] = 'Location ("'.$row[3].'":No puede estar vacio)';
             }
             
             if (!empty($row[7])) {
@@ -147,6 +175,7 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
                 $gisaid->virus_name = $row[0];
                 $gisaid->accession_id = $row[1];
                 $gisaid->collection_date = $row[2];
+                $gisaid->ubigeo = $ubigeo;
                 $gisaid->location = $row[3];
                 $gisaid->host = $row[4];
                 $gisaid->additional_location_information = $row[5];
