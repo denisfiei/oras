@@ -331,6 +331,9 @@ class CargaController extends Controller
                     'import'    =>  $data,
                     'log'       =>  $log_file
                 ];
+            } else {
+                $carga->cantidad_gisaid = $data['total'];
+                $carga->save();
             }
 
             $carga->cantidad_gisaid = $data['total'];
@@ -425,6 +428,9 @@ class CargaController extends Controller
                     'import'    =>  $data,
                     'log'       =>  $log_file
                 ];
+            } else {
+                $carga->cantidad_detalle = $data['total'];
+                $carga->save();
             }
 
             DB::commit();
