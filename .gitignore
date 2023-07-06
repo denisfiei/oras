@@ -23,5 +23,4 @@ Homestead.json
 /.idea
 /.vscode
 composer.lock
-/public/files
 .env
