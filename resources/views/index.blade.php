@@ -238,7 +238,7 @@
                                 @endif
                                 @foreach ($voi as $item)
                                     <tr>
-                                        <td class="text-center bg_1" width="30%" rowspan="4">{{$item->codigo}}</td>
+                                        <td class="text-center bg_1" width="30%">{{$item->codigo}}</td>
                                         <td class="bg_3" width="70%">
                                             @if ($item->voi_voc_bolivia_count > 0)
                                                 <div class="d-flex justify-content-between">

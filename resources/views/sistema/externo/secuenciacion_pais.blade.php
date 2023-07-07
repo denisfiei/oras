@@ -36,7 +36,7 @@
                                     </span>
                                 </p>
                                 <div class="pb-3">
-                                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZmI1MzdmNDUtMjkyMy00ZjU1LWEzNWEtNjUyODAyNzVlNWRkIiwidCI6IjNhODk3YjhiLTJmNmItNGI0OS05NGExLWJlN2RhMzMzZTM5ZiJ9&pageName=ReportSection0443596c064db8910077" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
+                                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYTI3MDU3NGMtODdkMC00MTc1LWFmNTYtZjliOWQ3YTAzOWRlIiwidCI6IjNhODk3YjhiLTJmNmItNGI0OS05NGExLWJlN2RhMzMzZTM5ZiJ9&pageName=ReportSectiona6526770a8b29ef84369" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
                                 </div>
                                 <p class="subtitle_pais pb-0">
                                     <span class="md">Linajes</span><br>
@@ -46,7 +46,7 @@
                                     </span>
                                 </p>
                                 <div class="pb-3">
-                                    <a href="https://app.powerbi.com/view?r=eyJrIjoiZmI1MzdmNDUtMjkyMy00ZjU1LWEzNWEtNjUyODAyNzVlNWRkIiwidCI6IjNhODk3YjhiLTJmNmItNGI0OS05NGExLWJlN2RhMzMzZTM5ZiJ9&pageName=ReportSection" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
+                                    <a href="https://app.powerbi.com/view?r=eyJrIjoiYTI3MDU3NGMtODdkMC00MTc1LWFmNTYtZjliOWQ3YTAzOWRlIiwidCI6IjNhODk3YjhiLTJmNmItNGI0OS05NGExLWJlN2RhMzMzZTM5ZiJ9&pageName=ReportSection" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
                                 </div>
     
                                 <p class="text-center">
