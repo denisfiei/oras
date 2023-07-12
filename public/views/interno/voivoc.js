@@ -29,9 +29,15 @@ new Vue({
         seleccion: [],
         errors: [],
 
+        tipos: [
+            { 'codigo': 'VOI', 'nombre': 'VOI - Variantes de Interes' },
+            { 'codigo': 'VOC', 'nombre': 'VOC - Variantes de Preocupación' },
+            { 'codigo': 'VBM', 'nombre': 'VBM - Variantes bajo Monitoreo' },
+        ],
         variante: {
             'codigo': null,
-            'tipo': 'VOI',
+            'tipo': null,
+            'tipo_text': '--- Seleccione opción ---',
         }
     },
     created() {
@@ -169,17 +175,17 @@ new Vue({
 
             switch (metodo) {                
                 case 'create':
-                    this.modal.title = 'NUEVO VOC / VOI';
+                    this.modal.title = 'NUEVO VOC / VOI / VBM';
                     break;
 
                 case 'edit':
-                    this.modal.title = 'EDITAR VOC / VOI';
+                    this.modal.title = 'EDITAR VOC / VOI / VBM';
                     this.variante.codigo = seleccion.codigo;
                     this.variante.tipo = seleccion.tipo;
                     break;
 
                 case 'delete':
-                    this.modal.title = 'ELIMINAR VOC / VOI';
+                    this.modal.title = 'ELIMINAR VOC / VOI / VBM';
                     this.variante.codigo = seleccion.codigo;
                     break;
                     
@@ -306,6 +312,10 @@ new Vue({
 
                 this.Alert2(action, title, message);
             });
+        },
+        SelectTipo(data) {
+            this.variante.tipo = data.codigo;
+            this.variante.tipo_text = data.nombre;
         },
         Fecha(date) {
             if (date) {

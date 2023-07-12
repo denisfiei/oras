@@ -294,7 +294,11 @@ class CargaController extends Controller
             $carga->save();
 
             $import = new CargaTsvGisaidImport($carga);
-            Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::TSV);
+            if ($request->tipo == 'tsv') {
+                Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::TSV);
+            } else {
+                Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::XLSX);
+            }
             $data = $import->getData();
 
             if (count($data['errors']) > 0) {
@@ -389,7 +393,11 @@ class CargaController extends Controller
             $carga->save();
 
             $import = new CargaTsvDetalleImport($carga);
-            Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::TSV);
+            if ($request->tipo == 'tsv') {
+                Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::TSV);
+            } else {
+                Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::XLSX);
+            }
             $data = $import->getData();
 
             if (count($data['errors']) > 0) {

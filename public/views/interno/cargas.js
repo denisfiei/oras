@@ -41,6 +41,7 @@ new Vue({
             'muestreo': null,
             'muestreo_text': '--- Seleccione una Opción ---',
             'archivo': null,
+            'tipo': 'TSV',
             'file': null
         },
         gisaids: [],
@@ -276,6 +277,7 @@ new Vue({
                 'muestreo': null,
                 'muestreo_text': '--- Seleccione una Opción ---',
                 'archivo': null,
+                'tipo': 'TSV',
                 'file': null
             };
             this.gisaids = [];
@@ -519,6 +521,7 @@ new Vue({
 
             var formData  = new FormData();
             formData.append('virus', this.carga.virus);
+            formData.append('tipo', this.carga.tipo);
             formData.append('file', this.carga.file);
             formData.append('cantidad', this.total_rows);
 
@@ -571,6 +574,7 @@ new Vue({
 
             var formData  = new FormData();
             formData.append('id', this.id);
+            formData.append('tipo', this.carga.tipo);
             // formData.append('muestreo', this.carga.muestreo);
             formData.append('file', this.carga.file);
             formData.append('cantidad', this.total_rows);

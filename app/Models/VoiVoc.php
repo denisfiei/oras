@@ -17,18 +17,18 @@ class VoiVoc extends Model
 
     public function voi_voc_peru()
     {
-        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo')->where('nivel1', 'Peru');
+        return $this->hasMany(ViewGisaid2::class, 'lineage', 'codigo')->where('nivel1', 'Peru');
     }
     public function voi_voc_colombia()
     {
-        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo')->where('nivel1', 'Colombia');
+        return $this->hasMany(ViewGisaid2::class, 'lineage', 'codigo')->where('nivel1', 'Colombia');
     }
     public function voi_voc_ecuador()
     {
-        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo')->where('nivel1', 'Ecuador');
+        return $this->hasMany(ViewGisaid2::class, 'lineage', 'codigo')->where('nivel1', 'Ecuador');
     }
     public function voi_voc_bolivia()
     {
-        return $this->hasMany(ViewGisaid::class, 'lineage', 'codigo')->where('nivel1', 'Bolivia');
+        return $this->hasMany(ViewGisaid2::class, 'lineage', 'codigo')->where('nivel1', 'Bolivia');
     }
 }

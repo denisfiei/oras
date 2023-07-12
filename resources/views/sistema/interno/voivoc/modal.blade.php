@@ -26,10 +26,11 @@
                             <div class="form-group col-md-12 mb-3">
                                 <label class="form-label mb-0" for="tipo">TIPO <span class="obligatorio">(*)</span></label>
                                 <div class="dropdown_select_content"> 
-                                    <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.tipo ? 'border-error' : '']">@{{variante.tipo}}</button>
+                                    <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.tipo ? 'border-error' : '']">@{{variante.tipo_text}}</button>
                                     <div class="dropdown-menu w-100">
-                                        <li><a class="dropdown-item" href="#" :class="[variante.tipo == 'VOI' ? 'active' : '']" @click="variante.tipo = 'VOI'">VOI</a></li>
-                                        <li><a class="dropdown-item" href="#" :class="[variante.tipo == 'VOC' ? 'active' : '']" @click="variante.tipo = 'VOC'">VOC</a></li>
+                                        <li v-for="item in tipos">
+                                            <a class="dropdown-item" href="#" :class="[variante.tipo == item.codigo ? 'active' : '']" @click="SelectTipo(item)">@{{item.nombre}}</a>
+                                        </li>
                                     </div>
                                 </div>
                                 <div class="input-error" v-if="errors.virus">@{{ errors.virus[0] }}</div>

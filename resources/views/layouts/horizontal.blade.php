@@ -39,6 +39,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300&family=Merriweather+Sans:wght@300&display=swap" rel="stylesheet"> --}}
 
     @yield('css')
+
+    <style>
+        .nav_footer {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: #fff;
+        }
+        .nav_footer a {
+            font-size: 16px;
+            color: #ffffffb3;
+        }
+        .nav_footer a:hover {
+            text-decoration: underline;
+            color: #fff;
+        }
+    </style>
 </head>
 
 <body>
@@ -102,30 +119,30 @@
     <div class="bg_1 mt-5">
         <div class="container">
             <div class="row pt-5 pb-5">
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <h2 class="bg_5 px-5 py-5 m-0">Contacto</h2>
-                    <div class="bg_3 px-5 py-3">
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <h3 class="bg_5 px-5 py-4 m-0">Contacto</h3>
+                    <div class="bg_3 px-5 py-2">
                         <ul class="p-0 m-0">
-                            <li class="list_red mb-1 tx-18">
+                            <li class="list_red mb-1 tx-16">
                                 <i class="fas fa-map-marker-alt"></i>
                                 <span>Av. Paseo la República N° 3832<br>Tercer Piso. Lima - Perú</span>
                             </li>
-                            <li class="list_red tx-18">
+                            <li class="list_red tx-16">
                                 <i class="fas fa-phone-rotary"></i>
                                 <span>(511) 611-3700</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="bg_6 px-5 py-3">
+                    <div class="bg_6 px-5 py-2">
                         <h5 class="">Email</h5>
                         <ul class="p-0 m-0">
                             <li class="list_red">
                                 <i class="fas fa-envelope"></i>
-                                <span class="tx-18">contacto@conhu.org.pe</span>
+                                <span class="tx-16">contacto@conhu.org.pe</span>
                             </li>
                         </ul>
                     </div>
-                    <div class="bg-white px-5 py-3">
+                    <div class="bg-white px-5 py-2">
                         <h5 class="text_1">Redes Sociales</h5>
                         <div style="display: flex;">
                             <a href="{{$config_cache->facebook}}" class="btn_socials facebook" target="_blank"><i class="fab fa-facebook-f"></i> </a>
@@ -135,17 +152,28 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-md-12 col-sm-12">
-                    <div class="mt-3 text-center">
+                <div class="col-lg-4 col-md-12 col-sm-12 px-5">
+                    <h3 class="text-white py-4 m-0">Accesos Rápidos</h3>
+                    <div>
+                        <ul class="nav_footer">
+                            <li><a href="{{url('/')}}">Inicio</a></li>
+                            <li><a href="{{route('vigilancia')}}">Vigilancia Genómica</a></li>
+                            <li><a href="{{route('red_regional')}}">Red Regional</a></li>
+                            <li><a href="{{route('secuenciacion')}}">Secuenciación</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-12 col-sm-12">
+                    <div class="mt-2 text-center">
                         <div style="display: flex; justify-content: center;">
                             @if ($config_cache->logo)
-                                <img src="{{ $path.'/storage/'.$config_cache->logo }}" alt="Logo" style="max-width: 100px;"></a>
+                                <img src="{{ $path.'/storage/'.$config_cache->logo }}" alt="Logo" style="max-width: 80px;"></a>
                             @endif
-                            <span class="text-white tx-bold ps-3 tx-18" style="padding-top: 22px;">ORGANISMO ANDINO DE SALUD<br>CONVENIO HIPÓLITO UNANUE</span>
+                            <span class="text-white tx-bold ps-3 tx-16" style="padding-top: 14px;">ORGANISMO ANDINO DE SALUD<br>CONVENIO HIPÓLITO UNANUE</span>
                         </div>
                     </div>
-                    <div class="mt-5 text-center">
-                        <img src="{{asset('images/logos/logo_home_white.png')}}" alt="logo_white" style="max-width: 300px">
+                    <div class="mt-2 text-center">
+                        <img src="{{asset('images/logos/logo_home_white.png')}}" alt="logo_white" style="max-width: 160px">
                     </div>
                     <div class="mt-5 text-center">
                         <div class="content_institutos">

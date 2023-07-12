@@ -31,10 +31,15 @@ class InicioController extends Controller
         $bolivia = clone $casos;//3
         $ecuador = clone $casos;//4
         
+        $casos_fecha = $casos->orderBy('collection_date', 'DESC')->pluck('collection_date')->first();
         $casos = $casos->count();
+        $peru_fecha = $peru->where('pais_id', 1)->orderBy('collection_date', 'DESC')->pluck('collection_date')->first();
         $peru = $peru->where('pais_id', 1)->count();
+        $colombia_fecha = $colombia->where('pais_id', 2)->orderBy('collection_date', 'DESC')->pluck('collection_date')->first();
         $colombia = $colombia->where('pais_id', 2)->count();
+        $bolivia_fecha = $bolivia->where('pais_id', 3)->orderBy('collection_date', 'DESC')->pluck('collection_date')->first();
         $bolivia = $bolivia->where('pais_id', 3)->count();
+        $ecuador_fecha = $ecuador->where('pais_id', 4)->orderBy('collection_date', 'DESC')->pluck('collection_date')->first();
         $ecuador = $ecuador->where('pais_id', 4)->count();
 
         $voi = VoiVoc::where('tipo', 'VOI')
@@ -43,14 +48,19 @@ class InicioController extends Controller
         ->withCount('voi_voc_ecuador')
         ->withCount('voi_voc_bolivia')
         ->get();
-
         $voc = VoiVoc::where('tipo', 'VOC')
         ->withCount('voi_voc_peru')
         ->withCount('voi_voc_colombia')
         ->withCount('voi_voc_ecuador')
         ->withCount('voi_voc_bolivia')
         ->get();
+        $vbm = VoiVoc::where('tipo', 'VBM')
+        ->withCount('voi_voc_peru')
+        ->withCount('voi_voc_colombia')
+        ->withCount('voi_voc_ecuador')
+        ->withCount('voi_voc_bolivia')
+        ->get();
         
-        return view('index', compact('config', 'aviso', 'banners', 'present', 'casos', 'peru', 'colombia', 'bolivia', 'ecuador', 'voi', 'voc'));
+        return view('index', compact('config', 'aviso', 'banners', 'present', 'casos_fecha', 'casos', 'peru_fecha', 'peru', 'colombia_fecha', 'colombia', 'bolivia_fecha', 'bolivia', 'ecuador_fecha', 'ecuador', 'voi', 'voc', 'vbm'));
     }
 }

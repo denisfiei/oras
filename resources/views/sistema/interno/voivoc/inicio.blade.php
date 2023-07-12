@@ -9,7 +9,7 @@
                 <h4 class="mg-b-0 tx-spacing--1"><i class="far fa-head-side-mask"></i> VARIANTES DE PREOCUPACIÓN O DE INTERES</h4>
             </div>
             <div class="d-none d-md-block">
-                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo VOC / VOI</button>
+                <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5" @click="Modal('modal-md', 'create', null, null)"><i class="fas fa-plus wd-10 mg-r-5"></i> Nuevo VOC / VOI / VBM</button>
             </div>
         </div>
     </div>

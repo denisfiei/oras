@@ -33,11 +33,23 @@
                                 </div>
                                 <div class="input-error" v-if="errors.virus">@{{ errors.virus[0] }}</div>
                             </div>
+                            <div class="form-group col-md-12 mb-3">
+                                <label class="form-label mb-0" for="tipo">TIPO DE ARCHIVO A SUBIR <span class="obligatorio">(*)</span></label>
+                                <div class="dropdown_select_content"> 
+                                    <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.tipo ? 'border-error' : '']">@{{carga.tipo}}</button>
+                                    <div class="dropdown-menu w-100">
+                                        <li><a class="dropdown-item" href="#" :class="[carga.tipo == 'TSV' ? 'active' : '']" @click="carga.tipo = 'TSV'">TSV</a></li>
+                                        <li><a class="dropdown-item" href="#" :class="[carga.tipo == 'XLSX' ? 'active' : '']" @click="carga.tipo = 'XLSX'">XLSX</a></li>
+                                    </div>
+                                </div>
+                                <div class="input-error" v-if="errors.tipo">@{{ errors.tipo[0] }}</div>
+                            </div>
                             <div class="form-group col-md-12 mb-2">
                                 <label class="form-label mb-0" for="file">SUBIR ARCHIVO <span class="obligatorio">(*)</span></label>
                                 <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
-                                accept=".tsv">
-                                {{-- accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"> --}}
+                                accept=".tsv" v-if="carga.tipo == 'TSV'">
+                                <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
+                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" v-else>
                                 <div class="input-error" v-if="errors.file">@{{ errors.file[0] }}</div>
                             </div>
 
@@ -124,11 +136,23 @@
                                 </div>
                                 <div class="input-error" v-if="errors.muestreo">@{{ errors.muestreo[0] }}</div>
                             </div> --}}
+                            <div class="form-group col-md-12 mb-3">
+                                <label class="form-label mb-0" for="tipo">TIPO DE ARCHIVO A SUBIR <span class="obligatorio">(*)</span></label>
+                                <div class="dropdown_select_content"> 
+                                    <button class="form_select" type="button" data-bs-toggle="dropdown" aria-expanded="false" :class="[errors.tipo ? 'border-error' : '']">@{{carga.tipo}}</button>
+                                    <div class="dropdown-menu w-100">
+                                        <li><a class="dropdown-item" href="#" :class="[carga.tipo == 'TSV' ? 'active' : '']" @click="carga.tipo = 'TSV'">TSV</a></li>
+                                        <li><a class="dropdown-item" href="#" :class="[carga.tipo == 'XLSX' ? 'active' : '']" @click="carga.tipo = 'XLSX'">XLSX</a></li>
+                                    </div>
+                                </div>
+                                <div class="input-error" v-if="errors.tipo">@{{ errors.tipo[0] }}</div>
+                            </div>
                             <div class="form-group col-md-12 mb-2">
                                 <label class="form-label mb-0" for="file">SUBIR ARCHIVO <span class="obligatorio">(*)</span></label>
                                 <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
-                                accept=".tsv">
-                                {{-- accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"> --}}
+                                accept=".tsv" v-if="carga.tipo == 'TSV'">
+                                <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
+                                accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" v-else>
                                 <div class="input-error" v-if="errors.file">@{{ errors.file[0] }}</div>
                             </div>
 

@@ -35,7 +35,11 @@ class CreateViewGisaidsTable extends Migration
             cg.passage AS passage, 
             cg.lineage AS lineage, 
             cg.clade AS clade, 
-            c.activo AS activo
+            c.activo AS activo,
+            mapas.latitud AS latitud,
+            mapas.longitud AS longitud,
+            mapas.geo_shape AS geo_shape,
+            ( SELECT sei.inicio FROM semana_epidemiologica sei WHERE((sei.inicio <= cg.collection_date ) AND ( sei.fin >= cg.collection_date ))) AS inicio
         FROM
             carga_gisaids AS cg
             LEFT JOIN
@@ -51,7 +55,7 @@ class CreateViewGisaidsTable extends Migration
             ON 
                 cg.ubigeo = mapas.id
         WHERE
-            cg.`host` = 'Human' AND
+            cg.host = 'Human' AND
             cg.passage = 'Original'
         ");
     }
