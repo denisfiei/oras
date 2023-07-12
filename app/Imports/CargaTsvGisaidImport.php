@@ -70,28 +70,23 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
                 }
             }   
             
+            $collection_date = null;
             if (!empty($row[2])) {
                 $fecha = explode('-', $row[2]);
-                if(count($fecha) < 3){
-                    $success = false;
-                    $columna[] = 'Collection_date ("'.$row[2].'": No contiene el formato correcto "YYYY-MM-DD")';
-                } else {
-                    if (intval($fecha[0]) < 2000) {
-                        $success = false;
-                        $columna[] = 'Collection_date ('.$fecha[0].' No contiene el formato para el año "YYYY")';
+                if(count($fecha) == 3){
+                    if (intval($fecha[0]) > 2000) {
+                        /*$success = false;
+                        $columna[] = 'Collection_date ('.$fecha[0].' No contiene el formato para el año "YYYY")';*/
+                        if (intval($fecha[1]) < 12 && intval($fecha[1]) > 1) {
+                            /*$success = false;
+                            $columna[] = 'Collection_date ('.$fecha[1].' No contiene el formato correcto para el mes "MM")';*/
+                            if (intval($fecha[2]) < 31 && intval($fecha[2]) > 1) {
+                                $collection_date = $row[2];
+                                /*$success = false;
+                                $columna[] = 'Collection_date ('.$fecha[2].' No contiene el formato correcto para día "DD")';*/
+                            }
+                        }
                     }
-                    if (intval($fecha[1]) > 12 || intval($fecha[1]) < 1) {
-                        $success = false;
-                        $columna[] = 'Collection_date ('.$fecha[1].' No contiene el formato correcto para el mes "MM")';
-                    }
-                    if (intval($fecha[2]) > 31 || intval($fecha[2]) < 1) {
-                        $success = false;
-                        $columna[] = 'Collection_date ('.$fecha[2].' No contiene el formato correcto para día "DD")';
-                    }
-                    /*if (!checkdate($ef[1], $ef[2], $ef[0])) {
-                        $success = false;
-                        $columna[] = 'Collection_date (No contiene el formato correcto "YYYY-MM-DD")';
-                    }*/
                 }
             }   
             
@@ -174,7 +169,8 @@ class CargaTsvGisaidImport implements OnEachRow, WithChunkReading, WithStartRow
                 $gisaid->pais_id = $this->carga->pais_id;
                 $gisaid->virus_name = $row[0];
                 $gisaid->accession_id = $row[1];
-                $gisaid->collection_date = $row[2];
+                $gisaid->collection_date_text = $row[2];
+                $gisaid->collection_date = $collection_date;
                 $gisaid->ubigeo = $ubigeo;
                 $gisaid->location = $row[3];
                 $gisaid->host = $row[4];
