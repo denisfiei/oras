@@ -135,8 +135,9 @@ class LinajeController extends Controller
             $fileContent = 'carga_linajes/arch_'.time().'.'.$extension;
             Storage::putFileAs('public/', $file, $fileContent);
             
-            $linajes = Linaje::where('activo', 'S')->update(['activo' => 'N']);
-            $carga_old = CargaLinaje::where('activo', 'S')->update(['activo' => 'N']);
+            CargaLinaje::where('activo', 'S')->update(['activo' => 'N']);
+            Linaje::where('activo', 'S')->delete();
+            //Linaje::where('activo', 'S')->update(['activo' => 'N']);
 
             $carga = new CargaLinaje();
             $carga->archivo = $fileName;

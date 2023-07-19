@@ -22,7 +22,6 @@ class CreateViewGisaidsTable extends Migration
             cg.virus_name AS virus_name,, 
             cg.accession_id AS accession_id, 
             cg.collection_date AS collection_date, 
-            YEARWEEK( cg.collection_date, 0 ) AS semana, 
             UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 1 ),(length(substring_index( cg.location, '/', 0 )) + 1 )), '/', ''))) AS nivel0,
             UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 2 ),(length(substring_index( cg.location, '/', 1 )) + 1 )), '/', ''))) AS nivel1,
             UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 3 ),(length(substring_index( cg.location, '/', 2 )) + 1 )), '/', ''))) AS nivel2,
@@ -39,7 +38,7 @@ class CreateViewGisaidsTable extends Migration
             mapas.latitud AS latitud,
             mapas.longitud AS longitud,
             mapas.geo_shape AS geo_shape,
-            ( SELECT sei.inicio FROM semana_epidemiologica sei WHERE((sei.inicio <= cg.collection_date ) AND ( sei.fin >= cg.collection_date ))) AS inicio
+            ( SELECT sei.semana FROM semana_epidemiologica sei WHERE((sei.inicio <= cg.collection_date ) AND ( sei.fin >= cg.collection_date ))) AS semana
         FROM
             carga_gisaids AS cg
             LEFT JOIN
@@ -56,7 +55,9 @@ class CreateViewGisaidsTable extends Migration
                 cg.ubigeo = mapas.id
         WHERE
             cg.host = 'Human' AND
-            cg.passage = 'Original'
+            cg.passage = 'Original' AND 
+            cg.collection_date IS NOT NULL AND 
+            c.activo = 'P'
         ");
     }
 

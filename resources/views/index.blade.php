@@ -162,7 +162,7 @@
                 </div>
                 <div class="col-xl-5 col-lg-7 col-md-12 col-sm-12 ps-5 mt-4">
                     <div style="position: relative;">
-                        <img src="{{asset('images/botones/mapa3.png')}}" alt="mapa" width="503" height="400" usemap="#workmap" class="maparea" id="america">
+                        <img src="{{asset('images/botones/mapa3.png')}}" alt="mapa" width="503" height="400" usemap="#workmap" class="maparea" id="america" style="max-width: 100%;">
                         <map name="workmap">
                             <area alt="Perú" title="INS PERÚ" href="#" class="home" onmouseover="mouseover('{{asset('images/botones/mapa_peru_2.png')}}', '{{$peru}}', 'PERÚ', '{{date('d/m/Y', strtotime($peru_fecha))}}')" onmouseleave="mouseleave('{{asset('images/botones/mapa3.png')}}', '{{$casos}}', '{{date('d/m/Y', strtotime($casos_fecha))}}')"
                             coords="19,184,19,193,27,199,34,201,39,185,50,174,61,162,68,150,72,140,84,145,92,154,100,162,111,162,118,165,122,174,117,179,107,186,97,197,90,209,91,225,102,237,107,245,123,243,120,260,130,265,136,272,143,275,150,280,148,288,145,300,146,308,143,316,138,319,126,317,115,319,101,315,89,307,79,294,69,283,62,271,53,261,46,245,34,232,25,216,16,211,11,197,13,192,22,187,29,196,120" shape="poly">
