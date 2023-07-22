@@ -96,6 +96,10 @@ class CargaController extends Controller
         try {
 
             DB::beginTransaction();
+            $msg = 'El Carga se publicó con éxito.';
+            if ($request->estado != 'P') {
+                $msg = 'El Carga no esta publicado.';
+            }
 
             $carga = Carga::findOrFail($request->id);
             $carga->activo = $request->estado;
@@ -107,7 +111,7 @@ class CargaController extends Controller
             return [
                 'action'    =>  'success',
                 'title'     =>  'Bien!!',
-                'message'   =>  'El Carga se actualizó con éxito.',
+                'message'   =>  $msg,
             ];
 
 

@@ -182,11 +182,22 @@ new Vue({
                     this.modal.title = 'EDITAR VOC / VOI / VBM';
                     this.variante.codigo = seleccion.codigo;
                     this.variante.tipo = seleccion.tipo;
+                    switch (seleccion.tipo) {
+                        case 'VOI':
+                            this.variante.tipo_text = 'VOI - Variantes de Interes';
+                            break;
+                        case 'VOC':
+                            this.variante.tipo_text = 'VOC - Variantes de Preocupación';
+                            break;
+                        default:
+                            this.variante.tipo_text = 'VBM - Variantes bajo Monitoreo';
+                            break;
+                    }
                     break;
 
                 case 'delete':
                     this.modal.title = 'ELIMINAR VOC / VOI / VBM';
-                    this.variante.codigo = seleccion.codigo;
+                    this.variante.nombre = seleccion.codigo;
                     break;
                     
                 default:
