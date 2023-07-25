@@ -1,5 +1,13 @@
 @extends('layouts.vertical')
 
+@section('css')
+    <style>
+        .wrap {
+            width: 200px;
+        }
+    </style>
+@endsection
+
 @section('content')
     
 <div class="content-body" id="form_cargas">
@@ -68,7 +76,9 @@
                                 <td class="text-center">@{{data.virus.nombre}}</td>
 
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="text-success button_link text_bold" title="Ver Datos" @click="Modal('modal-fullscreen', 'rows_gisaid', data.id, data)">@{{data.archivo_gisaid}}</a>
+                                    <div class="wrap">
+                                        <a href="javascript:void(0)" class="text-success button_link text_bold" title="Ver Datos" @click="Modal('modal-fullscreen', 'rows_gisaid', data.id, data)">@{{data.archivo_gisaid}}</a>
+                                    </div>
                                 </td>
                                 <td class="text-center text-success text_bold">@{{data.cantidad_gisaid}}</td>
                                 {{-- <td class="text-center">
@@ -76,8 +86,10 @@
                                 </td> --}}
 
                                 <td class="text-center">
-                                    <a href="javascript:void(0)" class="button_link text-info text_bold"  title="Ver Datos" @click="Modal('modal-fullscreen', 'rows_detalle', data.id, data)" v-if="data.archivo_detalle">@{{data.archivo_detalle}}</a>
-                                    <a href="javascript:void(0)" class="btn_opt text-info" data-bs-toggle="tooltip" title="Subir Detalle"  @click="Modal('modal-md', 'carga', data.id, data)" v-else><i class="fas fa-file-upload"></i></a>
+                                    <div class="wrap">
+                                        <a href="javascript:void(0)" class="button_link text-info text_bold"  title="Ver Datos" @click="Modal('modal-fullscreen', 'rows_detalle', data.id, data)" v-if="data.archivo_detalle">@{{data.archivo_detalle}}</a>
+                                        <a href="javascript:void(0)" class="btn_opt text-info" data-bs-toggle="tooltip" title="Subir Detalle"  @click="Modal('modal-md', 'carga', data.id, data)" v-else><i class="fas fa-file-upload"></i></a>
+                                    </div>
                                 </td>
                                 <td class="text-center text-info text_bold">@{{data.cantidad_detalle}}</td>
                                 {{-- <td class="text-center">
