@@ -14,7 +14,7 @@
         <div class="bg_color">
             <div class="ms-5 me-5">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-12 col-md-12 py-3">
+                    <div class="col-xl-6 col-lg-6 col-md-12 py-3">
                         <div class="row secuencia">
                             @php
                                 $img_mapa = 'images/colombia-mapa.png';
@@ -22,12 +22,12 @@
                                     $img_mapa = 'storage/recursos/'.$mapa->imagen;
                                 }
                             @endphp
-                            <div class="col-sm-5 col-xs-12 text-end">
-                                <img class="img_sec_pais" src="{{asset($img_mapa)}}" alt="{{$pais->nombre}}">
+                            <div class="col-lg-5 text-end">
+                                <img class="img_sec_pais" src="{{asset($img_mapa)}}" alt="Paises Andinos">
                             </div>
 
-                            <div class="col-sm-7 col-xs-12" style="background-color: #00000038;">
-                                <p class="title_pais pb-3"><span class="bg">{{$pais->nombre}}</span></p>
+                            <div class="col-lg-7">
+                                <p class="title_pais pb-3"><span class="bg">Paises Andinos</span></p>
                                 <p class="subtitle_pais pb-0">
                                     <span class="md">Genomas completos</span><br>
                                     <span class="sm">
@@ -48,23 +48,6 @@
                                 <div class="pb-3">
                                     <a href="https://app.powerbi.com/view?r=eyJrIjoiYTI3MDU3NGMtODdkMC00MTc1LWFmNTYtZjliOWQ3YTAzOWRlIiwidCI6IjNhODk3YjhiLTJmNmItNGI0OS05NGExLWJlN2RhMzMzZTM5ZiJ9&pageName=ReportSection" class="button_link text-white"><i class="fas fa-arrow-right"></i> Ver Dashboard</a>
                                 </div>
-    
-                                <p class="text-center">
-                                        @php
-                                            $img_inst = 'images/logos/logo_ins_col.png';
-                                            $enlace_inst = '#';
-                                            if ($instituto) {
-                                                $enlace_inst = $instituto->enlace;
-                                                $img_inst = 'storage/recursos/'.$instituto->imagen;
-                                            }
-                                        @endphp
-                                    <a href="{{$enlace_inst}}" target="_blank" class="btn_sec_pais">
-                                        <span class="btn_sec_img">
-                                            <img class="img_lab_pais" src="{{asset($img_inst)}}" alt="logo_pais">
-                                        </span>
-                                        Consulte más estadísticas
-                                    </a>
-                                </p>
                             </div>
                         </div>
                     </div>

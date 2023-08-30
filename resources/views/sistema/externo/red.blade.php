@@ -1,15 +1,15 @@
 @extends('layouts.horizontal')
 
 @section('content')
-
+@include('layouts.menu_h')
 @include('layouts.header_v', [
     'title_include' => $banner ? $banner->titulo : 'RED REGIONAL',
     'subtitle_include' => $banner ? $banner->descripcion : '', 
     'image' => $banner ? 'storage/recursos/'.$banner->imagen : 'images/banner_2.webp'
 ])
 
-<main class="m-0" >
-    <div class="last_banner" style="background-image: url({{asset('images/centro-fondo.jpg')}});background-repeat: no-repeat, repeat;
+<main >
+    <div class="last_banner watcher_banner" style="background-image: url({{asset('images/centro-fondo.jpg')}});background-repeat: no-repeat, repeat;
     background-size: cover;">
         <div class="bg_color">
             <div class="container">
@@ -22,13 +22,9 @@
                             $title_red = $intro->titulo;
                         }
                     @endphp
-                    <h2 class="title_secuencia mb-2 mt-5">{{$title_red}}</h2>
-                    <div class="col-xl-5 col-lg-6 col-md-12 col-sm-12 mt-4">
-                        <div class="img_contenedor">
-                            <img src="{{asset($img_red)}}" alt="img1" class="w-100 h-100">
-                        </div>
-                    </div>
-                    <div class="col-xl-7 col-lg-6 col-md-12 col-sm-12 mt-4">
+                    <h2>{{$title_red}}</h2>
+                    <div class="watcher_wrapper">
+                        <img class="custom_shadow" src="{{asset($img_red)}}" alt="img1" >
                         @if ($intro)
                             <p class="text_secuencia" style="white-space: pre-line;">{{$intro->descripcion}}</p>
                         @else
@@ -47,139 +43,126 @@
         </div>
     </div>
 
-    <div class="container">
-        <div class="row mt-5 mb-5">
-            <h2 class="text-center text_1 mb-5  lh-1">Institutos que forman parte de la<br>Red Regional</h2>
-            <div class="col-12">
-                <div class="row">
-                    <div class="col-lg-3 col-md-6 col-sm-12 bg_1">
-                        <h3 class="text-center tx-bold mt-5"><span class="bg_4 red_title_pais">BOLIVIA</span></h3>
-                        <h6 class="text-center text-white">INSTITUTO NACIONAL DE<br>LABORATORIOS DE SALUD<br>(INLASA)</h6>
-                        <div class="mt-5">
-                            <ul>
-                                <li class="list_red mb-3">
-                                    <i class="far fa-calendar-alt"></i>
-                                    <span>Horario de atención<br>
-                                    Lunes a viernes de 8:00 a 15:00<br>
-                                    Atención de laboratorios de 8:00 a 14:00.</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Ubicación<br>
-                                    Pasaje Rafael Zubieta #1889 <br>
-                                    (Lado Hospital del Niño), Zona Miraflores.</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-phone-rotary"></i>
-                                    <span>Números de contacto<br>
-                                    (591-2) 2226048, 2226670, 2225194, 2225198<br>
-                                    Fax: (591-2) 2228254, 2225007</span>
-                                </li> 
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-3 col-md-6 col-sm-12 bg_2">
-                        <h3 class="text-center tx-bold mt-5"><span class="bg_4 red_title_pais">COLOMBIA</span></h3>
-                        <h6 class="text-center text-white">INSTITUTO NACIONAL DE<br>SALUD (INS)</h6>
-                        <div class="mt-5">
-                            <ul>
-                                <li class="list_red mb-3">
-                                    <i class="far fa-calendar-alt"></i>
-                                    <span>Horario de atención<br>
-                                    Lunes a viernes de 8:00 a 17:00</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Ubicación<br>
-                                    Ac. 26 #5120, Bogotá, Colombia<br>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-phone-rotary"></i>
-                                    <span>Números de contacto<br>
-                                    (+57) 601 2207700</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="far fa-envelope"></i>
-                                    <span>Correo de contacto<br>
-                                    genomica.ins21@gmail.com</span>
-                                </li> 
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 bg_4">
-                        <h3 class="text-center mt-5"><span class="bg_1 red_title_pais">ECUADOR</span></h3>
-                        <h6 class="text-center">INSTITUTO NACIONAL DE<br>INVESTIGACIÓN EN SALUD<br>PÚBLICA (INSPI)</h6>
-                        <div class="mt-5">
-                            <ul>
-                                <li class="list_red mb-3">
-                                    <i class="far fa-calendar-alt"></i>
-                                    <span>Horario de atención<br>
-                                    Lunes a viernes de 8:00 a 16:30</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Ubicación<br>
-                                    Av. Julián Coronel 905 entre Esmeralda y José Mascote</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Ubicación<br>
-                                    Av. Juan Tanca Marengo #100<</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Ubicación<br>
-                                    Av. de las Américas Guayaquil - Ecuador</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-phone-rotary"></i>
-                                    <span>Números de contacto<br>
-                                    (04) 228 8097</span>
-                                </li> 
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-12 bg_3">
-                        <h3 class="text-center mt-5"><span class="bg_1 red_title_pais">PERÚ</span></h3>
-                        <h6 class="text-center">INSTITUTO NACIONAL DE<br>SALUD (INS)</h6>
-                        <div class="mt-5 mb-5">
-                            <ul>
-                                <li class="list_red mb-3">
-                                    <i class="far fa-calendar-alt"></i>
-                                    <span>Horario de atención<br>
-                                    Lunes a viernes de 8:00 a 16:15.</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Ubicación<br>
-                                    Sede central: Cápac yupanqui #1400 - Jesús María, Lima 11, Perú</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-phone-rotary"></i>
-                                    <span>Números de contacto<br>
-                                    (511) 748 1111</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span>Ubicación<br>
-                                    Sede Chorrillos: Av. Defensores del Morro #2268 (Ex Huaylas) - Chorrillos, Lima 9</span>
-                                </li> 
-                                <li class="list_red mb-3">
-                                    <i class="fas fa-phone-rotary"></i>
-                                    <span>Números de contacto<br>
-                                    (511) 748 0000</span>
-                                </li> 
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
+    <div class="container schedule ">
+        <h2 class="toAnimate">Institutos que forman parte de la Red Regional</h2>
+        <div class="schedule_wrapper">
+            <article class="toAnimate">
+                <h3>BOLIVIA</h3>
+                <h6>INSTITUTO NACIONAL DE LABORATORIOS DE SALUD (INLASA)</h6>
+                <ul>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M7.5 8.33337V10H5.83333V8.33337H7.5ZM10.8333 8.33337V10H9.16667V8.33337H10.8333ZM14.1667 8.33337V10H12.5V8.33337H14.1667ZM15.8333 2.50004C16.2754 2.50004 16.6993 2.67564 17.0118 2.9882C17.3244 3.30076 17.5 3.72468 17.5 4.16671V15.8334C17.5 16.2754 17.3244 16.6993 17.0118 17.0119C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0119C2.67559 16.6993 2.5 16.2754 2.5 15.8334V4.16671C2.5 3.72468 2.67559 3.30076 2.98816 2.9882C3.30072 2.67564 3.72464 2.50004 4.16667 2.50004H5V0.833374H6.66667V2.50004H13.3333V0.833374H15V2.50004H15.8333ZM15.8333 15.8334V6.66671H4.16667V15.8334H15.8333ZM7.5 11.6667V13.3334H5.83333V11.6667H7.5ZM10.8333 11.6667V13.3334H9.16667V11.6667H10.8333ZM14.1667 11.6667V13.3334H12.5V11.6667H14.1667Z" /> </svg>
+                        <span>Horario de atención<br>
+                        Lunes a viernes de 8:00 a 15:00<br>
+                        Atención de laboratorios de 8:00 a 14:00.</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M10 9.58329C9.44749 9.58329 8.91758 9.3638 8.52688 8.9731C8.13618 8.5824 7.91669 8.05249 7.91669 7.49996C7.91669 6.94743 8.13618 6.41752 8.52688 6.02682C8.91758 5.63612 9.44749 5.41663 10 5.41663C10.5526 5.41663 11.0825 5.63612 11.4732 6.02682C11.8639 6.41752 12.0834 6.94743 12.0834 7.49996C12.0834 7.77355 12.0295 8.04446 11.9248 8.29722C11.8201 8.54998 11.6666 8.77964 11.4732 8.9731C11.2797 9.16655 11.05 9.32001 10.7973 9.42471C10.5445 9.52941 10.2736 9.58329 10 9.58329ZM10 1.66663C8.45292 1.66663 6.96919 2.28121 5.87523 3.37517C4.78127 4.46913 4.16669 5.95286 4.16669 7.49996C4.16669 11.875 10 18.3333 10 18.3333C10 18.3333 15.8334 11.875 15.8334 7.49996C15.8334 5.95286 15.2188 4.46913 14.1248 3.37517C13.0308 2.28121 11.5471 1.66663 10 1.66663Z"/> </svg>
+                        <span>Ubicación<br>
+                        Pasaje Rafael Zubieta #1889 <br>
+                        (Lado Hospital del Niño), Zona Miraflores.</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M5.51667 8.99167C6.71667 11.35 8.65 13.2833 11.0083 14.4833L12.8417 12.65C13.075 12.4167 13.4 12.35 13.6917 12.4417C14.625 12.75 15.625 12.9167 16.6667 12.9167C16.8877 12.9167 17.0996 13.0045 17.2559 13.1607C17.4122 13.317 17.5 13.529 17.5 13.75V16.6667C17.5 16.8877 17.4122 17.0996 17.2559 17.2559C17.0996 17.4122 16.8877 17.5 16.6667 17.5C12.9094 17.5 9.30609 16.0074 6.64932 13.3507C3.99256 10.6939 2.5 7.09057 2.5 3.33333C2.5 3.11232 2.5878 2.90036 2.74408 2.74408C2.90036 2.5878 3.11232 2.5 3.33333 2.5H6.25C6.47101 2.5 6.68298 2.5878 6.83926 2.74408C6.99554 2.90036 7.08333 3.11232 7.08333 3.33333C7.08333 4.375 7.25 5.375 7.55833 6.30833C7.65 6.6 7.58333 6.925 7.35 7.15833L5.51667 8.99167Z"/> </svg>
+                        <span>Números de contacto<br>
+                        (591-2) 2226048, 2226670, 2225194, 2225198<br>
+                        Fax: (591-2) 2228254, 2225007</span>
+                    </li> 
+                </ul>
+            </article>
+            <article class="toAnimate">
+                <h3>COLOMBIA</h3>
+                <h6>INSTITUTO NACIONAL DE SALUD (INS)</h6>
+                <ul>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M7.5 8.33337V10H5.83333V8.33337H7.5ZM10.8333 8.33337V10H9.16667V8.33337H10.8333ZM14.1667 8.33337V10H12.5V8.33337H14.1667ZM15.8333 2.50004C16.2754 2.50004 16.6993 2.67564 17.0118 2.9882C17.3244 3.30076 17.5 3.72468 17.5 4.16671V15.8334C17.5 16.2754 17.3244 16.6993 17.0118 17.0119C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0119C2.67559 16.6993 2.5 16.2754 2.5 15.8334V4.16671C2.5 3.72468 2.67559 3.30076 2.98816 2.9882C3.30072 2.67564 3.72464 2.50004 4.16667 2.50004H5V0.833374H6.66667V2.50004H13.3333V0.833374H15V2.50004H15.8333ZM15.8333 15.8334V6.66671H4.16667V15.8334H15.8333ZM7.5 11.6667V13.3334H5.83333V11.6667H7.5ZM10.8333 11.6667V13.3334H9.16667V11.6667H10.8333ZM14.1667 11.6667V13.3334H12.5V11.6667H14.1667Z" /> </svg>
+                        <span>Horario de atención<br>
+                        Lunes a viernes de 8:00 a 17:00</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M10 9.58329C9.44749 9.58329 8.91758 9.3638 8.52688 8.9731C8.13618 8.5824 7.91669 8.05249 7.91669 7.49996C7.91669 6.94743 8.13618 6.41752 8.52688 6.02682C8.91758 5.63612 9.44749 5.41663 10 5.41663C10.5526 5.41663 11.0825 5.63612 11.4732 6.02682C11.8639 6.41752 12.0834 6.94743 12.0834 7.49996C12.0834 7.77355 12.0295 8.04446 11.9248 8.29722C11.8201 8.54998 11.6666 8.77964 11.4732 8.9731C11.2797 9.16655 11.05 9.32001 10.7973 9.42471C10.5445 9.52941 10.2736 9.58329 10 9.58329ZM10 1.66663C8.45292 1.66663 6.96919 2.28121 5.87523 3.37517C4.78127 4.46913 4.16669 5.95286 4.16669 7.49996C4.16669 11.875 10 18.3333 10 18.3333C10 18.3333 15.8334 11.875 15.8334 7.49996C15.8334 5.95286 15.2188 4.46913 14.1248 3.37517C13.0308 2.28121 11.5471 1.66663 10 1.66663Z"/> </svg>
+                        <span>Ubicación<br>
+                        Ac. 26 #5120, Bogotá, Colombia<br>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M5.51667 8.99167C6.71667 11.35 8.65 13.2833 11.0083 14.4833L12.8417 12.65C13.075 12.4167 13.4 12.35 13.6917 12.4417C14.625 12.75 15.625 12.9167 16.6667 12.9167C16.8877 12.9167 17.0996 13.0045 17.2559 13.1607C17.4122 13.317 17.5 13.529 17.5 13.75V16.6667C17.5 16.8877 17.4122 17.0996 17.2559 17.2559C17.0996 17.4122 16.8877 17.5 16.6667 17.5C12.9094 17.5 9.30609 16.0074 6.64932 13.3507C3.99256 10.6939 2.5 7.09057 2.5 3.33333C2.5 3.11232 2.5878 2.90036 2.74408 2.74408C2.90036 2.5878 3.11232 2.5 3.33333 2.5H6.25C6.47101 2.5 6.68298 2.5878 6.83926 2.74408C6.99554 2.90036 7.08333 3.11232 7.08333 3.33333C7.08333 4.375 7.25 5.375 7.55833 6.30833C7.65 6.6 7.58333 6.925 7.35 7.15833L5.51667 8.99167Z"/> </svg>
+                        <span>Números de contacto<br>
+                        (+57) 601 2207700</span>
+                    </li> 
+                    <li class="list_red mb-3">
+                        <i class="far fa-envelope"></i>
+                        <span>Correo de contacto<br>
+                        genomica.ins21@gmail.com</span>
+                    </li>
+                </ul>
+            </article>
+            <article class="toAnimate">
+                <h3>ECUADOR</h3>
+                <h6>INSTITUTO NACIONAL DE INVESTIGACIÓN EN SALUD PÚBLICA (INSPI)</h6>
+                <ul>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M7.5 8.33337V10H5.83333V8.33337H7.5ZM10.8333 8.33337V10H9.16667V8.33337H10.8333ZM14.1667 8.33337V10H12.5V8.33337H14.1667ZM15.8333 2.50004C16.2754 2.50004 16.6993 2.67564 17.0118 2.9882C17.3244 3.30076 17.5 3.72468 17.5 4.16671V15.8334C17.5 16.2754 17.3244 16.6993 17.0118 17.0119C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0119C2.67559 16.6993 2.5 16.2754 2.5 15.8334V4.16671C2.5 3.72468 2.67559 3.30076 2.98816 2.9882C3.30072 2.67564 3.72464 2.50004 4.16667 2.50004H5V0.833374H6.66667V2.50004H13.3333V0.833374H15V2.50004H15.8333ZM15.8333 15.8334V6.66671H4.16667V15.8334H15.8333ZM7.5 11.6667V13.3334H5.83333V11.6667H7.5ZM10.8333 11.6667V13.3334H9.16667V11.6667H10.8333ZM14.1667 11.6667V13.3334H12.5V11.6667H14.1667Z" /> </svg>
+                        <span>Horario de atención<br>
+                        Lunes a viernes de 8:00 a 16:30</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M10 9.58329C9.44749 9.58329 8.91758 9.3638 8.52688 8.9731C8.13618 8.5824 7.91669 8.05249 7.91669 7.49996C7.91669 6.94743 8.13618 6.41752 8.52688 6.02682C8.91758 5.63612 9.44749 5.41663 10 5.41663C10.5526 5.41663 11.0825 5.63612 11.4732 6.02682C11.8639 6.41752 12.0834 6.94743 12.0834 7.49996C12.0834 7.77355 12.0295 8.04446 11.9248 8.29722C11.8201 8.54998 11.6666 8.77964 11.4732 8.9731C11.2797 9.16655 11.05 9.32001 10.7973 9.42471C10.5445 9.52941 10.2736 9.58329 10 9.58329ZM10 1.66663C8.45292 1.66663 6.96919 2.28121 5.87523 3.37517C4.78127 4.46913 4.16669 5.95286 4.16669 7.49996C4.16669 11.875 10 18.3333 10 18.3333C10 18.3333 15.8334 11.875 15.8334 7.49996C15.8334 5.95286 15.2188 4.46913 14.1248 3.37517C13.0308 2.28121 11.5471 1.66663 10 1.66663Z"/> </svg>
+                        <span>Ubicación<br>
+                        Av. Julián Coronel 905 entre Esmeralda y José Mascote</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M10 9.58329C9.44749 9.58329 8.91758 9.3638 8.52688 8.9731C8.13618 8.5824 7.91669 8.05249 7.91669 7.49996C7.91669 6.94743 8.13618 6.41752 8.52688 6.02682C8.91758 5.63612 9.44749 5.41663 10 5.41663C10.5526 5.41663 11.0825 5.63612 11.4732 6.02682C11.8639 6.41752 12.0834 6.94743 12.0834 7.49996C12.0834 7.77355 12.0295 8.04446 11.9248 8.29722C11.8201 8.54998 11.6666 8.77964 11.4732 8.9731C11.2797 9.16655 11.05 9.32001 10.7973 9.42471C10.5445 9.52941 10.2736 9.58329 10 9.58329ZM10 1.66663C8.45292 1.66663 6.96919 2.28121 5.87523 3.37517C4.78127 4.46913 4.16669 5.95286 4.16669 7.49996C4.16669 11.875 10 18.3333 10 18.3333C10 18.3333 15.8334 11.875 15.8334 7.49996C15.8334 5.95286 15.2188 4.46913 14.1248 3.37517C13.0308 2.28121 11.5471 1.66663 10 1.66663Z"/> </svg>
+                        <span>Ubicación<br>
+                        Av. Juan Tanca Marengo #100</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M10 9.58329C9.44749 9.58329 8.91758 9.3638 8.52688 8.9731C8.13618 8.5824 7.91669 8.05249 7.91669 7.49996C7.91669 6.94743 8.13618 6.41752 8.52688 6.02682C8.91758 5.63612 9.44749 5.41663 10 5.41663C10.5526 5.41663 11.0825 5.63612 11.4732 6.02682C11.8639 6.41752 12.0834 6.94743 12.0834 7.49996C12.0834 7.77355 12.0295 8.04446 11.9248 8.29722C11.8201 8.54998 11.6666 8.77964 11.4732 8.9731C11.2797 9.16655 11.05 9.32001 10.7973 9.42471C10.5445 9.52941 10.2736 9.58329 10 9.58329ZM10 1.66663C8.45292 1.66663 6.96919 2.28121 5.87523 3.37517C4.78127 4.46913 4.16669 5.95286 4.16669 7.49996C4.16669 11.875 10 18.3333 10 18.3333C10 18.3333 15.8334 11.875 15.8334 7.49996C15.8334 5.95286 15.2188 4.46913 14.1248 3.37517C13.0308 2.28121 11.5471 1.66663 10 1.66663Z"/> </svg>
+                        <span>Ubicación<br>
+                        Av. de las Américas Guayaquil - Ecuador</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M5.51667 8.99167C6.71667 11.35 8.65 13.2833 11.0083 14.4833L12.8417 12.65C13.075 12.4167 13.4 12.35 13.6917 12.4417C14.625 12.75 15.625 12.9167 16.6667 12.9167C16.8877 12.9167 17.0996 13.0045 17.2559 13.1607C17.4122 13.317 17.5 13.529 17.5 13.75V16.6667C17.5 16.8877 17.4122 17.0996 17.2559 17.2559C17.0996 17.4122 16.8877 17.5 16.6667 17.5C12.9094 17.5 9.30609 16.0074 6.64932 13.3507C3.99256 10.6939 2.5 7.09057 2.5 3.33333C2.5 3.11232 2.5878 2.90036 2.74408 2.74408C2.90036 2.5878 3.11232 2.5 3.33333 2.5H6.25C6.47101 2.5 6.68298 2.5878 6.83926 2.74408C6.99554 2.90036 7.08333 3.11232 7.08333 3.33333C7.08333 4.375 7.25 5.375 7.55833 6.30833C7.65 6.6 7.58333 6.925 7.35 7.15833L5.51667 8.99167Z"/> </svg>
+                        <span>Números de contacto<br>
+                        (04) 228 8097</span>
+                    </li> 
+                </ul>
+            </article>
+            <article class="toAnimate">
+                <h3>PERÚ</h3>
+                <h6>INSTITUTO NACIONAL DE SALUD (INS)</h6>
+                <ul>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M7.5 8.33337V10H5.83333V8.33337H7.5ZM10.8333 8.33337V10H9.16667V8.33337H10.8333ZM14.1667 8.33337V10H12.5V8.33337H14.1667ZM15.8333 2.50004C16.2754 2.50004 16.6993 2.67564 17.0118 2.9882C17.3244 3.30076 17.5 3.72468 17.5 4.16671V15.8334C17.5 16.2754 17.3244 16.6993 17.0118 17.0119C16.6993 17.3244 16.2754 17.5 15.8333 17.5H4.16667C3.72464 17.5 3.30072 17.3244 2.98816 17.0119C2.67559 16.6993 2.5 16.2754 2.5 15.8334V4.16671C2.5 3.72468 2.67559 3.30076 2.98816 2.9882C3.30072 2.67564 3.72464 2.50004 4.16667 2.50004H5V0.833374H6.66667V2.50004H13.3333V0.833374H15V2.50004H15.8333ZM15.8333 15.8334V6.66671H4.16667V15.8334H15.8333ZM7.5 11.6667V13.3334H5.83333V11.6667H7.5ZM10.8333 11.6667V13.3334H9.16667V11.6667H10.8333ZM14.1667 11.6667V13.3334H12.5V11.6667H14.1667Z" /> </svg>
+                        <span>Horario de atención<br>
+                        Lunes a viernes de 8:00 a 16:15.</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M10 9.58329C9.44749 9.58329 8.91758 9.3638 8.52688 8.9731C8.13618 8.5824 7.91669 8.05249 7.91669 7.49996C7.91669 6.94743 8.13618 6.41752 8.52688 6.02682C8.91758 5.63612 9.44749 5.41663 10 5.41663C10.5526 5.41663 11.0825 5.63612 11.4732 6.02682C11.8639 6.41752 12.0834 6.94743 12.0834 7.49996C12.0834 7.77355 12.0295 8.04446 11.9248 8.29722C11.8201 8.54998 11.6666 8.77964 11.4732 8.9731C11.2797 9.16655 11.05 9.32001 10.7973 9.42471C10.5445 9.52941 10.2736 9.58329 10 9.58329ZM10 1.66663C8.45292 1.66663 6.96919 2.28121 5.87523 3.37517C4.78127 4.46913 4.16669 5.95286 4.16669 7.49996C4.16669 11.875 10 18.3333 10 18.3333C10 18.3333 15.8334 11.875 15.8334 7.49996C15.8334 5.95286 15.2188 4.46913 14.1248 3.37517C13.0308 2.28121 11.5471 1.66663 10 1.66663Z"/> </svg>
+                        <span>Ubicación<br>
+                        Sede central: Cápac yupanqui #1400 - Jesús María, Lima 11, Perú</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M5.51667 8.99167C6.71667 11.35 8.65 13.2833 11.0083 14.4833L12.8417 12.65C13.075 12.4167 13.4 12.35 13.6917 12.4417C14.625 12.75 15.625 12.9167 16.6667 12.9167C16.8877 12.9167 17.0996 13.0045 17.2559 13.1607C17.4122 13.317 17.5 13.529 17.5 13.75V16.6667C17.5 16.8877 17.4122 17.0996 17.2559 17.2559C17.0996 17.4122 16.8877 17.5 16.6667 17.5C12.9094 17.5 9.30609 16.0074 6.64932 13.3507C3.99256 10.6939 2.5 7.09057 2.5 3.33333C2.5 3.11232 2.5878 2.90036 2.74408 2.74408C2.90036 2.5878 3.11232 2.5 3.33333 2.5H6.25C6.47101 2.5 6.68298 2.5878 6.83926 2.74408C6.99554 2.90036 7.08333 3.11232 7.08333 3.33333C7.08333 4.375 7.25 5.375 7.55833 6.30833C7.65 6.6 7.58333 6.925 7.35 7.15833L5.51667 8.99167Z"/> </svg>
+                        <span>Números de contacto<br>
+                        (511) 748 1111</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M10 9.58329C9.44749 9.58329 8.91758 9.3638 8.52688 8.9731C8.13618 8.5824 7.91669 8.05249 7.91669 7.49996C7.91669 6.94743 8.13618 6.41752 8.52688 6.02682C8.91758 5.63612 9.44749 5.41663 10 5.41663C10.5526 5.41663 11.0825 5.63612 11.4732 6.02682C11.8639 6.41752 12.0834 6.94743 12.0834 7.49996C12.0834 7.77355 12.0295 8.04446 11.9248 8.29722C11.8201 8.54998 11.6666 8.77964 11.4732 8.9731C11.2797 9.16655 11.05 9.32001 10.7973 9.42471C10.5445 9.52941 10.2736 9.58329 10 9.58329ZM10 1.66663C8.45292 1.66663 6.96919 2.28121 5.87523 3.37517C4.78127 4.46913 4.16669 5.95286 4.16669 7.49996C4.16669 11.875 10 18.3333 10 18.3333C10 18.3333 15.8334 11.875 15.8334 7.49996C15.8334 5.95286 15.2188 4.46913 14.1248 3.37517C13.0308 2.28121 11.5471 1.66663 10 1.66663Z"/> </svg>
+                        <span>Ubicación<br>
+                        Sede Chorrillos: Av. Defensores del Morro #2268 (Ex Huaylas) - Chorrillos, Lima 9</span>
+                    </li> 
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none"> <path d="M5.51667 8.99167C6.71667 11.35 8.65 13.2833 11.0083 14.4833L12.8417 12.65C13.075 12.4167 13.4 12.35 13.6917 12.4417C14.625 12.75 15.625 12.9167 16.6667 12.9167C16.8877 12.9167 17.0996 13.0045 17.2559 13.1607C17.4122 13.317 17.5 13.529 17.5 13.75V16.6667C17.5 16.8877 17.4122 17.0996 17.2559 17.2559C17.0996 17.4122 16.8877 17.5 16.6667 17.5C12.9094 17.5 9.30609 16.0074 6.64932 13.3507C3.99256 10.6939 2.5 7.09057 2.5 3.33333C2.5 3.11232 2.5878 2.90036 2.74408 2.74408C2.90036 2.5878 3.11232 2.5 3.33333 2.5H6.25C6.47101 2.5 6.68298 2.5878 6.83926 2.74408C6.99554 2.90036 7.08333 3.11232 7.08333 3.33333C7.08333 4.375 7.25 5.375 7.55833 6.30833C7.65 6.6 7.58333 6.925 7.35 7.15833L5.51667 8.99167Z"/> </svg>
+                        <span>Números de contacto<br>
+                        (511) 748 0000</span>
+                    </li> 
+                </ul>
+            </article>
         </div>
     </div>
 </main>
 @endsection
 
 @section('js')
-    
+
 @endsection

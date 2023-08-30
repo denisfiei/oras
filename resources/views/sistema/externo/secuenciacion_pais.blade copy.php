@@ -14,7 +14,7 @@
         <div class="bg_color">
             <div class="ms-5 me-5">
                 <div class="row">
-                    <div class="col-xl-6 col-lg-12 col-md-12 py-3">
+                    <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12 py-3">
                         <div class="row secuencia">
                             @php
                                 $img_mapa = 'images/colombia-mapa.png';
@@ -22,11 +22,11 @@
                                     $img_mapa = 'storage/recursos/'.$mapa->imagen;
                                 }
                             @endphp
-                            <div class="col-sm-5 col-xs-12 text-end">
+                            <div class="col-lg-5 text-end">
                                 <img class="img_sec_pais" src="{{asset($img_mapa)}}" alt="{{$pais->nombre}}">
                             </div>
 
-                            <div class="col-sm-7 col-xs-12" style="background-color: #00000038;">
+                            <div class="col-lg-7">
                                 <p class="title_pais pb-3"><span class="bg">{{$pais->nombre}}</span></p>
                                 <p class="subtitle_pais pb-0">
                                     <span class="md">Genomas completos</span><br>

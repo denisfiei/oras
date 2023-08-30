@@ -4041,10 +4041,10 @@ textarea.form-control-lg {
     justify-content: space-between; }
 
 .navbar-brand {
-    padding-top: var(--bs-navbar-brand-padding-y);
-    padding-bottom: var(--bs-navbar-brand-padding-y);
-    margin-right: var(--bs-navbar-brand-margin-end);
-    font-size: var(--bs-navbar-brand-font-size);
+  padding-top: var(--bs-navbar-brand-padding-y);
+  padding-bottom: var(--bs-navbar-brand-padding-y);
+  margin-right: var(--bs-navbar-brand-margin-end);
+  font-size: var(--bs-navbar-brand-font-size);
   color: var(--bs-navbar-brand-color);
   white-space: nowrap; }
   .navbar-brand:hover, .navbar-brand:focus {
@@ -5839,39 +5839,31 @@ textarea.form-control-lg {
   justify-content: center;
   padding: 0;
   margin-right: 15%;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   margin-left: 15%;
   list-style: none; }
   .carousel-indicators [data-bs-target] {
     box-sizing: content-box;
     flex: 0 1 auto;
+    width: 30px;
+    height: 3px;
     padding: 0;
-    margin-right: 5px;
-    margin-left: 5px;
+    margin-right: 3px;
+    margin-left: 3px;
     text-indent: -999px;
     cursor: pointer;
     background-color: #fff;
     background-clip: padding-box;
     border: 0;
-    /* border-top: 12px solid transparent;
-    border-bottom: 12px solid transparent; */
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
     opacity: 0.5;
-    border-radius: 12px;
-    transition: all ease-in-out .15s;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .carousel-indicators [data-bs-target] {
-      transition: none; } 
-  }
-  .carousel-indicators li {
-    width: 9px;
-    height: 9px;
-    border-radius: 2px;
-  }
-.carousel-indicators .active {
-    opacity: 1;
-    width: 24px;
-  }
+    transition: opacity 0.6s ease; }
+    @media (prefers-reduced-motion: reduce) {
+      .carousel-indicators [data-bs-target] {
+        transition: none; } }
+  .carousel-indicators .active {
+    opacity: 1; }
 
 .carousel-caption {
   position: absolute;
@@ -9701,8 +9693,13 @@ strong {
   height: auto; }
   .carousel-control-prev-icon svg,
   .carousel-control-next-icon svg {
-    width: 32px;
-    height: 32px; }
+    width: 48px;
+    height: 48px; }
+
+.carousel-indicators li {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px; }
 
 .custom-control {
   min-height: inherit; }
@@ -13992,7 +13989,7 @@ textarea.parsley-success:focus {
     order: 1; }
     @media (min-width: 992px) {
       .navbar-header .navbar-brand {
-        /* width: 240px; */
+        width: 240px;
         padding: 0 0 0 20px; } }
   .navbar-header .burger-menu {
     margin-left: 18px;
@@ -14184,7 +14181,7 @@ textarea.parsley-success:focus {
   @media (min-width: 992px) {
     .navbar-menu-wrapper {
       width: auto;
-      padding: 0 15px;
+      padding: 0 25px;
       position: relative;
       top: auto;
       left: auto;
@@ -14196,21 +14193,10 @@ textarea.parsley-success:focus {
       order: 2;
       transform: none;
       z-index: auto;
-      flex: 1;
-    } 
-    .navbar-menu-wrapper:before {
-      content: "";
-      display: block;
-      width: 1px;
-      height: 100%;
-      background-color: rgba(0, 0, 0, .1);
-      transform: scale(.5);
-      margin-right: 15px;
-    }
-  }
+      flex: 1; } }
   @media (min-width: 1200px) {
     .navbar-menu-wrapper {
-      padding: 0 20px; } }
+      padding: 0 30px; } }
   .navbar-menu-wrapper > .ps__rail-y {
     display: none; }
 
@@ -14242,7 +14228,7 @@ textarea.parsley-success:focus {
       flex-direction: row;
       padding: 0;
       width: 100%;
-      /* max-width: 780px; */
+      max-width: 780px;
       margin-top: -3px; } }
   .navbar-menu .nav-item + .nav-item {
     margin-top: 10px; }
@@ -14536,14 +14522,20 @@ textarea.parsley-success:focus {
   display: flex;
   align-items: center;
   position: relative;
-  color: var(--primary_color);
+  color: #031a61;
   margin-top: -4px; }
+  @media (min-width: 576px) {
+    .df-logo {
+      font-size: 22px; } }
+  @media (min-width: 992px) {
+    .df-logo {
+      font-size: 24px; } }
   .df-logo:hover, .df-logo:focus {
     color: #03217a; }
   .df-logo span {
     display: inline-block;
-    font-weight: 600;
-    color: var(--accent_color); }
+    font-weight: 400;
+    color: #0168fa; }
 
 .df-logo-initial {
   width: 40px;

@@ -275,7 +275,7 @@ class CargaController extends Controller
 
         $this->validate($request, [
             'virus' => 'required|exists:virus,id',
-            'file' => ['required', 'mimes:tsv,txt'],
+            'file' => 'required',
             'cantidad' => 'required|min:1',
         ]);
 
@@ -376,7 +376,7 @@ class CargaController extends Controller
 
         $this->validate($request, [
             //'muestreo' => 'required|exists:tipo_muestreos,id',
-            'file' => ['required', 'mimes:tsv,txt'],
+            'file' => 'required',
             'cantidad' => 'required|min:1',
         ]);
 
