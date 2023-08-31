@@ -164,7 +164,7 @@
                     @foreach ($centros as $item)
                     <li>
                         <a href="{{url('centro_informacion/tipo/'.$item->id)}}">
-                            <i class="{{$item->icon}} cen_inf"></i>
+                            <i class="{{$item->icono}} cen_inf"></i>
                             <p>{{$item->nombre}}</p>
                         </a>
                     </li>
