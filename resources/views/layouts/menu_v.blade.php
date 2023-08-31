@@ -41,14 +41,15 @@
             </div>
             <div class="collapse" id="loggedinMenu">
                 <ul class="nav nav-aside mg-b-0">
-                    <li class="nav-item"><a href="" class="nav-link"><i data-feather="edit"></i> <span>Editar Perfil</span></a></li>
+                    <li class="nav-item"><a href="{{ route('perfil') }}" class="nav-link"><i data-feather="edit"></i> <span>Editar Perfil</span></a></li>
                     <li class="nav-item"><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" 
                         class="nav-link text-danger"><i class="text-danger" data-feather="log-out"></i> <span>Cerrar Sesión</span></a></li>
                 </ul>
             </div>
         </div>
         <ul class="nav nav-aside">
-            <li class="nav-item {{(request()->is('home')) ? 'active' : ''}}"><a href="{{ url('/') }}" class="nav-link"><i class="fas fa-desktop"></i> <span>Inicio</span></a></li>
+            <li class="nav-item {{(request()->is('home')) ? 'active' : ''}}"><a href="{{ url('home') }}" class="nav-link"><i class="far fa-home-lg"></i> <span>Inicio</span></a></li>
+            <li class="nav-item"><a href="{{ url('/') }}" class="nav-link"><i class="fas fa-desktop"></i> <span>Web</span></a></li>
             
             @if ( count($menus['administrativos']) > 0 )
                 <li class="nav-label mg-t-25">MENU DE ADMINISTRATIVO</li>

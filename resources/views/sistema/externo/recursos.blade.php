@@ -41,7 +41,15 @@
                     <section class="centro_menu custom_shadow mt-5">
                         <div class="stats_data_links">
                             <ul>
-                                <li>
+                                @foreach ($centros as $item)
+                                <li class="{{$id == $item->id ? 'active' : ''}}">
+                                    <a href="{{url('centro_informacion/tipo/'.$item->id)}}">
+                                        <i class="{{$item->icon}} cen_inf"></i>
+                                        <p>{{$item->nombre}}</p>
+                                    </a>
+                                </li>
+                                @endforeach
+                                {{-- <li>
                                     <a href="{{url('centro_informacion/tipo/DT')}}">
                                         <i>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"> <g clip-path="url(#clip0_32_8)"> <path d="M12 0H6C5.175 0 4.5 0.675 4.5 1.5V13.5C4.5 14.325 5.175 15 6 15H15C15.825 15 16.5 14.325 16.5 13.5V4.5L12 0ZM15 13.5H6V1.5H11.25V5.25H15V13.5ZM3 3V16.5H15V18H3C2.175 18 1.5 17.325 1.5 16.5V3H3ZM7.5 7.5V9H13.5V7.5H7.5ZM7.5 10.5V12H11.25V10.5H7.5Z" fill="white"/> </g> <defs> <clipPath id="clip0_32_8"> <rect width="18" height="18" fill="white"/> </clipPath> </defs> </svg>
@@ -72,7 +80,7 @@
                                         </i>
                                         <p>Centro de prensa</p>
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </section>
@@ -83,7 +91,7 @@
                             <button class="tx-20" type="button" data-bs-toggle="dropdown" aria-expanded="false">{{$anio_text}}</button>
                             <div class="dropdown-menu">
                                 @foreach ($anios as $an)
-                                    <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$an['id'])}}" class="dropdown-item {{$anio == $an['id'] ? 'active' : ''}}">{{$an['nombre']}}</a>
+                                    <a href="{{url('centro_informacion/tipo/'.$id.'/'.$an['id'])}}" class="dropdown-item {{$anio == $an['id'] ? 'active' : ''}}">{{$an['nombre']}}</a>
                                 @endforeach
                             </div>
                         </h2>
@@ -126,7 +134,9 @@
                                             <div class="text-justify">{{$item->descripcion}}</div>
 
                                             <div class="text-end">
-                                                <a href="{{$item->enlace}}" target="_blank" class="btn btn-sm btn-outline-dark"><i class="fas fa-download"></i> Descargar</a>
+                                                @if ($item->enlace)
+                                                    <a href="{{$item->enlace}}" target="_blank" class="btn btn-sm btn-outline-dark"><i class="fas fa-download"></i> Descargar</a>
+                                                @endif
                                             </div>
                                         </div>
                                     </li>

@@ -18,10 +18,19 @@
 
                     <div data-label="DATOS GENERALES" class="df-example demo-forms">
                         <div class="row">
-                            <div class="form-group col-md-12 mb-0">
+                            <div class="form-group col-md-12 mb-3">
                                 <label class="form-label mb-0" for="nombre">NOMBRE <span class="obligatorio">(*)</span></label>
                                 <input type="text" id="nombre" v-model="centro.nombre" class="form-control" :class="[errors.nombre ? 'border-error' : '']">
                                 <div class="input-error" v-if="errors.nombre">@{{ errors.nombre[0] }}</div>
+                            </div>
+                            <div class="form-group col-md-12 mb-3">
+                                <a href="https://fontawesome.com/v5/search" target="_blank" class="float-end button_link fs_11">Ver más iconos</a>
+                                <label for="icono">ICONO <small>(ingresar solo la clase) </small><span class="obligatorio">(*)</span></label>
+                                <div class="input-group mb-0">
+                                    <input type="text" id="icono" v-model="centro.icono" class="form-control form-control-border" :class="[errors.icono ? 'border-error' : '']">
+                                    <span class="input-group-text"><i :class="centro.icono"></i></span>
+                                </div>
+                                <div class="input-error" v-if="errors.icono">@{{ errors.icono[0] }}</div>
                             </div>
                         </div>
                     </div>

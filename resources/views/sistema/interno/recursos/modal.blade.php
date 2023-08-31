@@ -93,7 +93,7 @@
                                 </div>
                             </div>
 
-                            <div data-label="ARCHIVO" class="df-example demo-forms mb-3">
+                            <div data-label="ARCHIVO" class="df-example demo-forms mb-3" v-show="recurso.nivel != 12">
                                 <div class="row">
                                     <div class="form-group col-md-12 mb-0">
                                         <label class="form-label mb-0" for="imagen">IMAGEN / ARCHIVO&nbsp; <i class="fas fa-exclamation-circle" data-bs-toggle="tooltip" data-bs-placement="top" title="Dimención de la imagen 300x400 píxeles"></i> <span class="obligatorio">(*)</span></label>

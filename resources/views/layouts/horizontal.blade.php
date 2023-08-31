@@ -32,7 +32,7 @@
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.auth.css') }}">
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.filemgr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert2.min.css?v=1.0') }}">
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css?v=1.0.1') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css?v=1.0.2') }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     {{-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -40,6 +40,15 @@
 
     <link rel="stylesheet" type="text/css" href="{{ asset('css/responsive.css') }}">
 
+    <style>
+        .nav_footer li:hover {
+            text-decoration: underline;
+        }
+        .cen_inf {
+            font-size: 20px;
+            color: #fff;
+        }
+    </style>
     @yield('css')
 </head>
 
@@ -114,14 +123,14 @@
                     </div>
                 </div>
             </div>
-            <div class="footer_logo">
-                <h4>Accesos Rápidos</h4>
+            <div class="footer_logo" style="flex-direction: column;">
+                <h4 class="text-white">Accesos Rápidos</h4>
                 <div>
                     <ul class="nav_footer">
-                        <li><a href="{{url('/')}}">Inicio</a></li>
-                        <li><a href="{{route('vigilancia')}}">Vigilancia Genómica</a></li>
-                        <li><a href="{{route('red_regional')}}">Red Regional</a></li>
-                        <li><a href="{{route('secuenciacion')}}">Secuenciación</a></li>
+                        <li><a class="text-white" href="{{url('/')}}">Inicio</a></li>
+                        <li><a class="text-white" href="{{route('vigilancia')}}">Vigilancia Genómica</a></li>
+                        <li><a class="text-white" href="{{route('red_regional')}}">Red Regional</a></li>
+                        <li><a class="text-white" href="{{route('secuenciacion')}}">Secuenciación</a></li>
                     </ul>
                 </div>
             </div>

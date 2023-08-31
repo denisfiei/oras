@@ -4,7 +4,11 @@ new Vue({
         config: [],
         color: 'rgba(0, 0, 0, 0.71)',
         search: {
-            'datos': null
+            'datos': null,
+            'pais': null,
+            'pais_text': '--- Todos los paises ---',
+            'perfil': null,
+            'perfil_text': '--- Todos los Perfiles ---',
         },
         page: 1,
 
@@ -177,7 +181,9 @@ new Vue({
         Buscar(page) {
             urlBuscar = 'users/buscar?page=' + page;
             axios.post(urlBuscar, {
-                search: this.search.datos
+                search: this.search.datos,
+                pais: this.search.pais,
+                perfil: this.search.perfil
             }).then(response => {
                 this.listRequest = response.data.users.data;
                 this.to_pagination = response.data.users.to;
@@ -423,6 +429,26 @@ new Vue({
         SelectLab(data) {
             this.user.laboratorio = data.id;
             this.user.laboratorio_text = data.nombre;
+        },
+        SelectSearchPerfil(data) {
+            this.search.perfil = null;
+            this.search.perfil_text = '--- Todos los Países ---';
+
+            if (data) {
+                this.search.perfil = data.id;
+                this.search.perfil_text = data.nombre;
+            }
+            this.Buscar(this.page);
+        },
+        SelectSearchPais(data) {
+            this.search.pais = null;
+            this.search.pais_text = '--- Todos los Países ---';
+
+            if (data) {
+                this.search.pais = data.id;
+                this.search.pais_text = data.nombre;
+            }
+            this.Buscar(this.page);
         },
         Fecha(date) {
             if (date) {

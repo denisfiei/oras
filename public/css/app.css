@@ -1247,7 +1247,7 @@ h5 {
 .stats_data_links ul{
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     padding: 10px 25px;
 }
 .stats_data_links ul li{
@@ -1275,6 +1275,16 @@ h5 {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+.stats_data_links ul .active p:before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 2px;
+    background-color: var(--primary_color);
+    position: absolute;
+    bottom: 0;
+    left: 0;
 }
 .stats_data_links ul li p{
     margin: 0;
@@ -1405,7 +1415,7 @@ h5 {
     padding: 15px 25px;
     font-weight: 600;
     color: white;
-    font-size: 18px;
+    font-size: 15px;
 }
 .stats_layout .stat_col.data .stats_data_detail section {
     padding: 10px 25px;
@@ -1472,6 +1482,7 @@ h5 {
     padding: 15px;
     box-sizing: border-box;
     border-radius: 8px;
+    justify-content: space-evenly;
 }
 .contact_content {
     background-color: var(--primary_dark_color);

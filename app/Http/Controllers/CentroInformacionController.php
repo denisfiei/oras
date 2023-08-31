@@ -9,11 +9,13 @@ use App\Models\Recurso;
 
 class CentroInformacionController extends Controller
 {
-    public function index($tipo)
+    public function index($id)
     {
         $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('id', 'DESC')->orderBy('fecha', 'DESC')->first();
+        $centros = Centro::where('activo', 'S')->orderBy('id', 'ASC')->get();
         
-        switch ($tipo) {
+        $centro = Centro::findOrFail($id);
+        /*switch ($tipo) {
             case 'DT':
                 $centro = Centro::findOrFail(1);
                 break;
@@ -29,18 +31,20 @@ class CentroInformacionController extends Controller
             default:
                 $centro = Centro::where('id', '>', 4)->first();
                 break;
-        }
+        }*/
         $anio = date('Y');
         $anios = [$anio, $anio-1, 1];
-        return view('sistema.externo.centro_informacion', compact('banner', 'tipo', 'centro', 'anios'));
+        return view('sistema.externo.centro_informacion', compact('banner', 'id', 'centro', 'anios', 'centros'));
     }
 
-    public function anio($tipo, $anio)
+    public function anio($id, $anio)
     {
         if (is_numeric($anio)) {
             $banner = Recurso::where('activo', 'S')->where('nivel', '4')->orderBy('id', 'DESC')->orderBy('orden', 'DESC')->first();
+            $centros = Centro::where('activo', 'S')->orderBy('id', 'ASC')->get();
 
-            switch ($tipo) {
+            $centro = Centro::findOrFail($id);
+            /*switch ($tipo) {
                 case 'DT':
                     $centro = Centro::findOrFail(1);
                     break;
@@ -56,7 +60,7 @@ class CentroInformacionController extends Controller
                 default:
                     $centro = Centro::where('id', '>', 4)->first();
                     break;
-            }
+            }*/
 
             $recursos = Recurso::where('nivel', '20')
             ->where('centro_id', $centro->id)
@@ -79,7 +83,7 @@ class CentroInformacionController extends Controller
             ];
             $recursos = $recursos->with('pais')->orderBy('fecha', 'DESC')->get();
     
-            return view('sistema.externo.recursos', compact('banner', 'tipo', 'centro', 'recursos', 'anio', 'anio_text', 'anios'));
+            return view('sistema.externo.recursos', compact('banner', 'id', 'centro', 'recursos', 'anio', 'anio_text', 'anios', 'centros'));
         }
 
         return redirect()->back();

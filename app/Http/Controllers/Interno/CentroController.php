@@ -57,6 +57,7 @@ class CentroController extends Controller
     {
         $this->validate($request, [
             'nombre' => 'required|max:255',
+            'icono' => 'required|max:50',
         ]);
 
         try {
@@ -64,6 +65,7 @@ class CentroController extends Controller
             
             $centro = new Centro();
             $centro->nombre = Str::upper($request->nombre);
+            $centro->icono = $request->icono;
             $centro->save();
 
             DB::commit();
@@ -90,6 +92,7 @@ class CentroController extends Controller
     {
         $this->validate($request, [
             'nombre' => 'required|max:255',
+            'icono' => 'required|max:50',
         ]);
 
         try {
@@ -98,6 +101,7 @@ class CentroController extends Controller
 
             $centro = Centro::findOrFail($request->id);
             $centro->nombre = Str::upper($request->nombre);
+            $centro->icono = $request->icono;
             $centro->save();
 
             DB::commit();

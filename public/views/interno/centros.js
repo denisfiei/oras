@@ -31,6 +31,7 @@ new Vue({
 
         centro: {
             'nombre': null,
+            'icono': null,
         }
     },
     created() {
@@ -174,6 +175,7 @@ new Vue({
                 case 'edit':
                     this.modal.title = 'EDITAR CENTRO';
                     this.centro.nombre = seleccion.nombre;
+                    this.centro.icono = seleccion.icono;
                     break;
 
                 case 'delete':
@@ -201,6 +203,7 @@ new Vue({
 
             this.centro = {
                 'nombre': null,
+                'icono': null,
             };
         },
         Store(form) {
@@ -208,7 +211,8 @@ new Vue({
             this.errors = [];
 
             axios.post('centros/store', {
-                nombre: this.centro.nombre
+                nombre: this.centro.nombre,
+                icono: this.centro.icono
             }).then(response=> {
                 this.Load(form, 'off', null);
 
@@ -243,7 +247,8 @@ new Vue({
 
             axios.post('centros/update', {
                 id: this.id,
-                nombre: this.centro.nombre
+                nombre: this.centro.nombre,
+                icono: this.centro.icono
             }).then(response=> {
                 this.Load(form, 'off', null);
 

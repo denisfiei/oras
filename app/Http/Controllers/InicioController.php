@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use App\Models\Aviso;
 use App\Models\CargaGisaid;
+use App\Models\Centro;
 use App\Models\Config;
 use App\Models\Recurso;
 use App\Models\VoiVoc;
@@ -42,25 +43,30 @@ class InicioController extends Controller
         $ecuador_fecha = $ecuador->where('pais_id', 4)->orderBy('collection_date', 'DESC')->pluck('collection_date')->first();
         $ecuador = $ecuador->where('pais_id', 4)->count();
 
+        $centros = Centro::where('activo', 'S')->orderBy('id', 'ASC')->get();
+
         $voi = VoiVoc::where('tipo', 'VOI')
+        ->where('activo', 'S')
         ->withCount('voi_voc_peru')
         ->withCount('voi_voc_colombia')
         ->withCount('voi_voc_ecuador')
         ->withCount('voi_voc_bolivia')
         ->get();
         $voc = VoiVoc::where('tipo', 'VOC')
+        ->where('activo', 'S')
         ->withCount('voi_voc_peru')
         ->withCount('voi_voc_colombia')
         ->withCount('voi_voc_ecuador')
         ->withCount('voi_voc_bolivia')
         ->get();
         $vbm = VoiVoc::where('tipo', 'VBM')
+        ->where('activo', 'S')
         ->withCount('voi_voc_peru')
         ->withCount('voi_voc_colombia')
         ->withCount('voi_voc_ecuador')
         ->withCount('voi_voc_bolivia')
         ->get();
         
-        return view('index', compact('config', 'aviso', 'banners', 'present', 'casos_fecha', 'casos', 'peru_fecha', 'peru', 'colombia_fecha', 'colombia', 'bolivia_fecha', 'bolivia', 'ecuador_fecha', 'ecuador', 'voi', 'voc', 'vbm'));
+        return view('index', compact('config', 'aviso', 'banners', 'present', 'casos_fecha', 'casos', 'peru_fecha', 'peru', 'colombia_fecha', 'colombia', 'bolivia_fecha', 'bolivia', 'ecuador_fecha', 'ecuador', 'centros', 'voi', 'voc', 'vbm'));
     }
 }

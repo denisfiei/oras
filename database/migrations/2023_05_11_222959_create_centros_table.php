@@ -20,13 +20,6 @@ class CreateCentrosTable extends Migration
             $table->char('activo', 1)->default('S')->comment("S=si, N=no");
             $table->timestamps();
         });
-
-        DB::table('centros')->insert([
-            ['nombre'=>'DOCUMENTOS TÉCNICOS'],
-            ['nombre'=>'PUBLICACIONES'],
-            ['nombre'=>'PIPELINE O WORKFLOW'],
-            ['nombre'=>'SALA DE PRENSA']
-        ]);
     }
 
     /**

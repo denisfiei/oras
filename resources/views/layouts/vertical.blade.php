@@ -44,8 +44,8 @@
     <div class="content ht-100v pd-0">
         <div class="content-header">
             <div class="content-search">
-                <i data-feather="search"></i>
-                <input type="search" class="form-control" placeholder="Search...">
+                {{-- <i data-feather="search"></i>
+                <input type="search" class="form-control" placeholder="Search..."> --}}
             </div>
             <nav class="nav">
                 {{-- <a href="#" class="nav-link"><i data-feather="help-circle"></i></a>

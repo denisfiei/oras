@@ -66,6 +66,7 @@
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-right">Título</th>
+                                <th class="text-right">Nivel</th>
                                 <th class="text-center">Fecha</th>
                                 <th class="text-center">Enlace</th>
                                 <th class="text-center">País</th>
@@ -79,6 +80,7 @@
                             <tr class="my_vue" v-for="(data, index) in listRequest" style="display:none;">
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
                                 <td class="text-right">@{{data.titulo}}</td>
+                                <td class="text-right">@{{FindNivel(data.nivel)}}</td>
                                 <td class="text-center">@{{Fecha(data.fecha)}}</td>
                                 <td class="text-center">
                                     <a :href="data.enlace" class="button_link" target="_blank" v-if="data.enlace">Ir Enlace</a>

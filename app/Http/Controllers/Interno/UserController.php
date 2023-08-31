@@ -66,6 +66,14 @@ class UserController extends Controller
             });
         }
 
+        if ($request->pais) {
+            $users->where('pais_id', $request->pais);
+        }
+
+        if ($request->perfil) {
+            $users->where('rol_id', $request->perfil);
+        }
+
         $users = $users->with(['rol', 'pais', 'laboratorio'])->orderBy('nombres', 'ASC')->paginate(10);
 
         return [
@@ -240,6 +248,49 @@ class UserController extends Controller
                 'action'    =>  'error',
                 'title'     =>  'Incorrecto!!',
                 'message'   =>  'Ocurrio un error al dar de ALTA al Usuario, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
+                'error'     =>  'Error: '.$e->getMessage()
+            ];
+        }
+    }
+
+    public function perfil()
+    {
+        $user = User::findOrFail(Auth::user()->id);
+
+        return view('sistema.interno.users.perfil', compact('user'));
+    }
+
+    public function perfil_store(Request $request)
+    {   
+        try {
+            
+            DB::beginTransaction();
+            
+            $user = User::findOrFail(Auth::user()->id);
+            $user->nombres = Str::upper($request->nombres);
+            $user->telefono = $request->telefono;
+            $user->email = $request->email;
+            if ($request->password) {
+                $user->password = Hash::make($request->password);
+            }
+            $user->save();
+
+            DB::commit();
+
+            return [
+                'action'    =>  'success',
+                'title'     =>  'Bien!!',
+                'message'   =>  'El Usuario se actualizo con éxito.',
+            ];
+
+
+        } catch (\Exception $e) {
+            DB::rollBack();
+
+            return [
+                'action'    =>  'error',
+                'title'     =>  'Incorrecto!!',
+                'message'   =>  'Ocurrio un error al actualizar datos, intente nuevamente o contacte al Administrador del Sistema. Código de error: '.$e->getMessage(),
                 'error'     =>  'Error: '.$e->getMessage()
             ];
         }

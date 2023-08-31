@@ -110,7 +110,7 @@ class RecursoController extends Controller
                 'orden' => 'numeric|min:1',
                 'nivel' => 'numeric|min:1',
                 'enlace' => 'max:255',
-                'imagen' => 'file|max:5120',
+                'imagen' => 'required_unless|max:5120',
             ]);
         } else if ($request->nivel < 20 && $request->nivel >= 10) {
             $this->validate($request, [
@@ -120,7 +120,7 @@ class RecursoController extends Controller
                 'orden' => 'numeric|min:1',
                 'nivel' => 'numeric|min:1',
                 'enlace' => 'max:255',
-                'imagen' => 'file|max:5120',
+                'imagen' => 'required_unless:nivel,12|max:5120',
             ]);
         } else {
             $this->validate($request, [
@@ -129,7 +129,7 @@ class RecursoController extends Controller
                 'orden' => 'numeric|min:1',
                 'nivel' => 'numeric|min:1',
                 'enlace' => 'max:255',
-                'imagen' => 'file|max:5120',
+                'imagen' => 'required_unless:nivel,12|max:5120',
             ]);
         }
 

@@ -34,7 +34,15 @@
                     <section class="centro_menu custom_shadow mt-5">
                         <div class="stats_data_links">
                             <ul>
-                                <li>
+                                @foreach ($centros as $item)
+                                <li class="{{$id == $item->id ? 'active' : ''}}">
+                                    <a href="{{url('centro_informacion/tipo/'.$item->id)}}">
+                                        <i class="{{$item->icon}} cen_inf"></i>
+                                        <p>{{$item->nombre}}</p>
+                                    </a>
+                                </li>
+                                @endforeach
+                                {{-- <li>
                                     <a href="{{url('centro_informacion/tipo/DT')}}">
                                         <i>
                                             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18" fill="none"> <g clip-path="url(#clip0_32_8)"> <path d="M12 0H6C5.175 0 4.5 0.675 4.5 1.5V13.5C4.5 14.325 5.175 15 6 15H15C15.825 15 16.5 14.325 16.5 13.5V4.5L12 0ZM15 13.5H6V1.5H11.25V5.25H15V13.5ZM3 3V16.5H15V18H3C2.175 18 1.5 17.325 1.5 16.5V3H3ZM7.5 7.5V9H13.5V7.5H7.5ZM7.5 10.5V12H11.25V10.5H7.5Z" fill="white"/> </g> <defs> <clipPath id="clip0_32_8"> <rect width="18" height="18" fill="white"/> </clipPath> </defs> </svg>
@@ -65,14 +73,14 @@
                                         </i>
                                         <p>Centro de prensa</p>
                                     </a>
-                                </li>
+                                </li> --}}
                             </ul>
                         </div>
                     </section>
                     <section class="centro_years">
                         <h2 style="text-shadow: 2px 2px 2px rgba(0,0,0,0.39);">{{$centro->nombre}}</h2>
                         <div class="centro_years_grid">
-                            <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[0])}}" class="ci_anio">
+                            <a href="{{url('centro_informacion/tipo/'.$id.'/'.$anios[0])}}" class="ci_anio">
                                 <div class="img_wrapper">
                                     <span></span>
                                     <img src="{{asset('images/placehold1.jpg')}}" class="card-img-top custom_shadow" alt="" style="height: 180px;">
@@ -81,7 +89,7 @@
                                     {{$anios[0]}}
                                 </div>
                             </a>
-                            <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[1])}}" class="ci_anio">
+                            <a href="{{url('centro_informacion/tipo/'.$id.'/'.$anios[1])}}" class="ci_anio">
                                 <div class="img_wrapper">
                                     <span></span>
                                     <img src="{{asset('images/placehold2.jpg')}}" class="card-img-top custom_shadow" alt="" style="height: 180px;">
@@ -90,7 +98,7 @@
                                     {{$anios[1]}}
                                 </div>
                             </a>
-                            <a href="{{url('centro_informacion/tipo/'.$tipo.'/'.$anios[2])}}" class="ci_anio">
+                            <a href="{{url('centro_informacion/tipo/'.$id.'/'.$anios[2])}}" class="ci_anio">
                                 <div class="img_wrapper">
                                     <span></span>
                                     <img src="{{asset('images/placehold3.jpg')}}" class="card-img-top custom_shadow" alt="" style="height: 180px;">

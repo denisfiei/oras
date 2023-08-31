@@ -21,6 +21,11 @@ Auth::routes(['register' => false]);
 Route::middleware('auth')->group(function () {
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+    Route::prefix('perfil')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\UserController::class, 'perfil'])->name('perfil');
+        Route::post('/store', [App\Http\Controllers\Interno\UserController::class, 'perfil_store']);
+    });
+
     Route::prefix('paises')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\PaisController::class, 'index'])->name('paises');
         Route::post('/buscar', [App\Http\Controllers\Interno\PaisController::class, 'buscar']);
@@ -169,8 +174,8 @@ Route::prefix('distribucion')->group(function () {
 });
 
 Route::prefix('centro_informacion')->group(function () {
-    Route::get('/tipo/{tipo}', [App\Http\Controllers\CentroInformacionController::class, 'index'])->name('centro_informacion');
-    Route::get('/tipo/{tipo}/{anio}', [App\Http\Controllers\CentroInformacionController::class, 'anio']);
+    Route::get('/tipo/{id}', [App\Http\Controllers\CentroInformacionController::class, 'index'])->name('centro_informacion');
+    Route::get('/tipo/{id}/{anio}', [App\Http\Controllers\CentroInformacionController::class, 'anio']);
 
     Route::get('/download/{id}', [App\Http\Controllers\CentroInformacionController::class, 'download']);
 });

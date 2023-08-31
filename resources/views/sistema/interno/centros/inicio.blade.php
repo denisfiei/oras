@@ -44,6 +44,7 @@
                             <tr>
                                 <th class="text-center">#</th>
                                 <th class="text-right">Nombre</th>
+                                <th class="text-center">Icono</th>
                                 <th class="text-center"><ion-icon name="ellipsis-vertical"></ion-icon></th>
                             </tr>
                         </thead>
@@ -54,6 +55,7 @@
                             <tr class="my_vue" v-for="(data, index) in listRequest" style="display:none;">
                                 <td class="text-center">@{{(index + pagination.index + 1)}}</td>
                                 <td class="text-right">@{{data.nombre}}</td>
+                                <td class="text-center"><i :class="data.icono"></i></td>
                                 <td class="text-center">
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Editar" @click="Modal('modal-md', 'edit', data.id, data)"><i class="text-secondary fas fa-pencil-alt"></i></a>
                                     <a href="javascript:void(0)" class="btn_opt" data-bs-toggle="tooltip" title="Eliminar" @click="Modal('modal-md', 'delete', data.id, data)"><i class="text-danger far fa-trash-alt"></i></a>
@@ -92,5 +94,5 @@
 @endsection
 
 @section('js')
-    <script src="{{asset('views/interno/centros.js?v=1.0.0')}}"></script>
+    <script src="{{asset('views/interno/centros.js?v=1.0.1')}}"></script>
 @endsection
