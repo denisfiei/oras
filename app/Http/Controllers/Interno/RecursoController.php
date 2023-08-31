@@ -110,7 +110,7 @@ class RecursoController extends Controller
                 'orden' => 'numeric|min:1',
                 'nivel' => 'numeric|min:1',
                 'enlace' => 'max:255',
-                'imagen' => 'required_unless|max:5120',
+                'imagen' => 'required|file|max:5120',
             ]);
         } else if ($request->nivel < 20 && $request->nivel >= 10) {
             $this->validate($request, [
