@@ -100,7 +100,8 @@ class UserController extends Controller
             'codigo' => 'required|max:5',
             'telefono' => 'required|digits:9',
             'email' => 'required|email|unique:users|max:50',
-            'password' => 'required|min:6',
+            //'password' => 'required|min:6',
+            'password' => 'min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
         ]);
 
         try {
@@ -142,16 +143,29 @@ class UserController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'perfil' => 'required|exists:roles,id',
-            'pais' => 'required|exists:paises,id',
-            'laboratorio' => 'required|exists:laboratorios,id',
-            'nombres' => 'required|max:255',
-            'codigo' => 'required|max:5',
-            'telefono' => 'required|digits:9',
-            'email' => 'required|email|unique:users,id,'.$request->id.'|max:50',
-            //'password' => 'min:6',
-        ]);
+        if ($request->password) {
+            $this->validate($request, [
+                'perfil' => 'required|exists:roles,id',
+                'pais' => 'required|exists:paises,id',
+                'laboratorio' => 'required|exists:laboratorios,id',
+                'nombres' => 'required|max:255',
+                'codigo' => 'required|max:5',
+                'telefono' => 'required|digits:9',
+                'email' => 'required|email|unique:users,id,'.$request->id.'|max:50',
+                'password' => 'min:6|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/',
+            ]);
+        } else {
+            $this->validate($request, [
+                'perfil' => 'required|exists:roles,id',
+                'pais' => 'required|exists:paises,id',
+                'laboratorio' => 'required|exists:laboratorios,id',
+                'nombres' => 'required|max:255',
+                'codigo' => 'required|max:5',
+                'telefono' => 'required|digits:9',
+                'email' => 'required|email|unique:users,id,'.$request->id.'|max:50',
+            ]);
+
+        }
 
         try {
 

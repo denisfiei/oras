@@ -1,5 +1,32 @@
 @extends('layouts.vertical')
 
+@section('css')
+    <style>
+        #pswd_info {
+            padding: 6px 0 0;
+            line-height: 14px;
+            font-size: .875em;
+            border-top: 1px solid #cbcbcb;
+        }
+        .invalid {
+            background:url(../images/invalid.svg) no-repeat 0 50%;
+            background-size: 12px 12px;
+            padding-left:22px;
+            color:#ec3f41;
+        }
+        .valid {
+            background:url(../images/valid.svg) no-repeat 0 50%;
+            background-size: 12px 12px;
+            padding-left:22px;
+        }
+        .validation_list {
+            list-style:none;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+@endsection
+
 @section('content')
     
 <div class="content-body" id="form_users">

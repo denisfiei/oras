@@ -90,7 +90,15 @@
                                     <input type="password" id="password" v-model="user.password" class="form-control" :class="[errors.password ? 'border-error' : '']">
                                     <span class="input-group-text show_password cursor_pointer"><i class="far fa-eye"></i></span>
                                 </div>
-                                <div class="input-error" v-if="errors.password">@{{ errors.password[0] }}</div>
+                                <div class="input-error mb-3" v-if="errors.password">@{{ errors.password[0] }}</div>
+                                <div id="pswd_info">
+                                    <ul class="validation_list">
+                                       <li id="letter">Al menos debería tener <strong>una letra minúscula</strong></li>
+                                       <li id="capital">Al menos debería tener <strong>una letra mayúsculas</strong></li>
+                                       <li id="number">Al menos debería tener <strong>un número</strong></li>
+                                       <li id="length">Debería tener <strong>8 carácteres</strong> como mínimo</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
