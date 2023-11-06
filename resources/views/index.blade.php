@@ -7,7 +7,28 @@
 
         <div data-label="Example" class="df-example">
             <div id="carouselExample3" class="carousel slide carousel-fade banner_background" data-bs-ride="carousel">
-                
+                @if (count($banners) > 0)
+                    <ol class="carousel-indicators">
+                        @foreach ($banners as $index => $item)
+                            <li data-bs-target="#carouselExample3" data-bs-slide-to="{{$index}}" class="{{ ($index==0) ? 'active' : '' }}"></li>
+                        @endforeach
+                    </ol>
+
+                    <div class="carousel-inner">
+                        @foreach ($banners as $index => $img)
+                        <div class="carousel-item {{($index == 0) ? 'active' : ''}}">
+                            <div class="banner_background" style="background-image: url({{asset('storage/recursos/'.$img->imagen)}});">
+                                <div class="container">
+                                    <div style="padding-top: 70px;">
+                                        <h2 class="banner_title">{{$img->titulo}}</h2>
+                                        <h5 class="banner_subtitle">{{$img->descripcion}}</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>    
+                @else
                     <ol class="carousel-indicators">
                         <li data-bs-target="#carouselExample3" data-bs-slide-to="0" class="active"></li>
                         <li data-bs-target="#carouselExample3" data-bs-slide-to="1"></li>
@@ -45,6 +66,7 @@
                             </div>
                         </div>
                     </div>
+                @endif
                 <a class="carousel-control-prev" href="#carouselExample3" role="button" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"><i data-feather="chevron-left"></i></span>
                     <span class="sr-only">Previous</span>
