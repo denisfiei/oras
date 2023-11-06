@@ -142,9 +142,9 @@
                         @endif
                         <span>ORGANISMO ANDINO DE SALUD<br>CONVENIO HIPÓLITO UNANUE</span>
                     </div>
-                    <div class="text-center">
+                    <!--div class="text-center">
                         <img src="{{asset('images/logos/logo_home_white.png')}}" alt="logo_white" style="max-width: 200px">
-                    </div>
+                    </!--div-->
                     <div class="partners_content text-center">
                         <img src="{{asset('images/logos/logo_ins_bol.png')}}" alt="Ins_Bol" style="max-height: 40px;">
                         <img src="{{asset('images/logos/logo_ins_col.png')}}" alt="Ins_Col" style="max-height: 40px;">
