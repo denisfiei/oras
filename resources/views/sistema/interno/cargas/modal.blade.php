@@ -46,9 +46,9 @@
                             </div>
                             <div class="form-group col-md-12 mb-2">
                                 <label class="form-label mb-0" for="file">SUBIR ARCHIVO <span class="obligatorio">(*)</span></label>
-                                <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
+                                <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import', 'file')" 
                                 accept=".tsv" v-if="carga.tipo == 'TSV'">
-                                <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
+                                <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import', 'file')" 
                                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" v-else>
                                 <div class="input-error" v-if="errors.file">@{{ errors.file[0] }}</div>
                             </div>
@@ -79,11 +79,11 @@
                             </p>
                             <div class="mt-4" v-if="importar.errors.length > 0" style="max-height: 500px; overflow-y: auto;">
                                 <table class="table table-sm table-error">
-                                    <tr style="background-color: #dddddd;">
-                                        <th colspan="2"><i class="far fa-file-excel"></i> ERRORES AL IMPORTAR (@{{importar.rows_error}})</th>
+                                    <tr style="background-color: #dc3545;">
+                                        <th colspan="2" class="tx-white"><i class="far fa-file-excel"></i> ERRORES AL IMPORTAR (@{{importar.rows_error}})</th>
                                     </tr>
                                     <tr v-if="importar.log_file">
-                                        <th colspan="2" class="text-center"><a :href="importar.log_file" download id="log_file"><i class="fas fa-eye"></i> Ver archivo log</a></th>
+                                        <th colspan="2" class="text-center"><a :href="importar.log_file" download id="log_file" class="tx-danger"><i class="fas fa-eye"></i> Ver archivo log</a></th>
                                     </tr>
                                     <tr style="background-color: #dddddd;">
                                         <th>FILA</th>
@@ -149,9 +149,9 @@
                             </div>
                             <div class="form-group col-md-12 mb-2">
                                 <label class="form-label mb-0" for="file">SUBIR ARCHIVO <span class="obligatorio">(*)</span></label>
-                                <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
+                                <input type="file" id="file_det" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import', 'file_det')" 
                                 accept=".tsv" v-if="carga.tipo == 'TSV'">
-                                <input type="file" id="file" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import')" 
+                                <input type="file" id="file_det" class="form-control" :class="[errors.file ? 'border-error' : '']" @change="File('import', 'file_det')" 
                                 accept="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" v-else>
                                 <div class="input-error" v-if="errors.file">@{{ errors.file[0] }}</div>
                             </div>
@@ -180,13 +180,13 @@
                             <p class="mt-2">
                                 <i class="fas fa-check-circle text-success"></i> @{{importar.rows}} Filas importadas.
                             </p>
-                            <div class="mt-4" v-if="importar.errors.length > 0" style="max-height: 500px; overflow-y: auto;">
+                            <div class="mt-4" v-if="importar.errors.length > 0" style="max-height: calc(100vh - 430px); overflow-y: auto;">
                                 <table class="table table-sm table-error">
-                                    <tr style="background-color: #dddddd;">
-                                        <th colspan="2"><i class="far fa-file-excel"></i> ERROR DE DATOS (@{{importar.rows_error}})</th>
+                                    <tr style="background-color: #dc3545;">
+                                        <th colspan="2" class="tx-white"><i class="far fa-file-excel"></i> ERRORES AL IMPORTAR (@{{importar.rows_error}})</th>
                                     </tr>
                                     <tr v-if="importar.log_file">
-                                        <th colspan="2" class="text-center"><a :href="importar.log_file" download id="log_file"><i class="fas fa-eye"></i> Ver archivo log</a></th>
+                                        <th colspan="2" class="text-center"><a :href="importar.log_file" download id="log_file" class="tx-danger"><i class="fas fa-eye"></i> Ver archivo log</a></th>
                                     </tr>
                                     <tr style="background-color: #dddddd;">
                                         <th>FILA</th>
@@ -283,6 +283,8 @@
                                 </tbody>
                             </table>
                         </div>
+
+                        <a href="javascript:void(0)" @click="BuscarGisaid('rows_gisaid')" v-if="page_load <= page_last_load"><i class="fas fa-arrow-down"></i> Cargar mas filas</a>
                     </div>
                 </div>
             </div>
@@ -371,6 +373,7 @@
                                 </tbody>
                             </table>
                         </div>
+                        <a href="javascript:void(0)" @click="BuscarDetalle('rows_detalle')" v-if="page_load <= page_last_load"><i class="fas fa-arrow-down"></i> Cargar mas filas</a>
                     </div>
                 </div>
             </div>

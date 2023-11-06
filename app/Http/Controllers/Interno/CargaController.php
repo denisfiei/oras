@@ -238,17 +238,23 @@ class CargaController extends Controller
     public function datos_gisaid(Request $request)
     {
         $gisaids = CargaGisaid::where('carga_id', $request->id)
-        ->get();
+        ->paginate(100);
 
-        return $gisaids;
+        return [
+            'gisaids' => $gisaids
+        ];
+        //return $gisaids;
     }
     
     public function datos_detalle(Request $request)
     {
         $detalles = CargaDetalle::where('carga_id', $request->id)
-        ->get();
+        ->paginate(100);
 
-        return $detalles;
+        return [
+            'detalles' => $detalles
+        ];
+        //return $detalles;
     }
 
     public function rows(Request $request)
@@ -403,6 +409,7 @@ class CargaController extends Controller
                 Excel::import($import, request()->file('file'), \Maatwebsite\Excel\Excel::XLSX);
             }
             $data = $import->getData();
+            $dd = $data['dd'];
 
             if (count($data['errors']) > 0) {
                 $errors = [];
@@ -451,7 +458,8 @@ class CargaController extends Controller
                 'action'    =>  'success',
                 'title'     =>  'Bien!!',
                 'message'   =>  'Se importaron los Datos con éxito.',
-                'import'    =>  $data
+                'import'    =>  $data,
+                'dd'    =>  $dd,
             ];
         } catch (\Exception $e) {
             DB::rollBack();

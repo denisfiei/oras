@@ -46,6 +46,8 @@ new Vue({
         },
         gisaids: [],
         detalles: [],
+        page_load: 1,
+        page_last_load: 1,
 
         // UPLOAD
         visible: true,
@@ -294,6 +296,9 @@ new Vue({
             this.finished = false;
             this.total_rows = 0;            
             $('#file').val('');
+            $('#file_det').val('');
+
+            this.page_load = 1;
         },
         Delete(form) {
             this.Load(form, 'on', 'Eliminando Registro ...');
@@ -389,11 +394,14 @@ new Vue({
         BuscarGisaid(form) {
             this.Load(form, 'on', 'Cargando datos ...');
 
-            axios.post('cargas/datos_gisaid', {
+            axios.post('cargas/datos_gisaid?page='+this.page_load, {
                 id: this.id
             }).then(response => {
                 this.Load(form, 'off', null);
-                this.gisaids = response.data;
+                this.gisaids = this.gisaids.concat(response.data.gisaids.data);
+                this.page_load = response.data.gisaids.current_page+1;
+                this.page_last_load = response.data.gisaids.last_page;
+                console.log(this.gisaids);
             }).catch(error => {
                 console.log(error)
                 this.Load(form, 'off', null);
@@ -406,11 +414,13 @@ new Vue({
         BuscarDetalle(form) {
             this.Load(form, 'on', 'Cargando datos ...');
 
-            axios.post('cargas/datos_detalle', {
+            axios.post('cargas/datos_detalle?page='+this.page_load, {
                 id: this.id
             }).then(response => {
                 this.Load(form, 'off', null);
-                this.detalles = response.data;
+                this.detalles = this.detalles.concat(response.data.detalles.data);
+                this.page_load = response.data.detalles.current_page+1;
+                this.page_last_load = response.data.detalles.last_page;
             }).catch(error => {
                 console.log(error)
                 this.Load(form, 'off', null);
@@ -526,7 +536,6 @@ new Vue({
             formData.append('cantidad', this.total_rows);
 
             axios.post('cargas/gisaid', formData).then(response=>{
-                console.log(response.data)
                 this.Load(form, 'off', null);
                 var action = response.data.action;
                 var title = response.data.title;
@@ -572,10 +581,10 @@ new Vue({
             this.Load(form, 'on', 'Importando datos espere ...');
             this.visible = false;
 
+            console.log(this.carga.tipo);
             var formData  = new FormData();
             formData.append('id', this.id);
             formData.append('tipo', this.carga.tipo);
-            // formData.append('muestreo', this.carga.muestreo);
             formData.append('file', this.carga.file);
             formData.append('cantidad', this.total_rows);
 
@@ -600,12 +609,12 @@ new Vue({
                     this.Alert2(action, title, message);
                     this.visible = true;
                     this.carga.file = null;
-                    $('#file').val('');
+                    $('#file_det').val('');
                 }
             }).catch(error => {
                 console.log(error);
 
-                $('#file').val('');
+                $('#file_det').val('');
                 this.visible = true;
                 this.Load(form, 'off', null);
 

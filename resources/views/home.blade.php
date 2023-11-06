@@ -30,19 +30,19 @@
                 <table class="table table-dashboard table-hover mg-b-0">
                     <tbody>
                         <tr>
-                            <td class="tx-normal"><span class="tx-color-03">Manual</span> ADMINISTRADOR</td>
+                            <td class="tx-normal"><span class="tx-color-03">Manual perfil</span> ADMINISTRADOR</td>
                             <td class="tx-medium text-end">
                                 <a href="manuales/manual_sistema.pdf" download data-bs-toggle="tooltip" data-bs-placement="left" title="Descargar Manual" class="tx-15 tx-primary"><i class="far fa-download"></i></a>
                             </td>
                         </tr>
                         <tr>
-                            <td class="tx-normal"><span class="tx-color-03">Manual</span> OPERADOR</td>
+                            <td class="tx-normal"><span class="tx-color-03">Manual perfil</span> OPERADOR</td>
                             <td class="tx-medium text-end">
                                 <a href="manuales/manual_operativo.pdf" download data-bs-toggle="tooltip" data-bs-placement="left" title="Descargar Manual" class="tx-15 tx-primary"><i class="far fa-download"></i></a>
                             </td>
                         </tr>
                         <tr>
-                            <td class="tx-normal"><span class="tx-color-03">Manual</span> GESTOR DE CONTENIDO</td>
+                            <td class="tx-normal"><span class="tx-color-03">Manual perfil</span> GESTOR DE CONTENIDO</td>
                             <td class="tx-medium text-end">
                                 <a href="manuales/manual_gestor.pdf" download data-bs-toggle="tooltip" data-bs-placement="left" title="Descargar Manual" class="tx-15 tx-primary"><i class="far fa-download"></i></a>
                             </td>
@@ -72,24 +72,30 @@
                 </div>
                 <table class="table table-dashboard table-hover mg-b-0">
                     <tbody>
-                        {{-- <tr>
-                            <td class="tx-normal"><span class="tx-color-03">Tutorial</span> ADMINISTRADOR</td>
+                        <tr>
+                            <td class="tx-normal"><span class="tx-color-03">Video Tutorial perfil</span> ADMINISTRADOR</td>
                             <td class="tx-medium text-end">
-                                <a href="files/carga_gisaid_plantilla.xlsx" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver Tutorial" class="tx-15 tx-teal"><i class="far fa-caret-circle-right"></i></a>
+                                <a href="https://drive.google.com/file/d/1fRQ5WVIIoGH_fy6y-nYIlSfRefXfy2WD/view?usp=sharing" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver Video Tutorial" class="tx-15 tx-teal"><i class="far fa-caret-circle-right"></i></a>
                             </td>
                         </tr>
                         <tr>
-                            <td class="tx-normal"><span class="tx-color-03">Tutorial</span> OPERADOR</td>
+                            <td class="tx-normal"><span class="tx-color-03">Video Tutorial perfil</span> OPERADOR</td>
                             <td class="tx-medium text-end">
-                                <a href="files/carga_gisaid_plantilla.tsv" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver Tutorial" class="tx-15 tx-teal"><i class="far fa-caret-circle-right"></i></a>
+                                <a href="https://drive.google.com/file/d/1GDU1OJThXuipPT2O7Ayzr9PkU9ARA5Kw/view?usp=sharing" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver Video Tutorial" class="tx-15 tx-teal"><i class="far fa-caret-circle-right"></i></a>
                             </td>
                         </tr>
                         <tr>
-                            <td class="tx-normal"><span class="tx-color-03">Tutorial</span> GESTOR DE CONTENIDO</td>
+                            <td class="tx-normal"><span class="tx-color-03">Video Tutorial perfil</span> GESTOR DE CONTENIDO <span>parte 1</span></td>
                             <td class="tx-medium text-end">
-                                <a href="files/carga_detalle_plantilla.tsv" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver Tutorial" class="tx-15 tx-teal"><i class="far fa-caret-circle-right"></i></a>
+                                <a href="https://drive.google.com/file/d/1lEIeeY1-J6MeBVE0u8pf09fqwzevuPqX/view?usp=sharing" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver Video Tutorial" class="tx-15 tx-teal"><i class="far fa-caret-circle-right"></i></a>
                             </td>
-                        </tr> --}}
+                        </tr>
+                        <tr>
+                            <td class="tx-normal"><span class="tx-color-03">Video Tutorial perfil</span> GESTOR DE CONTENIDO <span>parte 2</span></td>
+                            <td class="tx-medium text-end">
+                                <a href="https://drive.google.com/file/d/1GURiPV5aOwyTS9YV_ZYX2SCPxh-JWkQ7/view?usp=sharing" target="_blank" data-bs-toggle="tooltip" data-bs-placement="left" title="Ver Video Tutorial" class="tx-15 tx-teal"><i class="far fa-caret-circle-right"></i></a>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

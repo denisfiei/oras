@@ -17,7 +17,7 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
 {
     use Importable;
 
-    public $errors = [], $total = 0, $total_error = 0, $carga = [], $fecha = '';
+    public $errors = [], $dd = [], $total = 0, $total_error = 0, $carga = [], $fecha = '';
 
     public function __construct($carga)
     {
@@ -141,9 +141,14 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
                 $columna[] = 'Fecha_ingreso_sistema (No puede estar vacio)';
             } else {
                 $fecha_sis = explode('-', $row[18]);
-                if(count($fecha_sis) < 3 && !checkdate($fecha_sis[1], $fecha_sis[2], $fecha_sis[0])){
+                if(count($fecha_sis) < 3){
                     $success = false;
                     $columna[] = 'Fecha_ingreso_sistema (No contiene el formato correcto "YYYY-MM-DD")';
+                } else {
+                    if (!checkdate($fecha_sis[1], $fecha_sis[2], $fecha_sis[0])) {
+                        $success = false;
+                        $columna[] = 'Fecha_ingreso_sistema (No contiene el formato correcto "YYYY-MM-DD")';
+                    }
                 }
             }
 
@@ -181,16 +186,7 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
                 }
             }
 
-            if ($success) {
-                /*$fecha_muestra = null;
-                $fecha_sistema = null;
-                if ($row[6]) {
-                    $fecha_muestra = $this->transformDateTime($row[6], 'Y-m-d');
-                }
-                if ($row[21]) {
-                    $fecha_sistema = $this->transformDateTime($row[21], 'Y-m-d H:i:s');
-                }*/
-    
+            if ($success) {    
                 $detalle = new CargaDetalle();
                 $detalle->carga_id = $this->carga->id;
                 $detalle->virus_id = $this->carga->virus_id;
@@ -209,7 +205,7 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
                 $detalle->marca_dosis_4 = $row[11];
                 $detalle->dosis_4 = $row[12];
                 $detalle->dosis_5 = 'NO';
-                $detalle->tipo_muestreo_id = $tipo_muestreo;
+                $detalle->tipo_muestreo_id = 1;
                 $detalle->numeracion_placa = $row[14];
                 $detalle->placa = $row[15];
                 $detalle->corrida = $row[16];
@@ -241,6 +237,7 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
                 'fila' => $rowIndex,
                 'error' => [$e->getMessage()]
             ];
+            $this->dd[] = $row;
         }
     }
 
@@ -250,6 +247,7 @@ class CargaTsvDetalleImport implements OnEachRow, WithChunkReading, WithStartRow
             'total' => $this->total,
             'total_error' => $this->total_error,
             'errors' => $this->errors,
+            'dd' => $this->dd
         ];
     }
 

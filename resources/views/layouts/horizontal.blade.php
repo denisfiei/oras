@@ -1,6 +1,7 @@
 @php
     $path = Request::root();
     $config_cache = Cache::get('config_cache');
+    $cache_logo = ($config_cache->logo) ? $path.'/storage/'.$config_cache->logo : $path.'/images/logos/logo_oras.png';
 @endphp
 
 <!DOCTYPE html>
@@ -33,6 +34,7 @@
     <link rel="stylesheet" href="{{ asset('theme/assets/css/dashforge.filemgr.css') }}">
     <link rel="stylesheet" type="text/css" href="{{asset('css/sweetalert2.min.css?v=1.0') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('css/app.css?v=1.0.2') }}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/load.css')}}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     {{-- <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -49,10 +51,43 @@
             color: #fff;
         }
     </style>
+    <style id="loftloader-lite-custom-bg-color">
+        #loftloader-wrapper .loader-section {
+            background: #ffffff;
+        }
+    </style>
+    <style id="loftloader-lite-custom-bg-opacity">
+        #loftloader-wrapper .loader-section {
+            opacity: 1;
+        }
+    </style>
+    <style id="loftloader-lite-custom-loader">
+        #loftloader-wrapper.pl-imgloading #loader {
+            width: 300px;
+        }
+        #loftloader-wrapper.pl-imgloading #loader span {
+            background-size: cover;
+            background-image: url({{$cache_logo}});
+        }
+    </style>
     @yield('css')
 </head>
 
 <body>
+    <!-- ======= Loader ======= -->
+    <div id="loftloader-wrapper" class="pl-imgloading" data-show-close-time="15000" data-max-load-time="0">
+        <div class="loader-section section-fade"></div>
+        <div class="loader-inner">
+            <div id="loader">
+                <div class="imgloading-container">
+                    <span style="background-image: url({{$cache_logo}});"></span>
+                </div>
+                <img width="300" height="157" data-no-lazy="1" class="skip-lazy" alt="loader image" src="{{$cache_logo}}">
+            </div>
+        </div>
+        <div class="loader-close-button" style=""><span class="screen-reader-text">Close</span></div>
+    </div>
+    
     <nav class="navbar navbar-header my-navbar">
         <div class="nav_logo_wrapper">
             @if ($config_cache->logo)
@@ -180,6 +215,7 @@
     <script src="{{ asset('js/axios.min.js') }}"></script>
     <script src="{{ asset('js/vue.min.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
+    <script src="{{asset('js/load.js')}}"></script>
 
     @yield('js')
 
