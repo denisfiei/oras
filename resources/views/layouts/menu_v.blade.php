@@ -42,7 +42,7 @@
             <div class="collapse" id="loggedinMenu">
                 <ul class="nav nav-aside mg-b-0">
                     <li class="nav-item"><a href="{{ route('perfil') }}" class="nav-link"><i data-feather="edit"></i> <span>Editar Perfil</span></a></li>
-                    <li class="nav-item"><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();" 
+                    <li class="nav-item"><a href="{{ route('logout') }}" onclick="event.preventDefault();document.getElementById('logout-form').submit();"
                         class="nav-link text-danger"><i class="text-danger" data-feather="log-out"></i> <span>Cerrar Sesión</span></a></li>
                 </ul>
             </div>
@@ -50,7 +50,7 @@
         <ul class="nav nav-aside">
             <li class="nav-item {{(request()->is('home')) ? 'active' : ''}}"><a href="{{ url('home') }}" class="nav-link"><i class="far fa-home-lg"></i> <span>Inicio</span></a></li>
             <li class="nav-item"><a href="{{ url('/') }}" class="nav-link"><i class="fas fa-desktop"></i> <span>Web</span></a></li>
-            
+
             @if ( count($menus['administrativos']) > 0 )
                 <li class="nav-label mg-t-25">MENU DE ADMINISTRATIVO</li>
                 @foreach ($menus['administrativos'] as $item)
@@ -62,11 +62,22 @@
             <li class="nav-item {{(request()->is('centros')) ? 'active' : ''}}"><a href="{{ route('centros') }}" class="nav-link"><i class="fas fa-university"></i> <span>Centros de Información</span></a></li>
             <li class="nav-item {{(request()->is('muestreos')) ? 'active' : ''}}"><a href="{{ route('muestreos') }}" class="nav-link"><i class="fas fa-layer-group"></i> <span>Tipos de Muestreo</span></a></li>
             <li class="nav-item {{(request()->is('recursos')) ? 'active' : ''}}"><a href="{{ route('recursos') }}" class="nav-link"><i class="far fa-file-alt"></i> <span>Recursos</span></a></li> --}}
-            
+
             @if ( count($menus['operativos']) > 0 )
                 <li class="nav-label mg-t-25">MENU OPERATIVO</li>
                 @foreach ($menus['operativos'] as $item)
-                    <li class="nav-item {{(request()->is($item->url)) ? 'active' : ''}}"><a href="{{ route($item->route) }}" class="nav-link"><i class="{{$item->icono}}"></i> <span>{{$item->nombre}}</span></a></li>
+                    @if ($item->orden <= 6)
+                        <li class="nav-item {{(request()->is($item->url)) ? 'active' : ''}}"><a href="{{ route($item->route) }}" class="nav-link"><i class="{{$item->icono}}"></i> <span>{{$item->nombre}}</span></a></li>
+                    @endif
+                @endforeach
+            @endif
+
+            @if ( count($menus['operativos']) > 0 )
+                <li class="nav-label mg-t-25">MENU OPERATIVO DENGUE</li>
+                @foreach ($menus['operativos'] as $item)
+                    @if ($item->orden > 6)
+                        <li class="nav-item {{(request()->is($item->url)) ? 'active' : ''}}"><a href="{{ route($item->route) }}" class="nav-link"><i class="{{$item->icono}}"></i> <span>{{$item->nombre}}</span></a></li>
+                    @endif
                 @endforeach
             @endif
             {{-- <li class="nav-item {{(request()->is('virus')) ? 'active' : ''}}"><a href="{{ route('virus') }}" class="nav-link"><i class="fas fa-virus"></i> <span>Virus</span></a></li>

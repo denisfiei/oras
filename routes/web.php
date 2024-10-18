@@ -58,7 +58,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update', [App\Http\Controllers\Interno\MuestreoController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\MuestreoController::class, 'delete']);
     });
-    
+
     Route::prefix('recursos')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\RecursoController::class, 'index'])->name('recursos');
         Route::post('/datos', [App\Http\Controllers\Interno\RecursoController::class, 'datos']);
@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update', [App\Http\Controllers\Interno\RecursoController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\RecursoController::class, 'delete']);
     });
-    
+
     Route::prefix('voi_voc')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\VoiVocController::class, 'index'])->name('voi_voc');
         Route::post('/datos', [App\Http\Controllers\Interno\VoiVocController::class, 'datos']);
@@ -93,7 +93,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/rows', [App\Http\Controllers\Interno\LinajeController::class, 'rows']);
         Route::post('/import', [App\Http\Controllers\Interno\LinajeController::class, 'import']);
     });
-    
+
     Route::prefix('cargas')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\CargaController::class, 'index'])->name('cargas');
         Route::post('/datos', [App\Http\Controllers\Interno\CargaController::class, 'datos']);
@@ -103,10 +103,43 @@ Route::middleware('auth')->group(function () {
         Route::post('/delete_detalle', [App\Http\Controllers\Interno\CargaController::class, 'delete_detalle']);
         Route::post('/datos_gisaid', [App\Http\Controllers\Interno\CargaController::class, 'datos_gisaid']);
         Route::post('/datos_detalle', [App\Http\Controllers\Interno\CargaController::class, 'datos_detalle']);
-        
+
         Route::post('/rows', [App\Http\Controllers\Interno\CargaController::class, 'rows']);
         Route::post('/gisaid', [App\Http\Controllers\Interno\CargaController::class, 'gisaid']);
         Route::post('/detalle', [App\Http\Controllers\Interno\CargaController::class, 'detalle']);
+    });
+
+    Route::prefix('tipo_dengue')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\TipoDengueController::class, 'index'])->name('tipo_dengue');
+        Route::post('/buscar', [App\Http\Controllers\Interno\TipoDengueController::class, 'buscar']);
+        Route::post('/delete', [App\Http\Controllers\Interno\TipoDengueController::class, 'delete']);
+        Route::post('/carga', [App\Http\Controllers\Interno\TipoDengueController::class, 'carga']);
+        Route::post('/rows', [App\Http\Controllers\Interno\TipoDengueController::class, 'rows']);
+        Route::post('/import', [App\Http\Controllers\Interno\TipoDengueController::class, 'import']);
+    });
+
+    Route::prefix('serotipo_genotipo')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\SerotipoGenotipoController::class, 'index'])->name('serotipo_genotipo');
+        Route::post('/datos', [App\Http\Controllers\Interno\SerotipoGenotipoController::class, 'datos']);
+        Route::post('/buscar', [App\Http\Controllers\Interno\SerotipoGenotipoController::class, 'buscar']);
+        Route::post('/store', [App\Http\Controllers\Interno\SerotipoGenotipoController::class, 'store']);
+        Route::post('/update', [App\Http\Controllers\Interno\SerotipoGenotipoController::class, 'update']);
+        Route::post('/delete', [App\Http\Controllers\Interno\SerotipoGenotipoController::class, 'delete']);
+    });
+
+    Route::prefix('carga_dengue')->group(function () {
+        Route::get('/', [App\Http\Controllers\Interno\CargaDengueController::class, 'index'])->name('carga_dengue');
+        Route::post('/datos', [App\Http\Controllers\Interno\CargaDengueController::class, 'datos']);
+        Route::post('/buscar', [App\Http\Controllers\Interno\CargaDengueController::class, 'buscar']);
+        Route::post('/publicado', [App\Http\Controllers\Interno\CargaDengueController::class, 'publicado']);
+        Route::post('/delete', [App\Http\Controllers\Interno\CargaDengueController::class, 'delete']);
+        Route::post('/delete_detalle', [App\Http\Controllers\Interno\CargaDengueController::class, 'delete_detalle']);
+        Route::post('/datos_gisaid', [App\Http\Controllers\Interno\CargaDengueController::class, 'datos_gisaid']);
+        Route::post('/datos_detalle', [App\Http\Controllers\Interno\CargaDengueController::class, 'datos_detalle']);
+
+        Route::post('/rows', [App\Http\Controllers\Interno\CargaDengueController::class, 'rows']);
+        Route::post('/gisaid', [App\Http\Controllers\Interno\CargaDengueController::class, 'gisaid']);
+        Route::post('/detalle', [App\Http\Controllers\Interno\CargaDengueController::class, 'detalle']);
     });
 
     Route::prefix('menus')->group(function () {
@@ -140,7 +173,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/buscar', [App\Http\Controllers\Interno\ConfigController::class, 'buscar']);
         Route::post('/update', [App\Http\Controllers\Interno\ConfigController::class, 'update']);
     });
-    
+
     Route::prefix('avisos')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\AvisoController::class, 'index'])->name('avisos');
         Route::post('/buscar', [App\Http\Controllers\Interno\AvisoController::class, 'buscar']);
@@ -148,7 +181,7 @@ Route::middleware('auth')->group(function () {
         Route::post('/update', [App\Http\Controllers\Interno\AvisoController::class, 'update']);
         Route::post('/delete', [App\Http\Controllers\Interno\AvisoController::class, 'delete']);
     });
-    
+
     Route::prefix('logs')->group(function () {
         Route::get('/', [App\Http\Controllers\Interno\ConfigController::class, 'index'])->name('logs');
         Route::post('/buscar', [App\Http\Controllers\Interno\ConfigController::class, 'buscar']);
