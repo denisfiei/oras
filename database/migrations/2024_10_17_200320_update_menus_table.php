@@ -17,8 +17,7 @@ class UpdateMenusTable extends Migration
         DB::table('menus')->insert([
 
             ['categoria'=>'O', 'nombre'=>'Tipo Dengue', 'icono'=>'fas fal fa-vial', 'route'=>'tipo_dengue', 'url'=>'tipo_dengue', 'orden'=>7, 'user_id'=>1],
-            ['categoria'=>'O', 'nombre'=>'Carga de Datos', 'icono'=>'fas fa-file-upload', 'route'=>'carga_dengue', 'url'=>'carga_dengue', 'orden'=>8, 'user_id'=>1],
-            ['categoria'=>'O', 'nombre'=>'Serotipo / Genotipo', 'icono'=>'fas fab fa-creative-commons-zero', 'route'=>'serotipo_genotipo', 'url'=>'serotipo_genotipo', 'orden'=>9, 'user_id'=>1],
+            ['categoria'=>'O', 'nombre'=>'Carga de Datos', 'icono'=>'fas fa-file-upload', 'route'=>'carga_dengue', 'url'=>'carga_dengue', 'orden'=>8, 'user_id'=>1]
         ]);
     }
 

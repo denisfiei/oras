@@ -14,26 +14,26 @@ class CreateViewGisaidsTable extends Migration
      */
     public function up()
     {
-        DB::statement("CREATE VIEW view_gisaid AS 
+        DB::statement("CREATE VIEW view_gisaid AS
         SELECT
-            l.nombre AS linaje, 
-            cg.carga_id AS carga_id, 
-            cg.virus_id AS virus_id, 
-            cg.virus_name AS virus_name,, 
-            cg.accession_id AS accession_id, 
-            cg.collection_date AS collection_date, 
+            l.nombre AS linaje,
+            cg.carga_id AS carga_id,
+            cg.virus_id AS virus_id,
+            cg.virus_name AS virus_name,,
+            cg.accession_id AS accession_id,
+            cg.collection_date AS collection_date,
             UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 1 ),(length(substring_index( cg.location, '/', 0 )) + 1 )), '/', ''))) AS nivel0,
             UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 2 ),(length(substring_index( cg.location, '/', 1 )) + 1 )), '/', ''))) AS nivel1,
             UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 3 ),(length(substring_index( cg.location, '/', 2 )) + 1 )), '/', ''))) AS nivel2,
             UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 4 ),(length(substring_index( cg.location, '/', 3 )) + 1 )), '/', ''))) AS nivel3,
             UPPER(ltrim(REPLACE (substr(substring_index( cg.location, '/', 5 ),(length(substring_index( cg.location, '/', 4 )) + 1 )), '/', ''))) AS nivel4,
-            cg.host AS host, 
-            cg.gender AS gender, 
-            cg.patient_age AS patient_age, 
-            cg.patient_status AS patient_status, 
-            cg.passage AS passage, 
-            cg.lineage AS lineage, 
-            cg.clade AS clade, 
+            cg.host AS host,
+            cg.gender AS gender,
+            cg.patient_age AS patient_age,
+            cg.patient_status AS patient_status,
+            cg.passage AS passage,
+            cg.lineage AS lineage,
+            cg.clade AS clade,
             c.activo AS activo,
             mapas.latitud AS latitud,
             mapas.longitud AS longitud,
@@ -43,20 +43,20 @@ class CreateViewGisaidsTable extends Migration
             carga_gisaids AS cg
             LEFT JOIN
             linajes AS l
-            ON 
+            ON
                 cg.lineage = l.codigo
             INNER JOIN
             cargas AS c
-            ON 
+            ON
                 cg.carga_id = c.id
             LEFT JOIN
             mapas
-            ON 
+            ON
                 cg.ubigeo = mapas.id
         WHERE
             cg.host = 'Human' AND
-            cg.passage = 'Original' AND 
-            cg.collection_date IS NOT NULL AND 
+            cg.passage = 'Original' AND
+            cg.collection_date IS NOT NULL AND
             c.activo = 'P'
         ");
     }
